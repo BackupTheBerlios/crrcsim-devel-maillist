@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Black screen with heli model
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Black%20screen%20with%20heli%20model&In-Reply-To=%3C20080914113354.d8aa4cf5.jan.reucker%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000025.html">
+   <LINK REL="Next"  HREF="000027.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Black screen with heli model</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Black%20screen%20with%20heli%20model&In-Reply-To=%3C20080914113354.d8aa4cf5.jan.reucker%40web.de%3E"
+       TITLE="[Crrcsim-devel] Black screen with heli model">jan.reucker at web.de
+       </A><BR>
+    <I>Sun Sep 14 11:33:54 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000025.html">[Crrcsim-devel] Black screen with heli model
+</A></li>
+        <LI>Next message: <A HREF="000027.html">[Crrcsim-devel] Black screen with heli model
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#26">[ date ]</a>
+              <a href="thread.html#26">[ thread ]</a>
+              <a href="subject.html#26">[ subject ]</a>
+              <a href="author.html#26">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Am Thu, 11 Sep 2008 21:48:00 +0200 schrieb Jan Reucker &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">jan.reucker at web.de</A>&gt;:
+
+&gt;<i> Am Thu, 11 Sep 2008 21:12:16 +0200 schrieb Jan Reucker &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">jan.reucker at web.de</A>&gt;:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; interesting fact: I compiled the tip on Windows today (gcc 3.4.5), on a different
+</I>&gt;<i> &gt; machine, and the black screen didn't happen.
+</I>&gt;<i> 
+</I>&gt;<i> More info: On my linux machine, the first frame seems to be rendered correctly.
+</I>&gt;<i> Then the FoV indicator (when starting with ./crrcsim -vvv) shows
+</I>&gt;<i> FoV: -2147483648.-2147483648 . Does this mean something like NaN?
+</I>
+Hi Jens,
+
+here are some more observations.
+
+- It's not a negative argument to sqrt. As a test, I replaced all calls to
+  sqrt with an inline function that tested the argument before the actual
+  call to sqrt. Everything was o.k.
+
+- When I start with an airplane and then switch to the heli model, everything
+  is o.k., no black screen. Heli flies better than ever, the ground effect
+  feels quite realistic.
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: <A HREF="http://www.reucker-online.de/pgpkey.asc">http://www.reucker-online.de/pgpkey.asc</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000025.html">[Crrcsim-devel] Black screen with heli model
+</A></li>
+	<LI>Next message: <A HREF="000027.html">[Crrcsim-devel] Black screen with heli model
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#26">[ date ]</a>
+              <a href="thread.html#26">[ thread ]</a>
+              <a href="subject.html#26">[ subject ]</a>
+              <a href="author.html#26">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

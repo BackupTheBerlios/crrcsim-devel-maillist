@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] [Bug #17076] Build error when CGAL installed on	Ubuntu karmic
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-April/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BBug%20%2317076%5D%20Build%20error%20when%20CGAL%20installed%20on%0A%09Ubuntu%20karmic&In-Reply-To=%3C201004130928.o3D9SLkb006270%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000326.html">
+   <LINK REL="Next"  HREF="000327.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] [Bug #17076] Build error when CGAL installed on	Ubuntu karmic</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BBug%20%2317076%5D%20Build%20error%20when%20CGAL%20installed%20on%0A%09Ubuntu%20karmic&In-Reply-To=%3C201004130928.o3D9SLkb006270%40unicorn.berlios.de%3E"
+       TITLE="[Crrcsim-devel] [Bug #17076] Build error when CGAL installed on	Ubuntu karmic">admin at berlios.de
+       </A><BR>
+    <I>Tue Apr 13 11:28:21 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000326.html">[Crrcsim-devel] [Feature #4309] Replay tool
+</A></li>
+        <LI>Next message: <A HREF="000327.html">[Crrcsim-devel] Windows beta package
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#323">[ date ]</a>
+              <a href="thread.html#323">[ thread ]</a>
+              <a href="subject.html#323">[ subject ]</a>
+              <a href="author.html#323">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bug #17076, was updated on 2010-Apr-13 11:28
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: csindle
+Assigned to : none
+Summary: Build error when CGAL installed on Ubuntu karmic
+
+Details: Steps to reproduce:
+
+$ uname -a
+Linux denali 2.6.31-20-generic #58-Ubuntu SMP Fri Mar 12 04:38:19 UTC 2010 x86_64 GNU/Linux
+
+$ cat /etc/issue
+Ubuntu 9.10 \n \l
+
+$ aptitude show libcgal-dev 
+...
+Package: libcgal-dev
+State: installed
+Automatically installed: no
+Version: 3.4-4ubuntu1
+Priority: optional
+Section: multiverse/libdevel
+...
+
+
+$ hg clone <A HREF="http://hg.berlios.de/repos/crrcsim">http://hg.berlios.de/repos/crrcsim</A>
+$ cd crrcsim
+$ ./autogen.sh
+$ ./configure 
+...
+config.status: executing depfiles commands
+
+Build options:
+
+    Mousewheel support: yes  (SDL &gt;= 1.2.5)
+    Audio interface:    yes  (found Portaudio V18)
+    Wind data import:   yes  (found CGAL)
+
+(Above libraries are the default ones installed with aptitude)
+
+Then:
+
+$ make
+...
+g++ -DHAVE_CONFIG_H -I.    -pthread  -I/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT -frounding-math -DPU_USE_SDL -DCRRC_DATA_PATH=&quot;\&quot;/usr/local/share/crrcsim\&quot;&quot; -g -O2 -Dlinux -Wall -MT crrcsim-crrc_builtin_scenery.o -MD -MP -MF .deps/crrcsim-crrc_builtin_scenery.Tpo -c -o crrcsim-crrc_builtin_scenery.o `test -f 'src/mod_landscape/crrc_builtin_scenery.cpp' || echo './'`src/mod_landscape/crrc_builtin_scenery.cpp
+mv -f .deps/crrcsim-crrc_builtin_scenery.Tpo .deps/crrcsim-crrc_builtin_scenery.Po
+g++ -DHAVE_CONFIG_H -I.    -pthread  -I/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT -frounding-math -DPU_USE_SDL -DCRRC_DATA_PATH=&quot;\&quot;/usr/local/share/crrcsim\&quot;&quot; -g -O2 -Dlinux -Wall -MT crrcsim-hd_tilingterrain.o -MD -MP -MF .deps/crrcsim-hd_tilingterrain.Tpo -c -o crrcsim-hd_tilingterrain.o `test -f 'src/mod_landscape/hd_tilingterrain.cpp' || echo './'`src/mod_landscape/hd_tilingterrain.cpp
+mv -f .deps/crrcsim-hd_tilingterrain.Tpo .deps/crrcsim-hd_tilingterrain.Po
+g++ -DHAVE_CONFIG_H -I.    -pthread  -I/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT -frounding-math -DPU_USE_SDL -DCRRC_DATA_PATH=&quot;\&quot;/usr/local/share/crrcsim\&quot;&quot; -g -O2 -Dlinux -Wall -MT crrcsim-model_based_scenery.o -MD -MP -MF .deps/crrcsim-model_based_scenery.Tpo -c -o crrcsim-model_based_scenery.o `test -f 'src/mod_landscape/model_based_scenery.cpp' || echo './'`src/mod_landscape/model_based_scenery.cpp
+mv -f .deps/crrcsim-model_based_scenery.Tpo .deps/crrcsim-model_based_scenery.Po
+g++ -DHAVE_CONFIG_H -I.    -pthread  -I/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT -frounding-math -DPU_USE_SDL -DCRRC_DATA_PATH=&quot;\&quot;/usr/local/share/crrcsim\&quot;&quot; -g -O2 -Dlinux -Wall -MT crrcsim-winddata3D.o -MD -MP -MF .deps/crrcsim-winddata3D.Tpo -c -o crrcsim-winddata3D.o `test -f 'src/mod_landscape/winddata3D.cpp' || echo './'`src/mod_landscape/winddata3D.cpp
+src/mod_landscape/winddata3D.cpp: In member function &#145;int ModelBasedScenery::init_wind_data(const char*)&#146;:
+src/mod_landscape/winddata3D.cpp:83: error: &#145;set_error_behaviour&#146; is not a member of &#145;CGAL&#146;
+src/mod_landscape/winddata3D.cpp:83: error: &#145;CONTINUE&#146; is not a member of &#145;CGAL&#146;
+make[2]: *** [crrcsim-winddata3D.o] Error 1
+
+
+
+
+
+
+If I rebuild after:
+$ aptitude purge libcgal-dev libcgal3 
+$ ./configure 
+...
+    Mousewheel support: yes  (SDL &gt;= 1.2.5)
+    Audio interface:    yes  (found Portaudio V18)
+    Wind data import:   no   (CGAL not found)
+
+
+Then crrcsim builds fine without CGAL support.
+
+
+Thank you.
+
+
+For detailed info, follow this link:
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=17076&amp;group_id=9957">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=17076&amp;group_id=9957</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000326.html">[Crrcsim-devel] [Feature #4309] Replay tool
+</A></li>
+	<LI>Next message: <A HREF="000327.html">[Crrcsim-devel] Windows beta package
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#323">[ date ]</a>
+              <a href="thread.html#323">[ thread ]</a>
+              <a href="subject.html#323">[ subject ]</a>
+              <a href="author.html#323">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

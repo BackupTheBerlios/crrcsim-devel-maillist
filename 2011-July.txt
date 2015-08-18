@@ -1,0 +1,148 @@
+From admin at berlios.de  Fri Jul  8 22:11:52 2011
+From: admin at berlios.de (admin at berlios.de)
+Date: Fri, 8 Jul 2011 22:11:52 +0200 (CEST)
+Subject: [Crrcsim-devel] [Bug #18218] dead zone with E-sky USB interface
+Message-ID: <201107082011.p68KBqhN022694@unicorn.berlios.de>
+
+Bug #18218, was updated on 2011-Jul-08 22:11
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: df2qy
+Assigned to : none
+Summary: dead zone with E-sky USB interface
+
+Details: As reported here: http://crrcsim.berlios.de/wiki/index.php?n=CRRCsim.IFJoyStick
+there is a dead zone with the E-sky USB interface in CRRCsim. I can confirm this behavior, but it is not there when I use the same hardware with FMS running in VirtualBox on the same machine with Windows XP. Therefore it has to be a bug in either CRRCsim or the linux driver for the interface cable. Also the dead zone is not at center position but only in one direction between 50% and about 75%. I assume that this is also the cause for the different scaling for positive and negative input.
+
+Tested with current source code from repository on ubuntu 11.04 64bit.
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=18218&group_id=9957
+
+
+From manuel.reimer at gmx.de  Thu Jul 28 11:30:05 2011
+From: manuel.reimer at gmx.de (Manuel Reimer)
+Date: Thu, 28 Jul 2011 11:30:05 +0200
+Subject: [Crrcsim-devel] Is crrcsim still developed?
+Message-ID: <4E312C1D.4060701@gmx.de>
+
+Hello,
+
+my simple question is: Are there still active developers in here?
+
+I have a problem with crrcsim. My sender is detected as joystick with only one 
+axe. At first I'll try to update all the external libraries, but if this doesn't 
+fix the problem, I'll try to create a patch. If I do so, where should I send it to?
+
+Second thing is, that I think it wouldn't be a that bad idea to make crrcsim 
+translatable. I could try to modify crrcsim to use gettext and then offer a 
+german translation to make it easier to use for german speaking people.
+
+Yours
+
+Manuel
+
+
+From jan.reucker at web.de  Thu Jul 28 17:19:47 2011
+From: jan.reucker at web.de (Jan Reucker)
+Date: Thu, 28 Jul 2011 17:19:47 +0200 (CEST)
+Subject: [Crrcsim-devel] Is crrcsim still developed?
+Message-ID: <608131318.1056662.1311866387855.JavaMail.fmail@mwmweb005>
+
+Manuel,
+
+I think most developers are still reading this list, but there is no active development going on. I guess for most of us, CRRCsim satisfies our needs pretty much. Speaking of myself, I don't have the time to implement "big" features any more.
+
+The best place to submit patches to is the patch tracker on the project page:
+
+https://developer.berlios.de/patch/?group_id=9957
+
+Kind regards,
+Jan R.
+
+
+-----Urspr?ngliche Nachricht-----
+Von: "Manuel Reimer" <manuel.reimer at gmx.de>
+Gesendet: 28.07.2011 11:30:05
+An: crrcsim-devel at lists.berlios.de
+Betreff: [Crrcsim-devel] Is crrcsim still developed?
+
+>Hello,
+>
+>my simple question is: Are there still active developers in here?
+>
+>I have a problem with crrcsim. My sender is detected as joystick with only one
+>axe. At first I'll try to update all the external libraries, but if this doesn't
+>fix the problem, I'll try to create a patch. If I do so, where should I send it to?
+>
+>Second thing is, that I think it wouldn't be a that bad idea to make crrcsim
+>translatable. I could try to modify crrcsim to use gettext and then offer a
+>german translation to make it easier to use for german speaking people.
+>
+>Yours
+>
+>Manuel
+>_______________________________________________
+>Crrcsim-devel mailing list
+>Crrcsim-devel at lists.berlios.de
+>https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+
+
+___________________________________________________________
+Schon geh?rt? WEB.DE hat einen genialen Phishing-Filter in die
+Toolbar eingebaut! http://produkte.web.de/go/toolbar
+
+
+From admin at berlios.de  Fri Jul 29 20:07:42 2011
+From: admin at berlios.de (admin at berlios.de)
+Date: Fri, 29 Jul 2011 20:07:42 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3153] Numerically stable geodetic latitude
+	function
+Message-ID: <201107291807.p6TI7gWv004484@unicorn.berlios.de>
+
+Patch #3153 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Accepted
+Submitted by: aharmat
+Assigned to : jww
+Summary: Numerically stable geodetic latitude function
+
+Follow-Ups:
+
+Date: 2011-Jul-29 20:07
+By: jww
+
+Comment:
+Thanks a lot to aharmat for his contribution and its excellent documentation!
+-------------------------------------------------------
+
+Date: 2011-May-09 19:12
+By: aharmat
+
+Comment:
+This is easiest to see with the helicopter or quadrotor because you can fly across the y axis slowly. Choose the launch site to be close to (0, 0), and fly around slowly, you should see the simulation stutter. I added a line to the debug display showing x,y,z coordinates to make it easier for me to track down the problem. If you do this, then watch the x coordinate as you drift slowly across the y axis, when it hits zero you will see stuttering. This attached picture shows a plot of the geocentric and geodetic latitudes before the patch, you can clearly see the problem around x = 0. After the patch, the geodetic latitude follows the geocentric smoothly. 
+
+http://img685.imageshack.us/i/geodeticproblemplot.png/
+-------------------------------------------------------
+
+Date: 2011-May-07 09:40
+By: jreucker
+
+Comment:
+Thanks for your bug report and your patch. I'm no expert for CRRCsim's internal FDM implementation and its coordinate systems, so it's hard for me to evaluate the patch. Can you provide a simple test case so that I can see where your patch helps? E.g. some directions like "fly across coordinates xyz and you'll see stuttering, apply the patch and try again"?
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3153&group_id=9957
+
+

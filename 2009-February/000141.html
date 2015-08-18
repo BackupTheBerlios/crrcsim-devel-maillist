@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] development quality expectations
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-February/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20development%20quality%20expectations&In-Reply-To=%3C20090225163243.GB9970%40knusper.jensens.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000151.html">
+   <LINK REL="Next"  HREF="000144.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] development quality expectations</H1>
+    <B>Jens Wilhelm Wulf</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20development%20quality%20expectations&In-Reply-To=%3C20090225163243.GB9970%40knusper.jensens.local%3E"
+       TITLE="[Crrcsim-devel] development quality expectations">jens_w2 at gmx.net
+       </A><BR>
+    <I>Wed Feb 25 17:32:43 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000151.html">[Crrcsim-devel] Release candidate 1 for 0.9.10
+</A></li>
+        <LI>Next message: <A HREF="000144.html">[Crrcsim-devel] development quality expectations
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#141">[ date ]</a>
+              <a href="thread.html#141">[ thread ]</a>
+              <a href="subject.html#141">[ subject ]</a>
+              <a href="author.html#141">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Here are some notes about the subject..maybe this is just my two cents,
+maybe we can stick to it... 
+
+ - coding style (we agreed on that some time ago)
+     * no tabs
+     * indentation, braces
+     * no further code on if/else lines despite condition
+ - no inactive (commented out) code without good reason and comment. We DO
+   have a VCS.
+ - code quality in general
+ - don't push what's far from finished if it is visible to the user or in
+   the config files and you don't manage to fix it for the next release 
+ - if you messed up your local repo by adding much-too-big-files, pointless
+   merge changesets or something like that: don't push. Ask on the list about
+   how to fix your local repo (it is possible!), fix it, push afterwards.   
+ - take a look at your changesets regarding the points above before you push 
+
+The current state of CRRCSim is too good to leave traces of bad
+coding/style, obvious regressions or something like this. And we have little
+manpower -- so if we do something, it should be done right or not done at all.
+
+If something worked (well) for a user in version A, it should work at least
+equally well in version B, no matter if it is a fresh install or an upgrade.
+We must not require a user to tweak config files in order to get something
+working again or fix misfeatures.
+
+Best regards,
+Jens
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000151.html">[Crrcsim-devel] Release candidate 1 for 0.9.10
+</A></li>
+	<LI>Next message: <A HREF="000144.html">[Crrcsim-devel] development quality expectations
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#141">[ date ]</a>
+              <a href="thread.html#141">[ thread ]</a>
+              <a href="subject.html#141">[ subject ]</a>
+              <a href="author.html#141">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

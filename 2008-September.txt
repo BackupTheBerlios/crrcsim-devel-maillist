@@ -1,0 +1,2258 @@
+From jens_w2 at gmx.net  Fri Sep  5 11:27:31 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Fri, 5 Sep 2008 11:27:31 +0200
+Subject: [Crrcsim-devel] CRRCSim helicopter model
+Message-ID: <20080905092731.GA19494@localhost>
+
+Hi folks,
+
+there is something new to play with in the development version of CRRCSim!
+
+If you are able to compile from source, you can use
+  http://hg.berlios.de/repos/crrcsim/archive/tip.zip
+
+If you are experienced with model helicopters, please provide feedback and 
+fiddle around with parameters in
+  models/heli.xml
+until it feels realistic.
+The model already contains different configurations; one for a fixed-pitch
+heli and two for a collective-pitch heli.
+
+The file format of heli.xml is mostly identical to that of the fixed wing
+models.
+If it climbs to fast/not fast enough, adjust its force F in the following
+context
+  +--------------------------------------------------------
+  |     <power>
+  |       <automagic F="10" V="1">
+  +--------------------------------------------------------
+of the configuration you use.
+
+Other interesting parameters are 
+  +--------------------------------------------------------
+  |     <aero version="1" >
+  |       <yaw   ctrl="0.6"  damp="0.05" dist="0.03" />
+  |       <pitch ctrl="0.15" damp="0.01" dist="0.03" />
+  |       <roll  ctrl="0.15" damp="0.01" dist="0.03" />
+  |       <cp    ctrl="1.0"  off="0.55" />
+  |       <speed damp="0.05" />
+  |     </aero>  
+  +--------------------------------------------------------
+'ctrl' means control throw, 'damp' is damping (higher numbers make it easier to
+fly). 'dist' introduces disturbances so you get something to do ;-)
+'cp' contains settings for the collective-pitch type only (control throw and
+offset).
+
+throttle controls climb
+rudder   controls yaw
+aileron  controls roll
+elevator controls pitch
+
+Taken from the changelog:
+  +--------------------------------------------------------
+  | First draft of a simple helicopter FDM and model
+  | 
+  | Note how simple this is (make a visual diff between fdm_larcsim
+  | and fdm_heli01!) and keep in mind that...
+  | - it is NOT backed by physics knowledge
+  | - it is done by a person who has never flown a helicopter (apart
+  |   from twenty minutes of simulation)
+  | - no special model for helicopter rotors has been created; the
+  |   fixed pitch models just use the existing propeller of the power
+  |   system
+  | - ...yes, the 3D model is done by myself, simple as usual...
+  | 
+  | However, comparing this to the helicopter simulation I tried out
+  | some years ago (for twenty minutes; I was told it was quite realistic)
+  | and to FMS (tried that out last night) this already seems better
+  | than FMS!
+  +--------------------------------------------------------
+  
+
+Have fun,
+Jens
+
+
+From olivier at obordes.com  Fri Sep  5 12:00:48 2008
+From: olivier at obordes.com (Olivier Bordes)
+Date: Fri, 05 Sep 2008 12:00:48 +0200
+Subject: [Crrcsim-devel] [crrcsim] CRRCSim helicopter model
+In-Reply-To: <20080905092731.GA19494@localhost>
+References: <20080905092731.GA19494@localhost>
+Message-ID: <48C10350.7050600@obordes.com>
+
+Good work Jens !
+I fly helicopter so of course I am interested to try it.
+As soon as I will have some spare time.
+
+
+-------- Original Message --------
+Subject: [crrcsim] CRRCSim helicopter model
+From: Jens Wilhelm Wulf <jens_w2 at gmx.net>
+To: crrcsim at yahoogroups.com, crrcsim-devel at lists.berlios.de, 
+crrcsim-devel at lists.sourceforge.net
+Date: ven 05 sep 2008 11:27:31 CEST
+> Hi folks,
+>
+> there is something new to play with in the development version of CRRCSim!
+>
+> If you are able to compile from source, you can use
+>   http://hg.berlios.de/repos/crrcsim/archive/tip.zip
+>
+> If you are experienced with model helicopters, please provide feedback and 
+> fiddle around with parameters in
+>   models/heli.xml
+> until it feels realistic.
+> The model already contains different configurations; one for a fixed-pitch
+> heli and two for a collective-pitch heli.
+>
+> The file format of heli.xml is mostly identical to that of the fixed wing
+> models.
+> If it climbs to fast/not fast enough, adjust its force F in the following
+> context
+>   +--------------------------------------------------------
+>   |     <power>
+>   |       <automagic F="10" V="1">
+>   +--------------------------------------------------------
+> of the configuration you use.
+>
+> Other interesting parameters are 
+>   +--------------------------------------------------------
+>   |     <aero version="1" >
+>   |       <yaw   ctrl="0.6"  damp="0.05" dist="0.03" />
+>   |       <pitch ctrl="0.15" damp="0.01" dist="0.03" />
+>   |       <roll  ctrl="0.15" damp="0.01" dist="0.03" />
+>   |       <cp    ctrl="1.0"  off="0.55" />
+>   |       <speed damp="0.05" />
+>   |     </aero>  
+>   +--------------------------------------------------------
+> 'ctrl' means control throw, 'damp' is damping (higher numbers make it easier to
+> fly). 'dist' introduces disturbances so you get something to do ;-)
+> 'cp' contains settings for the collective-pitch type only (control throw and
+> offset).
+>
+> throttle controls climb
+> rudder   controls yaw
+> aileron  controls roll
+> elevator controls pitch
+>
+> Taken from the changelog:
+>   +--------------------------------------------------------
+>   | First draft of a simple helicopter FDM and model
+>   | 
+>   | Note how simple this is (make a visual diff between fdm_larcsim
+>   | and fdm_heli01!) and keep in mind that...
+>   | - it is NOT backed by physics knowledge
+>   | - it is done by a person who has never flown a helicopter (apart
+>   |   from twenty minutes of simulation)
+>   | - no special model for helicopter rotors has been created; the
+>   |   fixed pitch models just use the existing propeller of the power
+>   |   system
+>   | - ...yes, the 3D model is done by myself, simple as usual...
+>   | 
+>   | However, comparing this to the helicopter simulation I tried out
+>   | some years ago (for twenty minutes; I was told it was quite realistic)
+>   | and to FMS (tried that out last night) this already seems better
+>   | than FMS!
+>   +--------------------------------------------------------
+>   
+>
+> Have fun,
+> Jens
+>
+> ------------------------------------
+>
+> Yahoo! Groups Links
+>
+> <*> To visit your group on the web, go to:
+>     http://groups.yahoo.com/group/crrcsim/
+>
+> <*> Your email settings:
+>     Individual Email | Traditional
+>
+> <*> To change settings online go to:
+>     http://groups.yahoo.com/group/crrcsim/join
+>     (Yahoo! ID required)
+>
+> <*> To change settings via email:
+>     mailto:crrcsim-digest at yahoogroups.com 
+>     mailto:crrcsim-fullfeatured at yahoogroups.com
+>
+> <*> To unsubscribe from this group, send an email to:
+>     crrcsim-unsubscribe at yahoogroups.com
+>
+> <*> Your use of Yahoo! Groups is subject to:
+>     http://docs.yahoo.com/info/terms/
+>
+>
+>   
+
+
+
+
+From jan.reucker at web.de  Fri Sep  5 22:12:53 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Fri, 5 Sep 2008 22:12:53 +0200
+Subject: [Crrcsim-devel] CRRCSim helicopter model
+In-Reply-To: <20080905092731.GA19494@localhost>
+References: <20080905092731.GA19494@localhost>
+Message-ID: <20080905221253.decec4ad.jan.reucker@web.de>
+
+Am Fri, 5 Sep 2008 11:27:31 +0200 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> there is something new to play with in the development version of CRRCSim!
+
+Hi Jens,
+
+this sounds great! Can't wait to try it tomorrow.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Sat Sep  6 18:20:27 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sat, 6 Sep 2008 18:20:27 +0200
+Subject: [Crrcsim-devel] CRRCSim helicopter model
+In-Reply-To: <20080905221253.decec4ad.jan.reucker@web.de>
+References: <20080905092731.GA19494@localhost>
+	<20080905221253.decec4ad.jan.reucker@web.de>
+Message-ID: <20080906182027.737f1324.jan.reucker@web.de>
+
+Am Fri, 5 Sep 2008 22:12:53 +0200 schrieb Jan Reucker <jan.reucker at web.de>:
+
+> > there is something new to play with in the development version of CRRCSim!
+> this sounds great! Can't wait to try it tomorrow.
+
+Hi Jens,
+
+I just tried it and I have to say that it's quite nice for a "first try".
+I don't fly helis myself (apart from one of these indoor coaxial "Lama"
+helis, couldn't resist...), but I spent some time with the helis in
+AFPD.
+
+First of all, yaw input should be inverted. I guess most pilots have 
+configured yaw to move the nose in the same direction as the stick,
+although most beginners try to "move the tail".
+
+The original model configuration seems to be much too sensitive. I think
+a value of 0.03 for roll and nick damping should be more realistic. But
+I leave this fine-tuning to the experts.
+
+Nice feature!
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From kees.lemmens at gmail.com  Sat Sep  6 21:04:47 2008
+From: kees.lemmens at gmail.com (Kees Lemmens)
+Date: Sat, 6 Sep 2008 21:04:47 +0200
+Subject: [Crrcsim-devel] [crrcsim] CRRCSim helicopter model
+In-Reply-To: <20080905092731.GA19494@localhost>
+References: <20080905092731.GA19494@localhost>
+Message-ID: <200809062104.47270.kees.lemmens@gmail.com>
+
+Hi Jens,
+
+Just gave the helicopter a try : really a nice piece of work !! I 
+increased the damping for pitch and roll to 0.6 as well and then it 
+flies quite nice with my Walkera transmitter on the serial port 
+(zhenhua) ! With the default settings however it is almost impossible 
+to fly, at least with this transmitter.
+
+2 small things :
+
+- after running make and make install the heli wasn't found anywhere 
+in the list : it turned out I had to put the model and object files 
+in the appropiate places manually. That may be very easily fixed :-)
+
+- Because the model is so simple the orientation is very difficult to 
+guess : most of the time you have no idea whether the tail points 
+towards you or is 180 deg rotated and pointing away from you. Maybe 
+add a little more texture, e.g. on one side of the body and also make 
+it a little less transparant ?
+
+Congratulations with this nice piece of work ! I am a great fan of 
+heli flying and am very happy to see that my favorite simulator can 
+now do helies as well !
+
+Bye,
+Kees Lemmens.
+
+On Friday 05 September 2008, Jens Wilhelm Wulf wrote:
+> Hi folks,
+>
+> there is something new to play with in the development version of
+> CRRCSim!
+>
+> If you are able to compile from source, you can use
+>   http://hg.berlios.de/repos/crrcsim/archive/tip.zip
+>
+> If you are experienced with model helicopters, please provide
+> feedback and fiddle around with parameters in
+>   models/heli.xml
+> until it feels realistic.
+> The model already contains different configurations; one for a
+> fixed-pitch heli and two for a collective-pitch heli.
+>
+> The file format of heli.xml is mostly identical to that of the
+> fixed wing models.
+> If it climbs to fast/not fast enough, adjust its force F in the
+> following context
+>   +--------------------------------------------------------
+>
+>   |     <power>
+>   |       <automagic F="10" V="1">
+>
+>   +--------------------------------------------------------
+> of the configuration you use.
+>
+> Other interesting parameters are
+>   +--------------------------------------------------------
+>
+>   |     <aero version="1" >
+>   |       <yaw   ctrl="0.6"  damp="0.05" dist="0.03" />
+>   |       <pitch ctrl="0.15" damp="0.01" dist="0.03" />
+>   |       <roll  ctrl="0.15" damp="0.01" dist="0.03" />
+>   |       <cp    ctrl="1.0"  off="0.55" />
+>   |       <speed damp="0.05" />
+>   |     </aero>
+>
+>   +--------------------------------------------------------
+> 'ctrl' means control throw, 'damp' is damping (higher numbers make
+> it easier to fly). 'dist' introduces disturbances so you get
+> something to do ;-) 'cp' contains settings for the collective-pitch
+> type only (control throw and offset).
+>
+> throttle controls climb
+> rudder   controls yaw
+> aileron  controls roll
+> elevator controls pitch
+>
+> Taken from the changelog:
+>   +--------------------------------------------------------
+>
+>   | First draft of a simple helicopter FDM and model
+>   |
+>   | Note how simple this is (make a visual diff between fdm_larcsim
+>   | and fdm_heli01!) and keep in mind that...
+>   | - it is NOT backed by physics knowledge
+>   | - it is done by a person who has never flown a helicopter
+>   | (apart from twenty minutes of simulation)
+>   | - no special model for helicopter rotors has been created; the
+>   |   fixed pitch models just use the existing propeller of the
+>   | power system
+>   | - ...yes, the 3D model is done by myself, simple as usual...
+>   |
+>   | However, comparing this to the helicopter simulation I tried
+>   | out some years ago (for twenty minutes; I was told it was quite
+>   | realistic) and to FMS (tried that out last night) this already
+>   | seems better than FMS!
+>
+>   +--------------------------------------------------------
+>
+>
+> Have fun,
+> Jens
+
+
+
+-- 
+Bye,
+Kees Lemmens,
+Email : kees.lemmens<at>gmail<dot>com
+---------------------------------------------------------------------
+NOTICES: 
+1 I moved from Yahoo to Gmail, but my Yahoo still works as well.
+2 To minimize spam I'll trash HTML-only email immediately ...
+
+BTW: Ceterum Censeo Microsoftem esse Delendam
+
+
+From lemmens_kees at yahoo.co.uk  Sat Sep  6 21:10:31 2008
+From: lemmens_kees at yahoo.co.uk (Kees Lemmens)
+Date: Sat, 6 Sep 2008 21:10:31 +0200
+Subject: [Crrcsim-devel] [crrcsim] CRRCSim helicopter model
+In-Reply-To: <20080905092731.GA19494@localhost>
+References: <20080905092731.GA19494@localhost>
+Message-ID: <200809062110.31221.lemmens_kees@yahoo.co.uk>
+
+Hi Jens,
+
+Just gave the helicopter a try : really a nice piece of work !! I 
+increased the damping for pitch and roll to 0.6 as well and then it 
+flies quite nice with my Walkera transmitter on the serial port 
+(zhenhua) ! With the default settings however it is almost impossible 
+to fly, at least with this transmitter.
+
+2 small things :
+
+- after running make and make install the heli wasn't found anywhere 
+in the list : it turned out I had to put the model and object files 
+in the appropiate places manually. That may be very easily fixed :-)
+
+- Because the model is so simple the orientation is very difficult to 
+guess : most of the time you have no idea whether the tail points 
+towards you or is 180 deg rotated and pointing away from you. Maybe 
+add a little more texture, e.g. on one side of the body and also make 
+it a little less transparant ?
+
+Congratulations with this nice piece of work ! I am a great fan of 
+heli flying and am very happy to see that my favorite simulator can 
+now do helies as well !
+
+Bye,
+Kees Lemmens.
+
+On Friday 05 September 2008, Jens Wilhelm Wulf wrote:
+> Hi folks,
+>
+> there is something new to play with in the development version of
+> CRRCSim!
+>
+> If you are able to compile from source, you can use
+>   http://hg.berlios.de/repos/crrcsim/archive/tip.zip
+>
+> If you are experienced with model helicopters, please provide
+> feedback and fiddle around with parameters in
+>   models/heli.xml
+> until it feels realistic.
+> The model already contains different configurations; one for a
+> fixed-pitch heli and two for a collective-pitch heli.
+>
+> The file format of heli.xml is mostly identical to that of the
+> fixed wing models.
+> If it climbs to fast/not fast enough, adjust its force F in the
+> following context
+>   +--------------------------------------------------------
+>
+>   |     <power>
+>   |       <automagic F="10" V="1">
+>
+>   +--------------------------------------------------------
+> of the configuration you use.
+>
+> Other interesting parameters are
+>   +--------------------------------------------------------
+>
+>   |     <aero version="1" >
+>   |       <yaw   ctrl="0.6"  damp="0.05" dist="0.03" />
+>   |       <pitch ctrl="0.15" damp="0.01" dist="0.03" />
+>   |       <roll  ctrl="0.15" damp="0.01" dist="0.03" />
+>   |       <cp    ctrl="1.0"  off="0.55" />
+>   |       <speed damp="0.05" />
+>   |     </aero>
+>
+>   +--------------------------------------------------------
+> 'ctrl' means control throw, 'damp' is damping (higher numbers make
+> it easier to fly). 'dist' introduces disturbances so you get
+> something to do ;-) 'cp' contains settings for the collective-pitch
+> type only (control throw and offset).
+>
+> throttle controls climb
+> rudder   controls yaw
+> aileron  controls roll
+> elevator controls pitch
+>
+> Taken from the changelog:
+>   +--------------------------------------------------------
+>
+>   | First draft of a simple helicopter FDM and model
+>   |
+>   | Note how simple this is (make a visual diff between fdm_larcsim
+>   | and fdm_heli01!) and keep in mind that...
+>   | - it is NOT backed by physics knowledge
+>   | - it is done by a person who has never flown a helicopter
+>   | (apart from twenty minutes of simulation)
+>   | - no special model for helicopter rotors has been created; the
+>   |   fixed pitch models just use the existing propeller of the
+>   | power system
+>   | - ...yes, the 3D model is done by myself, simple as usual...
+>   |
+>   | However, comparing this to the helicopter simulation I tried
+>   | out some years ago (for twenty minutes; I was told it was quite
+>   | realistic) and to FMS (tried that out last night) this already
+>   | seems better than FMS!
+>
+>   +--------------------------------------------------------
+>
+>
+> Have fun,
+> Jens
+
+
+
+-- 
+With best regards,
+Kees Lemmens,
+Email : lemmens<underscore>kees<at>yahoo<dot>co<dot>uk
+----------------------------------------------------------------
+NOTICE: I consider HTML-only based email as SPAM : goes straight into
+        the trash, so send plain text if you want me to read it ;-)
+
+BTW: Ceterum Censeo Microsoftem esse Delendam
+
+
+From jan.reucker at web.de  Sat Sep  6 21:38:18 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sat, 6 Sep 2008 21:38:18 +0200
+Subject: [Crrcsim-devel] [crrcsim] CRRCSim helicopter model
+In-Reply-To: <200809062104.47270.kees.lemmens@gmail.com>
+References: <20080905092731.GA19494@localhost>
+	<200809062104.47270.kees.lemmens@gmail.com>
+Message-ID: <20080906213818.9aac775f.jan.reucker@web.de>
+
+Am Sat, 6 Sep 2008 21:04:47 +0200 schrieb Kees Lemmens <kees.lemmens at gmail.com>:
+
+Hi!
+
+> - after running make and make install the heli wasn't found anywhere 
+> in the list : it turned out I had to put the model and object files 
+> in the appropiate places manually. That may be very easily fixed :-)
+
+This should be fixed in the latest tip now. heli.xml and heli.ac were missing
+in the Makefile.am's. 
+
+> - Because the model is so simple the orientation is very difficult to 
+> guess : most of the time you have no idea whether the tail points 
+> towards you or is 180 deg rotated and pointing away from you. Maybe 
+> add a little more texture, e.g. on one side of the body and also make 
+> it a little less transparant ?
+
+Yes, a bigger and more colourful model would be nice, but this is also
+a lot of work...
+
+You may also notice that there's a rendering problem with the rotor disc:
+If you look at it from above, you see the bottom of the skybox behind it,
+not the scenery. I have to adjust the rendering order some day...
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Sun Sep  7 08:37:36 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Sun, 7 Sep 2008 08:37:36 +0200
+Subject: [Crrcsim-devel] CRRCSim helicopter model
+In-Reply-To: <20080906182027.737f1324.jan.reucker@web.de>
+References: <20080905092731.GA19494@localhost>
+	<20080905221253.decec4ad.jan.reucker@web.de>
+	<20080906182027.737f1324.jan.reucker@web.de>
+Message-ID: <20080907063736.GA5189@localhost>
+
+Hello Jan and others,
+
+> First of all, yaw input should be inverted. I guess most pilots have 
+> configured yaw to move the nose in the same direction as the stick,
+> although most beginners try to "move the tail".
+Oh yes, this is currently wrong. However, the reason is not that I was
+'moving the tail' but that I set up the transmitter interface from scratch
+and didn't compare with test mode or some fixed wing plane. I simply mapped
+and inverted until it was fine.
+
+By the way, there is something wrong with transmitter interface setup. I
+used a clean crrcsim.xml (I removed it), chose 'FMSPIC', and '/dev/ttyUSB0'
+for the device, but then it crashed and still wanted to use '/dev/ttyS0'. So
+I had to write FMSPIC.port.name into crrcsim.xml using an editor.
+
+I noticed something else when fixing the yaw thing: throttle is inverse
+(related to fixed wing model). The behaviour of the variable seems right,
+but I feel 
+ - throttle is positive for stick forward with fixed wing model
+ - throttle is positive for stick backward with fixed pitch heli model
+ - throttle (controls climb in this case) is positive for stick backward
+   with collective pitch heli model
+
+So the meaning of throttle has to be inverted when switching between fixed
+wing/heli. For me this is ok, as I have to remap anyway. But maybe I should
+invert throttle in the heli code to save user one click?
+
+I prefer the following setup (please comment if this is totally strange and
+what is strange about it):
+
+fixed wing:
+  left stick is elevator, rudder
+  right stick is throttle, aileron
+
+heli:
+  Roll and pitch have to be on one stick, and I want them on the right stick.
+  So there is throttle (collective pitch) and yaw on the left stick.
+ 
+Something else: I searched the web for correct english words, but I am not
+sure about them...
+
+roll and yaw seem right, but what about 
+  - pitch (rotation about model's y-axis). Is 'nick' the correct word, or
+    is it just used in Germany?
+  - What to use for collective pitch (controls climb)?
+
+Well, some questions here...
+
+When commenting on the heli's aero parameters, please keep in mind that the
+current file includes three different settings! I think it would be fine if
+we could adjust settings for differents types (I will fill them into the
+file):
+
+  - koaxial indoor
+  - fixed pitch
+  - collective pitch, beginner type
+  - collective pitch, expert type
+
+And everyone of them with an indoor setting (no wind) and with an outdoor
+setting (disturbances because of medium wind).
+    
+Best regards,
+Jens
+
+
+From jens_w2 at gmx.net  Sun Sep  7 08:39:20 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Sun, 7 Sep 2008 08:39:20 +0200
+Subject: [Crrcsim-devel] [crrcsim] CRRCSim helicopter model
+In-Reply-To: <200809062104.47270.kees.lemmens@gmail.com>
+References: <20080905092731.GA19494@localhost>
+	<200809062104.47270.kees.lemmens@gmail.com>
+Message-ID: <20080907063920.GB5189@localhost>
+
+Hi Kees,
+
+> - Because the model is so simple the orientation is very difficult to 
+> guess : most of the time you have no idea whether the tail points 
+> towards you or is 180 deg rotated and pointing away from you. Maybe 
+> add a little more texture, e.g. on one side of the body and also make 
+> it a little less transparant ?
+Yes, I felt that this is difficult, too. But the current model is not
+transparent at all!?!?
+
+Jens
+
+
+From jan.reucker at web.de  Sun Sep  7 10:37:19 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sun, 7 Sep 2008 10:37:19 +0200
+Subject: [Crrcsim-devel] CRRCSim helicopter model
+In-Reply-To: <20080907063736.GA5189@localhost>
+References: <20080905092731.GA19494@localhost>
+	<20080905221253.decec4ad.jan.reucker@web.de>
+	<20080906182027.737f1324.jan.reucker@web.de>
+	<20080907063736.GA5189@localhost>
+Message-ID: <20080907103719.31a72a6c.jan.reucker@web.de>
+
+Am Sun, 7 Sep 2008 08:37:36 +0200 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> By the way, there is something wrong with transmitter interface setup. I
+> used a clean crrcsim.xml (I removed it), chose 'FMSPIC', and '/dev/ttyUSB0'
+> for the device, but then it crashed and still wanted to use '/dev/ttyS0'. So
+> I had to write FMSPIC.port.name into crrcsim.xml using an editor.
+
+Yes, I'm currently working on this. The "ctrlgen" dialog showed some very
+weird behaviour, so I "fixed" something, which unfortunately caused some
+more weird behaviour... I decided to rewrite large parts of the dialog (and
+actually split it into two dialogs), but this is not ready for the public,
+yet. FMSPIC and ZhenHua device selection seems to be working now, but
+joystick and AUDIO still need some work. I will push my changesets ASAP,
+but it may still take about a week or so.
+ 
+> I noticed something else when fixing the yaw thing: throttle is inverse
+> (related to fixed wing model). The behaviour of the variable seems right,
+> but I feel 
+>  - throttle is positive for stick forward with fixed wing model
+>  - throttle is positive for stick backward with fixed pitch heli model
+>  - throttle (controls climb in this case) is positive for stick backward
+>    with collective pitch heli model
+
+I guess there's no "right" way to implement throttle behaviour. Some pilots
+like the "fixed-wing" behaviour (forward == more power), others like
+the "real-thing" behaviour (pull the stick for more power, like in a
+real copter).
+
+> So the meaning of throttle has to be inverted when switching between fixed
+> wing/heli. For me this is ok, as I have to remap anyway. But maybe I should
+> invert throttle in the heli code to save user one click?
+
+I'd prefer the "fixed-wing" behaviour: same stick direction gives more power
+on both fixed-wing and heli models.
+
+> I prefer the following setup (please comment if this is totally strange and
+> what is strange about it):
+> 
+> fixed wing:
+>   left stick is elevator, rudder
+>   right stick is throttle, aileron
+> 
+> heli:
+>   Roll and pitch have to be on one stick, and I want them on the right stick.
+>   So there is throttle (collective pitch) and yaw on the left stick.
+
+I prefer the same heli setup, and I guess that's what most people are using,
+maybe with left and right stick swapped. My fixed-wing setup is swapped,
+so that the throttle stick is always on the left for both fixed-wing and heli.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Sun Sep  7 17:13:09 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sun, 7 Sep 2008 17:13:09 +0200
+Subject: [Crrcsim-devel] Interface configuration dialog
+Message-ID: <20080907171309.2cbd7b13.jan.reucker@web.de>
+
+Hello,
+
+I just pushed my changes regarding the ctrlgen dialog to the BerliOS repo. Large
+parts of the dialog code were rewritten, and I also changed some of the inputdev
+modules to work with the new dialog. I hope that I didn't break too much stuff :-/
+
+Please report any unusual behaviour. This includes:
+
+- interface configurations not properly saved to config file
+- dialog does not reflect the settings from the config when opened
+- interface cannot be configured properly
+- missing devices in the device selection combo box
+- wrong set of buttons highlighted in the main dialog after selecting
+  a new interface in the "Device" subdialog
+
+Especially the joystick configuration procedure is a bit messy, because it is
+split into two independent modules (mouse_kbd.* and inputdev_software). I
+tested it with the "fake joystick" mode, but can't test it with real joysticks
+(they are still buried somewhere in a box since my move last year).
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Mon Sep  8 20:43:35 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Mon, 8 Sep 2008 20:43:35 +0200
+Subject: [Crrcsim-devel] Interface configuration dialog
+In-Reply-To: <20080907171309.2cbd7b13.jan.reucker@web.de>
+References: <20080907171309.2cbd7b13.jan.reucker@web.de>
+Message-ID: <20080908184335.GA6537@localhost>
+
+Hi Jan,
+
+your current changes are great. I can configure FMSPIC (starting from
+non-existant crrcsim.xml) and it works, settings are fine after restart.
+
+The rendering changes make a big difference, too. The heli's rotor disc
+looks much better now -- everything that's missing is stopping it from
+dropping a shadow. How do we want to do this? Do we need to provide separate
+files for rotors 
+ - moving and not creating a shadow
+ - standstill, creating a shadow
+
+By the way, could you extend the GUI and mixer things to include 
+ - flaps
+ - spoiler
+?
+
+Then I'd add flaps and brake/spoiler to the larcsim FDM.
+ 
+
+Best regards,
+Jens
+
+ 
+
+
+From jan.reucker at web.de  Mon Sep  8 21:56:37 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Mon, 8 Sep 2008 21:56:37 +0200
+Subject: [Crrcsim-devel] Interface configuration dialog
+In-Reply-To: <20080908184335.GA6537@localhost>
+References: <20080907171309.2cbd7b13.jan.reucker@web.de>
+	<20080908184335.GA6537@localhost>
+Message-ID: <20080908215637.ebd7f25c.jan.reucker@web.de>
+
+Am Mon, 8 Sep 2008 20:43:35 +0200 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> your current changes are great. I can configure FMSPIC (starting from
+> non-existant crrcsim.xml) and it works, settings are fine after restart.
+
+Hi Jens,
+
+thanks for the positive feedback. However, I found two bugs today, one
+compile problem on Win32 and a missing update to the buttons in the
+ctrlgen dialog that causes problems when changing e.g. from AUDIO back
+to MOUSE (the "Buttons" button won't get highlighted in that case). I'll
+fix this now.
+
+> The rendering changes make a big difference, too. The heli's rotor disc
+> looks much better now -- everything that's missing is stopping it from
+> dropping a shadow. How do we want to do this? Do we need to provide separate
+> files for rotors 
+>  - moving and not creating a shadow
+>  - standstill, creating a shadow
+
+I always thought that the rotor disc would at least cast a light shadow,
+but I just searched the Tube for some vids, and as soon as the rotor
+spins the shadow is gone:
+
+http://www.youtube.com/watch?v=-RIurMzH91U
+http://www.youtube.com/watch?v=-Mn18PoKpNo
+http://www.youtube.com/watch?v=e5Wy5uiOcKA
+
+So we need to implement at least a static model shadow without the rotor
+disc. This can be implemented relatively easy by naming the disc in the
+3D model (just like it is done for the animated control surfaces). Then
+I can remove this part from the shadow model. I'll look into that later.
+
+A realistic spin-up of the rotor would be much harder to implement.
+
+
+> By the way, could you extend the GUI and mixer things to include 
+>  - flaps
+>  - spoiler
+> ?
+> 
+> Then I'd add flaps and brake/spoiler to the larcsim FDM.
+
+Aw, I always feared the day when this feature request would be thrown in... ;)
+Sure I can, but it will be quite an amount of work. And while we're at it,
+we should add two extra channels for special functions (like retractable gear
+or smoke). I'll see what I can do.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Mon Sep  8 22:22:31 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Mon, 8 Sep 2008 22:22:31 +0200
+Subject: [Crrcsim-devel] Interface configuration dialog
+In-Reply-To: <20080908215637.ebd7f25c.jan.reucker@web.de>
+References: <20080907171309.2cbd7b13.jan.reucker@web.de>
+	<20080908184335.GA6537@localhost>
+	<20080908215637.ebd7f25c.jan.reucker@web.de>
+Message-ID: <20080908202231.GA7886@localhost>
+
+Hello Jan,
+
+> So we need to implement at least a static model shadow without the rotor
+> disc. This can be implemented relatively easy by naming the disc in the
+> 3D model (just like it is done for the animated control surfaces). Then
+> I can remove this part from the shadow model. I'll look into that later.
+This is great.
+
+> A realistic spin-up of the rotor would be much harder to implement.
+And is not needed -- at least that's my opinion. A static disc without
+shadow is just fine.
+
+> Aw, I always feared the day when this feature request would be thrown in... ;)
+Oh, I thought this is just cut'n'paste, renaming some variables/strings and
+adjusting the GUI (ouch!).
+And of course not having that feature won't kill us or our users -- but
+having those control inputs would make it easy to add flaps/spoilers and
+make sailplane simulation much more complete.
+
+Jens
+
+
+From jan.reucker at web.de  Tue Sep  9 21:18:53 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Tue, 9 Sep 2008 21:18:53 +0200
+Subject: [Crrcsim-devel] Interface configuration dialog
+In-Reply-To: <20080908202231.GA7886@localhost>
+References: <20080907171309.2cbd7b13.jan.reucker@web.de>
+	<20080908184335.GA6537@localhost>
+	<20080908215637.ebd7f25c.jan.reucker@web.de>
+	<20080908202231.GA7886@localhost>
+Message-ID: <20080909211853.9d43f64c.jan.reucker@web.de>
+
+Am Mon, 8 Sep 2008 22:22:31 +0200 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> > Aw, I always feared the day when this feature request would be thrown in... ;)
+> Oh, I thought this is just cut'n'paste, renaming some variables/strings and
+> adjusting the GUI (ouch!).
+
+Hi Jens,
+
+in fact it is. But isn't this the most dangerous way of extending software?
+It's been a while since I've touched this part of CRRCsim, but I can recall
+that there pieces of code which heavily depend on magic numbers and a certain
+order of enum constants. This is easy to break. But I guess in the end it's
+not too much work. I'll finish the shadow stuff first and then look into
+it.
+
+> And of course not having that feature won't kill us or our users -- but
+> having those control inputs would make it easy to add flaps/spoilers and
+> make sailplane simulation much more complete.
+
+Sure. I was always hoping that someone would implement spoilers some day,
+so I'll happily dig into the mixer/mapper/GUI code.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Tue Sep  9 22:28:07 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Tue, 9 Sep 2008 22:28:07 +0200
+Subject: [Crrcsim-devel] Rendering attributes / rotor shadow
+Message-ID: <20080909222807.05481c78.jan.reucker@web.de>
+
+Hello,
+
+I added some generic functions to handle additional rendering attributes. This
+mechanism works as follows:
+
+- 3D modelling tools allow you to assign arbitrary names to objects in a 3D model.
+- CRRCsim will only use all characters up to the first blank as the node's name.
+- The rest of the string is parsed for attributes which then can be
+  queried in CRRCsim for different purposes.
+
+The first supported attribute is "-shadow" which removes an object from shadow
+rendering. So if you create a heli model, add -shadow to the rotor disc object's
+name, e.g.
+
+RotorDisc -shadow
+
+In an AC3D file, this will result in something like:
+
+...
+OBJECT world
+kids 16
+OBJECT poly
+name "RotorDisc -shadow"
+data 8
+...
+
+CRRCsim can now traverse the scenegraph and query each node's "pure" name with
+
+SSGUtil::getPureNodeName(ssgEntity* node)
+
+and the node's attributes with
+
+SSGUtil::NodeAttributes SSGUtil::getNodeAttributes(ssgEntity* node)
+
+-shadow is mapped to the variable "bool castsShadow" in SSGUtil::NodeAttributes.
+Other attributes can easily be added.
+
+The shadow removal routine doesn't work perfectly: It works for the rotor disc
+of Jens' heli model, but not for the tail rotor. I will investigate this.
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Wed Sep 10 22:16:41 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Wed, 10 Sep 2008 22:16:41 +0200
+Subject: [Crrcsim-devel] Black screen with heli model
+Message-ID: <20080910221641.d578954c.jan.reucker@web.de>
+
+Hello Jens,
+
+I just pulled the latest changes (8163dd6fbce7 to 0b0623b1d8a9), and now
+I'm getting a black screen when the heli is selected. I had the same problem
+with one of my homebrew models (with a strange set of aero params). So I
+went back to 8163dd6fbce7 and followed your changesets. Everything was o.k.
+until I reached 58f0a215cb10. I don't have the time to investigate this any
+further tonight, but maybe you can figure out the cause of the problem.
+I can recall that someone mentioned something like "taking the square-root of
+a negative floating point number" when I addressed the black screen problem
+before on this list.
+
+o    changeset:   950:0b0623b1d8a9
+|\   tag:         tip
+| |  parent:      949:58f0a215cb10
+| |  parent:      945:8c56eab098bc
+| |  user:        jww <jens_w2 at gmx.net>
+| |  date:        Wed Sep 10 00:33:13 2008 +0200
+| |  summary:     merge
+| |
+| @  changeset:   949:58f0a215cb10                 <----- screen goes black
+| |  user:        jww <jens_w2 at gmx.net>
+| |  date:        Wed Sep 10 00:29:12 2008 +0200
+| |  summary:     Changes to power, heli, larcsim
+| |
+| o  changeset:   948:fdf3bacbde00                 <----- OK
+| |  user:        jww <jens_w2 at gmx.net>
+| |  date:        Wed Sep 10 00:21:25 2008 +0200
+| |  summary:     Power::Shaft honours brake setting and propeller inertia in automagic mode
+| |
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Thu Sep 11 17:24:44 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Thu, 11 Sep 2008 17:24:44 +0200
+Subject: [Crrcsim-devel] Black screen with heli model
+In-Reply-To: <20080910221641.d578954c.jan.reucker@web.de>
+References: <20080910221641.d578954c.jan.reucker@web.de>
+Message-ID: <20080911152444.GA4396@localhost>
+
+Hi Jan,
+
+I'm going to do a (hopefully final) redesign of some things related to the
+heli model, but unfortunately it might take one or two weeks until I can
+start working on it...
+
+Jens
+
+
+From jan.reucker at web.de  Thu Sep 11 21:12:16 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Thu, 11 Sep 2008 21:12:16 +0200
+Subject: [Crrcsim-devel] Black screen with heli model
+In-Reply-To: <20080911152444.GA4396@localhost>
+References: <20080910221641.d578954c.jan.reucker@web.de>
+	<20080911152444.GA4396@localhost>
+Message-ID: <20080911211216.7b6dcc51.jan.reucker@web.de>
+
+Am Thu, 11 Sep 2008 17:24:44 +0200 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> I'm going to do a (hopefully final) redesign of some things related to the
+> heli model, but unfortunately it might take one or two weeks until I can
+> start working on it...
+
+Jens,
+
+interesting fact: I compiled the tip on Windows today (gcc 3.4.5), on a different
+machine, and the black screen didn't happen.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Thu Sep 11 21:46:53 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Thu, 11 Sep 2008 21:46:53 +0200
+Subject: [Crrcsim-devel] Interface configuration dialog
+In-Reply-To: <20080909211853.9d43f64c.jan.reucker@web.de>
+References: <20080907171309.2cbd7b13.jan.reucker@web.de>
+	<20080908184335.GA6537@localhost>
+	<20080908215637.ebd7f25c.jan.reucker@web.de>
+	<20080908202231.GA7886@localhost>
+	<20080909211853.9d43f64c.jan.reucker@web.de>
+Message-ID: <20080911214653.c5046513.jan.reucker@web.de>
+
+Am Tue, 9 Sep 2008 21:18:53 +0200 schrieb Jan Reucker <jan.reucker at web.de>:
+
+> > Oh, I thought this is just cut'n'paste, renaming some variables/strings and
+> > adjusting the GUI (ouch!).
+
+> in fact it is. But isn't this the most dangerous way of extending software?
+
+"just cut'n'paste" turned out to be a 1227 line patch across 10 files. And
+I've not started to adapt the GUI or command line parsing yet... but now we have
+eight control functions, and I refactored/simplified/DRY'ed some parts of the
+code that always annoyed me. Adding more functions should also be easier now.
+
+I threw out the "brake" function, don't think it's useful yet. The new functions are
+flap, spoiler, retract and pitch. Spoiler and retract travel from 0.0 to 1.0
+while flap and pitch move from -0.5...0.5.
+
+As I said, no GUI support yet, but after saving your config file once with the
+current tip version, you can edit the axis assignments manually.
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Thu Sep 11 21:48:00 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Thu, 11 Sep 2008 21:48:00 +0200
+Subject: [Crrcsim-devel] Black screen with heli model
+In-Reply-To: <20080911211216.7b6dcc51.jan.reucker@web.de>
+References: <20080910221641.d578954c.jan.reucker@web.de>
+	<20080911152444.GA4396@localhost>
+	<20080911211216.7b6dcc51.jan.reucker@web.de>
+Message-ID: <20080911214800.53db3f47.jan.reucker@web.de>
+
+Am Thu, 11 Sep 2008 21:12:16 +0200 schrieb Jan Reucker <jan.reucker at web.de>:
+
+> interesting fact: I compiled the tip on Windows today (gcc 3.4.5), on a different
+> machine, and the black screen didn't happen.
+
+More info: On my linux machine, the first frame seems to be rendered correctly.
+Then the FoV indicator (when starting with ./crrcsim -vvv) shows
+FoV: -2147483648.-2147483648 . Does this mean something like NaN?
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Sun Sep 14 11:33:54 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sun, 14 Sep 2008 11:33:54 +0200
+Subject: [Crrcsim-devel] Black screen with heli model
+In-Reply-To: <20080911214800.53db3f47.jan.reucker@web.de>
+References: <20080910221641.d578954c.jan.reucker@web.de>
+	<20080911152444.GA4396@localhost>
+	<20080911211216.7b6dcc51.jan.reucker@web.de>
+	<20080911214800.53db3f47.jan.reucker@web.de>
+Message-ID: <20080914113354.d8aa4cf5.jan.reucker@web.de>
+
+Am Thu, 11 Sep 2008 21:48:00 +0200 schrieb Jan Reucker <jan.reucker at web.de>:
+
+> Am Thu, 11 Sep 2008 21:12:16 +0200 schrieb Jan Reucker <jan.reucker at web.de>:
+> 
+> > interesting fact: I compiled the tip on Windows today (gcc 3.4.5), on a different
+> > machine, and the black screen didn't happen.
+> 
+> More info: On my linux machine, the first frame seems to be rendered correctly.
+> Then the FoV indicator (when starting with ./crrcsim -vvv) shows
+> FoV: -2147483648.-2147483648 . Does this mean something like NaN?
+
+Hi Jens,
+
+here are some more observations.
+
+- It's not a negative argument to sqrt. As a test, I replaced all calls to
+  sqrt with an inline function that tested the argument before the actual
+  call to sqrt. Everything was o.k.
+
+- When I start with an airplane and then switch to the heli model, everything
+  is o.k., no black screen. Heli flies better than ever, the ground effect
+  feels quite realistic.
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Sun Sep 14 17:59:57 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sun, 14 Sep 2008 17:59:57 +0200
+Subject: [Crrcsim-devel] Black screen with heli model
+In-Reply-To: <20080914113354.d8aa4cf5.jan.reucker@web.de>
+References: <20080910221641.d578954c.jan.reucker@web.de>
+	<20080911152444.GA4396@localhost>
+	<20080911211216.7b6dcc51.jan.reucker@web.de>
+	<20080911214800.53db3f47.jan.reucker@web.de>
+	<20080914113354.d8aa4cf5.jan.reucker@web.de>
+Message-ID: <20080914175957.b6e1d035.jan.reucker@web.de>
+
+Am Sun, 14 Sep 2008 11:33:54 +0200 schrieb Jan Reucker <jan.reucker at web.de>:
+
+> Am Thu, 11 Sep 2008 21:48:00 +0200 schrieb Jan Reucker <jan.reucker at web.de>:
+> > 
+> > More info: On my linux machine, the first frame seems to be rendered correctly.
+> > Then the FoV indicator (when starting with ./crrcsim -vvv) shows
+> > FoV: -2147483648.-2147483648 . Does this mean something like NaN?
+
+Regarding NaN: I turned on the following log options:
+
+#define FDM_LOG             1
+#define FDM_LOG_POS         1
+#define FDM_LOG_WIND_IN     0
+#define FDM_LOG_AERO_OUT    1
+
+Here's the logfile (starting up with the heli model):
+
+0 -20.9298 0 -0.333071 0 0 3.14159 -0 -0 -0.006709 -0.000127768 0.00531848 0 
+1 -20.9298 0 -0.332885 0 -0 3.14159 -0 -0 -0 0 0.00576199 0 
+2 -20.9298 -9.43175e-22 -0.332405 0 -0 0 nan nan nan nan nan 0 
+3 -20.9298 -2.51513e-21 -0.331688 nan nan nan nan nan nan nan nan nan 
+4 nan nan nan nan nan nan nan nan nan nan nan nan 
+5 nan nan nan nan nan nan nan nan nan nan nan nan 
+6 nan nan nan nan nan nan nan nan nan nan nan nan 
+....
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Mon Sep 15 21:36:04 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Mon, 15 Sep 2008 21:36:04 +0200
+Subject: [Crrcsim-devel] Black screen with heli model
+In-Reply-To: <20080914175957.b6e1d035.jan.reucker@web.de>
+References: <20080910221641.d578954c.jan.reucker@web.de>
+	<20080911152444.GA4396@localhost>
+	<20080911211216.7b6dcc51.jan.reucker@web.de>
+	<20080911214800.53db3f47.jan.reucker@web.de>
+	<20080914113354.d8aa4cf5.jan.reucker@web.de>
+	<20080914175957.b6e1d035.jan.reucker@web.de>
+Message-ID: <20080915193604.GA6201@localhost>
+
+Hi Jan,
+
+thanks for your report. 
+I don't understand this thing...
+58f0a215cb10 and 0b0623b1d8a9 work well for me. I made some more changes,
+but even if the code is the same as 0b0623b1d8a9 (except some block:
+if (false) { ... }) I get the black screen.
+
+I keep searching...
+
+Jens
+
+
+From jens_w2 at gmx.net  Mon Sep 15 21:51:30 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Mon, 15 Sep 2008 21:51:30 +0200
+Subject: [Crrcsim-devel] Black screen with heli model
+In-Reply-To: <20080915193604.GA6201@localhost>
+References: <20080910221641.d578954c.jan.reucker@web.de>
+	<20080911152444.GA4396@localhost>
+	<20080911211216.7b6dcc51.jan.reucker@web.de>
+	<20080911214800.53db3f47.jan.reucker@web.de>
+	<20080914113354.d8aa4cf5.jan.reucker@web.de>
+	<20080914175957.b6e1d035.jan.reucker@web.de>
+	<20080915193604.GA6201@localhost>
+Message-ID: <20080915195130.GA7162@localhost>
+
+Well, I think I got it now...
+
+
+From jan.reucker at web.de  Mon Sep 15 21:59:13 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Mon, 15 Sep 2008 21:59:13 +0200
+Subject: [Crrcsim-devel] Black screen with heli model
+In-Reply-To: <20080915195130.GA7162@localhost>
+References: <20080910221641.d578954c.jan.reucker@web.de>
+	<20080911152444.GA4396@localhost>
+	<20080911211216.7b6dcc51.jan.reucker@web.de>
+	<20080911214800.53db3f47.jan.reucker@web.de>
+	<20080914113354.d8aa4cf5.jan.reucker@web.de>
+	<20080914175957.b6e1d035.jan.reucker@web.de>
+	<20080915193604.GA6201@localhost> <20080915195130.GA7162@localhost>
+Message-ID: <20080915215913.9996f2ec.jan.reucker@web.de>
+
+Am Mon, 15 Sep 2008 21:51:30 +0200 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> Well, I think I got it now...
+
+I hope so... I just started browsing through the FDM code but it's hard to
+trace bugs in code that you don't really understand... ;-)
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Tue Sep 16 00:40:04 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Tue, 16 Sep 2008 00:40:04 +0200
+Subject: [Crrcsim-devel] Black screen with heli model
+In-Reply-To: <20080910221641.d578954c.jan.reucker@web.de>
+References: <20080910221641.d578954c.jan.reucker@web.de>
+Message-ID: <20080915224004.GA7318@localhost>
+
+...so hopefully the black screen problem is gone now. There has been an
+initialisation bug in one place, but the FDM may still go mad in general.
+However, I added some sanity checks and can't trigger the black screen
+anymore.
+
+Jens
+
+
+From jens_w2 at gmx.net  Tue Sep 16 00:49:04 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Tue, 16 Sep 2008 00:49:04 +0200
+Subject: [Crrcsim-devel] heli model
+Message-ID: <20080915224904.GB7318@localhost>
+
+Hi,
+
+the heli model has undergone some major change again...parameters are much less
+dependent on each other now, so adjusting them has become quite easy.
+
+For example, the *_ctrl parameters mean 'rotational velocity at full stick
+input' (2*pi is one revolution per second) now, no matter what *_damp is and
+whether heading hold is used or not.
+
+Well, seems I'll have to write some doc about it..
+
+I have run out of ideas now and so the implementation is unlikely to change
+again, so playing with parameters to make it feel realistic makes lots of
+sense now...
+
+Have fun,
+Jens
+
+
+From jan.reucker at web.de  Tue Sep 16 11:01:46 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Tue, 16 Sep 2008 11:01:46 +0200
+Subject: [Crrcsim-devel] Black screen with heli model
+In-Reply-To: <20080915224004.GA7318@localhost>
+References: <20080910221641.d578954c.jan.reucker@web.de>
+	<20080915224004.GA7318@localhost>
+Message-ID: <20080916110146.78de6082.jan.reucker@web.de>
+
+Am Tue, 16 Sep 2008 00:40:04 +0200 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> ...so hopefully the black screen problem is gone now. There has been an
+> initialisation bug in one place, but the FDM may still go mad in general.
+> However, I added some sanity checks and can't trigger the black screen
+> anymore.
+
+Hi Jens,
+
+same here: I don't get the black screen any more. Thanks a lot for the fix!
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Tue Sep 16 11:07:37 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Tue, 16 Sep 2008 11:07:37 +0200
+Subject: [Crrcsim-devel] heli model
+In-Reply-To: <20080915224904.GB7318@localhost>
+References: <20080915224904.GB7318@localhost>
+Message-ID: <20080916110737.c56baa9c.jan.reucker@web.de>
+
+Am Tue, 16 Sep 2008 00:49:04 +0200 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> I have run out of ideas now and so the implementation is unlikely to change
+> again, so playing with parameters to make it feel realistic makes lots of
+> sense now...
+
+Hi Jens,
+
+without looking at the parameters in great detail: is it possible to
+configure a collective pitch heli to have zero pitch instead of
+negative pitch when the throttle is pulled all the way back? I tried
+the "collective beginner" configuration and found it very hard to
+hover around with negative pitch kicking in every now and then when
+I pulled the stick back too far. AFAIK the "beginner" CP helis
+are usually configured to have only positive pitch to make the
+transition from fixed to collective pitch easier. 
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Tue Sep 16 11:54:17 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Tue, 16 Sep 2008 11:54:17 +0200
+Subject: [Crrcsim-devel] Rendering attributes / rotor shadow
+In-Reply-To: <20080909222807.05481c78.jan.reucker@web.de>
+References: <20080909222807.05481c78.jan.reucker@web.de>
+Message-ID: <20080916115417.4c88af7b.jan.reucker@web.de>
+
+Am Tue, 9 Sep 2008 22:28:07 +0200 schrieb Jan Reucker <jan.reucker at web.de>:
+
+> The shadow removal routine doesn't work perfectly: It works for the rotor disc
+> of Jens' heli model, but not for the tail rotor. I will investigate this.
+
+Found the bug, but still have to find a clever fix.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Tue Sep 16 18:14:56 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Tue, 16 Sep 2008 18:14:56 +0200
+Subject: [Crrcsim-devel] heli model
+In-Reply-To: <20080916110737.c56baa9c.jan.reucker@web.de>
+References: <20080915224904.GB7318@localhost>
+	<20080916110737.c56baa9c.jan.reucker@web.de>
+Message-ID: <20080916161456.GA4388@localhost>
+
+Hello Jan,
+
+yes, it is:
+    inputs->pitch = cp_ctrl * (inputs->throttle - 0.5) + cp_off;
+
+Best regards,
+Jens
+
+
+From jan.reucker at web.de  Tue Sep 16 22:21:43 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Tue, 16 Sep 2008 22:21:43 +0200
+Subject: [Crrcsim-devel] Rendering attributes / rotor shadow
+In-Reply-To: <20080916115417.4c88af7b.jan.reucker@web.de>
+References: <20080909222807.05481c78.jan.reucker@web.de>
+	<20080916115417.4c88af7b.jan.reucker@web.de>
+Message-ID: <20080916222143.d6806760.jan.reucker@web.de>
+
+Am Tue, 16 Sep 2008 11:54:17 +0200 schrieb Jan Reucker <jan.reucker at web.de>:
+
+> Am Tue, 9 Sep 2008 22:28:07 +0200 schrieb Jan Reucker <jan.reucker at web.de>:
+> 
+> > The shadow removal routine doesn't work perfectly: It works for the rotor disc
+> > of Jens' heli model, but not for the tail rotor. I will investigate this.
+> 
+> Found the bug, but still have to find a clever fix.
+
+Done. Now everything tagged with "-shadow" should be removed properly.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Tue Sep 16 22:43:29 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Tue, 16 Sep 2008 22:43:29 +0200
+Subject: [Crrcsim-devel] spoiler and flaps
+Message-ID: <20080916204329.GA7577@localhost>
+
+Hi,
+
+spoiler and flaps have been added to fdm_larcsim. See skorpion.xml for an
+example.
+
+Best regards,
+Jens
+
+
+From jens_w2 at gmx.net  Wed Sep 17 08:17:35 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Wed, 17 Sep 2008 08:17:35 +0200
+Subject: [Crrcsim-devel] spoiler and flaps
+Message-ID: <20080917061735.GA4391@localhost>
+
+Hi,
+
+the current development version of CRRCSim is able to simulate spoiler and
+flaps now. See
+  http://hg.berlios.de/repos/crrcsim/raw-file/tip/documentation/file_format/index.html
+  http://hg.berlios.de/repos/crrcsim/raw-file/tip/models/Skorpion.xml
+
+If you are able to compile CRRCSim from source, grab
+  http://hg.berlios.de/repos/crrcsim/archive/tip.zip
+and go ahead.
+
+It is not possible to assign sticks to spoiler or flaps using the GUI, so
+you have to edit crrcsim.xml by hand. You'll find a line
+  +--------------------------------------------------------
+  |           <spoiler axis="-1" polarity="1" />
+  +--------------------------------------------------------
+in your crrcsim.xml after running the new version for the first time. Change 
+  axis="-1"
+to
+  axis="3"
+or whatever the number of your spoiler input stick is.
+
+Currently only the 'Skorpion' has spoiler and flaps parameters set. It is up
+to you to figure out and provide realistic parameters for the airplanes
+which are lacking flap/spoiler parameters!
+
+Just post them here and we'll happily include them in the next official
+CRRCSim release.
+
+Best regards,
+Jens
+
+
+From jan.reucker at web.de  Wed Sep 17 11:31:21 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Wed, 17 Sep 2008 11:31:21 +0200
+Subject: [Crrcsim-devel] spoiler and flaps
+In-Reply-To: <20080917061735.GA4391@localhost>
+References: <20080917061735.GA4391@localhost>
+Message-ID: <20080917113121.0cc935a5.jan.reucker@web.de>
+
+Am Wed, 17 Sep 2008 08:17:35 +0200 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> the current development version of CRRCSim is able to simulate spoiler and
+> flaps now.
+
+Hi Jens,
+
+great addition, many CRRCsim fans have waited for this feature.
+
+But unluckily flaps and spoiler brought back the BSOC (black screen
+of CRRCsim) for any plane other than the Skorpion. Changeset d535944cfb05
+introduced this behaviour. The Skorpion and the heli still work fine.
+Here's some output when starting up with the Gap65 model:
+
+Opening fdm logfile
+Closing fdm logfile
+Not CRRC_AirplaneSim_Heli01: No Attribute named type in CRRCSim_airplane
+Opening fdm logfile
+Closing fdm logfile
+Not CRRC_AirplaneSim_Larcsim: No item named flaps in aero
+Opening fdm logfile
+airplane: Cm_a=-1.354138   Alpha_0=0.000000  Cm_0=0.000000
+airplane: CL_a=4.788372               CL_0=0.101000
+airplane: alpha=0.000000  C_L=0.200000
+trimmedFlightVelocity = 24.3858 m/s
+
+And the log file with all logging options enabled:
+0 -20.93 0 -0.74638 nan nan nan 0 0 0 0 0 0 0 0 0 0 0 0 nan nan nan nan nan nan 
+1 nan nan nan nan nan nan 0 0 0 0 0 0 0 0 0 0 0 0 nan nan nan nan nan nan 
+2 nan nan nan nan nan nan 0 0 0 0 0 0 0 0 0 0 0 0 nan nan nan nan nan nan 
+...
+
+I guess there's some backward compatibility missing, because now fdm_larcsim
+will throw an exception on creation when no flaps or spoiler parameters are
+found. The following patch fixed things for me. Please apply it if you think
+that this is an appropriate solution.
+
+diff -r d8a77c402c5b src/mod_fdm/fdm_larcsim/fdm_larcsim.cpp
+--- a/src/mod_fdm/fdm_larcsim/fdm_larcsim.cpp	Wed Sep 17 11:01:22 2008 +0200
++++ b/src/mod_fdm/fdm_larcsim/fdm_larcsim.cpp	Wed Sep 17 11:27:38 2008 +0200
+@@ -266,12 +266,12 @@
+   Cn_dr = i->getDouble("Cn_dr");
+   Cn_da = i->getDouble("Cn_da");
+   
+-  i = xml->getChild("aero.flaps");
++  i = xml->getChild("aero.flaps", true);
+   flaps_drag = i->getDouble("drag", 0);
+   flaps_lift = i->getDouble("lift", 0);
+   flaps_off  = i->getDouble("off",  0);
+   
+-  i = xml->getChild("aero.spoiler");
++  i = xml->getChild("aero.spoiler", true);
+   spoiler_drag = i->getDouble("drag", 0);
+   spoiler_lift = i->getDouble("lift", 0);
+   
+
+
+
+I hope that I can provide a modified GUI ASAP.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Wed Sep 17 17:33:14 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Wed, 17 Sep 2008 17:33:14 +0200
+Subject: [Crrcsim-devel] spoiler and flaps
+In-Reply-To: <20080917113121.0cc935a5.jan.reucker@web.de>
+References: <20080917061735.GA4391@localhost>
+	<20080917113121.0cc935a5.jan.reucker@web.de>
+Message-ID: <20080917173314.694683d6.jan.reucker@web.de>
+
+Am Wed, 17 Sep 2008 11:31:21 +0200 schrieb Jan Reucker <jan.reucker at web.de>:
+
+> I hope that I can provide a modified GUI ASAP.
+
+Done. But one thing is missing: The mapping presets for different transmitter
+brands only set up the first four functions. How do we handle this? Assigning
+special functions like flap, spoiler or gear is mostly done by personal
+preference, so I don't know if there are typical factory presets for all
+brands.
+ 
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Wed Sep 17 18:36:13 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Wed, 17 Sep 2008 18:36:13 +0200
+Subject: [Crrcsim-devel] spoiler and flaps
+In-Reply-To: <20080917113121.0cc935a5.jan.reucker@web.de>
+References: <20080917061735.GA4391@localhost>
+	<20080917113121.0cc935a5.jan.reucker@web.de>
+Message-ID: <20080917163613.GA4395@localhost>
+
+Hi Jan,
+
+when cycling to work this morning I realized that I introduced this
+compatibility bug, now I've fixed it before reading your mail. 
+
+> But unluckily flaps and spoiler brought back the BSOC (black screen
+> of CRRCsim) for any plane other than the Skorpion. Changeset d535944cfb05
+> introduced this behaviour. The Skorpion and the heli still work fine.
+This is because of fdm_002 being used, which is not free of bugs at all.
+
+Thanks for extending the GUI...after some realistic heli model(s) and
+flap/spoiler parameters are added, we should release 0.9.10, shouldn't we?
+
+However, I really have to concentrate on something else than CRRCSim for
+quite a while now...
+
+Jens
+
+
+From jan.reucker at web.de  Thu Sep 18 21:25:33 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Thu, 18 Sep 2008 21:25:33 +0200
+Subject: [Crrcsim-devel] spoiler and flaps
+In-Reply-To: <20080917163613.GA4395@localhost>
+References: <20080917061735.GA4391@localhost>
+	<20080917113121.0cc935a5.jan.reucker@web.de>
+	<20080917163613.GA4395@localhost>
+Message-ID: <20080918212533.ce756d81.jan.reucker@web.de>
+
+Am Wed, 17 Sep 2008 18:36:13 +0200 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> Thanks for extending the GUI...after some realistic heli model(s) and
+> flap/spoiler parameters are added, we should release 0.9.10, shouldn't we?
+
+Maybe we should even release 0.9.10 before waiting for these additions,
+just to get a bigger audience. Or we should provide some kind of "beta"
+packages.
+
+Tonight I'll try to implement retractable gear support. Shouldn't be too
+much work: for the graphics, it's just another ControlSurfaceAnimation
+(most gears swing around a single axis, especially on model planes), so
+this should already work. But the fdm needs support for moving hardpoints.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Thu Sep 18 21:51:02 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Thu, 18 Sep 2008 21:51:02 +0200
+Subject: [Crrcsim-devel] spoiler and flaps
+In-Reply-To: <20080918212533.ce756d81.jan.reucker@web.de>
+References: <20080917061735.GA4391@localhost>
+	<20080917113121.0cc935a5.jan.reucker@web.de>
+	<20080917163613.GA4395@localhost>
+	<20080918212533.ce756d81.jan.reucker@web.de>
+Message-ID: <20080918195102.GA25927@localhost>
+
+> Maybe we should even release 0.9.10 before waiting for these additions,
+> just to get a bigger audience. Or we should provide some kind of "beta"
+> packages.
+We'll, at least for the heli part I'd like to have some 'confirmed'
+sets of parameters.
+
+Could you tweak the coax configuration so that it feels almost right?
+I hardly know helicopter pilots, but I'll do my very best in contacting
+them. However, we might need a prerelease for windows...
+
+And I'd like to have a good example of some glider with
+flaps/spoiler...in the next release.
+
+> Tonight I'll try to implement retractable gear support. 
+Another big step in terms of features! The next CRRCSim release is gonna be
+really cool...
+
+However, as said before: I have to stop programming now. Answering some
+questions and help getting parameters will be enough work.
+
+Jens
+
+
+From jan.reucker at web.de  Thu Sep 18 23:24:48 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Thu, 18 Sep 2008 23:24:48 +0200
+Subject: [Crrcsim-devel] spoiler and flaps
+In-Reply-To: <20080918195102.GA25927@localhost>
+References: <20080917061735.GA4391@localhost>
+	<20080917113121.0cc935a5.jan.reucker@web.de>
+	<20080917163613.GA4395@localhost>
+	<20080918212533.ce756d81.jan.reucker@web.de>
+	<20080918195102.GA25927@localhost>
+Message-ID: <20080918232448.ffc6ca0f.jan.reucker@web.de>
+
+Am Thu, 18 Sep 2008 21:51:02 +0200 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> > Maybe we should even release 0.9.10 before waiting for these additions,
+> > just to get a bigger audience. Or we should provide some kind of "beta"
+> > packages.
+> We'll, at least for the heli part I'd like to have some 'confirmed'
+> sets of parameters.
+
+O.k.
+
+> Could you tweak the coax configuration so that it feels almost right?
+
+I'll try. I flew the simulated coax for only a few minutes and noticed that
+some parameters aren't right yet, but all in all it shouldn't be too hard.
+But I think I need some test flights with my real coax before, it's been
+sitting on the shelf for quite a time. Gotta persuade the kids that I
+need their room for some extended test flying, it's too windy outside
+right now.
+
+> I hardly know helicopter pilots, but I'll do my very best in contacting
+> them. However, we might need a prerelease for windows...
+
+No problem. Anytime.
+ 
+> > Tonight I'll try to implement retractable gear support. 
+> Another big step in terms of features! The next CRRCSim release is gonna be
+> really cool...
+
+Right. Check out the latest tip, the Sport can now retract its gear. It's
+only the plain animation because I had to read several tutorials on Blender
+before I figured out how to do some minimal changes to the model and
+didn't have more time to dive into the code, but it looks quite nice.
+
+The fdm actually needs two additions. Hardpoints must be movable, and
+there should be a parameter for additional drag caused by the plane.
+Maybe there should even be a parameter for additional pitching moment.
+Hopefully I can add all this during the next few days.
+ 
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Sat Sep 27 08:30:14 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Sat, 27 Sep 2008 08:30:14 +0200
+Subject: [Crrcsim-devel] Hard point handling,
+	was: CRRSCIM Wish List Revision 1
+In-Reply-To: <20080922214948.4ab03227.valid.but.only.for.spam@gmx.net>
+References: <20080921120952.9e0dbf47.valid.but.only.for.spam@gmx.net>
+	<gb8m5o+no7d@eGroups.com>
+	<20080922214948.4ab03227.valid.but.only.for.spam@gmx.net>
+Message-ID: <20080927063014.GA4391@localhost>
+
+Hi Jan,
+
+> I'm currently revisiting the hardpoint handling code, so maybe I can include
+> this as well.
+I thought about adding a parameter to every hard point which is the force
+(no matter in which direction, just the length of the resulting vector) at
+which the structure is damaged.
+
+Furthermore, one might need to adjust 'sliding_mu' (see code) for every
+non-gear hardpoint?
+
+Well, just some thoughts,
+Jens
+
+
+From jan.reucker at web.de  Sat Sep 27 11:38:09 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sat, 27 Sep 2008 11:38:09 +0200
+Subject: [Crrcsim-devel] Hard point handling,
+ was: CRRSCIM Wish List Revision 1
+In-Reply-To: <20080927063014.GA4391@localhost>
+References: <20080921120952.9e0dbf47.valid.but.only.for.spam@gmx.net>
+	<gb8m5o+no7d@eGroups.com>
+	<20080922214948.4ab03227.valid.but.only.for.spam@gmx.net>
+	<20080927063014.GA4391@localhost>
+Message-ID: <20080927113809.54fc2057.jan.reucker@web.de>
+
+Am Sat, 27 Sep 2008 08:30:14 +0200 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> Hi Jan,
+
+Hi Jens,
+
+long time no see ;) Welcome back!
+
+> > I'm currently revisiting the hardpoint handling code, so maybe I can include
+> > this as well.
+> I thought about adding a parameter to every hard point which is the force
+> (no matter in which direction, just the length of the resulting vector) at
+> which the structure is damaged.
+
+Ack. Thought about the same thing. But we have to think about the consequences:
+
+- Simply freeze the simulation and force the user to reset.
+- Stop calculating lift after damaging any hardpoint so that the plane will
+  bounce on the ground and crash, also forcing the user to reset.
+- Something else?
+
+I guess it's time to integrate the EventDispatcher I proposed recently:
+
+http://crrcsim.berlios.de/wiki/index.php?n=CRRCsim.EventDispatcher
+
+This is a typical use case for this mechanism. If a wheel detects a crash,
+it will throw an event. FDM and other interested objects (like, maybe, a
+flight time stopwatch or the main statemachine) catch this event. When the
+user resets the sim, a "reset" event is thrown, which in turn is caught by
+every wheel, setting back the "crashed" state. This provides very loose
+coupling between all participating objects.
+ 
+A "normal" touchdown, of course, will also throw some kind of event received
+by e.g. a flight time stopwatch.
+
+> Furthermore, one might need to adjust 'sliding_mu' (see code) for every
+> non-gear hardpoint?
+
+Yes, I guess that "tyres on tarmac" is not what you usually want for a glider.
+
+I guess you've already noticed that I pushed some changes regarding wheel
+handling. There are no functional changes yet, only structural changes. Maybe
+you have a better idea for a more general interface between FDM and WheelSystem?
+It worked fine for fdm_larcsim and fdm_heli, but not for fdm_002 (maybe the
+adaption is easy, but I don't know enough about the code and the math behind
+it).
+
+About retracting hardpoints: I think it should be enough to define a destination
+point and linearly interpolate between the original hardpoint location and the
+destination, based on the current RETRACT input value. This introduces a certain
+error for swinging gears, but even interpolating along a circle would lead to an
+error (because the real contact point moves along the outline of the wheel while
+retracting the gear). And it would be much harder to configure, if it is possible
+in a flexible way at all.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Sat Sep 27 22:34:16 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Sat, 27 Sep 2008 22:34:16 +0200
+Subject: [Crrcsim-devel] Hard point handling
+In-Reply-To: <20080927113809.54fc2057.jan.reucker@web.de>
+References: <20080921120952.9e0dbf47.valid.but.only.for.spam@gmx.net>
+	<gb8m5o+no7d@eGroups.com>
+	<20080922214948.4ab03227.valid.but.only.for.spam@gmx.net>
+	<20080927063014.GA4391@localhost>
+	<20080927113809.54fc2057.jan.reucker@web.de>
+Message-ID: <20080927203416.GA5782@localhost>
+
+Hello Jan,
+
+> long time no see ;) Welcome back!
+Well, that's only been six days of CRRCSim-inactivity for me...
+
+> Ack. Thought about the same thing. But we have to think about the consequences:
+> 
+> - Simply freeze the simulation and force the user to reset.
+> - Stop calculating lift after damaging any hardpoint so that the plane will
+>   bounce on the ground and crash, also forcing the user to reset.
+> - Something else?
+> 
+> I guess it's time to integrate the EventDispatcher I proposed recently:
+Sounds good.
+
+I'd freeze the simulation, show a message and force the user to reset.
+
+> If a wheel detects a crash,
+> it will throw an event. FDM and other interested objects (like, maybe, a
+> flight time stopwatch or the main statemachine) catch this event. When the
+> user resets the sim, a "reset" event is thrown, which in turn is caught by
+> every wheel, setting back the "crashed" state. 
+Does a wheel need a 'crashed' state? It detects a crash, throws an event and
+the sim is stopped, afterwards it will be reset/restarted. A wheel is
+never 'used' after having thrown its 'crashed' event, so a 'crashed' state
+is not needed.
+
+> A "normal" touchdown, of course, will also throw some kind of event received
+> by e.g. a flight time stopwatch.
+...note that detecting a 'normal' touchdown is not easy. Stopping a flight
+time stopwatch might be triggered by touching the ground in any way, however.
+
+> Yes, I guess that "tyres on tarmac" is not what you usually want for a glider.
+And touching ground with the wingtip is unlike touching with a wheel or the
+fuselage bottom.
+
+> Maybe
+> you have a better idea for a more general interface between FDM and WheelSystem?
+> It worked fine for fdm_larcsim and fdm_heli, but not for fdm_002 (maybe the
+> adaption is easy, but I don't know enough about the code and the math behind
+> it).
+Well, I'll try to take a look at it.
+
+ 
+> About retracting hardpoints: 
+We could just connect a hardpoint to a certain animation and then use its
+hinge axis to rotate the hardpoint like the 3D model is rotated, couldn't
+we? We don't need any additional definition in the .xml besides maybe 
+
+  +--------------------------------------------------------
+  |     ...
+  |     <wheel percent_brake="0.5" caster_angle_rad="0">
+  |       <pos x="-2.1666" y="-0.66659999" z="0" />
+  |       <spring constant="65" damping="0.25" />
+  |       <retract animation_object_name="right_gear" />        <--- add something like this
+  |     </wheel>
+  |   </wheels>
+  |   <animations>
+  |     <animation type="ControlSurface">
+  |       <!-- right gear -->
+  |       <object name="right_gear" max_angle="1.57" />
+  |       <control mapping="RETRACT" gain="-1.0" />
+  |       <hinge x="-0.09" y="0.67" z="0.12" />
+  |       <hinge x="-1.09" y="0.67" z="0.12" />
+  |     </animation>
+  |     ...
+  +--------------------------------------------------------
+
+Of course WheelSystem needs to parse the 'animations' part of the xml.
+
+Jens
+
+
+From jan.reucker at web.de  Sun Sep 28 10:08:05 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sun, 28 Sep 2008 10:08:05 +0200
+Subject: [Crrcsim-devel] Hard point handling
+In-Reply-To: <20080927203416.GA5782@localhost>
+References: <20080921120952.9e0dbf47.valid.but.only.for.spam@gmx.net>
+	<gb8m5o+no7d@eGroups.com>
+	<20080922214948.4ab03227.valid.but.only.for.spam@gmx.net>
+	<20080927063014.GA4391@localhost>
+	<20080927113809.54fc2057.jan.reucker@web.de>
+	<20080927203416.GA5782@localhost>
+Message-ID: <20080928100805.445ec2fa.jan.reucker@web.de>
+
+Am Sat, 27 Sep 2008 22:34:16 +0200 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+
+> I'd freeze the simulation, show a message and force the user to reset.
+[...]
+> Does a wheel need a 'crashed' state? It detects a crash, throws an event and
+> the sim is stopped, afterwards it will be reset/restarted. A wheel is
+> never 'used' after having thrown its 'crashed' event, so a 'crashed' state
+> is not needed.
+
+In this case you're right. The "crashed" state is only needed if you continue
+the simulation like I proposed. Then it prevents the wheel from throwing more
+events.
+ 
+> > A "normal" touchdown, of course, will also throw some kind of event received
+> > by e.g. a flight time stopwatch.
+> ...note that detecting a 'normal' touchdown is not easy. Stopping a flight
+> time stopwatch might be triggered by touching the ground in any way, however.
+
+Yes, that's what I meant with "normal touchdown". Just like in a competition:
+touching the ground in any way will end your turn.
+
+> > About retracting hardpoints: 
+> We could just connect a hardpoint to a certain animation and then use its
+> hinge axis to rotate the hardpoint like the 3D model is rotated, couldn't
+> we? We don't need any additional definition in the .xml besides maybe 
+[...]
+> Of course WheelSystem needs to parse the 'animations' part of the xml.
+
+Yes, this would be possible. But the result is not 100% correct, because the
+hardpoint will move along the outline of the wheel while retracting. On the other
+hand, I don't want to burden WheelSystem with too much knowledge about the
+animation stuff. Maybe there's a way to query the needed information from
+the animation object. I'll think about it.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Sun Sep 28 11:43:36 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Sun, 28 Sep 2008 11:43:36 +0200
+Subject: [Crrcsim-devel] Hard point handling
+In-Reply-To: <20080928100805.445ec2fa.jan.reucker@web.de>
+References: <20080921120952.9e0dbf47.valid.but.only.for.spam@gmx.net>
+	<gb8m5o+no7d@eGroups.com>
+	<20080922214948.4ab03227.valid.but.only.for.spam@gmx.net>
+	<20080927063014.GA4391@localhost>
+	<20080927113809.54fc2057.jan.reucker@web.de>
+	<20080927203416.GA5782@localhost>
+	<20080928100805.445ec2fa.jan.reucker@web.de>
+Message-ID: <20080928094336.GA4393@localhost>
+
+> Yes, this would be possible. But the result is not 100% correct, because the
+> hardpoint will move along the outline of the wheel while retracting. 
+It is at least as good as defining some linear movement as implemented in
+3949d96f0ca3. The reason I want to do it like this is: it is much easier for
+those who describe some airplane, as they don't have to define another 3D
+coordinate. And airplane definition (or people willing to do it) is the
+major problem of CRRCSim at the moment, I think.
+
+
+> On the other
+> hand, I don't want to burden WheelSystem with too much knowledge about the
+> animation stuff. Maybe there's a way to query the needed information from
+> the animation object. I'll think about it.
+So you'd prefer WheelSystem asking some other object about the hinge instead
+of WheelSystem reading it from xml by itself?
+
+Jens
+
+
+From jan.reucker at web.de  Sun Sep 28 21:09:09 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sun, 28 Sep 2008 21:09:09 +0200
+Subject: [Crrcsim-devel] Hard point handling
+In-Reply-To: <20080928094336.GA4393@localhost>
+References: <20080921120952.9e0dbf47.valid.but.only.for.spam@gmx.net>
+	<gb8m5o+no7d@eGroups.com>
+	<20080922214948.4ab03227.valid.but.only.for.spam@gmx.net>
+	<20080927063014.GA4391@localhost>
+	<20080927113809.54fc2057.jan.reucker@web.de>
+	<20080927203416.GA5782@localhost>
+	<20080928100805.445ec2fa.jan.reucker@web.de>
+	<20080928094336.GA4393@localhost>
+Message-ID: <20080928210909.5871a696.jan.reucker@web.de>
+
+Am Sun, 28 Sep 2008 11:43:36 +0200 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> > On the other
+> > hand, I don't want to burden WheelSystem with too much knowledge about the
+> > animation stuff. Maybe there's a way to query the needed information from
+> > the animation object. I'll think about it.
+> So you'd prefer WheelSystem asking some other object about the hinge instead
+> of WheelSystem reading it from xml by itself?
+
+The more I think about it, the more I come to the conclusion that the best
+way to handle this is to let the animation object do the whole transformation.
+The reason for this is simple: If we implement a different kind of animation,
+say, a linear movement, we have to implement the matching behaviour in
+WheelSystem. But if the animation base class offers a generic
+
+CRRCMath::Vector3 CRRCAnimation::transform(CRRCMath::Vector3 const& point)
+
+the kinematics behind the specific CRRCAnimation won't matter any longer,
+and there's no need to duplicate the transformation matrix in two places.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Mon Sep 29 16:57:21 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Mon, 29 Sep 2008 16:57:21 +0200
+Subject: [Crrcsim-devel] Hard point handling
+In-Reply-To: <20080928210909.5871a696.jan.reucker@web.de>
+References: <20080921120952.9e0dbf47.valid.but.only.for.spam@gmx.net>
+	<gb8m5o+no7d@eGroups.com>
+	<20080922214948.4ab03227.valid.but.only.for.spam@gmx.net>
+	<20080927063014.GA4391@localhost>
+	<20080927113809.54fc2057.jan.reucker@web.de>
+	<20080927203416.GA5782@localhost>
+	<20080928100805.445ec2fa.jan.reucker@web.de>
+	<20080928094336.GA4393@localhost>
+	<20080928210909.5871a696.jan.reucker@web.de>
+Message-ID: <20080929145721.GA4409@localhost>
+
+Sounds good. 
+
+Is it possible to move this code to a class/file which doesn't
+depend on any GUI/graphics stuff, so the FDM is still usable without
+GUI/graphics? This is an important point for me.
+
+Jens
+
+
+From jan.reucker at web.de  Mon Sep 29 22:08:55 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Mon, 29 Sep 2008 22:08:55 +0200
+Subject: [Crrcsim-devel] Hard point handling
+In-Reply-To: <20080929145721.GA4409@localhost>
+References: <20080921120952.9e0dbf47.valid.but.only.for.spam@gmx.net>
+	<gb8m5o+no7d@eGroups.com>
+	<20080922214948.4ab03227.valid.but.only.for.spam@gmx.net>
+	<20080927063014.GA4391@localhost>
+	<20080927113809.54fc2057.jan.reucker@web.de>
+	<20080927203416.GA5782@localhost>
+	<20080928100805.445ec2fa.jan.reucker@web.de>
+	<20080928094336.GA4393@localhost>
+	<20080928210909.5871a696.jan.reucker@web.de>
+	<20080929145721.GA4409@localhost>
+Message-ID: <20080929220855.d22042da.jan.reucker@web.de>
+
+Am Mon, 29 Sep 2008 16:57:21 +0200 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> Sounds good. 
+> 
+> Is it possible to move this code to a class/file which doesn't
+> depend on any GUI/graphics stuff, so the FDM is still usable without
+> GUI/graphics? This is an important point for me.
+
+I'll try to do this. I don't want to introduce any unnecessary coupling,
+but there must be some kind of interface between both systems (graphics
+and FDM). I don't have too much spare time right now, but I'll see what
+I can do.
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Tue Sep 30 21:54:36 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Tue, 30 Sep 2008 21:54:36 +0200
+Subject: [Crrcsim-devel] Hard point handling
+In-Reply-To: <20080929220855.d22042da.jan.reucker@web.de>
+References: <20080921120952.9e0dbf47.valid.but.only.for.spam@gmx.net>
+	<gb8m5o+no7d@eGroups.com>
+	<20080922214948.4ab03227.valid.but.only.for.spam@gmx.net>
+	<20080927063014.GA4391@localhost>
+	<20080927113809.54fc2057.jan.reucker@web.de>
+	<20080927203416.GA5782@localhost>
+	<20080928100805.445ec2fa.jan.reucker@web.de>
+	<20080928094336.GA4393@localhost>
+	<20080928210909.5871a696.jan.reucker@web.de>
+	<20080929145721.GA4409@localhost>
+	<20080929220855.d22042da.jan.reucker@web.de>
+Message-ID: <20080930215436.3f153e65.jan.reucker@web.de>
+
+Am Mon, 29 Sep 2008 22:08:55 +0200 schrieb Jan Reucker <jan.reucker at web.de>:
+
+> Am Mon, 29 Sep 2008 16:57:21 +0200 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+> 
+> > Sounds good. 
+> > 
+> > Is it possible to move this code to a class/file which doesn't
+> > depend on any GUI/graphics stuff, so the FDM is still usable without
+> > GUI/graphics? This is an important point for me.
+> 
+> I'll try to do this. I don't want to introduce any unnecessary coupling,
+> but there must be some kind of interface between both systems (graphics
+> and FDM). I don't have too much spare time right now, but I'll see what
+> I can do.
+
+Some more thoughts on "loose coupling"...
+
+Maybe this is the wrong approach. I experimented with communicating the
+animation setup to the Wheels via the EventDispatcher. Would work o.k. I
+guess. But if you think some steps ahead, there's one major problem:
+today we only have ONE fdm, ONE TSimInputs and ONE 3D model. So a Wheel
+can always be sure that a "NewAnimationConfigured" event originated from
+a graphical airplane representation that belonged to the same fdm as itself.
+
+In future, it should be possible to load more than one airplane, e.g. for
+network play, "ghost" playback or AI traffic. Therefore it would make
+sense to couple these three components even tighter by stuffing one instance
+of each into a "master" class that really holds everything that belongs to
+a single airplane. That's what I originally designed CRRCAirplane for,
+but it has become the "multimedia" representation of an airplane without
+the physics stuff.
+
+So what about a class that provides a "master interface" to everything that
+is related to a single airplane? This master class can also provide the
+necessary coupling between the parts of an airplane (so that an animation
+from the CRRCAirplane part can call a method in the WheelSystem of the
+FDM part), but in a way that all parts only have to know the parent class,
+and the parent does not need to know details like PLIB data types or methods
+(if you want to compile the FDM without graphics).
+
+Then it should be fairly easy to add more airplane instances for different
+purposes.
+
+While I thought about this I noticed that there seems to be a memory leak
+when loading a different model through the GUI:
+
+CGUIPlaneSelCallback() deallocates Global::airplane, but not Global::fdm.
+Then loadAirplane() creates a new fdm instance.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+

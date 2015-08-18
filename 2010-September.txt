@@ -1,0 +1,1798 @@
+From admin at berlios.de  Tue Sep  7 20:52:49 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Tue, 7 Sep 2010 20:52:49 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3059] New airplane specific config and
+	verbosity level config
+Message-ID: <201009071852.o87Iqn9H001008@unicorn.berlios.de>
+
+Patch #3059 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: dl6lr
+Assigned to : none
+Summary: New airplane specific config and verbosity level config
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3059&group_id=9957
+
+
+From admin at berlios.de  Tue Sep  7 20:55:37 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Tue, 7 Sep 2010 20:55:37 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3059] New airplane specific config and
+	verbosity level config
+Message-ID: <201009071855.o87Itbce004562@unicorn.berlios.de>
+
+Patch #3059 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: dl6lr
+Assigned to : none
+Summary: New airplane specific config and verbosity level config
+
+Follow-Ups:
+
+Date: 2010-Sep-07 20:55
+By: dl6lr
+
+Comment:
+Patch to enable model specific input configurations
+---------------------------------------------------
+
+Idea: 
+
+Model specific configuration options like mixer settings may help in handling of separate models.
+Make usage of existing classes and configuration by writing the config to a different position in the xml file.
+
+GUI:
+
+The input configuration dialog "Controls" was extended by two components.
+The first component is a text box indicating if the current configuration is model specific
+The second component is a button to enable migration of the current config to a model 
+specific section. The way back was not implemented at the moment.
+This button is greyed out if the current configuration is an airplane specific configuration.
+
+The xml file:
+
+The global configuration resides as is in the section <inputMethod /> 
+The model specific input configuration resides in a new tree named <models />
+Every model has its own section inside <models /> with the name of the model (i.e. <allegro>)
+If the model specific section is not found, the configuration falls back to the global section.
+
+How does it work?
+
+1. Beginning with the xml file from 0.9.11, crrcsim should work as before.
+2. Hitting the Migration button "--> Model" will now migrate the global input config to a specific config for the current model.
+   Save settings and check the xml file. There should be a copy of the input configuration inside the models tag.
+3. Every change in controls you do will now affect the model specific settings, not the global one.
+4. Selecting a different airplane will start over as before, beginning with the global config, as there is no specific config.
+   Migrate and save the setting if you want. Or leave the global configuration if you are fine with that.
+   Changing control settings while the global config is in effect will change the global settings.
+5. Switching between airplanes will now load each specific configuration for each airplane.
+6. If you want to write the current model specific configuration as a global config back to the file, 
+   you have to edit the xml file.
+
+Further changes:
+
+- Refactored the crrc_ctrlgen.cpp to have a simple layout scheme with easier calculation of the components
+
+Known issues:
+
+- Still in work
+- Ugly usage of global function reconfigureInputMethod in crrc_main from the dialog
+- Encapsulation of functionalities needs more work
+
+
+
+
+Patch to configure verbosity levels
+-----------------------------------
+
+
+Idea:
+
+The current setting of verbosity levels are hard coded and not configurable.
+Personal preferences can only be set by compiling the source code.
+
+GUI:
+
+A new dialog box was created that contains a "New" button to create a new level, 
+a combo box to select one of the current levels, a text field to (re)name the current level
+and one check box for every feature that can be selected/deselcted.
+The "OK" button closes the dialog.
+
+The xml file:
+
+A new tree <display> was inserted. 
+A sub tree <verbose> holds every level, stating the number of levels and the currently selected level in its attributes.
+For every level, a node <> is inside the <verbose> tree.
+
+Example xml:
+
+  <display>
+    <verbose levels="5" current="2">
+      <level0 name="nothing" controls="0" fov="0" fps="0" altitude="0" position="0" />
+      <level1 name="test1" controls="0" fov="1" fps="1" altitude="1" position="0" />
+      <level2 name="test2" controls="0" fov="1" fps="0" altitude="1" position="0" />
+      <level3 name="noname3" controls="0" fov="0" fps="0" altitude="0" position="1" />
+      <level4 name="all" controls="1" fov="1" fps="1" altitude="1" position="1" />
+    </verbose>
+  </display>
+
+How does it work?
+
+1. Starting with the xml from 0.9.11, a new empty level called "unnamed" is automatically created.
+2. Open the configuration Options/Verbosity. You will see the one and only level "unnamed"
+   You can rename it (with the text field) and/or select options.
+3. By closing the dialog with OK, the new settings will be effective.
+4. You can create new levels with the "New" button
+   Whenever you create a new level, select a different one from the combo box or close the dialog with OK,
+   the current settings are saved to memory.
+5. You can now toggle the verbose levels inside crrcsim with the "v" key
+
+For the developers:
+
+Expanding the configurable verbosity options is easy:
+- verboselevel.h: extend the enum by inserting a new value JUST BEFORE __UNUSED__MAX_NUM
+- verboselevel.cpp: expand the array optionNames with the new string
+- info.cpp: expand the method InfoPanel::show()
+
+To do:
+
+- rework the verbosity info to an overlay
+- configure the position and size of the overlay
+
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3059&group_id=9957
+
+
+From admin at berlios.de  Tue Sep  7 20:56:34 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Tue, 7 Sep 2010 20:56:34 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3044] Airplane specific controls
+	configuration
+Message-ID: <201009071856.o87IuYEv005876@unicorn.berlios.de>
+
+Patch #3044 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: jreucker
+Assigned to : jreucker
+Summary: Airplane specific controls configuration
+
+Follow-Ups:
+
+Date: 2010-Sep-07 20:56
+By: dl6lr
+
+Comment:
+Please do not use any more, a new patch was submitted today that should be used.
+-------------------------------------------------------
+
+Date: 2010-Aug-08 15:49
+By: jreucker
+
+Comment:
+Submitted on behalf of Bernd Laengerich (see CRRCsim Yahoo group posting from 2010-08-04).
+
+Patch to enable model specific input configurations
+
+---------------------------------------------------
+
+
+
+Idea: 
+
+
+
+Model specific configuration options like mixer settings may help in handling of separate models.
+
+Make usage of existing classes and configuration by writing the config to a different position in the xml file.
+
+
+
+GUI:
+
+
+
+The input configuration dialog "Controls" was extended by two components.
+
+The first component is a check box indicating if the current configuration is model specific
+
+The second component is a button to enable migration of the current config to either a model 
+
+specific or a global section, depending on the state the configuration is in.
+
+This button is greyed out if the current configuration option matches the configuration file.
+
+
+
+The xml file:
+
+
+
+The global configuration resides as is in the section <inputMethod /> 
+
+The tag has a new attribute "model_specific=0/1" indicating if the new feature should be used. The old behaviour is model_specific=0.
+
+The model specific input configuration resides in a new tree named <models />
+
+Every model has its own section inside <models /> with the name of the model (i.e. <allegro>)
+
+If the model specific section is not found, the configuration falls back to the global section.
+
+
+
+How does it work?
+
+
+
+1. Beginning with the xml file from 0.9.11, crrcsim should work as before.
+
+2. Using the controls dialog, the check box "model specific" is unset, the migration button is deactivated
+
+3. Checking the model specific check box will enable the migration button. 
+
+4. When saving configuration, the only change will be the attribute model_specific set to 1. 
+
+   As there is no specific configuration option for the current airplane, the input configuration will remain the same.
+
+5. Hitting the Migration button "--> Model" will now migrate the global input config to a specific config for the current model.
+
+   Save settings and check the xml file. There should be a copy of the input configuration inside the models tag.
+
+6. Every change you do now will affect the model specific settings, not the global one.
+
+7. Selecting a different airplane will start over as before, beginning with the global config, as there is no specific config.
+
+   Migrate and save the setting
+
+8. Switching between airplanes will now load each specific configuration for each airplane.
+
+9. To write the current model specific configuration as a global config back to the file:
+
+   a) uncheck the model specific setting
+
+   b) hit the migration button "--> Global"
+
+   c) Save settings
+
+   You can reenable the model specific configuration thereafter 
+
+
+
+Further changes:
+
+
+
+- Refactored the crrc_ctrlgen.cpp to have a simple layout scheme with easier calculation of the components
+
+
+
+Known issues:
+
+
+
+- Still in work
+
+- Before saving the settings, the migration button will reappear each time the controls dialog is opened
+
+- Some debugging printf to be removed
+
+- Ugly usage of global function reconfigureInputMethod in crrc_main from the dialog
+
+- Encapsulation of functionalities needs more work
+
+
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3044&group_id=9957
+
+
+From admin at berlios.de  Sat Sep 11 22:10:29 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Sat, 11 Sep 2010 22:10:29 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3059] New airplane specific config and
+	verbosity level config
+Message-ID: <201009112010.o8BKATsw029192@unicorn.berlios.de>
+
+Patch #3059 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: dl6lr
+Assigned to : none
+Summary: New airplane specific config and verbosity level config
+
+Follow-Ups:
+
+Date: 2010-Sep-11 22:10
+By: jreucker
+
+Comment:
+This patch doesn't compile (tested with changeset 47418350284e), it looks as if the newly created files are missing.
+-------------------------------------------------------
+
+Date: 2010-Sep-07 20:55
+By: dl6lr
+
+Comment:
+Patch to enable model specific input configurations
+---------------------------------------------------
+
+Idea: 
+
+Model specific configuration options like mixer settings may help in handling of separate models.
+Make usage of existing classes and configuration by writing the config to a different position in the xml file.
+
+GUI:
+
+The input configuration dialog "Controls" was extended by two components.
+The first component is a text box indicating if the current configuration is model specific
+The second component is a button to enable migration of the current config to a model 
+specific section. The way back was not implemented at the moment.
+This button is greyed out if the current configuration is an airplane specific configuration.
+
+The xml file:
+
+The global configuration resides as is in the section <inputMethod /> 
+The model specific input configuration resides in a new tree named <models />
+Every model has its own section inside <models /> with the name of the model (i.e. <allegro>)
+If the model specific section is not found, the configuration falls back to the global section.
+
+How does it work?
+
+1. Beginning with the xml file from 0.9.11, crrcsim should work as before.
+2. Hitting the Migration button "--> Model" will now migrate the global input config to a specific config for the current model.
+   Save settings and check the xml file. There should be a copy of the input configuration inside the models tag.
+3. Every change in controls you do will now affect the model specific settings, not the global one.
+4. Selecting a different airplane will start over as before, beginning with the global config, as there is no specific config.
+   Migrate and save the setting if you want. Or leave the global configuration if you are fine with that.
+   Changing control settings while the global config is in effect will change the global settings.
+5. Switching between airplanes will now load each specific configuration for each airplane.
+6. If you want to write the current model specific configuration as a global config back to the file, 
+   you have to edit the xml file.
+
+Further changes:
+
+- Refactored the crrc_ctrlgen.cpp to have a simple layout scheme with easier calculation of the components
+
+Known issues:
+
+- Still in work
+- Ugly usage of global function reconfigureInputMethod in crrc_main from the dialog
+- Encapsulation of functionalities needs more work
+
+
+
+
+Patch to configure verbosity levels
+-----------------------------------
+
+
+Idea:
+
+The current setting of verbosity levels are hard coded and not configurable.
+Personal preferences can only be set by compiling the source code.
+
+GUI:
+
+A new dialog box was created that contains a "New" button to create a new level, 
+a combo box to select one of the current levels, a text field to (re)name the current level
+and one check box for every feature that can be selected/deselcted.
+The "OK" button closes the dialog.
+
+The xml file:
+
+A new tree <display> was inserted. 
+A sub tree <verbose> holds every level, stating the number of levels and the currently selected level in its attributes.
+For every level, a node <> is inside the <verbose> tree.
+
+Example xml:
+
+  <display>
+    <verbose levels="5" current="2">
+      <level0 name="nothing" controls="0" fov="0" fps="0" altitude="0" position="0" />
+      <level1 name="test1" controls="0" fov="1" fps="1" altitude="1" position="0" />
+      <level2 name="test2" controls="0" fov="1" fps="0" altitude="1" position="0" />
+      <level3 name="noname3" controls="0" fov="0" fps="0" altitude="0" position="1" />
+      <level4 name="all" controls="1" fov="1" fps="1" altitude="1" position="1" />
+    </verbose>
+  </display>
+
+How does it work?
+
+1. Starting with the xml from 0.9.11, a new empty level called "unnamed" is automatically created.
+2. Open the configuration Options/Verbosity. You will see the one and only level "unnamed"
+   You can rename it (with the text field) and/or select options.
+3. By closing the dialog with OK, the new settings will be effective.
+4. You can create new levels with the "New" button
+   Whenever you create a new level, select a different one from the combo box or close the dialog with OK,
+   the current settings are saved to memory.
+5. You can now toggle the verbose levels inside crrcsim with the "v" key
+
+For the developers:
+
+Expanding the configurable verbosity options is easy:
+- verboselevel.h: extend the enum by inserting a new value JUST BEFORE __UNUSED__MAX_NUM
+- verboselevel.cpp: expand the array optionNames with the new string
+- info.cpp: expand the method InfoPanel::show()
+
+To do:
+
+- rework the verbosity info to an overlay
+- configure the position and size of the overlay
+
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3059&group_id=9957
+
+
+From admin at berlios.de  Sun Sep 12 20:24:49 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Sun, 12 Sep 2010 20:24:49 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3059] New airplane specific config and
+	verbosity level config
+Message-ID: <201009121824.o8CIOnud004723@unicorn.berlios.de>
+
+Patch #3059 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: dl6lr
+Assigned to : none
+Summary: New airplane specific config and verbosity level config
+
+Follow-Ups:
+
+Date: 2010-Sep-12 20:24
+By: dl6lr
+
+Comment:
+Sorry, the newly created files were missing
+-------------------------------------------------------
+
+Date: 2010-Sep-11 22:10
+By: jreucker
+
+Comment:
+This patch doesn't compile (tested with changeset 47418350284e), it looks as if the newly created files are missing.
+-------------------------------------------------------
+
+Date: 2010-Sep-07 20:55
+By: dl6lr
+
+Comment:
+Patch to enable model specific input configurations
+---------------------------------------------------
+
+Idea: 
+
+Model specific configuration options like mixer settings may help in handling of separate models.
+Make usage of existing classes and configuration by writing the config to a different position in the xml file.
+
+GUI:
+
+The input configuration dialog "Controls" was extended by two components.
+The first component is a text box indicating if the current configuration is model specific
+The second component is a button to enable migration of the current config to a model 
+specific section. The way back was not implemented at the moment.
+This button is greyed out if the current configuration is an airplane specific configuration.
+
+The xml file:
+
+The global configuration resides as is in the section <inputMethod /> 
+The model specific input configuration resides in a new tree named <models />
+Every model has its own section inside <models /> with the name of the model (i.e. <allegro>)
+If the model specific section is not found, the configuration falls back to the global section.
+
+How does it work?
+
+1. Beginning with the xml file from 0.9.11, crrcsim should work as before.
+2. Hitting the Migration button "--> Model" will now migrate the global input config to a specific config for the current model.
+   Save settings and check the xml file. There should be a copy of the input configuration inside the models tag.
+3. Every change in controls you do will now affect the model specific settings, not the global one.
+4. Selecting a different airplane will start over as before, beginning with the global config, as there is no specific config.
+   Migrate and save the setting if you want. Or leave the global configuration if you are fine with that.
+   Changing control settings while the global config is in effect will change the global settings.
+5. Switching between airplanes will now load each specific configuration for each airplane.
+6. If you want to write the current model specific configuration as a global config back to the file, 
+   you have to edit the xml file.
+
+Further changes:
+
+- Refactored the crrc_ctrlgen.cpp to have a simple layout scheme with easier calculation of the components
+
+Known issues:
+
+- Still in work
+- Ugly usage of global function reconfigureInputMethod in crrc_main from the dialog
+- Encapsulation of functionalities needs more work
+
+
+
+
+Patch to configure verbosity levels
+-----------------------------------
+
+
+Idea:
+
+The current setting of verbosity levels are hard coded and not configurable.
+Personal preferences can only be set by compiling the source code.
+
+GUI:
+
+A new dialog box was created that contains a "New" button to create a new level, 
+a combo box to select one of the current levels, a text field to (re)name the current level
+and one check box for every feature that can be selected/deselcted.
+The "OK" button closes the dialog.
+
+The xml file:
+
+A new tree <display> was inserted. 
+A sub tree <verbose> holds every level, stating the number of levels and the currently selected level in its attributes.
+For every level, a node <> is inside the <verbose> tree.
+
+Example xml:
+
+  <display>
+    <verbose levels="5" current="2">
+      <level0 name="nothing" controls="0" fov="0" fps="0" altitude="0" position="0" />
+      <level1 name="test1" controls="0" fov="1" fps="1" altitude="1" position="0" />
+      <level2 name="test2" controls="0" fov="1" fps="0" altitude="1" position="0" />
+      <level3 name="noname3" controls="0" fov="0" fps="0" altitude="0" position="1" />
+      <level4 name="all" controls="1" fov="1" fps="1" altitude="1" position="1" />
+    </verbose>
+  </display>
+
+How does it work?
+
+1. Starting with the xml from 0.9.11, a new empty level called "unnamed" is automatically created.
+2. Open the configuration Options/Verbosity. You will see the one and only level "unnamed"
+   You can rename it (with the text field) and/or select options.
+3. By closing the dialog with OK, the new settings will be effective.
+4. You can create new levels with the "New" button
+   Whenever you create a new level, select a different one from the combo box or close the dialog with OK,
+   the current settings are saved to memory.
+5. You can now toggle the verbose levels inside crrcsim with the "v" key
+
+For the developers:
+
+Expanding the configurable verbosity options is easy:
+- verboselevel.h: extend the enum by inserting a new value JUST BEFORE __UNUSED__MAX_NUM
+- verboselevel.cpp: expand the array optionNames with the new string
+- info.cpp: expand the method InfoPanel::show()
+
+To do:
+
+- rework the verbosity info to an overlay
+- configure the position and size of the overlay
+
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3059&group_id=9957
+
+
+From admin at berlios.de  Sun Sep 12 21:05:14 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Sun, 12 Sep 2010 21:05:14 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3062] Patch model specific config only
+Message-ID: <201009121905.o8CJ5EHK009067@unicorn.berlios.de>
+
+Patch #3062 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: dl6lr
+Assigned to : none
+Summary: Patch model specific config only
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3062&group_id=9957
+
+
+From admin at berlios.de  Sun Sep 12 21:06:34 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Sun, 12 Sep 2010 21:06:34 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3062] Patch model specific config only
+Message-ID: <201009121906.o8CJ6YS8011978@unicorn.berlios.de>
+
+Patch #3062 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: dl6lr
+Assigned to : none
+Summary: Patch model specific config only
+
+Follow-Ups:
+
+Date: 2010-Sep-12 21:06
+By: dl6lr
+
+Comment:
+Patch to enable model specific input configurations
+---------------------------------------------------
+
+Idea: 
+
+Model specific configuration options like mixer settings may help in handling of separate models.
+Make usage of existing classes and configuration by writing the config to a different position in the xml file.
+
+GUI:
+
+The input configuration dialog "Controls" was extended by two components.
+The first component is a text box indicating if the current configuration is model specific
+The second component is a button to enable migration of the current config to a model 
+specific section. The way back was not implemented at the moment.
+This button is greyed out if the current configuration is an airplane specific configuration.
+
+The xml file:
+
+The global configuration resides as is in the section <inputMethod /> 
+The model specific input configuration resides in a new tree named <models />
+Every model has its own section inside <models /> with the name of the model (i.e. <allegro>)
+If the model specific section is not found, the configuration falls back to the global section.
+
+How does it work?
+
+1. Beginning with the xml file from 0.9.11, crrcsim should work as before.
+2. Hitting the Migration button "--> Model" will now migrate the global input config to a specific config for the current model.
+   Save settings and check the xml file. There should be a copy of the input configuration inside the models tag.
+3. Every change in controls you do will now affect the model specific settings, not the global one.
+4. Selecting a different airplane will start over as before, beginning with the global config, as there is no specific config.
+   Migrate and save the setting if you want. Or leave the global configuration if you are fine with that.
+   Changing control settings while the global config is in effect will change the global settings.
+5. Switching between airplanes will now load each specific configuration for each airplane.
+6. If you want to write the current model specific configuration as a global config back to the file, 
+   you have to edit the xml file.
+
+Further changes:
+
+- Refactored the crrc_ctrlgen.cpp to have a simple layout scheme with easier calculation of the components
+
+Known issues:
+
+- Still in work
+- Ugly usage of global function reconfigureInputMethod in crrc_main from the dialog
+- Encapsulation of functionalities needs more work
+
+
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3062&group_id=9957
+
+
+From admin at berlios.de  Sun Sep 12 21:56:48 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Sun, 12 Sep 2010 21:56:48 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3063] Verbosity level configuration only
+Message-ID: <201009121956.o8CJumte029153@unicorn.berlios.de>
+
+Patch #3063 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: dl6lr
+Assigned to : none
+Summary: Verbosity level configuration only
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3063&group_id=9957
+
+
+From admin at berlios.de  Sun Sep 12 21:57:19 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Sun, 12 Sep 2010 21:57:19 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3063] Verbosity level configuration only
+Message-ID: <201009121957.o8CJvJWa029659@unicorn.berlios.de>
+
+Patch #3063 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: dl6lr
+Assigned to : none
+Summary: Verbosity level configuration only
+
+Follow-Ups:
+
+Date: 2010-Sep-12 21:57
+By: dl6lr
+
+Comment:
+Patch to configure verbosity levels
+-----------------------------------
+
+
+Idea:
+
+The current setting of verbosity levels are hard coded and not configurable.
+Personal preferences can only be set by compiling the source code.
+
+GUI:
+
+A new dialog box was created that contains a "New" button to create a new level, 
+a combo box to select one of the current levels, a text field to (re)name the current level
+and one check box for every feature that can be selected/deselcted.
+The "OK" button closes the dialog.
+
+The xml file:
+
+A new tree <display> was inserted. 
+A sub tree <verbose> holds every level, stating the number of levels and the currently selected level in its attributes.
+For every level, a node <> is inside the <verbose> tree.
+
+Example xml:
+
+  <display>
+    <verbose levels="5" current="2">
+      <level0 name="nothing" controls="0" fov="0" fps="0" altitude="0" position="0" />
+      <level1 name="test1" controls="0" fov="1" fps="1" altitude="1" position="0" />
+      <level2 name="test2" controls="0" fov="1" fps="0" altitude="1" position="0" />
+      <level3 name="noname3" controls="0" fov="0" fps="0" altitude="0" position="1" />
+      <level4 name="all" controls="1" fov="1" fps="1" altitude="1" position="1" />
+    </verbose>
+  </display>
+
+How does it work?
+
+1. Starting with the xml from 0.9.11, a new empty level called "unnamed" is automatically created.
+2. Open the configuration Options/Verbosity. You will see the one and only level "unnamed"
+   You can rename it (with the text field) and/or select options.
+3. By closing the dialog with OK, the new settings will be effective.
+4. You can create new levels with the "New" button
+   Whenever you create a new level, select a different one from the combo box or close the dialog with OK,
+   the current settings are saved to memory.
+5. You can now toggle the verbose levels inside crrcsim with the "v" key
+
+For the developers:
+
+Expanding the configurable verbosity options is easy:
+- verboselevel.h: extend the enum by inserting a new value JUST BEFORE __UNUSED__MAX_NUM
+- verboselevel.cpp: expand the array optionNames with the new string
+- info.cpp: expand the method InfoPanel::show()
+
+To do:
+
+- rework the verbosity info to an overlay
+- configure the position and size of the overlay
+
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3063&group_id=9957
+
+
+From jan.reucker at web.de  Mon Sep 13 22:21:24 2010
+From: jan.reucker at web.de (Jan Reucker)
+Date: Mon, 13 Sep 2010 22:21:24 +0200
+Subject: [Crrcsim-devel] Dereferencing a type-punned pointer
+Message-ID: <20100913222124.0dd7ac87@web.de>
+
+Hello,
+
+I'm currently getting lots of complaints about dereferencing a type-punned pointer
+when compiling files that include fdm_inputs.h:
+
+../src/mod_fdm/fdm_inputs.h: In Elementfunktion ?int TSimInputs::getRandNum() const?:
+../src/mod_fdm/fdm_inputs.h:112:35: Warnung: Dereferenzierung eines Type-Pun-Zeigers verletzt strict-aliasing-Regeln
+../src/mod_fdm/fdm_inputs.h:113:35: Warnung: Dereferenzierung eines Type-Pun-Zeigers verletzt strict-aliasing-Regeln
+../src/mod_fdm/fdm_inputs.h:114:37: Warnung: Dereferenzierung eines Type-Pun-Zeigers verletzt strict-aliasing-Regeln
+../src/mod_fdm/fdm_inputs.h:115:37: Warnung: Dereferenzierung eines Type-Pun-Zeigers verletzt strict-aliasing-Regeln
+../src/mod_fdm/fdm_inputs.h:116:33: Warnung: Dereferenzierung eines Type-Pun-Zeigers verletzt strict-aliasing-Regeln
+../src/mod_fdm/fdm_inputs.h:117:36: Warnung: Dereferenzierung eines Type-Pun-Zeigers verletzt strict-aliasing-Regeln
+../src/mod_fdm/fdm_inputs.h:118:36: Warnung: Dereferenzierung eines Type-Pun-Zeigers verletzt strict-aliasing-Regeln
+../src/mod_fdm/fdm_inputs.h:119:34: Warnung: Dereferenzierung eines Type-Pun-Zeigers verletzt strict-aliasing-Regeln
+
+I assume that -fno-strict-alias would cure the symptoms, but fixing the
+real "problem" might be a better approach. This is the source code:
+
+     tmp = *(int*)(void*)(&aileron);
+     tmp ^= *(int*)(void*)(&rudder);
+     tmp ^= *(int*)(void*)(&elevator);
+     ...
+
+The double-cast via void* is usually accepted by most static code analyzation
+tools as a way to express "yes, I really know what I'm doing here and I don't
+want you to complain about it". But gcc 4.5.1 nevertheless throws the
+warnings.
+
+Does anyone have an idea how to fix it?
+
+Kind regards,
+Jan R.
+
+
+
+From admin at berlios.de  Mon Sep 13 22:54:06 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Mon, 13 Sep 2010 22:54:06 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3063] Verbosity level configuration only
+Message-ID: <201009132054.o8DKs6Dc004853@unicorn.berlios.de>
+
+Patch #3063 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: dl6lr
+Assigned to : jreucker
+Summary: Verbosity level configuration only
+
+Follow-Ups:
+
+Date: 2010-Sep-13 22:54
+By: jreucker
+
+Comment:
+I'll accept this patch, but I think the new feature deserves a better name. "Verbosity level" was adopted from one of the early CRRCsim versions, but I guess something like "Info Panel" sounds better.
+
+I already did some minor changes to your code (e.g. ran it through AStyle to adjust the formatting to our coding standard) and updated the patch. I think I can handle the renaming myself, but if you insist on doing it yourself, just send me an email.
+
+Kind regards,
+Jan R. 
+-------------------------------------------------------
+
+Date: 2010-Sep-12 21:57
+By: dl6lr
+
+Comment:
+Patch to configure verbosity levels
+-----------------------------------
+
+
+Idea:
+
+The current setting of verbosity levels are hard coded and not configurable.
+Personal preferences can only be set by compiling the source code.
+
+GUI:
+
+A new dialog box was created that contains a "New" button to create a new level, 
+a combo box to select one of the current levels, a text field to (re)name the current level
+and one check box for every feature that can be selected/deselcted.
+The "OK" button closes the dialog.
+
+The xml file:
+
+A new tree <display> was inserted. 
+A sub tree <verbose> holds every level, stating the number of levels and the currently selected level in its attributes.
+For every level, a node <> is inside the <verbose> tree.
+
+Example xml:
+
+  <display>
+    <verbose levels="5" current="2">
+      <level0 name="nothing" controls="0" fov="0" fps="0" altitude="0" position="0" />
+      <level1 name="test1" controls="0" fov="1" fps="1" altitude="1" position="0" />
+      <level2 name="test2" controls="0" fov="1" fps="0" altitude="1" position="0" />
+      <level3 name="noname3" controls="0" fov="0" fps="0" altitude="0" position="1" />
+      <level4 name="all" controls="1" fov="1" fps="1" altitude="1" position="1" />
+    </verbose>
+  </display>
+
+How does it work?
+
+1. Starting with the xml from 0.9.11, a new empty level called "unnamed" is automatically created.
+2. Open the configuration Options/Verbosity. You will see the one and only level "unnamed"
+   You can rename it (with the text field) and/or select options.
+3. By closing the dialog with OK, the new settings will be effective.
+4. You can create new levels with the "New" button
+   Whenever you create a new level, select a different one from the combo box or close the dialog with OK,
+   the current settings are saved to memory.
+5. You can now toggle the verbose levels inside crrcsim with the "v" key
+
+For the developers:
+
+Expanding the configurable verbosity options is easy:
+- verboselevel.h: extend the enum by inserting a new value JUST BEFORE __UNUSED__MAX_NUM
+- verboselevel.cpp: expand the array optionNames with the new string
+- info.cpp: expand the method InfoPanel::show()
+
+To do:
+
+- rework the verbosity info to an overlay
+- configure the position and size of the overlay
+
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3063&group_id=9957
+
+
+From admin at berlios.de  Mon Sep 13 22:56:45 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Mon, 13 Sep 2010 22:56:45 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3059] New airplane specific config and
+	verbosity level config
+Message-ID: <201009132056.o8DKujAq007608@unicorn.berlios.de>
+
+Patch #3059 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Out of date
+Submitted by: dl6lr
+Assigned to : none
+Summary: New airplane specific config and verbosity level config
+
+Follow-Ups:
+
+Date: 2010-Sep-12 20:24
+By: dl6lr
+
+Comment:
+Sorry, the newly created files were missing
+-------------------------------------------------------
+
+Date: 2010-Sep-11 22:10
+By: jreucker
+
+Comment:
+This patch doesn't compile (tested with changeset 47418350284e), it looks as if the newly created files are missing.
+-------------------------------------------------------
+
+Date: 2010-Sep-07 20:55
+By: dl6lr
+
+Comment:
+Patch to enable model specific input configurations
+---------------------------------------------------
+
+Idea: 
+
+Model specific configuration options like mixer settings may help in handling of separate models.
+Make usage of existing classes and configuration by writing the config to a different position in the xml file.
+
+GUI:
+
+The input configuration dialog "Controls" was extended by two components.
+The first component is a text box indicating if the current configuration is model specific
+The second component is a button to enable migration of the current config to a model 
+specific section. The way back was not implemented at the moment.
+This button is greyed out if the current configuration is an airplane specific configuration.
+
+The xml file:
+
+The global configuration resides as is in the section <inputMethod /> 
+The model specific input configuration resides in a new tree named <models />
+Every model has its own section inside <models /> with the name of the model (i.e. <allegro>)
+If the model specific section is not found, the configuration falls back to the global section.
+
+How does it work?
+
+1. Beginning with the xml file from 0.9.11, crrcsim should work as before.
+2. Hitting the Migration button "--> Model" will now migrate the global input config to a specific config for the current model.
+   Save settings and check the xml file. There should be a copy of the input configuration inside the models tag.
+3. Every change in controls you do will now affect the model specific settings, not the global one.
+4. Selecting a different airplane will start over as before, beginning with the global config, as there is no specific config.
+   Migrate and save the setting if you want. Or leave the global configuration if you are fine with that.
+   Changing control settings while the global config is in effect will change the global settings.
+5. Switching between airplanes will now load each specific configuration for each airplane.
+6. If you want to write the current model specific configuration as a global config back to the file, 
+   you have to edit the xml file.
+
+Further changes:
+
+- Refactored the crrc_ctrlgen.cpp to have a simple layout scheme with easier calculation of the components
+
+Known issues:
+
+- Still in work
+- Ugly usage of global function reconfigureInputMethod in crrc_main from the dialog
+- Encapsulation of functionalities needs more work
+
+
+
+
+Patch to configure verbosity levels
+-----------------------------------
+
+
+Idea:
+
+The current setting of verbosity levels are hard coded and not configurable.
+Personal preferences can only be set by compiling the source code.
+
+GUI:
+
+A new dialog box was created that contains a "New" button to create a new level, 
+a combo box to select one of the current levels, a text field to (re)name the current level
+and one check box for every feature that can be selected/deselcted.
+The "OK" button closes the dialog.
+
+The xml file:
+
+A new tree <display> was inserted. 
+A sub tree <verbose> holds every level, stating the number of levels and the currently selected level in its attributes.
+For every level, a node <> is inside the <verbose> tree.
+
+Example xml:
+
+  <display>
+    <verbose levels="5" current="2">
+      <level0 name="nothing" controls="0" fov="0" fps="0" altitude="0" position="0" />
+      <level1 name="test1" controls="0" fov="1" fps="1" altitude="1" position="0" />
+      <level2 name="test2" controls="0" fov="1" fps="0" altitude="1" position="0" />
+      <level3 name="noname3" controls="0" fov="0" fps="0" altitude="0" position="1" />
+      <level4 name="all" controls="1" fov="1" fps="1" altitude="1" position="1" />
+    </verbose>
+  </display>
+
+How does it work?
+
+1. Starting with the xml from 0.9.11, a new empty level called "unnamed" is automatically created.
+2. Open the configuration Options/Verbosity. You will see the one and only level "unnamed"
+   You can rename it (with the text field) and/or select options.
+3. By closing the dialog with OK, the new settings will be effective.
+4. You can create new levels with the "New" button
+   Whenever you create a new level, select a different one from the combo box or close the dialog with OK,
+   the current settings are saved to memory.
+5. You can now toggle the verbose levels inside crrcsim with the "v" key
+
+For the developers:
+
+Expanding the configurable verbosity options is easy:
+- verboselevel.h: extend the enum by inserting a new value JUST BEFORE __UNUSED__MAX_NUM
+- verboselevel.cpp: expand the array optionNames with the new string
+- info.cpp: expand the method InfoPanel::show()
+
+To do:
+
+- rework the verbosity info to an overlay
+- configure the position and size of the overlay
+
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3059&group_id=9957
+
+
+From admin at berlios.de  Mon Sep 13 22:56:45 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Mon, 13 Sep 2010 22:56:45 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3044] Airplane specific controls
+	configuration
+Message-ID: <201009132056.o8DKuj29007663@unicorn.berlios.de>
+
+Patch #3044 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Out of date
+Submitted by: jreucker
+Assigned to : jreucker
+Summary: Airplane specific controls configuration
+
+Follow-Ups:
+
+Date: 2010-Sep-07 20:56
+By: dl6lr
+
+Comment:
+Please do not use any more, a new patch was submitted today that should be used.
+-------------------------------------------------------
+
+Date: 2010-Aug-08 15:49
+By: jreucker
+
+Comment:
+Submitted on behalf of Bernd Laengerich (see CRRCsim Yahoo group posting from 2010-08-04).
+
+Patch to enable model specific input configurations
+
+---------------------------------------------------
+
+
+
+Idea: 
+
+
+
+Model specific configuration options like mixer settings may help in handling of separate models.
+
+Make usage of existing classes and configuration by writing the config to a different position in the xml file.
+
+
+
+GUI:
+
+
+
+The input configuration dialog "Controls" was extended by two components.
+
+The first component is a check box indicating if the current configuration is model specific
+
+The second component is a button to enable migration of the current config to either a model 
+
+specific or a global section, depending on the state the configuration is in.
+
+This button is greyed out if the current configuration option matches the configuration file.
+
+
+
+The xml file:
+
+
+
+The global configuration resides as is in the section <inputMethod /> 
+
+The tag has a new attribute "model_specific=0/1" indicating if the new feature should be used. The old behaviour is model_specific=0.
+
+The model specific input configuration resides in a new tree named <models />
+
+Every model has its own section inside <models /> with the name of the model (i.e. <allegro>)
+
+If the model specific section is not found, the configuration falls back to the global section.
+
+
+
+How does it work?
+
+
+
+1. Beginning with the xml file from 0.9.11, crrcsim should work as before.
+
+2. Using the controls dialog, the check box "model specific" is unset, the migration button is deactivated
+
+3. Checking the model specific check box will enable the migration button. 
+
+4. When saving configuration, the only change will be the attribute model_specific set to 1. 
+
+   As there is no specific configuration option for the current airplane, the input configuration will remain the same.
+
+5. Hitting the Migration button "--> Model" will now migrate the global input config to a specific config for the current model.
+
+   Save settings and check the xml file. There should be a copy of the input configuration inside the models tag.
+
+6. Every change you do now will affect the model specific settings, not the global one.
+
+7. Selecting a different airplane will start over as before, beginning with the global config, as there is no specific config.
+
+   Migrate and save the setting
+
+8. Switching between airplanes will now load each specific configuration for each airplane.
+
+9. To write the current model specific configuration as a global config back to the file:
+
+   a) uncheck the model specific setting
+
+   b) hit the migration button "--> Global"
+
+   c) Save settings
+
+   You can reenable the model specific configuration thereafter 
+
+
+
+Further changes:
+
+
+
+- Refactored the crrc_ctrlgen.cpp to have a simple layout scheme with easier calculation of the components
+
+
+
+Known issues:
+
+
+
+- Still in work
+
+- Before saving the settings, the migration button will reappear each time the controls dialog is opened
+
+- Some debugging printf to be removed
+
+- Ugly usage of global function reconfigureInputMethod in crrc_main from the dialog
+
+- Encapsulation of functionalities needs more work
+
+
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3044&group_id=9957
+
+
+From jens_w2 at gmx.net  Wed Sep 15 18:01:56 2010
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Wed, 15 Sep 2010 18:01:56 +0200
+Subject: [Crrcsim-devel] Dereferencing a type-punned pointer
+In-Reply-To: <20100913222124.0dd7ac87@web.de>
+References: <20100913222124.0dd7ac87@web.de>
+Message-ID: <20100915160156.GA3274@streusel>
+
+Hi Jan,
+
+does the compiler accept 
+
+     tmp = reinterpret_cast<int>((void*)&aileron);
+     tmp ^= reinterpret_cast<int>((void*)&rudder);
+     tmp ^= reinterpret_cast<int>((void*)&elevator);
+     tmp ^= reinterpret_cast<int>((void*)&throttle);
+     tmp ^= reinterpret_cast<int>((void*)&flap);
+     tmp ^= reinterpret_cast<int>((void*)&spoiler);
+     tmp ^= reinterpret_cast<int>((void*)&retract);
+     tmp ^= reinterpret_cast<int>((void*)&pitch);
+
+without warning? gcc 4.3.3 does so.
+
+best regards,
+Jens
+
+
+From jan.reucker at web.de  Wed Sep 15 22:10:56 2010
+From: jan.reucker at web.de (Jan Reucker)
+Date: Wed, 15 Sep 2010 22:10:56 +0200
+Subject: [Crrcsim-devel] Dereferencing a type-punned pointer
+In-Reply-To: <20100915160156.GA3274@streusel>
+References: <20100913222124.0dd7ac87@web.de> <20100915160156.GA3274@streusel>
+Message-ID: <20100915221056.4b36455a@web.de>
+
+On Wed, 15 Sep 2010 18:01:56 +0200
+Jens Wilhelm Wulf <jens_w2 at gmx.net> wrote:
+
+> Hi Jan,
+> 
+> does the compiler accept 
+> 
+>      tmp = reinterpret_cast<int>((void*)&aileron);
+
+Hi Jens,
+
+it does. But shouldn't it be
+
+     tmp = *(reinterpret_cast<int*>((void*)&aileron));
+
+? In this case, it still raises the warning. Side note: the warning is
+only raised when performing an optimized (non-debug) build.
+
+Reinterpreting to a char* and then accessing the float as four individual
+chars would be possible but quite time-consuming. Any other idea?
+
+Kind regards,
+Jan R.
+
+
+From jens_w2 at gmx.net  Fri Sep 17 06:20:46 2010
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Fri, 17 Sep 2010 06:20:46 +0200
+Subject: [Crrcsim-devel] Dereferencing a type-punned pointer
+In-Reply-To: <20100915221056.4b36455a@web.de>
+References: <20100913222124.0dd7ac87@web.de> <20100915160156.GA3274@streusel>
+	<20100915221056.4b36455a@web.de>
+Message-ID: <20100917042046.GB3690@knusper>
+
+> >      tmp = reinterpret_cast<int>((void*)&aileron);
+Yes, this actually is crap, as it might be using the adress instead of the
+contents. I didn't recognize my mistake until your post. Actually I wanted
+to use
+  tmp = reinterpret_cast<int>(aileron);
+but this fails to compile of course, as reinterpret_cast handles pointers
+only.
+
+http://www.cs.umd.edu/class/sum2003/cmsc311/Notes/BitOp/cast.html says one
+should use reinterpret_cast just like you suggested...
+
+
+> Side note: the warning is only raised when performing an optimized
+> (non-debug) build.
+Yes, some post on the net I came across due to "type punned cast" said
+something like this and that it is expected:
+http://bytes.com/topic/c/answers/672233-dereferencing-type-punned-pointer-will-break-strict-aliasing-rules#post2674265
+
+
+http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm
+suggests to use a union:
+
+   union FloatAndInt
+   {
+     int i;
+     float f;
+   };
+
+   int getRandNum() const
+   {
+     int tmp = 0;
+     FloatAndInt u;
+
+     u.f = aileron;
+     tmp =  u.i;
+
+     u.f = rudder;
+     tmp ^= u.i;
+
+     ...
+
+Best regards,
+Jens
+
+
+From jan.reucker at web.de  Fri Sep 17 07:55:40 2010
+From: jan.reucker at web.de (Jan Reucker)
+Date: Fri, 17 Sep 2010 07:55:40 +0200
+Subject: [Crrcsim-devel] Dereferencing a type-punned pointer
+In-Reply-To: <20100917042046.GB3690@knusper>
+References: <20100913222124.0dd7ac87@web.de> <20100915160156.GA3274@streusel>
+	<20100915221056.4b36455a@web.de> <20100917042046.GB3690@knusper>
+Message-ID: <20100917075540.1216fdb9@web.de>
+
+On Fri, 17 Sep 2010 06:20:46 +0200
+Jens Wilhelm Wulf <jens_w2 at gmx.net> wrote:
+
+> > Side note: the warning is only raised when performing an optimized
+> > (non-debug) build.
+> Yes, some post on the net I came across due to "type punned cast" said
+> something like this and that it is expected:
+> http://bytes.com/topic/c/answers/672233-dereferencing-type-punned-pointer-will-break-strict-aliasing-rules#post2674265
+
+It's indeed a helpful warning. I've seen the gcc optimizer reordering
+statements because it was fooled by a type-punned pointer and did not
+recognize that two successive operations were performed on the same
+object. Results in nasty and hard-to-find bugs.
+ 
+> http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm
+> suggests to use a union:
+
+This should definitely help, although it's not strictly allowed by the
+C standard (AFAIK it only guarantees defined behaviour if a read access
+uses the same type as the previous write access). However, I've never
+had problems with this before on any platform. I think I'll give it a try.
+
+Kind regards,
+Jan R.
+
+
+From admin at berlios.de  Fri Sep 17 16:28:29 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Fri, 17 Sep 2010 16:28:29 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3063] Verbosity level configuration only
+Message-ID: <201009171428.o8HESTUx027714@unicorn.berlios.de>
+
+Patch #3063 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: dl6lr
+Assigned to : jreucker
+Summary: Verbosity level configuration only
+
+Follow-Ups:
+
+Date: 2010-Sep-17 16:28
+By: jreucker
+
+Comment:
+Here's a new revision of the patch. I renamed some files and classes. Instead of VerboseLevels we now have InfoPanelCfgs, which should be easier to understand.
+
+There are still two issues that I'd like to be changed before putting the patch into the repository:
+
+- There seems to be a memory leak in CGUIInfoDialog::updateLevelNames(). The allocated space is not deleted if the dialog is destroyed. There are two methods T_GUI_Util::loadnames() and T_GUI_Util::freenames() which should do exactly what the code in updateLevelNames() is doing, maybe use these proven methods?
+
+- When the dialog is closed, the InfoPanel should be set to the currently displayed configuration. I think it's easier to understand for the enduser. No more "toggle verbosity" in the menu, just select "InfoPanel..." to open the configuration dialog, select the config that you want to be applied and hit OK. Side note: I also moved the dialog to the View menu.
+
+Could you please care for these two issues?
+-------------------------------------------------------
+
+Date: 2010-Sep-13 22:54
+By: jreucker
+
+Comment:
+I'll accept this patch, but I think the new feature deserves a better name. "Verbosity level" was adopted from one of the early CRRCsim versions, but I guess something like "Info Panel" sounds better.
+
+I already did some minor changes to your code (e.g. ran it through AStyle to adjust the formatting to our coding standard) and updated the patch. I think I can handle the renaming myself, but if you insist on doing it yourself, just send me an email.
+
+Kind regards,
+Jan R. 
+-------------------------------------------------------
+
+Date: 2010-Sep-12 21:57
+By: dl6lr
+
+Comment:
+Patch to configure verbosity levels
+-----------------------------------
+
+
+Idea:
+
+The current setting of verbosity levels are hard coded and not configurable.
+Personal preferences can only be set by compiling the source code.
+
+GUI:
+
+A new dialog box was created that contains a "New" button to create a new level, 
+a combo box to select one of the current levels, a text field to (re)name the current level
+and one check box for every feature that can be selected/deselcted.
+The "OK" button closes the dialog.
+
+The xml file:
+
+A new tree <display> was inserted. 
+A sub tree <verbose> holds every level, stating the number of levels and the currently selected level in its attributes.
+For every level, a node <> is inside the <verbose> tree.
+
+Example xml:
+
+  <display>
+    <verbose levels="5" current="2">
+      <level0 name="nothing" controls="0" fov="0" fps="0" altitude="0" position="0" />
+      <level1 name="test1" controls="0" fov="1" fps="1" altitude="1" position="0" />
+      <level2 name="test2" controls="0" fov="1" fps="0" altitude="1" position="0" />
+      <level3 name="noname3" controls="0" fov="0" fps="0" altitude="0" position="1" />
+      <level4 name="all" controls="1" fov="1" fps="1" altitude="1" position="1" />
+    </verbose>
+  </display>
+
+How does it work?
+
+1. Starting with the xml from 0.9.11, a new empty level called "unnamed" is automatically created.
+2. Open the configuration Options/Verbosity. You will see the one and only level "unnamed"
+   You can rename it (with the text field) and/or select options.
+3. By closing the dialog with OK, the new settings will be effective.
+4. You can create new levels with the "New" button
+   Whenever you create a new level, select a different one from the combo box or close the dialog with OK,
+   the current settings are saved to memory.
+5. You can now toggle the verbose levels inside crrcsim with the "v" key
+
+For the developers:
+
+Expanding the configurable verbosity options is easy:
+- verboselevel.h: extend the enum by inserting a new value JUST BEFORE __UNUSED__MAX_NUM
+- verboselevel.cpp: expand the array optionNames with the new string
+- info.cpp: expand the method InfoPanel::show()
+
+To do:
+
+- rework the verbosity info to an overlay
+- configure the position and size of the overlay
+
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3063&group_id=9957
+
+
+From admin at berlios.de  Tue Sep 21 22:44:52 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Tue, 21 Sep 2010 22:44:52 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3062] Patch model specific config only
+Message-ID: <201009212044.o8LKiq3X008959@unicorn.berlios.de>
+
+Patch #3062 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: dl6lr
+Assigned to : none
+Summary: Patch model specific config only
+
+Follow-Ups:
+
+Date: 2010-Sep-21 22:44
+By: jreucker
+
+Comment:
+Something still is weird... Try the following test:
+
+1.) start CRRCsim with a clean config: crrcsim -g test.xml
+2.) options->controls shows "Config global"
+3.) exit and save
+4.) start CRRCsim with same config: crrcsim -g test.xml
+5.) options->controls shows "Config airplane", although the configuration was never migrated.
+
+-------------------------------------------------------
+
+Date: 2010-Sep-12 21:06
+By: dl6lr
+
+Comment:
+Patch to enable model specific input configurations
+---------------------------------------------------
+
+Idea: 
+
+Model specific configuration options like mixer settings may help in handling of separate models.
+Make usage of existing classes and configuration by writing the config to a different position in the xml file.
+
+GUI:
+
+The input configuration dialog "Controls" was extended by two components.
+The first component is a text box indicating if the current configuration is model specific
+The second component is a button to enable migration of the current config to a model 
+specific section. The way back was not implemented at the moment.
+This button is greyed out if the current configuration is an airplane specific configuration.
+
+The xml file:
+
+The global configuration resides as is in the section <inputMethod /> 
+The model specific input configuration resides in a new tree named <models />
+Every model has its own section inside <models /> with the name of the model (i.e. <allegro>)
+If the model specific section is not found, the configuration falls back to the global section.
+
+How does it work?
+
+1. Beginning with the xml file from 0.9.11, crrcsim should work as before.
+2. Hitting the Migration button "--> Model" will now migrate the global input config to a specific config for the current model.
+   Save settings and check the xml file. There should be a copy of the input configuration inside the models tag.
+3. Every change in controls you do will now affect the model specific settings, not the global one.
+4. Selecting a different airplane will start over as before, beginning with the global config, as there is no specific config.
+   Migrate and save the setting if you want. Or leave the global configuration if you are fine with that.
+   Changing control settings while the global config is in effect will change the global settings.
+5. Switching between airplanes will now load each specific configuration for each airplane.
+6. If you want to write the current model specific configuration as a global config back to the file, 
+   you have to edit the xml file.
+
+Further changes:
+
+- Refactored the crrc_ctrlgen.cpp to have a simple layout scheme with easier calculation of the components
+
+Known issues:
+
+- Still in work
+- Ugly usage of global function reconfigureInputMethod in crrc_main from the dialog
+- Encapsulation of functionalities needs more work
+
+
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3062&group_id=9957
+
+
+From admin at berlios.de  Thu Sep 23 22:11:42 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Thu, 23 Sep 2010 22:11:42 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3062] Patch model specific config only
+Message-ID: <201009232011.o8NKBgd9020838@unicorn.berlios.de>
+
+Patch #3062 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: dl6lr
+Assigned to : none
+Summary: Patch model specific config only
+
+Follow-Ups:
+
+Date: 2010-Sep-23 22:11
+By: dl6lr
+
+Comment:
+Hi Jan,
+
+I cannot reproduce the problem. With step 5 my config remains global.  I fetched tip and imported my patch (which had another flaw in the diff, as the Makefile.am was incorrrectly patched with the old verboselevel files, fixed)
+-------------------------------------------------------
+
+Date: 2010-Sep-21 22:44
+By: jreucker
+
+Comment:
+Something still is weird... Try the following test:
+
+1.) start CRRCsim with a clean config: crrcsim -g test.xml
+2.) options->controls shows "Config global"
+3.) exit and save
+4.) start CRRCsim with same config: crrcsim -g test.xml
+5.) options->controls shows "Config airplane", although the configuration was never migrated.
+
+-------------------------------------------------------
+
+Date: 2010-Sep-12 21:06
+By: dl6lr
+
+Comment:
+Patch to enable model specific input configurations
+---------------------------------------------------
+
+Idea: 
+
+Model specific configuration options like mixer settings may help in handling of separate models.
+Make usage of existing classes and configuration by writing the config to a different position in the xml file.
+
+GUI:
+
+The input configuration dialog "Controls" was extended by two components.
+The first component is a text box indicating if the current configuration is model specific
+The second component is a button to enable migration of the current config to a model 
+specific section. The way back was not implemented at the moment.
+This button is greyed out if the current configuration is an airplane specific configuration.
+
+The xml file:
+
+The global configuration resides as is in the section <inputMethod /> 
+The model specific input configuration resides in a new tree named <models />
+Every model has its own section inside <models /> with the name of the model (i.e. <allegro>)
+If the model specific section is not found, the configuration falls back to the global section.
+
+How does it work?
+
+1. Beginning with the xml file from 0.9.11, crrcsim should work as before.
+2. Hitting the Migration button "--> Model" will now migrate the global input config to a specific config for the current model.
+   Save settings and check the xml file. There should be a copy of the input configuration inside the models tag.
+3. Every change in controls you do will now affect the model specific settings, not the global one.
+4. Selecting a different airplane will start over as before, beginning with the global config, as there is no specific config.
+   Migrate and save the setting if you want. Or leave the global configuration if you are fine with that.
+   Changing control settings while the global config is in effect will change the global settings.
+5. Switching between airplanes will now load each specific configuration for each airplane.
+6. If you want to write the current model specific configuration as a global config back to the file, 
+   you have to edit the xml file.
+
+Further changes:
+
+- Refactored the crrc_ctrlgen.cpp to have a simple layout scheme with easier calculation of the components
+
+Known issues:
+
+- Still in work
+- Ugly usage of global function reconfigureInputMethod in crrc_main from the dialog
+- Encapsulation of functionalities needs more work
+
+
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3062&group_id=9957
+
+
+From admin at berlios.de  Sun Sep 26 08:39:03 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Sun, 26 Sep 2010 08:39:03 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3062] Patch model specific config only
+Message-ID: <201009260639.o8Q6d3e3017311@unicorn.berlios.de>
+
+Patch #3062 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: dl6lr
+Assigned to : none
+Summary: Patch model specific config only
+
+Follow-Ups:
+
+Date: 2010-Sep-26 08:39
+By: jreucker
+
+Comment:
+I tested it again and created a protocol containing all console output. I'll send it to your private email, maybe you can see what's wrong with my setup. When starting with a fresh config, CRRCsim first says that no model specific config was found. I immediately quit without doing anything, then CRRCsim tells me that a model-specific config is used for the Allegro.
+
+-------------------------------------------------------
+
+Date: 2010-Sep-23 22:11
+By: dl6lr
+
+Comment:
+Hi Jan,
+
+I cannot reproduce the problem. With step 5 my config remains global.  I fetched tip and imported my patch (which had another flaw in the diff, as the Makefile.am was incorrrectly patched with the old verboselevel files, fixed)
+-------------------------------------------------------
+
+Date: 2010-Sep-21 22:44
+By: jreucker
+
+Comment:
+Something still is weird... Try the following test:
+
+1.) start CRRCsim with a clean config: crrcsim -g test.xml
+2.) options->controls shows "Config global"
+3.) exit and save
+4.) start CRRCsim with same config: crrcsim -g test.xml
+5.) options->controls shows "Config airplane", although the configuration was never migrated.
+
+-------------------------------------------------------
+
+Date: 2010-Sep-12 21:06
+By: dl6lr
+
+Comment:
+Patch to enable model specific input configurations
+---------------------------------------------------
+
+Idea: 
+
+Model specific configuration options like mixer settings may help in handling of separate models.
+Make usage of existing classes and configuration by writing the config to a different position in the xml file.
+
+GUI:
+
+The input configuration dialog "Controls" was extended by two components.
+The first component is a text box indicating if the current configuration is model specific
+The second component is a button to enable migration of the current config to a model 
+specific section. The way back was not implemented at the moment.
+This button is greyed out if the current configuration is an airplane specific configuration.
+
+The xml file:
+
+The global configuration resides as is in the section <inputMethod /> 
+The model specific input configuration resides in a new tree named <models />
+Every model has its own section inside <models /> with the name of the model (i.e. <allegro>)
+If the model specific section is not found, the configuration falls back to the global section.
+
+How does it work?
+
+1. Beginning with the xml file from 0.9.11, crrcsim should work as before.
+2. Hitting the Migration button "--> Model" will now migrate the global input config to a specific config for the current model.
+   Save settings and check the xml file. There should be a copy of the input configuration inside the models tag.
+3. Every change in controls you do will now affect the model specific settings, not the global one.
+4. Selecting a different airplane will start over as before, beginning with the global config, as there is no specific config.
+   Migrate and save the setting if you want. Or leave the global configuration if you are fine with that.
+   Changing control settings while the global config is in effect will change the global settings.
+5. Switching between airplanes will now load each specific configuration for each airplane.
+6. If you want to write the current model specific configuration as a global config back to the file, 
+   you have to edit the xml file.
+
+Further changes:
+
+- Refactored the crrc_ctrlgen.cpp to have a simple layout scheme with easier calculation of the components
+
+Known issues:
+
+- Still in work
+- Ugly usage of global function reconfigureInputMethod in crrc_main from the dialog
+- Encapsulation of functionalities needs more work
+
+
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3062&group_id=9957
+
+

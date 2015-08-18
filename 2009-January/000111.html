@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] license header progress
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20license%20header%20progress&In-Reply-To=%3C20090126225811.deaed021.jan.reucker%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000110.html">
+   <LINK REL="Next"  HREF="000112.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] license header progress</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20license%20header%20progress&In-Reply-To=%3C20090126225811.deaed021.jan.reucker%40web.de%3E"
+       TITLE="[Crrcsim-devel] license header progress">jan.reucker at web.de
+       </A><BR>
+    <I>Mon Jan 26 22:58:11 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000110.html">[Crrcsim-devel] license header progress
+</A></li>
+        <LI>Next message: <A HREF="000112.html">[Crrcsim-devel] license header progress
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#111">[ date ]</a>
+              <a href="thread.html#111">[ thread ]</a>
+              <a href="subject.html#111">[ subject ]</a>
+              <a href="author.html#111">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Am Sun, 25 Jan 2009 18:11:26 +0000 schrieb Christopher Swift &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">Chris at Chrisswift.eu</A>&gt;:
+
+&gt;<i> Great! It's not long until perhaps the package is able to appear in Jaunty when
+</I>&gt;<i> this is complete. Also if you happen to know of any Debian Developers feel free
+</I>&gt;<i> to use &quot;my&quot; diff.gz for an upload to Debian rather than waiting for the 
+</I>&gt;<i> Jaunty/Debian synchronisation. When the copyright has finished, I'll keep you up
+</I>&gt;<i> to date with every change that I make via REVU. 
+</I>
+Hi all,
+
+my status:
+
+&gt;<i> src root	done
+</I>&gt;<i> GUI		done
+</I>&gt;<i> mod_chardevice	done (own headers)
+</I>&gt;<i> mod_cntrl	JWW, done
+</I>&gt;<i> mod_env		JWW, done
+</I>&gt;<i> mod_fdm		JWW, done
+</I>&gt;<i> mod_inputdev	JWW, done (except mnav; sent email to Todd)
+</I>&gt;<i> mod_landscape	JR, done
+</I>&gt;<i> mod_main	JR, done
+</I>&gt;<i> mod_math	JWW, done
+</I>&gt;<i> mod_misc	JR, done
+</I>&gt;<i> mod_mode	JR, done
+</I>&gt;<i> mod_windfield	JR, done
+</I>
+So the issue with the missing license headers should be fixed.
+
+Regarding the open bug #015028, I'm currently testing a solution, so expect a
+fix to be pushed soon. I found out that it does not only affect joysticks but
+all interfaces that can provide more than TX_MAXAXIS axes.
+
+While I did some tests on WinXP I experienced another familiar bug. I thought
+it was fixed a long time ago, but now it is back, at least on XP. The
+soundserver may segfault when exiting CRRCsim. I guess it's a race condition
+when the different threads are shutting down. However, this shouldn't be a
+show stopper for the Ubuntu activities as I can't reproduce it on Linux.
+
+Another issue that needs discussion: Should we clean up the list of airplanes
+delivered with the base package? I think we should maybe remove some of the
+lower quality models (e.g. the &quot;Delta&quot; things that show some very
+interesting flat-spinning when handled incorrectly, or models that are
+just duplicates of the Allegro FDM parameters) and maybe add one or two
+of the higher quality models from crrcsim-addon-models (like the Supra or
+the Fireworks III with Bob's fine-tuned FDM parameters).
+
+And what about scenery files?
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: <A HREF="http://www.reucker-online.de/pgpkey.asc">http://www.reucker-online.de/pgpkey.asc</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000110.html">[Crrcsim-devel] license header progress
+</A></li>
+	<LI>Next message: <A HREF="000112.html">[Crrcsim-devel] license header progress
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#111">[ date ]</a>
+              <a href="thread.html#111">[ thread ]</a>
+              <a href="subject.html#111">[ subject ]</a>
+              <a href="author.html#111">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,176 @@
+From jan.reucker at web.de  Wed Jun 24 22:11:03 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Wed, 24 Jun 2009 22:11:03 +0200
+Subject: [Crrcsim-devel] Patch for Walkera PCM via audio interface
+Message-ID: <20090624221103.ffc1181e.jan.reucker@web.de>
+
+Hi all,
+
+Peter Popovec sent me a patch which extends the current audio interface to
+decode PCM signals from Walkera transmitters. The patch can be found here:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=2779&group_id=9957
+
+I'd really like to include this feature, but before applying the patch
+I request your comments.
+
+The solution for the integration somehow differs from other interfaces
+(like the "serial" family). FMSPIC and Zhenhua share most of the code,
+but use different configuration branches. This is achieved by using a
+common superclass for device handling and doing the interface-specific
+stuff in subclasses. Peter, in contrast, proposes to extend the existing
+audio interface with an additional "type" attribute that selects
+between two different data decoding methods inside the same class.
+
+Both approaches have their pros and cons. Any opinions from other developers?
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From martin at famherrmann.de  Fri Jun 26 22:27:44 2009
+From: martin at famherrmann.de (Martin Herrmann)
+Date: Fri, 26 Jun 2009 16:27:44 -0400
+Subject: [Crrcsim-devel] Patch for Walkera PCM via audio interface
+In-Reply-To: <20090624221103.ffc1181e.jan.reucker@web.de>
+References: <20090624221103.ffc1181e.jan.reucker@web.de>
+Message-ID: <1246048064.9062.36.camel@localhost>
+
+On Wed, 2009-06-24 at 22:11 +0200, Jan Reucker wrote:
+> The solution for the integration somehow differs from other interfaces
+> (like the "serial" family). FMSPIC and Zhenhua share most of the code,
+> but use different configuration branches. This is achieved by using a
+> common superclass for device handling and doing the interface-specific
+> stuff in subclasses. Peter, in contrast, proposes to extend the existing
+> audio interface with an additional "type" attribute that selects
+> between two different data decoding methods inside the same class.
+
+Using a common superclass is generally considered better programming
+style that using switches/ifs in a class. This keeps the individual
+classes small and modular.
+
+Suppose we would add support for 42 different audio transmitters in the
+future, then it would certainly be better to have 42 classes with maybe
+100 lines each than one single class with 4200 lines. Not only does this
+make it much easier to understand by keeping the individual modules
+(classes) concise, it also makes it easier for multiple developers to
+work on different parts at the same time.
+
+Usually, it is also more maintainable with multiple classes. A single
+file with a type attribute tends to have code that belongs together
+distributed all over the file, like this:
+
+void init () {
+  if (type 1) {
+    // Code for initializing type 1
+  }
+  else if (type 2) {
+    // Code for initializing type 2
+  }
+  ...
+  else if (type 42) {
+    // Code for initializing type 42
+  }
+}
+
+void process_data (...) {
+  if (type 1) {
+    // Code for processing type 1
+  }
+  else if (type 2) {
+    // Code for processing type 2
+  }
+  ...
+  else if (type 42) {
+    // Code for processing type 42
+  }
+}
+
+void cleanup (...) {
+  if (type 1) {
+    ...
+  }
+
+  ...
+}
+
+Separate classes keep together what belongs together. They also separate
+the hardware specific code from the protocol decoding logic.
+
+So I am in favor of the separate classes approach. On the other hand, if
+the code is already written and tested and you are unwilling to change
+it, it can still be rewritten later (as I did for the serial code) - and
+it may be easier to figure out the interface between the classes if
+there are more than just one or two protocols.
+
+
+Martin
+
+
+
+
+From jens_w2 at gmx.net  Sun Jun 28 18:30:30 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Sun, 28 Jun 2009 18:30:30 +0200
+Subject: [Crrcsim-devel] Patch for Walkera PCM via audio interface
+In-Reply-To: <1246048064.9062.36.camel@localhost>
+References: <20090624221103.ffc1181e.jan.reucker@web.de>
+	<1246048064.9062.36.camel@localhost>
+Message-ID: <20090628163030.GA4073@knusper.jensens.local>
+
+I agree with Martin, but I do want to note that 'rewriting it later' (while
+knowing that it is bad design) includes a high possibility of never
+rewriting it. So it seems to me that doing it right now means less work and
+better code. The GUI stuff has to be done anyway...
+
+Best regards,
+Jens
+
+
+From jan.reucker at web.de  Sun Jun 28 23:03:01 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sun, 28 Jun 2009 23:03:01 +0200
+Subject: [Crrcsim-devel] Patch for Walkera PCM via audio interface
+In-Reply-To: <20090628163030.GA4073@knusper.jensens.local>
+References: <20090624221103.ffc1181e.jan.reucker@web.de>
+	<1246048064.9062.36.camel@localhost>
+	<20090628163030.GA4073@knusper.jensens.local>
+Message-ID: <20090628230301.ca18e4ee.jan.reucker@web.de>
+
+Am Sun, 28 Jun 2009 18:30:30 +0200 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> I agree with Martin, but I do want to note that 'rewriting it later' (while
+> knowing that it is bad design) includes a high possibility of never
+> rewriting it. So it seems to me that doing it right now means less work and
+> better code. The GUI stuff has to be done anyway...
+
+I agree with both of you. I already proposed to Peter that he maybe should
+separate his code into a subclass, but he preferred not to change this for
+version 2 of his patch. His point is that currently all subclassed interfaces
+have separate configurations. This means that you have to configure the
+hardware separately for each interface type while, in his opinion, a hardware
+device should only be configured once for all interfaces using it.
+
+On the other hand, that's why I like the current configuration scheme: I can
+switch from one interface type to another and I always have a working,
+well-calibrated configuration.
+
+I guess all this doesn't matter to Joe User who only owns one interface
+and don't care if hardware and protocol are handled in a single or separate
+classes internally... So I'd go for the most maintainable solution, which
+is the subclass approach.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+

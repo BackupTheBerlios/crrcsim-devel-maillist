@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Release candidate 2 for 0.9.10
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-March/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Release%20candidate%202%20for%200.9.10&In-Reply-To=%3C20090306233534.d0f8baa4.jan.reucker%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000180.html">
+   <LINK REL="Next"  HREF="000183.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Release candidate 2 for 0.9.10</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Release%20candidate%202%20for%200.9.10&In-Reply-To=%3C20090306233534.d0f8baa4.jan.reucker%40web.de%3E"
+       TITLE="[Crrcsim-devel] Release candidate 2 for 0.9.10">jan.reucker at web.de
+       </A><BR>
+    <I>Fri Mar  6 23:35:34 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000180.html">[Crrcsim-devel] Release candidate 2 for 0.9.10
+</A></li>
+        <LI>Next message: <A HREF="000183.html">[Crrcsim-devel] Release candidate 2 for 0.9.10
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#181">[ date ]</a>
+              <a href="thread.html#181">[ thread ]</a>
+              <a href="subject.html#181">[ subject ]</a>
+              <a href="author.html#181">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Am Thu, 5 Mar 2009 21:47:35 -0700 schrieb &quot;Jerry Williams&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">jwilliam at xmission.com</A>&gt;:
+
+&gt;<i> In the select location box it is really hard to tell what you have selected.
+</I>&gt;<i> It looks like there are some menus that show a like 3D box and others there
+</I>&gt;<i> seems to be a very light change in color.
+</I>
+Hi Jerry,
+
+this problem shows up in several dialogs, but I don't think that it's really
+a showstopper for the 0.9.10 release. We can easily change the color theme
+of the GUI for more contrast. It could even be made adjustable.
+
+&gt;<i> I am wondering if we need a key to toggle full screen?  Like maybe f?
+</I>
+Maybe. But this is Linux-specific. On Windows, you currently can't switch
+between video modes on-the-fly without reloading the whole OpenGL context.
+This is not yet implemented in CRRCsim.
+ 
+&gt;<i> I did have a time that I couldn't get out of the program and had to turn off
+</I>&gt;<i> the box to get out.  I haven't been able to recreate the problem.
+</I>
+Did CRRCsim still run or was it some kind of xserver lockup/freeze?
+
+&gt;<i> I had to change the crrcsim.spec file for Fedora 10, and I am wondering if
+</I>&gt;<i> there is a way to add the version number to the file?
+</I>
+I've updated the files in my local repository. As Fedora 6 and 8 are a
+bit outdated I decided to put both files into the main packages/Fedora
+directory and remove 6 and 8 from the tarball. They are still in the
+repository if someone needs them.
+
+&gt;<i> I am not sure what we need/use any of the Makefile, Makefile.am, Makefile.in
+</I>&gt;<i> files in any of the Fedora directories.  Do we?
+</I>
+The Makefiles are needed to control the distribution of files, although
+nothing has to be built inside these directories.
+ 
+&gt;<i> Also it seems like some of the required packages has changed.
+</I>&gt;<i> Like freeglut is gone.  Not sure I have all of the required stuff in the
+</I>&gt;<i> spec file.
+</I>
+Glut is gone, yes. And we've added a new dependency on libjpeg, and an optional
+dependency on CGAL. So maybe you have to add this dependency manually before
+building the final RPM, or you trust on libjpeg being installed on every
+Linux system (which should be pretty much o.k. I guess).
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: <A HREF="http://www.reucker-online.de/pgpkey.asc">http://www.reucker-online.de/pgpkey.asc</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000180.html">[Crrcsim-devel] Release candidate 2 for 0.9.10
+</A></li>
+	<LI>Next message: <A HREF="000183.html">[Crrcsim-devel] Release candidate 2 for 0.9.10
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#181">[ date ]</a>
+              <a href="thread.html#181">[ thread ]</a>
+              <a href="subject.html#181">[ subject ]</a>
+              <a href="author.html#181">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

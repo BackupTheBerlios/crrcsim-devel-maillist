@@ -1,0 +1,151 @@
+From admin at berlios.de  Fri May  6 19:12:58 2011
+From: admin at berlios.de (admin at berlios.de)
+Date: Fri, 6 May 2011 13:12:58 -0400 (EDT)
+Subject: [Crrcsim-devel] [Bug #18100] Geodetic latitude calculation has
+	numerical instability
+Message-ID: <201105061712.p46HCwg4006997@unicorn.berlios.de>
+
+Bug #18100, was updated on 2011-May-06 13:12
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: aharmat
+Assigned to : none
+Summary: Geodetic latitude calculation has numerical instability
+
+Details: The conversion from geocentric to geodetic latitude in the function ls_geoc_to_geod(...) in ls_geodesy.cpp suffers from numerical instability around zero latitude, making the simulation jerky as the aircraft crosses the "equator" because the geodetic latitude output becomes coarse.
+
+I will be uploading a patch to fix this, it implements a fast version of Bowring's iterative formula for calculating geodetic location. This function does not suffer from instability around the equator and behaves just like the old function everywhere else.
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=18100&group_id=9957
+
+
+From admin at berlios.de  Fri May  6 19:20:11 2011
+From: admin at berlios.de (admin at berlios.de)
+Date: Fri, 6 May 2011 13:20:11 -0400 (EDT)
+Subject: [Crrcsim-devel] [Patch #3153] Numerically stable geodetic latitude
+	function
+Message-ID: <201105061720.p46HKBNw028049@unicorn.berlios.de>
+
+Patch #3153 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: aharmat
+Assigned to : none
+Summary: Numerically stable geodetic latitude function
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3153&group_id=9957
+
+
+From admin at berlios.de  Sat May  7 09:40:36 2011
+From: admin at berlios.de (admin at berlios.de)
+Date: Sat, 7 May 2011 09:40:36 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3153] Numerically stable geodetic latitude
+	function
+Message-ID: <201105070740.p477eaKZ012891@unicorn.berlios.de>
+
+Patch #3153 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: aharmat
+Assigned to : none
+Summary: Numerically stable geodetic latitude function
+
+Follow-Ups:
+
+Date: 2011-May-07 09:40
+By: jreucker
+
+Comment:
+Thanks for your bug report and your patch. I'm no expert for CRRCsim's internal FDM implementation and its coordinate systems, so it's hard for me to evaluate the patch. Can you provide a simple test case so that I can see where your patch helps? E.g. some directions like "fly across coordinates xyz and you'll see stuttering, apply the patch and try again"?
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3153&group_id=9957
+
+
+From admin at berlios.de  Sat May  7 09:43:53 2011
+From: admin at berlios.de (admin at berlios.de)
+Date: Sat, 7 May 2011 09:43:53 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3147] Support for PulseAudio input devices
+Message-ID: <201105070743.p477hr5d016160@unicorn.berlios.de>
+
+Patch #3147 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: pdima
+Assigned to : jreucker
+Summary: Support for PulseAudio input devices
+
+Follow-Ups:
+
+Date: 2011-May-07 09:43
+By: jreucker
+
+Comment:
+Thanks for your patch, I'll try it ASAP.
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3147&group_id=9957
+
+
+From admin at berlios.de  Mon May  9 19:12:39 2011
+From: admin at berlios.de (admin at berlios.de)
+Date: Mon, 9 May 2011 13:12:39 -0400 (EDT)
+Subject: [Crrcsim-devel] [Patch #3153] Numerically stable geodetic latitude
+	function
+Message-ID: <201105091712.p49HCd7v019385@unicorn.berlios.de>
+
+Patch #3153 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: aharmat
+Assigned to : none
+Summary: Numerically stable geodetic latitude function
+
+Follow-Ups:
+
+Date: 2011-May-09 13:12
+By: aharmat
+
+Comment:
+This is easiest to see with the helicopter or quadrotor because you can fly across the y axis slowly. Choose the launch site to be close to (0, 0), and fly around slowly, you should see the simulation stutter. I added a line to the debug display showing x,y,z coordinates to make it easier for me to track down the problem. If you do this, then watch the x coordinate as you drift slowly across the y axis, when it hits zero you will see stuttering. This attached picture shows a plot of the geocentric and geodetic latitudes before the patch, you can clearly see the problem around x = 0. After the patch, the geodetic latitude follows the geocentric smoothly. 
+
+http://img685.imageshack.us/i/geodeticproblemplot.png/
+-------------------------------------------------------
+
+Date: 2011-May-07 03:40
+By: jreucker
+
+Comment:
+Thanks for your bug report and your patch. I'm no expert for CRRCsim's internal FDM implementation and its coordinate systems, so it's hard for me to evaluate the patch. Can you provide a simple test case so that I can see where your patch helps? E.g. some directions like "fly across coordinates xyz and you'll see stuttering, apply the patch and try again"?
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3153&group_id=9957
+
+

@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Hard point handling
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Hard%20point%20handling&In-Reply-To=%3C20080928100805.445ec2fa.jan.reucker%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000048.html">
+   <LINK REL="Next"  HREF="000050.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Hard point handling</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Hard%20point%20handling&In-Reply-To=%3C20080928100805.445ec2fa.jan.reucker%40web.de%3E"
+       TITLE="[Crrcsim-devel] Hard point handling">jan.reucker at web.de
+       </A><BR>
+    <I>Sun Sep 28 10:08:05 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000048.html">[Crrcsim-devel] Hard point handling
+</A></li>
+        <LI>Next message: <A HREF="000050.html">[Crrcsim-devel] Hard point handling
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#49">[ date ]</a>
+              <a href="thread.html#49">[ thread ]</a>
+              <a href="subject.html#49">[ subject ]</a>
+              <a href="author.html#49">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Am Sat, 27 Sep 2008 22:34:16 +0200 schrieb Jens Wilhelm Wulf &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">jens_w2 at gmx.net</A>&gt;:
+
+
+&gt;<i> I'd freeze the simulation, show a message and force the user to reset.
+</I>[...]
+&gt;<i> Does a wheel need a 'crashed' state? It detects a crash, throws an event and
+</I>&gt;<i> the sim is stopped, afterwards it will be reset/restarted. A wheel is
+</I>&gt;<i> never 'used' after having thrown its 'crashed' event, so a 'crashed' state
+</I>&gt;<i> is not needed.
+</I>
+In this case you're right. The &quot;crashed&quot; state is only needed if you continue
+the simulation like I proposed. Then it prevents the wheel from throwing more
+events.
+ 
+&gt;<i> &gt; A &quot;normal&quot; touchdown, of course, will also throw some kind of event received
+</I>&gt;<i> &gt; by e.g. a flight time stopwatch.
+</I>&gt;<i> ...note that detecting a 'normal' touchdown is not easy. Stopping a flight
+</I>&gt;<i> time stopwatch might be triggered by touching the ground in any way, however.
+</I>
+Yes, that's what I meant with &quot;normal touchdown&quot;. Just like in a competition:
+touching the ground in any way will end your turn.
+
+&gt;<i> &gt; About retracting hardpoints: 
+</I>&gt;<i> We could just connect a hardpoint to a certain animation and then use its
+</I>&gt;<i> hinge axis to rotate the hardpoint like the 3D model is rotated, couldn't
+</I>&gt;<i> we? We don't need any additional definition in the .xml besides maybe 
+</I>[...]
+&gt;<i> Of course WheelSystem needs to parse the 'animations' part of the xml.
+</I>
+Yes, this would be possible. But the result is not 100% correct, because the
+hardpoint will move along the outline of the wheel while retracting. On the other
+hand, I don't want to burden WheelSystem with too much knowledge about the
+animation stuff. Maybe there's a way to query the needed information from
+the animation object. I'll think about it.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: <A HREF="http://www.reucker-online.de/pgpkey.asc">http://www.reucker-online.de/pgpkey.asc</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000048.html">[Crrcsim-devel] Hard point handling
+</A></li>
+	<LI>Next message: <A HREF="000050.html">[Crrcsim-devel] Hard point handling
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#49">[ date ]</a>
+              <a href="thread.html#49">[ thread ]</a>
+              <a href="subject.html#49">[ subject ]</a>
+              <a href="author.html#49">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

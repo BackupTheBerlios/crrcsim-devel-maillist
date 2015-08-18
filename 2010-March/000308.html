@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] record/demo/shadow is ready for testing
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-March/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20record/demo/shadow%20is%20ready%20for%20testing&In-Reply-To=%3C1268992780.4102.166.camel%40joel-portable%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000307.html">
+   <LINK REL="Next"  HREF="000309.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] record/demo/shadow is ready for testing</H1>
+    <B>Jo&#235;l Li&#233;nard</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20record/demo/shadow%20is%20ready%20for%20testing&In-Reply-To=%3C1268992780.4102.166.camel%40joel-portable%3E"
+       TITLE="[Crrcsim-devel] record/demo/shadow is ready for testing">joel.lienard at free.fr
+       </A><BR>
+    <I>Fri Mar 19 10:59:40 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000307.html">[Crrcsim-devel] record/demo/shadow is ready for testing
+</A></li>
+        <LI>Next message: <A HREF="000309.html">[Crrcsim-devel] record/demo/shadow is ready for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#308">[ date ]</a>
+              <a href="thread.html#308">[ thread ]</a>
+              <a href="subject.html#308">[ subject ]</a>
+              <a href="author.html#308">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> ...is basically done! I have to care about binary file portability (does
+</I>&gt;<i> anyone know about that?), and maybe some things you come across, but apart
+</I>&gt;<i> from that me it seems quite finished to me.
+</I>&gt;<i> 
+</I>Hello Jens,
+
+It seems to me that the only problem of binary data portability is the
+bytes order convention : &quot;little indian&quot; or &quot;big indian&quot;.
+There is also the format of floating numbers representation but the
+normalized format IEEE 754 is used everywhere.
+One simple and sure solution  is to write in binary a word of value
+agreed in a header to know if the convention used in the file is the
+same that that used by the machine host. If it is different, it is
+necessary to swap the bytes of every word after reading.
+The difficulty will be to test it: I believe that we have all Intel
+processors  or compatible(Little Endian). Apple used PowerPC ( Big
+Indian) but it seems to me that now it uses Intel. 
+
+Jo&#235;l
+
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000307.html">[Crrcsim-devel] record/demo/shadow is ready for testing
+</A></li>
+	<LI>Next message: <A HREF="000309.html">[Crrcsim-devel] record/demo/shadow is ready for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#308">[ date ]</a>
+              <a href="thread.html#308">[ thread ]</a>
+              <a href="subject.html#308">[ subject ]</a>
+              <a href="author.html#308">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Record and playback
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-March/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Record%20and%20playback&In-Reply-To=%3C20100314205910.GA28000%40knusper%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000300.html">
+   <LINK REL="Next"  HREF="000302.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Record and playback</H1>
+    <B>Jens Wilhelm Wulf</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Record%20and%20playback&In-Reply-To=%3C20100314205910.GA28000%40knusper%3E"
+       TITLE="[Crrcsim-devel] Record and playback">jens_w2 at gmx.net
+       </A><BR>
+    <I>Sun Mar 14 21:59:10 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000300.html">[Crrcsim-devel] Record and playback
+</A></li>
+        <LI>Next message: <A HREF="000302.html">[Crrcsim-devel] Record and playback
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#301">[ date ]</a>
+              <a href="thread.html#301">[ thread ]</a>
+              <a href="subject.html#301">[ subject ]</a>
+              <a href="author.html#301">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This post is just me writing while I'm thinking about it...
+
+Aircraft(src/aircraft.cpp) loads 3D model and FDM, it is directly called
+from crrc_main.cpp's &quot;void loadAirplane()&quot;. 
+
+There could be a second instance of Aircraft (for shadow mode).
+Aircraft::load() could be told about shadow mode by giving a non-empty file
+name for a recorded flight; in this case 
+ - Aircraft would load the fdm before loading the 3D model
+ - CRRC_AirplaneSim_Playback could expose XML data from the recorded file's 
+   header 
+ - now Aircraft can load the 3D model, as the filename is known
+ 
+This could be repeated for any number of &quot;shadow planes&quot; by letting the user
+open many recorded files. We could go further: the recorded file can be
+identified by its header (well, not yet, but this is easy and already prepared
+for) and may not even be a recorded file. It could contain settings for
+an FDM which is a &quot;robot player&quot; or gets its data from the network.
+CRRCSim could export data of its manually controlled airplane to a server or
+another client, while displaying another airplane after loading its network
+settings from a file.
+
+While loading a file, the user should be able to select whether this file
+replaces the manually controlled airplane or whether it is a &quot;shadow plane&quot;.
+It must also be possible to remove one of the existing &quot;Aircraft&quot;s.
+
+But this is sligthly more than I'm planning to do; it is just thinking
+whether it can be extended and how it could work.
+
+Best regards,
+Jens
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000300.html">[Crrcsim-devel] Record and playback
+</A></li>
+	<LI>Next message: <A HREF="000302.html">[Crrcsim-devel] Record and playback
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#301">[ date ]</a>
+              <a href="thread.html#301">[ thread ]</a>
+              <a href="subject.html#301">[ subject ]</a>
+              <a href="author.html#301">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

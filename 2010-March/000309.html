@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] record/demo/shadow is ready for testing
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-March/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20record/demo/shadow%20is%20ready%20for%20testing&In-Reply-To=%3C20100319161005.GB3873%40knusper%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000308.html">
+   <LINK REL="Next"  HREF="000310.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] record/demo/shadow is ready for testing</H1>
+    <B>Jens Wilhelm Wulf</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20record/demo/shadow%20is%20ready%20for%20testing&In-Reply-To=%3C20100319161005.GB3873%40knusper%3E"
+       TITLE="[Crrcsim-devel] record/demo/shadow is ready for testing">jens_w2 at gmx.net
+       </A><BR>
+    <I>Fri Mar 19 17:10:05 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000308.html">[Crrcsim-devel] record/demo/shadow is ready for testing
+</A></li>
+        <LI>Next message: <A HREF="000310.html">[Crrcsim-devel] record/demo/shadow is ready for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#309">[ date ]</a>
+              <a href="thread.html#309">[ thread ]</a>
+              <a href="subject.html#309">[ subject ]</a>
+              <a href="author.html#309">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> There is also the format of floating numbers representation but the
+</I>&gt;<i> normalized format IEEE 754 is used everywhere.
+</I>That means the only issue with floats/doubles is byte order, too? Good news.
+I searched the net but only found the usual integer examples and a paper
+dealing with ancient unix systems.
+
+&gt;<i> One simple and sure solution  is to write in binary a word of value
+</I>&gt;<i> agreed in a header to know if the convention used in the file is the
+</I>&gt;<i> same that that used by the machine host. If it is different, it is
+</I>&gt;<i> necessary to swap the bytes of every word after reading.
+</I>I will not go that way. The files will use native x86 byte order (little
+endian), other systems will have to byteswap.
+
+&gt;<i> The difficulty will be to test it: I believe that we have all Intel
+</I>&gt;<i> processors  or compatible(Little Endian). Apple used PowerPC ( Big
+</I>&gt;<i> Indian) but it seems to me that now it uses Intel. 
+</I>Well, that's good and bad. Good, because we usually don't have to care about
+byte order, but bad because we'll be surprised once the first big-endian
+machine runs CRRCSim ;-)
+
+Anyway, I'll prepare the code for endianess issues...
+
+Thanks,
+Jens
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000308.html">[Crrcsim-devel] record/demo/shadow is ready for testing
+</A></li>
+	<LI>Next message: <A HREF="000310.html">[Crrcsim-devel] record/demo/shadow is ready for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#309">[ date ]</a>
+              <a href="thread.html#309">[ thread ]</a>
+              <a href="subject.html#309">[ subject ]</a>
+              <a href="author.html#309">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

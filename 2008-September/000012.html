@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] CRRCSim helicopter model
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20CRRCSim%20helicopter%20model&In-Reply-To=%3C20080907063736.GA5189%40localhost%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000008.html">
+   <LINK REL="Next"  HREF="000014.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] CRRCSim helicopter model</H1>
+    <B>Jens Wilhelm Wulf</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20CRRCSim%20helicopter%20model&In-Reply-To=%3C20080907063736.GA5189%40localhost%3E"
+       TITLE="[Crrcsim-devel] CRRCSim helicopter model">jens_w2 at gmx.net
+       </A><BR>
+    <I>Sun Sep  7 08:37:36 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000008.html">[Crrcsim-devel] CRRCSim helicopter model
+</A></li>
+        <LI>Next message: <A HREF="000014.html">[Crrcsim-devel] CRRCSim helicopter model
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#12">[ date ]</a>
+              <a href="thread.html#12">[ thread ]</a>
+              <a href="subject.html#12">[ subject ]</a>
+              <a href="author.html#12">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Jan and others,
+
+&gt;<i> First of all, yaw input should be inverted. I guess most pilots have 
+</I>&gt;<i> configured yaw to move the nose in the same direction as the stick,
+</I>&gt;<i> although most beginners try to &quot;move the tail&quot;.
+</I>Oh yes, this is currently wrong. However, the reason is not that I was
+'moving the tail' but that I set up the transmitter interface from scratch
+and didn't compare with test mode or some fixed wing plane. I simply mapped
+and inverted until it was fine.
+
+By the way, there is something wrong with transmitter interface setup. I
+used a clean crrcsim.xml (I removed it), chose 'FMSPIC', and '/dev/ttyUSB0'
+for the device, but then it crashed and still wanted to use '/dev/ttyS0'. So
+I had to write FMSPIC.port.name into crrcsim.xml using an editor.
+
+I noticed something else when fixing the yaw thing: throttle is inverse
+(related to fixed wing model). The behaviour of the variable seems right,
+but I feel 
+ - throttle is positive for stick forward with fixed wing model
+ - throttle is positive for stick backward with fixed pitch heli model
+ - throttle (controls climb in this case) is positive for stick backward
+   with collective pitch heli model
+
+So the meaning of throttle has to be inverted when switching between fixed
+wing/heli. For me this is ok, as I have to remap anyway. But maybe I should
+invert throttle in the heli code to save user one click?
+
+I prefer the following setup (please comment if this is totally strange and
+what is strange about it):
+
+fixed wing:
+  left stick is elevator, rudder
+  right stick is throttle, aileron
+
+heli:
+  Roll and pitch have to be on one stick, and I want them on the right stick.
+  So there is throttle (collective pitch) and yaw on the left stick.
+ 
+Something else: I searched the web for correct english words, but I am not
+sure about them...
+
+roll and yaw seem right, but what about 
+  - pitch (rotation about model's y-axis). Is 'nick' the correct word, or
+    is it just used in Germany?
+  - What to use for collective pitch (controls climb)?
+
+Well, some questions here...
+
+When commenting on the heli's aero parameters, please keep in mind that the
+current file includes three different settings! I think it would be fine if
+we could adjust settings for differents types (I will fill them into the
+file):
+
+  - koaxial indoor
+  - fixed pitch
+  - collective pitch, beginner type
+  - collective pitch, expert type
+
+And everyone of them with an indoor setting (no wind) and with an outdoor
+setting (disturbances because of medium wind).
+    
+Best regards,
+Jens
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000008.html">[Crrcsim-devel] CRRCSim helicopter model
+</A></li>
+	<LI>Next message: <A HREF="000014.html">[Crrcsim-devel] CRRCSim helicopter model
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#12">[ date ]</a>
+              <a href="thread.html#12">[ thread ]</a>
+              <a href="subject.html#12">[ subject ]</a>
+              <a href="author.html#12">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

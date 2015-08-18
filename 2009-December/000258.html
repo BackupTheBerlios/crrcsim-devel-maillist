@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] F3F on all scenery
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20F3F%20on%20all%20scenery&In-Reply-To=%3C4B2E6234.9060206%40obordes.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000257.html">
+   <LINK REL="Next"  HREF="000261.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] F3F on all scenery</H1>
+    <B>Olivier Bordes</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20F3F%20on%20all%20scenery&In-Reply-To=%3C4B2E6234.9060206%40obordes.com%3E"
+       TITLE="[Crrcsim-devel] F3F on all scenery">olivier at obordes.com
+       </A><BR>
+    <I>Sun Dec 20 18:43:16 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000257.html">[Crrcsim-devel] F3F on all scenery
+</A></li>
+        <LI>Next message: <A HREF="000261.html">[Crrcsim-devel] F3F on all scenery
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#258">[ date ]</a>
+              <a href="thread.html#258">[ thread ]</a>
+              <a href="subject.html#258">[ subject ]</a>
+              <a href="author.html#258">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Configuration parameters related to the scenery of the F3F game  can be 
+put in  the &quot;F3F parameters&quot; section of the conf file.
+None of these parameters should be scenery dependant anyway, so adding 
+(x,y,z) for the middle of the game, and (dx,dy,dz) for the direction 
+should be enough.
+Pylons (x,y,z) position will be computed based on that, and on the 
+return result from the altitude method of the scenery.
+It is not needed to add a method in the scenery related to F3F.
+
+
+Jo&#235;l Li&#233;nard wrote:
+&gt;<i>  Hello Olivier,
+</I>&gt;<i>
+</I>&gt;<i>  I prepared the modifications to parametrize the direction and the
+</I>&gt;<i> positions. No difficulty to obtain then the height, the method already
+</I>&gt;<i> exist.
+</I>&gt;<i> A question is to know where to store these parameters. They can be in
+</I>&gt;<i> the general configuration file but it seems to me useful to put values
+</I>&gt;<i> by default in scenery files.
+</I>&gt;<i> To add a method F3F in the object scene to read these parameters does
+</I>&gt;<i> not seem to me good as regards the modularity of the code, I thus
+</I>&gt;<i> suggest making it in the object F3F.
+</I>&gt;<i>
+</I>&gt;<i> Jo&#235;l
+</I>&gt;<i>
+</I>&gt;<i> Le dimanche 20 d&#233;cembre 2009 &#224; 15:45 +0100, Olivier Bordes a &#233;crit :
+</I>&gt;<i>   
+</I>&gt;&gt;<i> Hello Joel,
+</I>&gt;&gt;<i> Thanks for the question.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Game mode brings rules, physical and times constraints to the 
+</I>&gt;&gt;<i> simulation. They should be valid on every location, even if it does not 
+</I>&gt;&gt;<i> really make sense to do F3F on all scenery.
+</I>&gt;&gt;<i> Game mode should need a central point to initialize  (the center of the 
+</I>&gt;&gt;<i> course) , and a direction (toward which the race will happen).
+</I>&gt;&gt;<i> Once this is defined,  pylons can  be located relatively to this point. 
+</I>&gt;&gt;<i> But their real location will be subject to  relief  contraints (as in 
+</I>&gt;&gt;<i> the real life :).
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> So, this suggest *no* dependances between the scenery and the game mode: 
+</I>&gt;&gt;<i> it  means, that a scenery shoud be able to tell the altitude of the 
+</I>&gt;&gt;<i> ground at a certain point, and then  the F3F game mode should ask to the 
+</I>&gt;&gt;<i> scenery: what is the ground altitude of this point ? and then start 
+</I>&gt;&gt;<i> drawing the pylons from that location.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> In term of code, each Scenery object should implement an additional 
+</I>&gt;&gt;<i> method (Virtual function  mandatory) that they have to implement.
+</I>&gt;&gt;<i> The &quot;F3F game mode&quot; to be changed when drawing the pylons, to first 
+</I>&gt;&gt;<i> require the &quot;altitude&quot; of the starting point.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Olivier
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Jo&#235;l Li&#233;nard wrote:
+</I>&gt;&gt;<i>     
+</I>&gt;&gt;&gt;<i> I prepared minor modifications for the code F3F so that he can work on
+</I>&gt;&gt;&gt;<i> all scenery.
+</I>&gt;&gt;&gt;<i> But it is necessary to define the position of bases according to the
+</I>&gt;&gt;&gt;<i> scenery. It is then logical to put these parameters in files scenery. If
+</I>&gt;&gt;&gt;<i> these parameters are read by loadScenery and stored in the scenery
+</I>&gt;&gt;&gt;<i> object, it create a dependence  scenery/f3f code.
+</I>&gt;&gt;&gt;<i> To avoid it, we can, in the scenery object, make public the name of the
+</I>&gt;&gt;&gt;<i> file or the object &quot; SimpleXMLTransfer xml &quot;.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Do you see a better solution?
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Jo&#235;l
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;&gt;<i> Crrcsim-devel mailing list
+</I>&gt;&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">Crrcsim-devel at lists.berlios.de</A>
+</I>&gt;&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">https://lists.berlios.de/mailman/listinfo/crrcsim-devel</A>
+</I>&gt;&gt;&gt;<i>   
+</I>&gt;&gt;&gt;<i>       
+</I>&gt;&gt;<i>     
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Crrcsim-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">Crrcsim-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">https://lists.berlios.de/mailman/listinfo/crrcsim-devel</A>
+</I>&gt;<i>   
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20091220/25a21a56/attachment.html">https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20091220/25a21a56/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000257.html">[Crrcsim-devel] F3F on all scenery
+</A></li>
+	<LI>Next message: <A HREF="000261.html">[Crrcsim-devel] F3F on all scenery
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#258">[ date ]</a>
+              <a href="thread.html#258">[ thread ]</a>
+              <a href="subject.html#258">[ subject ]</a>
+              <a href="author.html#258">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

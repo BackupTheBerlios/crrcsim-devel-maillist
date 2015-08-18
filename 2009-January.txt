@@ -1,0 +1,2784 @@
+From jwilliam at xmission.com  Fri Jan  2 21:03:27 2009
+From: jwilliam at xmission.com (Jerry Williams)
+Date: Fri, 2 Jan 2009 13:03:27 -0700
+Subject: [Crrcsim-devel] Multiple crrcsim.xml files?
+Message-ID: <BCAD03E3113C4755B0C9C9871B88D811@Q9450>
+
+I was just wondering about a way to keep multiple crrcsim.xml files or a way
+to manage setups.
+
+For example if I want to play the F3F game and I get everything setup the
+way I want it.  And then I decide that I want to do Thermal at the Davis
+Field with a different airplane.
+
+I guess that I could manually copy my crrcsim.xml file to f3f.xml.
+And then rename the files for what I want each time a want to do a different
+type of flying.
+
+I think it would be nice if CRRCSim would let me manage the different
+setups.
+
+What do you think?
+
+Thanks!
+Jerry Williams
+
+
+
+
+
+
+From jan.reucker at web.de  Fri Jan  2 22:44:27 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Fri, 2 Jan 2009 22:44:27 +0100
+Subject: [Crrcsim-devel] Multiple crrcsim.xml files?
+In-Reply-To: <BCAD03E3113C4755B0C9C9871B88D811@Q9450>
+References: <BCAD03E3113C4755B0C9C9871B88D811@Q9450>
+Message-ID: <20090102224427.760964fb.jan.reucker@web.de>
+
+Am Fri, 2 Jan 2009 13:03:27 -0700 schrieb "Jerry Williams" <jwilliam at xmission.com>:
+
+Happy new year!
+
+> I was just wondering about a way to keep multiple crrcsim.xml files or a way
+> to manage setups.
+
+This can already be achieved on the command line:
+
+crrcsim -g config.xml
+
+will use config.xml as the active configuration. So you can easily create multiple
+start menu entries or desktop links that use different config files, just by
+editing the link's command line.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jwilliam at xmission.com  Fri Jan  2 23:10:53 2009
+From: jwilliam at xmission.com (Jerry Williams)
+Date: Fri, 2 Jan 2009 15:10:53 -0700
+Subject: [Crrcsim-devel] Multiple crrcsim.xml files?
+In-Reply-To: <20090102224427.760964fb.jan.reucker@web.de>
+References: <BCAD03E3113C4755B0C9C9871B88D811@Q9450>
+	<20090102224427.760964fb.jan.reucker@web.de>
+Message-ID: <E79C836E4094438FBDDC2B12C0040637@Q9450>
+
+Happy New Year!
+
+Thanks!
+
+I have been running a version crrcsim 0.9.10-alpha2-c92ef3cb697e on
+Windows Vista 64-bit.
+Would you happen to have a newer version that I could install for windows?
+This version seems to die sometimes when I make changes, but I like the new
+features, so I am spoiled and don't want to go back to 0.9.9.  :)
+
+I thought about building it, but not sure the compiler will run on my
+machine.
+
+Thanks again,
+Jerry Williams
+
+
+
+> -----Original Message-----
+> From: crrcsim-devel-bounces at lists.berlios.de [mailto:crrcsim-devel-
+> bounces at lists.berlios.de] On Behalf Of Jan Reucker
+> Sent: Friday, January 02, 2009 2:44 PM
+> To: crrcsim-devel at lists.berlios.de
+> Subject: Re: [Crrcsim-devel] Multiple crrcsim.xml files?
+> 
+> Am Fri, 2 Jan 2009 13:03:27 -0700 schrieb "Jerry Williams"
+> <jwilliam at xmission.com>:
+> 
+> Happy new year!
+> 
+> > I was just wondering about a way to keep multiple crrcsim.xml files or a
+> way
+> > to manage setups.
+> 
+> This can already be achieved on the command line:
+> 
+> crrcsim -g config.xml
+> 
+> will use config.xml as the active configuration. So you can easily create
+> multiple
+> start menu entries or desktop links that use different config files, just
+> by
+> editing the link's command line.
+> 
+> Kind regards,
+> Jan R.
+> 
+> --
+> Jan Reucker
+> Ober-Ramstadt, Germany
+> PGP-Key: http://www.reucker-online.de/pgpkey.asc
+> _______________________________________________
+> Crrcsim-devel mailing list
+> Crrcsim-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+
+
+
+
+From jan.reucker at web.de  Sun Jan  4 22:14:26 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sun, 4 Jan 2009 22:14:26 +0100
+Subject: [Crrcsim-devel] Multiple crrcsim.xml files?
+In-Reply-To: <E79C836E4094438FBDDC2B12C0040637@Q9450>
+References: <BCAD03E3113C4755B0C9C9871B88D811@Q9450>
+	<20090102224427.760964fb.jan.reucker@web.de>
+	<E79C836E4094438FBDDC2B12C0040637@Q9450>
+Message-ID: <20090104221426.b76201de.jan.reucker@web.de>
+
+Am Fri, 2 Jan 2009 15:10:53 -0700 schrieb "Jerry Williams" <jwilliam at xmission.com>:
+
+> Would you happen to have a newer version that I could install for windows?
+> This version seems to die sometimes when I make changes, but I like the new
+> features, so I am spoiled and don't want to go back to 0.9.9.  :)
+
+Hi Jerry,
+
+sorry, this is currently the latest version available for Windows. I'll see
+if I can compile and pack a version that contains the new "Brie" scenery,
+but expect it to be a huge download compared to the current version.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From joel.lienard at free.fr  Sun Jan 11 21:56:39 2009
+From: joel.lienard at free.fr (=?iso-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Sun, 11 Jan 2009 21:56:39 +0100
+Subject: [Crrcsim-devel] panorama scenery
+Message-ID: <E46E6C3AED1040E1A34C52A2C4B0340B@PCdeJol>
+
+Hello,
+
+ 
+
+I finished the large part of the work of implementation in CRRCSIM.
+
+ 
+
+The importation of the components of wind functions. I have currently only
+values in 2 dimensions but all is envisaged in 3 dimensions.
+
+It is enough to provide a file with values of coordinates (X, Y, Z) of the
+components of wind vx, vy, vz. These values are interpolated linearly.
+
+ 
+
+I also made the importation of textures in JPEG. Plib-Ssg makes it possible
+to add functions to ssgLoadTexture by ssgAddTextureFormat.
+
+ 
+
+ Some difficulties:
+
+ 
+
+ - The importation of the wind is a little slow. The current file is
+unnecessarily large but in 3D it will be necessarily large. This slowness
+does not seem to me really awkward but it would be useful to post a window
+of waiting during the loading of scene. 
+
+ 
+
+- The components of wind are standardized values. They are multiplied by the
+speed of the wind which the user can change. On the other hand, the
+direction is fixed. The adjustment of the direction of the wind is thus
+ineffective. It would thus be necessary to provide to invalidate this
+adjustment or to replace it by the choice of discrete values (This problem
+already exists for Cape_Cod) Idea? 
+
+ 
+
+- I added the use of two new libraries: 
+
+    * libjpeg (http://www.ijg.org/) for reading JPEG
+
+    * CGAL (http://www.cgal.org/) for 3D triangulation of wind data.
+
+It will thus be necessary to update the procedure of compilation. Jan ?
+
+ 
+
+I pushed source and data file on Berlios. It will be well to remove the
+large files xxx.rgb en scnery/Brie. Jens ?
+
+ 
+
+Jo?l
+
+ 
+
+ 
+
+ 
+
+ 
+
+panorama scenery
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20090111/6ea62b46/attachment.html>
+
+From jens_w2 at gmx.net  Mon Jan 12 20:16:26 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Mon, 12 Jan 2009 20:16:26 +0100
+Subject: [Crrcsim-devel] panorama scenery
+In-Reply-To: <E46E6C3AED1040E1A34C52A2C4B0340B@PCdeJol>
+References: <E46E6C3AED1040E1A34C52A2C4B0340B@PCdeJol>
+Message-ID: <20090112191626.GA5207@localhost>
+
+Hi Jo?l,
+
+>  - The importation of the wind is a little slow. The current file is
+> unnecessarily large but in 3D it will be necessarily large. This slowness
+> does not seem to me really awkward but it would be useful to post a window
+> of waiting during the loading of scene. 
+
+> [..]
+
+> I pushed source and data file on Berlios. It will be well to remove the
+> large files xxx.rgb en scnery/Brie. Jens ?
+
+This is no good news after being offline for about eight weeks...but I'm
+back (some weeks of hard work and having no internet connection because of
+me moving, four weeks being on holiday) and got telephone and internet
+access just today. However, I won't have as much time to spend on CRRCSim as
+before anytime soon.
+
+Some thoughts and facts:
+ - every single dev should talk to other devs BEFORE adding big files to the
+   official repository. 
+   The recent additions made the whole history of CRRCSim (including every
+   revision of every single file) grow from 12MB to about 100MB by adding
+   twelve files which sum up to more than 100MB (yes, the whole repo is
+   smaller than one revision of just those files because it is compressed).
+   'hg' even issues a warning if one adds files as big as in this case, but
+   apparently it has been ignored.
+ - Even the addition of the 'unnecessarily large' wind data seems odd to me.
+   This data is used for a method which is not 'state of the art' (fixed
+   direction of wind) although another dev (Jan) already announced that he
+   has/has played with a method which might be used to calculate the windfield
+   of any terrain/wind direction.
+   So why pollute the official repo with such big and intermediate data?
+ - intermediate/highly experimental code versions should not be pushed to the
+   official repo. It is possible to make them available in some other way.
+ - it is hard(...impossible) to strip history from distributed repositories,
+   as they are distributed and one person is only able to strip his own
+   repos, but not those of other people -- so when they push back to the
+   official repo, the bad history may be back again
+ - rewriting history has unwanted side effects (lots of work, at least)
+ - Luckily not that much has happened and there is a little number of devs,
+   so one/I can create a line of development in the repo which does not include
+   the big files. But: 
+     1. without help of the berlios staff it is not possible
+        to strip the obsolete and big parts of the history. So we have to
+        live with big repos for some time and hope that noone will ever push
+        the unwanted history back to the official repo again
+     2. every dev who has pulled this obsolete history is requested (and
+        cannot be forced) to strip it from his own repo before pushing to 
+        the official repo        
+
+So lets see what I can do...
+
+hg co 33569991f606
+hg debugsetparents b5d92059e2b0
+
+...
+
+well, no, I've got better things to do.
+
+Jo?l, please do a 
+  hg co b5d92059e2b0
+and replay your changes (without the big files, please do think about the
+windfield thing, too), then push to the official repo again. It will have
+one more head then. 
+Contact berlios staff and request them to do a 
+  hg strip 33569991f606
+on our official repository to delete the unwanted line of development.
+
+not amused,
+Jens
+
+
+From jens_w2 at gmx.net  Mon Jan 12 20:28:51 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Mon, 12 Jan 2009 20:28:51 +0100
+Subject: [Crrcsim-devel] important repository maintenance request
+Message-ID: <20090112192851.GB5207@localhost>
+
+Hi,
+
+this is an important request which everyone who pulled from the official
+repository since 19.12.2008 (and who plans to push back to it) must follow
+in order to keep our (or his) repository small and clean:
+
+
+1. Hopefully you have not based any changeset on the changesets 33569991f606
+   or later. If this is the case, you must rebase them on b5d92059e2b0.
+
+2. Enable the mq extension for your installation of mercurial. In your
+   ~/.hgrc (or equivalent file on windows) there must be a line
+  +--------------------------------------------------------
+  | hgext.mq =
+  +--------------------------------------------------------
+   in the section '[extensions]'.
+
+3. Issue 'hg strip 33569991f606' on every single one of your CRRCSim
+   repositories, which will delete changeset 33569991f606 and what's derived
+   from it.
+
+Thanks,
+Jens
+
+
+From jan.reucker at web.de  Tue Jan 13 21:07:11 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Tue, 13 Jan 2009 21:07:11 +0100
+Subject: [Crrcsim-devel] important repository maintenance request
+In-Reply-To: <20090112192851.GB5207@localhost>
+References: <20090112192851.GB5207@localhost>
+Message-ID: <20090113210711.3d9bf4b9.jan.reucker@web.de>
+
+Am Mon, 12 Jan 2009 20:28:51 +0100 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> this is an important request which everyone who pulled from the official
+> repository since 19.12.2008 (and who plans to push back to it) must follow
+> in order to keep our (or his) repository small and clean:
+
+Done.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Tue Jan 13 21:19:45 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Tue, 13 Jan 2009 21:19:45 +0100
+Subject: [Crrcsim-devel] panorama scenery
+In-Reply-To: <20090112191626.GA5207@localhost>
+References: <E46E6C3AED1040E1A34C52A2C4B0340B@PCdeJol>
+	<20090112191626.GA5207@localhost>
+Message-ID: <20090113211945.0a49f5d7.jan.reucker@web.de>
+
+Am Mon, 12 Jan 2009 20:16:26 +0100 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> Jo?l, please do a 
+>   hg co b5d92059e2b0
+> and replay your changes (without the big files, please do think about the
+> windfield thing, too), then push to the official repo again. It will have
+> one more head then. 
+> Contact berlios staff and request them to do a 
+>   hg strip 33569991f606
+> on our official repository to delete the unwanted line of development.
+
+Hi,
+
+I guess this request to the berlios staff has to come from one of the
+project admins. I'll take care of this. Do I have to wait until Joel
+created the new head, or can I issue the request anytime? Maybe it would
+be better to wait until the BerliOS staff fixed this issue before
+pushing Joel's changes again.
+
+One more thing that I'd like to discuss before fixing re-pushing the
+changes: is CGAL really necessary for some windfield interpolation?
+I'd like to keep the dependencies of CRRCsim small. I've put some
+effort into removing the dependencies to GLUT to get rid of a library,
+so I'd really appreciate if everybody thinks carefully about the
+addition of new libraries. For me as a Linux user, it's usually easy
+to fulfill library dependencies, but on Windows it's usually a lot
+more work to download, compile and install extra dependencies.
+So if we only need a small amount of code from a huge lib, we should
+rather consider copying the code (if the license of the library
+permits this!!!) instead of adding new dependencies.
+
+But to judge this, I'd have to take a detailed look at Joel's
+additions first. Didn't have the time to do it yet.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Tue Jan 13 21:52:14 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Tue, 13 Jan 2009 21:52:14 +0100
+Subject: [Crrcsim-devel] panorama scenery
+In-Reply-To: <20090113211945.0a49f5d7.jan.reucker@web.de>
+References: <E46E6C3AED1040E1A34C52A2C4B0340B@PCdeJol>
+	<20090112191626.GA5207@localhost>
+	<20090113211945.0a49f5d7.jan.reucker@web.de>
+Message-ID: <20090113215214.7efade80.jan.reucker@web.de>
+
+Am Tue, 13 Jan 2009 21:19:45 +0100 schrieb Jan Reucker <jan.reucker at web.de>:
+
+> I guess this request to the berlios staff has to come from one of the
+> project admins. I'll take care of this. Do I have to wait until Joel
+> created the new head, or can I issue the request anytime? Maybe it would
+> be better to wait until the BerliOS staff fixed this issue before
+> pushing Joel's changes again.
+
+Update: I've issued a support request. You can track it here:
+
+https://developer.berlios.de/support/index.php?func=detailsupport&support_id=102877&group_id=1
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Tue Jan 13 21:53:22 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Tue, 13 Jan 2009 21:53:22 +0100
+Subject: [Crrcsim-devel] panorama scenery
+In-Reply-To: <20090113211945.0a49f5d7.jan.reucker@web.de>
+References: <E46E6C3AED1040E1A34C52A2C4B0340B@PCdeJol>
+	<20090112191626.GA5207@localhost>
+	<20090113211945.0a49f5d7.jan.reucker@web.de>
+Message-ID: <20090113205322.GA4500@localhost>
+
+Hi,
+
+> I guess this request to the berlios staff has to come from one of the
+> project admins. 
+Maybe you're right, yes.
+
+> Do I have to wait until Joel
+> created the new head, or can I issue the request anytime? 
+> Maybe it would
+> be better to wait until the BerliOS staff fixed this issue before
+> pushing Joel's changes again.
+The only thing which is important: noone should push the old code again
+after it has been deleted on berlios. Whether we do it before or after Joel
+has pushed his modified changes might not matter, as long as HE has a backup
+of his things. 
+So he should strip his personal repo after he did his modified changes.
+
+Jens
+
+
+From joel.lienard at free.fr  Thu Jan 15 17:09:50 2009
+From: joel.lienard at free.fr (=?iso-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Thu, 15 Jan 2009 17:09:50 +0100
+Subject: [Crrcsim-devel] panorama scenery
+In-Reply-To: <20090112192851.GB5207@localhost>
+References: <20090112192851.GB5207@localhost>
+Message-ID: <2B80DAF6564C428299D85DE99B046A93@PCdeJol>
+
+Firstly, I present to you my excuse for my awkwardness. I had not understood
+that the transfer of large data files increased in an irreversible way the
+size of the history of Mercurial. Thank you in Jens to have proposed a
+solution.
+
+I transferred my modifications again. Without any large data file. I put
+them on a personal site while waiting for a better solution. (See
+scenery/Brie/ReadMe.txt)
+
+Some comments on the solution chosen for the wind, in answer to the
+questions of Jan and Jens:
+
+- The quality of CRRCSIM is the realism of the fly. That is obtained by the
+use of external software of simulation (AVL). I aim to preserve this realism
+for the sites of slope soaring by the use of software of aerodynamic
+simulation of the slope. (http://jugiraud1.free.fr/brie.htm).
+
+- The problem is that the result of this simulation cannot be summarized by
+only some coefficients. It is necessary to cover the space of flight by data
+in 3 dimensions. To reduce the volume of these data, they are taken on a no
+uniform grid. But that complicates the retrieval the data close to a point
+of space. I noted that the interpolation is essential. To make this
+interpolation of no regular data, a good technique is to carry out a
+triangulation. The interpolation in a specified point then consists to seek
+the triangle containing this point and to interpolate the values of the tops
+linearly. (In 3D, the triangles become tetrahedrons.)
+
+- I thought of calculating the triangulation at the outside of CRRCSIM but
+that increases much the volume of the data file. I then found this library
+CGAL which makes very well the triangulation and the search for tetrahedron.
+The interface of the functions used is very simple (windata3D.cpp). It thus
+seems preferable to me to use this library rather than to "reinvent the
+wheel".
+I did not have any difficulty to install it under Windows and Msys (.
+/config; make).
+
+- To recopy only the useful parts? I can test but I fear that is not easy
+for CGAL. That is probably easier for libJPEG.
+
+- Note, I envisaged to be able to compile CRRCSIM without importation of the
+data of wind and thus without CGAL (see windata3D.h).
+
+
+Cordially,
+
+Jo?l
+
+
+
+From Chris at Chrisswift.eu  Fri Jan 16 02:22:05 2009
+From: Chris at Chrisswift.eu (Christopher Swift)
+Date: Fri, 16 Jan 2009 01:22:05 +0000
+Subject: [Crrcsim-devel] The debanisation of CRRCsim
+Message-ID: <1232068925.15630.16.camel@chris-laptop>
+
+Hello to the CRRCsim developers, Jan Kansky may have already told you
+that I have been in contact with him already if not I shall start from
+the top. My name is Chris and I am an Ubuntu developer in training who
+has accepted the task of packaging your application for usage in the
+Ubuntu repositories which will later be ported over to the Debian ones.
+There is however a minor problem with the source tarball of your
+application regarding the packaging process. Both the Ubuntu & Debian
+archives are very strict on maintaining copyrights to the respectful
+owners, that is where the issue comes into place with this project.
+Unfortunately their policy requires that each individual source-code
+file, .cpp, .h & even .xml in the project has a header containing the
+copyright holder of the file and the license of it, note that a single
+file can have many copyright holders and multiple different files can
+have different licenses all within the same project.
+
+Ideally for the project to be included, what we are looking for is to
+have a licence header, just like the source-codes under /chardevice.
+This will enable us to get around the legalities of including your
+software in our mirrors. Here is a copy of what we, the Ubuntu/Debian
+packagers are meant to write in each package as an example (note that
+this one was written by my Ubuntu developer mentor):
+http://packages.debian.org/changelogs/pool/main/k/kde-style-domino/current/copyright
+
+As you can see, there are two licenses, the GPLv2 and the GPLv3 in that
+project as well as having multiple copyright owners over multiple
+directories. If possible could you release a new upstream tarball with
+the respected copyright clearly shown in each source-file. If you have
+any questions at all, please feel free to email me back directly or
+through this mailing list.
+
+Thanks for your time for reading this,
+Chris.
+-- 
+Christopher Swift <Chris at Chrisswift.eu>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 197 bytes
+Desc: This is a digitally signed message part
+URL: <https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20090116/4350c37b/attachment.pgp>
+
+From jan.reucker at web.de  Sat Jan 17 13:06:36 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sat, 17 Jan 2009 13:06:36 +0100
+Subject: [Crrcsim-devel] The debanisation of CRRCsim
+In-Reply-To: <1232068925.15630.16.camel@chris-laptop>
+References: <1232068925.15630.16.camel@chris-laptop>
+Message-ID: <20090117130636.140c73d1.jan.reucker@web.de>
+
+Am Fri, 16 Jan 2009 01:22:05 +0000 schrieb Christopher Swift <Chris at Chrisswift.eu>:
+
+> Hello to the CRRCsim developers, Jan Kansky may have already told you
+> that I have been in contact with him already if not I shall start from
+> the top. My name is Chris and I am an Ubuntu developer in training who
+> has accepted the task of packaging your application for usage in the
+> Ubuntu repositories which will later be ported over to the Debian ones.
+
+Hi Chris,
+
+welcome to the CRRCsim community! Being an Ubuntu (and former Debian) user
+myself, I really appreciate your plans to debianize CRRCsim.
+
+Most files in CRRCsim are released under the GPL v2, I guess that
+mod_chardevice is the only exception. It's no problem to add license
+headers to those files who are missing a proper header.
+
+What's the minimum content of this header? Is it sufficient to name
+the original author of the file and that the file is licensed under
+GNU GPLv2? Here's a proposal:
+
+/** 
+ *  CRRCsim, the Charles River Radio Control Club Flight Simulator Project
+ *
+ *  \file crrc_system.cpp
+ *
+ *  This file contains some platform-specific stuff for
+ *  system interaction.
+ *
+ *  Copyright:
+ *    (C) 2005 Jan Reucker <slowhand_47 at gmx.de>
+ *
+ *  This file is licensed under the GNU GPLv2. You should have received a
+ *  copy of this license with this source package (file COPYING).
+ */
+
+What do you think?
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Sat Jan 17 13:24:12 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sat, 17 Jan 2009 13:24:12 +0100
+Subject: [Crrcsim-devel] panorama scenery
+In-Reply-To: <2B80DAF6564C428299D85DE99B046A93@PCdeJol>
+References: <20090112192851.GB5207@localhost>
+	<2B80DAF6564C428299D85DE99B046A93@PCdeJol>
+Message-ID: <20090117132412.7a7c367e.jan.reucker@web.de>
+
+Am Thu, 15 Jan 2009 17:09:50 +0100 schrieb Jo?l Li?nard <joel.lienard at free.fr>:
+
+> Firstly, I present to you my excuse for my awkwardness. I had not understood
+> that the transfer of large data files increased in an irreversible way the
+> size of the history of Mercurial.
+
+No problem. It's one of the major features of DVCS systems compared to
+classical VCS systems that you always have the whole repo history
+side-by-side with your local working copy. But this puts a lot of
+responsibility on the shoulders of each developer.
+ 
+> - The quality of CRRCSIM is the realism of the fly. That is obtained by the
+> use of external software of simulation (AVL). I aim to preserve this realism
+> for the sites of slope soaring by the use of software of aerodynamic
+> simulation of the slope. (http://jugiraud1.free.fr/brie.htm).
+
+You're right, CRRCsim is all about realism. Therefore it's o.k. to have
+the option to include realistic wind data. But I think it's quite
+impractical to generate this wind data for each scenery and for each
+wind direction. We should think about a way to integrate different
+wind calculation methods and configure it through the scenery files.
+
+> - I thought of calculating the triangulation at the outside of CRRCSIM but
+> that increases much the volume of the data file. I then found this library
+> CGAL which makes very well the triangulation and the search for tetrahedron.
+> The interface of the functions used is very simple (windata3D.cpp). It thus
+> seems preferable to me to use this library rather than to "reinvent the
+> wheel".
+> I did not have any difficulty to install it under Windows and Msys (.
+> /config; make).
+
+O.k., if the data is not evenly distributed, I agree that interpolation is
+a lot more complicated than with data distributed on a 2D/3D grid.
+
+On my Ubuntu system, installing libcgal2 pulled in the following dependencies,
+summing up to 274 MB of hard disc space.
+
+  libatlas-base-dev libatlas-headers libatlas3gf-base libblas-dev
+  libboost-date-time-dev libboost-date-time1.34.1 libboost-dev libboost-doc
+  libboost-filesystem-dev libboost-filesystem1.34.1 libboost-graph-dev
+  libboost-graph1.34.1 libboost-iostreams-dev libboost-iostreams1.34.1
+  libboost-program-options-dev libboost-program-options1.34.1
+  libboost-python-dev libboost-python1.34.1 libboost-regex-dev
+  libboost-regex1.34.1 libboost-serialization-dev libboost-serialization1.34.1
+  libboost-signals-dev libboost-signals1.34.1 libboost-test-dev
+  libboost-test1.34.1 libboost-thread-dev libboost-thread1.34.1
+  libboost-wave-dev libboost-wave1.34.1 libcgal-dev libcgal2 libgmp3-dev
+  libgmpxx4ldbl libicu-dev liblapack-dev libmpfr-dev
+0 aktualisiert, 37 neu installiert, 0 zu entfernen und 0 nicht aktualisiert.
+Es m?ssen 55,9MB an Archiven heruntergeladen werden.
+Nach dieser Operation werden 274MB Plattenplatz zus?tzlich benutzt.
+
+I guess we should find a way to make libcgal optional. And we need to
+integrate it in the automake process. Right now, ./configure does not
+search for libcgal and therefore doesn't do its job, because if
+libcgal is not installed, the CRRCsim build fails although ./configure
+did not report any errors.
+
+> - Note, I envisaged to be able to compile CRRCSIM without importation of the
+> data of wind and thus without CGAL (see windata3D.h).
+
+Then this #define has to be in crrc_config.h, and must be determined
+by ./configure. I'll see what I can do.
+
+And libjpeg should also be detected by ./configure....
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From Chris at Chrisswift.eu  Sat Jan 17 18:44:08 2009
+From: Chris at Chrisswift.eu (Christopher Swift)
+Date: Sat, 17 Jan 2009 17:44:08 +0000
+Subject: [Crrcsim-devel] Fwd:  The debanisation of CRRCsim
+In-Reply-To: <57c30d030901170938i390762bdsddd31d635cfd0ede@mail.gmail.com>
+References: <1232068925.15630.16.camel@chris-laptop>
+	<20090117130636.140c73d1.jan.reucker@web.de>
+	<57c30d030901170938i390762bdsddd31d635cfd0ede@mail.gmail.com>
+Message-ID: <57c30d030901170944p6df3a8c6r2b04f959d92dc7f3@mail.gmail.com>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hopefully I'm trying to get some headers similar to this (if it was GPL v2):
+/*
+ * App name - Short Description of App
+ * Copyright (C) 200x - Author
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
+You don't require the _full_ license on each file, just a shortened
+one like the one above. In the debian/copyright file I will have
+listed a place on the user's system where they can find the licences,
+/usr/share/common-licenses/GPL. As long as each sourcefile has some
+sort of header with the date of copyright, author & license it
+should be OK! Other than that, a new tarball will be required but it
+doesn't need to be a new version of the software. Just repackage the
+original one and place it on the SF.net download page. Other than
+that, I have to write-up a manpage for the project. When I have
+finished this manpage, I shall forward back upstream to you if you
+wish to include it in your project.
+
+Regards,
+Chris.
+
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: http://getfiregpg.org
+
+iEYEARECAAYFAklyF5MACgkQYckxdhCgq45ZIwCff2TgEA4Z0GthfHMgygwZT/TQ
+YskAnisMQGwuYhwuT0ehGk7U/qgeu+i1
+=CpzA
+-----END PGP SIGNATURE-----
+
+On Sat, Jan 17, 2009 at 12:06 PM, Jan Reucker <jan.reucker at web.de> wrote:
+
+> Am Fri, 16 Jan 2009 01:22:05 +0000 schrieb Christopher Swift
+> <Chris at Chrisswift.eu>:
+>
+> > Hello to the CRRCsim developers, Jan Kansky may have already told you
+> > that I have been in contact with him already if not I shall start from
+> > the top. My name is Chris and I am an Ubuntu developer in training who
+> > has accepted the task of packaging your application for usage in the
+> > Ubuntu repositories which will later be ported over to the Debian ones.
+>
+> Hi Chris,
+>
+> welcome to the CRRCsim community! Being an Ubuntu (and former Debian) user
+> myself, I really appreciate your plans to debianize CRRCsim.
+>
+> Most files in CRRCsim are released under the GPL v2, I guess that
+> mod_chardevice is the only exception. It's no problem to add license
+> headers to those files who are missing a proper header.
+>
+> What's the minimum content of this header? Is it sufficient to name
+> the original author of the file and that the file is licensed under
+> GNU GPLv2? Here's a proposal:
+>
+> /**
+>  *  CRRCsim, the Charles River Radio Control Club Flight Simulator Project
+>  *
+>  *  \file crrc_system.cpp
+>  *
+>  *  This file contains some platform-specific stuff for
+>  *  system interaction.
+>  *
+>  *  Copyright:
+>  *    (C) 2005 Jan Reucker <slowhand_47 at gmx.de>
+>  *
+>  *  This file is licensed under the GNU GPLv2. You should have received a
+>  *  copy of this license with this source package (file COPYING).
+>  */
+>
+> What do you think?
+>
+> Kind regards,
+> Jan R.
+>
+> --
+> Jan Reucker
+> Ober-Ramstadt, Germany
+> PGP-Key: http://www.reucker-online.de/pgpkey.asc
+> _______________________________________________
+> Crrcsim-devel mailing list
+> Crrcsim-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20090117/61a0d2ad/attachment.html>
+
+From jan.reucker at web.de  Sat Jan 17 18:58:49 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sat, 17 Jan 2009 18:58:49 +0100
+Subject: [Crrcsim-devel] Fwd:  The debanisation of CRRCsim
+In-Reply-To: <57c30d030901170944p6df3a8c6r2b04f959d92dc7f3@mail.gmail.com>
+References: <1232068925.15630.16.camel@chris-laptop>
+	<20090117130636.140c73d1.jan.reucker@web.de>
+	<57c30d030901170938i390762bdsddd31d635cfd0ede@mail.gmail.com>
+	<57c30d030901170944p6df3a8c6r2b04f959d92dc7f3@mail.gmail.com>
+Message-ID: <20090117185849.af951285.jan.reucker@web.de>
+
+Am Sat, 17 Jan 2009 17:44:08 +0000 schrieb "Christopher Swift" <Chris at Chrisswift.eu>:
+
+> You don't require the _full_ license on each file, just a shortened
+> one like the one above. In the debian/copyright file I will have
+
+That's ok for me. I'll merge that into my header proposal.
+
+> original one and place it on the SF.net download page. Other than
+> that, I have to write-up a manpage for the project. When I have
+> finished this manpage, I shall forward back upstream to you if you
+> wish to include it in your project.
+
+Wait! The repository already contains a man page, but it has been added
+after the 0.9.9 tarball.
+
+You can get it here:
+http://hg.berlios.de/repos/crrcsim/raw-file/c0820cd28e4d/documentation/man/crrcsim.1
+
+A tarball of the latest repository tip is here:
+http://hg.berlios.de/repos/crrcsim/archive/tip.tar.gz
+
+It needs some minor fixes, then we can create a new 0.9.10 tarball. I'm
+currently ironing out some build system issues that were introduced
+by the last commits.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Sat Jan 17 22:09:54 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sat, 17 Jan 2009 22:09:54 +0100
+Subject: [Crrcsim-devel] panorama scenery
+In-Reply-To: <20090117132412.7a7c367e.jan.reucker@web.de>
+References: <20090112192851.GB5207@localhost>
+	<2B80DAF6564C428299D85DE99B046A93@PCdeJol>
+	<20090117132412.7a7c367e.jan.reucker@web.de>
+Message-ID: <20090117220954.31fa2bab.jan.reucker@web.de>
+
+Am Sat, 17 Jan 2009 13:24:12 +0100 schrieb Jan Reucker <jan.reucker at web.de>:
+
+> > - Note, I envisaged to be able to compile CRRCSIM without importation of the
+> > data of wind and thus without CGAL (see windata3D.h).
+
+Please note that it only compiled, but did not link without CGAL (-lCGAL was
+always present in Makefile.am).
+ 
+> Then this #define has to be in crrc_config.h, and must be determined
+> by ./configure. I'll see what I can do.
+> And libjpeg should also be detected by ./configure....
+
+This should work now. I've just pushed two changesets with a g++ 4.3.2 compile
+error fix and an extended configure.ac that should detect CGAL and check for
+libjpeg. I still have to test it on a system that doesn't have these libs
+installed (will do this on my Windows box, maybe tomorrow).
+
+If you extend your wind simulation, please use
+
+#if WINDDATA3D == 1
+
+instead of 
+
+#ifdef WINDDATA3D
+
+and include <crrc_config.h> as the first header file in every .cpp file that
+uses this macro. Don't include crrc_config.h into ANY header file! The macros
+will automatically be present in all header files that are included after
+crrc_config.h, so just make sure it's the first included header in any .cpp file.
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Sun Jan 18 11:29:52 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sun, 18 Jan 2009 11:29:52 +0100
+Subject: [Crrcsim-devel] Fwd:  The debanisation of CRRCsim
+In-Reply-To: <20090117185849.af951285.jan.reucker@web.de>
+References: <1232068925.15630.16.camel@chris-laptop>
+	<20090117130636.140c73d1.jan.reucker@web.de>
+	<57c30d030901170938i390762bdsddd31d635cfd0ede@mail.gmail.com>
+	<57c30d030901170944p6df3a8c6r2b04f959d92dc7f3@mail.gmail.com>
+	<20090117185849.af951285.jan.reucker@web.de>
+Message-ID: <20090118112952.0c25c0b2.jan.reucker@web.de>
+
+Am Sat, 17 Jan 2009 18:58:49 +0100 schrieb Jan Reucker <jan.reucker at web.de>:
+
+> Am Sat, 17 Jan 2009 17:44:08 +0000 schrieb "Christopher Swift" <Chris at Chrisswift.eu>:
+> 
+> > You don't require the _full_ license on each file, just a shortened
+> > one like the one above. In the debian/copyright file I will have
+> 
+> That's ok for me. I'll merge that into my header proposal.
+
+One more question: in your proposal, the copyright notice is located
+right below the program title. Is there something like a "global"
+copyright for the whole program (held by Jan Kansky as the original
+author) and individual copyrights for later contributions? In
+this case I'd split the header into a unified "legal notice" and
+a file-specific header that uses Doxygen syntax:
+
+/*
+ * CRRCsim - the Charles River Radio Control Club Flight Simulator Project
+ * Copyright (C) 2000 - Jan Kansky
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330,
+ * Boston, MA 02111-1307, USA.
+ *
+ */
+/** \file crrc_system.cpp
+ *
+ *  This file contains some platform-specific stuff for
+ *  system interaction.
+ *
+ *  Copyright:
+ *    (C) 2005 Jan Reucker <slowhand_47 at gmx.de>
+ *
+ */
+
+
+Kind regards,
+Jan R.
+
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From joel.lienard at free.fr  Sun Jan 18 14:08:41 2009
+From: joel.lienard at free.fr (=?iso-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Sun, 18 Jan 2009 14:08:41 +0100
+Subject: [Crrcsim-devel] panorama scenery
+In-Reply-To: <20090117220954.31fa2bab.jan.reucker@web.de>
+References: <20090112192851.GB5207@localhost><2B80DAF6564C428299D85DE99B046A93@PCdeJol><20090117132412.7a7c367e.jan.reucker@web.de>
+	<20090117220954.31fa2bab.jan.reucker@web.de>
+Message-ID: <8B0E868DD53D4B03A34D93228095D112@PCdeJol>
+
+
+Hello Jan
+
+> This should work now. I've just pushed two changesets with a g++ 4.3.2 
+> compile error fix and an extended configure.ac that should detect CGAL and
+> check for libjpeg. I still have to test it on a system that doesn't have
+> these libs installed (will do this on my Windows box, maybe tomorrow).
+
+
+I pulled a new clone.
+./configure ; make is OK on my computer (Windows, msys)
+
+> But I think it's quite impractical to generate this wind data for each
+> scenery and for each wind direction. We should think about a way to
+> integrate different wind calculation methods and configure it through
+> the scenery files.
+
+I am completely OK. It is necessary to supplement ModelBasedScenery::
+getWindComponents to have a default method of calculating the wind vertical
+component. You said to have a proposal for that?
+
+Cordially
+
+Jo?l
+
+
+
+From Chris at Chrisswift.eu  Wed Jan 21 00:45:49 2009
+From: Chris at Chrisswift.eu (Christopher Swift)
+Date: Tue, 20 Jan 2009 23:45:49 +0000
+Subject: [Crrcsim-devel] Fwd: The debanisation of CRRCsim
+In-Reply-To: <57c30d030901181121h265bbebft80f124d689dcf69f@mail.gmail.com>
+References: <1232068925.15630.16.camel@chris-laptop>
+	<20090117130636.140c73d1.jan.reucker@web.de>
+	<57c30d030901170938i390762bdsddd31d635cfd0ede@mail.gmail.com>
+	<57c30d030901170944p6df3a8c6r2b04f959d92dc7f3@mail.gmail.com>
+	<20090117185849.af951285.jan.reucker@web.de>
+	<20090118112952.0c25c0b2.jan.reucker@web.de>
+	<57c30d030901181109g67552150xa02387569c3f0e6f@mail.gmail.com>
+	<57c30d030901181121h265bbebft80f124d689dcf69f@mail.gmail.com>
+Message-ID: <57c30d030901201545u4a78a401k8f14993396e7088@mail.gmail.com>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+To answer your question, each file that Jan Kansky has authored,
+should contain his original copyright and name in the header and any
+later contributions should be listed below him with the year of
+
+contributing also. So for example:
+/*
+....
+* Copyright (C) 2000 - Jan Kansky
+* Copyright (C) 2005 - Jan Reucker, Philip Morris
+* Copyright (C) 2008 - Fredrick Peterson
+....
+*/
+
+The above shows that the parts added by Fredrick in 2008 as
+
+copyrighted under whatever license (probably GPL) as well as
+originally being owned by Jan Kansky in 2000. As long as the
+contributions follow the same license as the original file, there is
+usually no issue at all regarding the copyrighting. I hope that this
+
+helps. Also if you are going to repack the 0.9.9 tarball, could you
+include the manpage and updated copyright headers otherwise I can wait
+for 0.9.10 if that is what you wanted. Either way I'll try and package
+
+it ready for Jaunty (the next Ubuntu version).
+
+Regards,
+Chris.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: http://getfiregpg.org
+
+iEYEARECAAYFAkl2Yh0ACgkQYckxdhCgq46VxgCeOMD1K3MaDfguEhwgQ+m2JZYM
+TKsAn2pJerw5/3OzfQfJCvHDhj0cCOEz
+=hXTn
+-----END PGP SIGNATURE-----
+
+
+On Sun, Jan 18, 2009 at 7:21 PM, Christopher Swift <
+chris.r.swift at googlemail.com> wrote:
+
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> To answer your question, each file that Jan Kansky has authored,
+> should contain his original copyright and name in the header and any
+> later contributions should be listed below him with the year of
+> contributing also. So for example:
+> /*
+> ....
+> * Copyright (C) 2000 - Jan Kansky
+> * Copyright (C) 2005 - Jan Reucker, Philip Morris
+> * Copyright (C) 2008 - Fredrick Peterson
+> ....
+> */
+>
+> The above shows that the parts added by Fredrick in 2008 as
+> copyrighted under whatever license (probably GPL) as well as
+> originally being owned by Jan Kansky in 2000. As long as the
+> contributions follow the same license as the original file, there is
+> usually no issue at all regarding the copyrighting. I hope that this
+> helps. Also if you are going to repack the 0.9.9 tarball, could you
+> include the manpage and updated copyright headers otherwise I can wait
+> for 0.9.10 if that is what you wanted. Either way I'll try and package
+> it ready for Jaunty (the next Ubuntu version).
+>
+> Regards,
+> Chris.
+>
+>
+> On Sun, Jan 18, 2009 at 10:29 AM, Jan Reucker <jan.reucker at web.de> wrote:
+> Am Sat, 17 Jan 2009 18:58:49 +0100 schrieb Jan Reucker <jan.reucker at web.de
+> >:
+>
+> > Am Sat, 17 Jan 2009 17:44:08 +0000 schrieb "Christopher Swift"
+> <Chris at Chrisswift.eu>:
+> >
+> > > You don't require the _full_ license on each file, just a shortened
+> > > one like the one above. In the debian/copyright file I will have
+> >
+> > That's ok for me. I'll merge that into my header proposal.
+>
+> One more question: in your proposal, the copyright notice is located
+> right below the program title. Is there something like a "global"
+> copyright for the whole program (held by Jan Kansky as the original
+> author) and individual copyrights for later contributions? In
+> this case I'd split the header into a unified "legal notice" and
+> a file-specific header that uses Doxygen syntax:
+>
+> /*
+>  * CRRCsim - the Charles River Radio Control Club Flight Simulator Project
+>  * Copyright (C) 2000 - Jan Kansky
+>  *
+>  * This program is free software; you can redistribute it and/or modify
+>  * it under the terms of the GNU General Public License as published by
+>  * the Free Software Foundation; either version 2 of the License, or
+>  * (at your option) any later version.
+>  *
+>  * This program is distributed in the hope that it will be useful,
+>  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+>  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+>  * GNU General Public License for more details.
+>  *
+>  * You should have received a copy of the GNU General Public License
+>  * along with this program; if not, write to the Free Software
+>  * Foundation, Inc., 59 Temple Place, Suite 330,
+>  * Boston, MA 02111-1307, USA.
+>  *
+>  */
+> /** \file crrc_system.cpp
+>  *
+>  *  This file contains some platform-specific stuff for
+>  *  system interaction.
+>  *
+>  *  Copyright:
+>  *    (C) 2005 Jan Reucker <slowhand_47 at gmx.de>
+>  *
+>  */
+>
+>
+> Kind regards,
+> Jan R.
+>
+>
+>
+> - --
+> Jan Reucker
+> Ober-Ramstadt, Germany
+> PGP-Key: http://www.reucker-online.de/pgpkey.asc
+> _______________________________________________
+> Crrcsim-devel mailing list
+> Crrcsim-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+>
+>
+>
+>
+>
+>
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.9 (GNU/Linux)
+> Comment: http://getfiregpg.org
+>
+> iEYEARECAAYFAklzgUYACgkQYckxdhCgq46UfwCfWiseOfniKj5iYy3hN904UNRq
+> vWIAn1nlfbvj2j3KleZkn0+ZbGylzYlN
+> =ESOC
+> -----END PGP SIGNATURE-----
+>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20090120/0955b2ba/attachment.html>
+
+From jens_w2 at gmx.net  Wed Jan 21 18:29:13 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Wed, 21 Jan 2009 18:29:13 +0100
+Subject: [Crrcsim-devel] copyright header, was: The debanisation of CRRCsim
+In-Reply-To: <20090118112952.0c25c0b2.jan.reucker@web.de>
+References: <1232068925.15630.16.camel@chris-laptop>
+	<20090117130636.140c73d1.jan.reucker@web.de>
+	<57c30d030901170938i390762bdsddd31d635cfd0ede@mail.gmail.com>
+	<57c30d030901170944p6df3a8c6r2b04f959d92dc7f3@mail.gmail.com>
+	<20090117185849.af951285.jan.reucker@web.de>
+	<20090118112952.0c25c0b2.jan.reucker@web.de>
+Message-ID: <20090121172913.GA4716@localhost>
+
+Hi, 
+
+so if I understood Christopher correctly, it is fine to use a header like
+this:
+
+/*
+ * CRRCsim - the Charles River Radio Control Club Flight Simulator Project
+ * Copyright (C) 2000 - Jan Kansky
+ * Copyright (C) year - name
+ * Copyright (C) year - name
+ * ...
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330,
+ * Boston, MA 02111-1307, USA.
+ *
+ */
+
+I will not use the ', or (at your option) any later version' part in the
+files originally created by me, though. No matter how trustworthy the FSF
+is, I'm not gonna sign a blank future contract.
+
+Apart from this, can we agree on this header? It's the one suggested by Jan
+Reucker, but using the author indication as suggested by Christopher.
+
+Saturday or sunday I'd like to start adding the header to the files created
+by me (adding the names of those who edited them afterwards) and adding
+appropriate headers to all those files which I created while doing those big
+refactorings.
+
+If I add a header, but it is unfinished, I'll add the keyword
+'copyrighttodo_jw' to it.
+
+Here is a shellscript which lists dates and contributors to every file in
+the current directory (glad to have hg again):
+
+  +--------------------------------------------------------
+  | #! /bin/sh
+  | 
+  | for n in *
+  |   do
+  |      if test -f $n
+  |        then
+  |          echo $n
+  |          hg log -f -l 9999 --template "   {date|shortdate} {author|user}\n" $n
+  |      fi
+  | done
+  +--------------------------------------------------------
+
+
+
+Best regards,
+Jens
+
+PS: I'm happy to see that the berlios staff stripped the big changesets and
+that they didn't reappear until now!
+
+
+From Chris at Chrisswift.eu  Wed Jan 21 19:13:14 2009
+From: Chris at Chrisswift.eu (Christopher Swift)
+Date: Wed, 21 Jan 2009 18:13:14 +0000
+Subject: [Crrcsim-devel]  copyright header, was: The debanisation of CRRCsim
+In-Reply-To: <57c30d030901211012l1c8a0fa9g9f1780abfeb32d81@mail.gmail.com>
+References: <1232068925.15630.16.camel@chris-laptop>
+	<20090117130636.140c73d1.jan.reucker@web.de>
+	<57c30d030901170938i390762bdsddd31d635cfd0ede@mail.gmail.com>
+	<57c30d030901170944p6df3a8c6r2b04f959d92dc7f3@mail.gmail.com>
+	<20090117185849.af951285.jan.reucker@web.de>
+	<20090118112952.0c25c0b2.jan.reucker@web.de>
+	<20090121172913.GA4716@localhost>
+	<57c30d030901211012l1c8a0fa9g9f1780abfeb32d81@mail.gmail.com>
+Message-ID: <57c30d030901211013m11766c84r6a2d7b956a6d832d@mail.gmail.com>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Yeah that would be perfect the header template. Sorry however about the
+mailings going all over the place, I've recently changed my email domain to
+be used with gmail and it's taking some time to configure 100% properly. It
+is allowed IIRC to remove "or at your option a later version" since you are
+specifically stating that your license being used is still GPL v2 but you
+don't want to be upgraded just yet. I can't wait to start packaging it. Also
+if you are going to repackage the tarball, could you include your manpage in
+there too to the current version. Other than that it looks great and
+hopefully it'll be ready in time for Jaunty :).
+
+Regards,
+Chris.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: http://getfiregpg.org
+
+iEYEARECAAYFAkl3ZZQACgkQYckxdhCgq47HMACfeXQWMCxY1e1bXCUGt5o08lsI
+39IAn2qC6Z3MUC4GD8tfteQaL24ylOo9
+=FLRX
+-----END PGP SIGNATURE-----
+
+
+
+On Wed, Jan 21, 2009 at 5:29 PM, Jens Wilhelm Wulf <jens_w2 at gmx.net> wrote:
+
+> Hi,
+>
+> so if I understood Christopher correctly, it is fine to use a header like
+> this:
+>
+> /*
+>  * CRRCsim - the Charles River Radio Control Club Flight Simulator Project
+>  * Copyright (C) 2000 - Jan Kansky
+>  * Copyright (C) year - name
+>  * Copyright (C) year - name
+>  * ...
+>  *
+>  * This program is free software; you can redistribute it and/or modify
+>  * it under the terms of the GNU General Public License as published by
+>  * the Free Software Foundation; either version 2 of the License, or
+>  * (at your option) any later version.
+>  *
+>  * This program is distributed in the hope that it will be useful,
+>  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+>  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+>  * GNU General Public License for more details.
+>  *
+>  * You should have received a copy of the GNU General Public License
+>  * along with this program; if not, write to the Free Software
+>  * Foundation, Inc., 59 Temple Place, Suite 330,
+>  * Boston, MA 02111-1307, USA.
+>  *
+>  */
+>
+> I will not use the ', or (at your option) any later version' part in the
+> files originally created by me, though. No matter how trustworthy the FSF
+> is, I'm not gonna sign a blank future contract.
+>
+> Apart from this, can we agree on this header? It's the one suggested by Jan
+> Reucker, but using the author indication as suggested by Christopher.
+>
+> Saturday or sunday I'd like to start adding the header to the files created
+> by me (adding the names of those who edited them afterwards) and adding
+> appropriate headers to all those files which I created while doing those
+> big
+> refactorings.
+>
+> If I add a header, but it is unfinished, I'll add the keyword
+> 'copyrighttodo_jw' to it.
+>
+> Here is a shellscript which lists dates and contributors to every file in
+> the current directory (glad to have hg again):
+>
+>  +--------------------------------------------------------
+>  | #! /bin/sh
+>  |
+>  | for n in *
+>  |   do
+>  |      if test -f $n
+>  |        then
+>  |          echo $n
+>  |          hg log -f -l 9999 --template "   {date|shortdate}
+> {author|user}\n" $n
+>  |      fi
+>  | done
+>  +--------------------------------------------------------
+>
+>
+>
+> Best regards,
+> Jens
+>
+> PS: I'm happy to see that the berlios staff stripped the big changesets and
+> that they didn't reappear until now!
+> _______________________________________________
+> Crrcsim-devel mailing list
+> Crrcsim-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20090121/2dc586c9/attachment.html>
+
+From jan.reucker at web.de  Wed Jan 21 21:31:49 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Wed, 21 Jan 2009 21:31:49 +0100
+Subject: [Crrcsim-devel] panorama scenery
+In-Reply-To: <8B0E868DD53D4B03A34D93228095D112@PCdeJol>
+References: <20090112192851.GB5207@localhost>
+	<2B80DAF6564C428299D85DE99B046A93@PCdeJol>
+	<20090117132412.7a7c367e.jan.reucker@web.de>
+	<20090117220954.31fa2bab.jan.reucker@web.de>
+	<8B0E868DD53D4B03A34D93228095D112@PCdeJol>
+Message-ID: <20090121213149.88d1d189.jan.reucker@web.de>
+
+Am Sun, 18 Jan 2009 14:08:41 +0100 schrieb Jo?l Li?nard <joel.lienard at free.fr>:
+
+> I am completely OK. It is necessary to supplement ModelBasedScenery::
+> getWindComponents to have a default method of calculating the wind vertical
+> component. You said to have a proposal for that?
+
+Hi Joel,
+
+yes, I wrote some code to generate a wind field and used gnuplot to
+visualize the resulting wind vectors. Looked quite o.k. to me:
+
+http://crrcsim.berlios.de/wiki/index.php?n=CRRCsim.RedesignWindfield
+
+I still have to integrate this code into CRRCsim, but I think I'll focus
+on the Ubuntu packaging right now, which requires some bug fixing and
+pushing a 0.9.10 release.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Wed Jan 21 21:38:58 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Wed, 21 Jan 2009 21:38:58 +0100
+Subject: [Crrcsim-devel] copyright header,
+ was: The debanisation of CRRCsim
+In-Reply-To: <57c30d030901211013m11766c84r6a2d7b956a6d832d@mail.gmail.com>
+References: <1232068925.15630.16.camel@chris-laptop>
+	<20090117130636.140c73d1.jan.reucker@web.de>
+	<57c30d030901170938i390762bdsddd31d635cfd0ede@mail.gmail.com>
+	<57c30d030901170944p6df3a8c6r2b04f959d92dc7f3@mail.gmail.com>
+	<20090117185849.af951285.jan.reucker@web.de>
+	<20090118112952.0c25c0b2.jan.reucker@web.de>
+	<20090121172913.GA4716@localhost>
+	<57c30d030901211012l1c8a0fa9g9f1780abfeb32d81@mail.gmail.com>
+	<57c30d030901211013m11766c84r6a2d7b956a6d832d@mail.gmail.com>
+Message-ID: <20090121213858.94f7e01d.jan.reucker@web.de>
+
+Am Wed, 21 Jan 2009 18:13:14 +0000 schrieb Christopher Swift <Chris at Chrisswift.eu>:
+
+> Yeah that would be perfect the header template. Sorry however about the
+> mailings going all over the place, I've recently changed my email domain to
+> be used with gmail and it's taking some time to configure 100% properly. It
+> is allowed IIRC to remove "or at your option a later version" since you are
+> specifically stating that your license being used is still GPL v2 but you
+> don't want to be upgraded just yet. I can't wait to start packaging it. Also
+> if you are going to repackage the tarball, could you include your manpage in
+> there too to the current version. Other than that it looks great and
+> hopefully it'll be ready in time for Jaunty :).
+
+Hi Chris,
+
+repackaging is a bad option, because we changed our version control system
+since 0.9.9 and re-organized source files and file locations, so there's
+no simple way to merge changes back and forth between 0.9.9 and 0.9.10.
+I'd rather like to do all changes in 0.9.10 only, fix the one open bug
+reported for 0.9.10 and release this version ASAP. Then you can take
+this tarball to create a first version of your package. If we run into
+serious problems or discover new bugs, it's fine for me to release a
+0.9.11 or even more versions until Jaunty.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Wed Jan 21 21:47:03 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Wed, 21 Jan 2009 21:47:03 +0100
+Subject: [Crrcsim-devel] copyright header,
+ was: The debanisation of CRRCsim
+In-Reply-To: <20090121172913.GA4716@localhost>
+References: <1232068925.15630.16.camel@chris-laptop>
+	<20090117130636.140c73d1.jan.reucker@web.de>
+	<57c30d030901170938i390762bdsddd31d635cfd0ede@mail.gmail.com>
+	<57c30d030901170944p6df3a8c6r2b04f959d92dc7f3@mail.gmail.com>
+	<20090117185849.af951285.jan.reucker@web.de>
+	<20090118112952.0c25c0b2.jan.reucker@web.de>
+	<20090121172913.GA4716@localhost>
+Message-ID: <20090121214703.d49246a9.jan.reucker@web.de>
+
+Am Wed, 21 Jan 2009 18:29:13 +0100 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+Hi Jens!
+
+> I will not use the ', or (at your option) any later version' part in the
+> files originally created by me, though. No matter how trustworthy the FSF
+> is, I'm not gonna sign a blank future contract.
+
+You're right, we should stick with one version of the GPL.
+ 
+> Apart from this, can we agree on this header? It's the one suggested by Jan
+> Reucker, but using the author indication as suggested by Christopher.
+
+Absolutely o.k. for me.
+
+> Saturday or sunday I'd like to start adding the header to the files created
+> by me (adding the names of those who edited them afterwards) and adding
+> appropriate headers to all those files which I created while doing those big
+> refactorings.
+
+Good!
+
+> If I add a header, but it is unfinished, I'll add the keyword
+> 'copyrighttodo_jw' to it.
+> 
+> Here is a shellscript which lists dates and contributors to every file in
+> the current directory (glad to have hg again):
+
+Hehe, that's what I planned to do tonight. I thought I'd write a short perl
+script that sorts out the oldest contribution of each author and automatically
+outputs the header. But maybe that's over-engineered...
+
+Anyway, I'll start adding headers for "my" files later.
+
+> PS: I'm happy to see that the berlios staff stripped the big changesets and
+> that they didn't reappear until now!
+
+Dito.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Wed Jan 21 22:25:40 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Wed, 21 Jan 2009 22:25:40 +0100
+Subject: [Crrcsim-devel] copyright header,
+	was: The debanisation of CRRCsim
+In-Reply-To: <20090121214703.d49246a9.jan.reucker@web.de>
+References: <1232068925.15630.16.camel@chris-laptop>
+	<20090117130636.140c73d1.jan.reucker@web.de>
+	<57c30d030901170938i390762bdsddd31d635cfd0ede@mail.gmail.com>
+	<57c30d030901170944p6df3a8c6r2b04f959d92dc7f3@mail.gmail.com>
+	<20090117185849.af951285.jan.reucker@web.de>
+	<20090118112952.0c25c0b2.jan.reucker@web.de>
+	<20090121172913.GA4716@localhost>
+	<20090121214703.d49246a9.jan.reucker@web.de>
+Message-ID: <20090121212540.GA4470@localhost>
+
+> Hehe, that's what I planned to do tonight. I thought I'd write a short perl
+> script that sorts out the oldest contribution of each author and automatically
+> outputs the header. But maybe that's over-engineered...
+That's exactly what I started, but did not finish tonight because of an
+appointment: writing a script/program which automatically adds an header to
+a file. I guess it's worth doing it. Maybe tomorrow...
+
+Jens
+
+
+From Chris at Chrisswift.eu  Wed Jan 21 23:07:46 2009
+From: Chris at Chrisswift.eu (Christopher Swift)
+Date: Wed, 21 Jan 2009 22:07:46 +0000
+Subject: [Crrcsim-devel] copyright header,
+	was: The debanisation of 	CRRCsim
+In-Reply-To: <20090121213858.94f7e01d.jan.reucker@web.de>
+References: <1232068925.15630.16.camel@chris-laptop>
+	<20090117130636.140c73d1.jan.reucker@web.de>
+	<57c30d030901170938i390762bdsddd31d635cfd0ede@mail.gmail.com>
+	<57c30d030901170944p6df3a8c6r2b04f959d92dc7f3@mail.gmail.com>
+	<20090117185849.af951285.jan.reucker@web.de>
+	<20090118112952.0c25c0b2.jan.reucker@web.de>
+	<20090121172913.GA4716@localhost>
+	<57c30d030901211012l1c8a0fa9g9f1780abfeb32d81@mail.gmail.com>
+	<57c30d030901211013m11766c84r6a2d7b956a6d832d@mail.gmail.com>
+	<20090121213858.94f7e01d.jan.reucker@web.de>
+Message-ID: <57c30d030901211407o641123d2jb26eb932725101a5@mail.gmail.com>
+
+Its perfectly OK to wait until version 0.9.10 for the packaging and updated
+header files. In fact it would be better since then you can fix your only
+open bug that you have got. You can release as many versions to before
+Jaunty and I will try to include them as each new version gets released.
+Good luck & have fun with future versions.
+
+Regards,
+Chris.
+
+On Wed, Jan 21, 2009 at 8:38 PM, Jan Reucker <jan.reucker at web.de> wrote:
+
+> Am Wed, 21 Jan 2009 18:13:14 +0000 schrieb Christopher Swift
+> <Chris at Chrisswift.eu>:
+>
+> > Yeah that would be perfect the header template. Sorry however about the
+> > mailings going all over the place, I've recently changed my email domain
+> to
+> > be used with gmail and it's taking some time to configure 100% properly.
+> It
+> > is allowed IIRC to remove "or at your option a later version" since you
+> are
+> > specifically stating that your license being used is still GPL v2 but you
+> > don't want to be upgraded just yet. I can't wait to start packaging it.
+> Also
+> > if you are going to repackage the tarball, could you include your manpage
+> in
+> > there too to the current version. Other than that it looks great and
+> > hopefully it'll be ready in time for Jaunty :).
+>
+> Hi Chris,
+>
+> repackaging is a bad option, because we changed our version control system
+> since 0.9.9 and re-organized source files and file locations, so there's
+> no simple way to merge changes back and forth between 0.9.9 and 0.9.10.
+> I'd rather like to do all changes in 0.9.10 only, fix the one open bug
+> reported for 0.9.10 and release this version ASAP. Then you can take
+> this tarball to create a first version of your package. If we run into
+> serious problems or discover new bugs, it's fine for me to release a
+> 0.9.11 or even more versions until Jaunty.
+>
+> Kind regards,
+> Jan R.
+>
+> --
+> Jan Reucker
+> Ober-Ramstadt, Germany
+> PGP-Key: http://www.reucker-online.de/pgpkey.asc
+> _______________________________________________
+> Crrcsim-devel mailing list
+> Crrcsim-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20090121/dda3e7da/attachment.html>
+
+From jens_w2 at gmx.net  Thu Jan 22 18:40:51 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Thu, 22 Jan 2009 18:40:51 +0100
+Subject: [Crrcsim-devel] copyright header,
+	was: The debanisation of CRRCsim
+In-Reply-To: <20090121214703.d49246a9.jan.reucker@web.de>
+References: <1232068925.15630.16.camel@chris-laptop>
+	<20090117130636.140c73d1.jan.reucker@web.de>
+	<57c30d030901170938i390762bdsddd31d635cfd0ede@mail.gmail.com>
+	<57c30d030901170944p6df3a8c6r2b04f959d92dc7f3@mail.gmail.com>
+	<20090117185849.af951285.jan.reucker@web.de>
+	<20090118112952.0c25c0b2.jan.reucker@web.de>
+	<20090121172913.GA4716@localhost>
+	<20090121214703.d49246a9.jan.reucker@web.de>
+Message-ID: <20090122174051.GB4425@localhost>
+
+Hi there,
+
+so here is my quick attempt for a script to automatically add a header. It
+is _not_ perfect or beautiful, but works -- which is ok for me, given the
+number of files which has to be edited and the limited time I have. 
+
+I miss two real names -- does anyone know about them?
+
+Best regards,
+Jens
+-------------- next part --------------
+s/kansky/Jan Edward Kansky/
+s/slowhand_47/Jan Reucker/
+s/jwwulf/Jens Wilhelm Wulf/
+s/jens_w2/Jens Wilhelm Wulf/
+s/lemmens/Kees Lemmens/
+s/lcailler/Lionel Cailler/
+s/Joel/Joel Lienard/
+s/joellienard/Joel Lienard/
+s/oborf3f/Olivier Bordes/
+s/ttempleton/Todd Templeton/
+s/bp_jww/Bob Parks/
+s/ainanous/Ahmet Inan/
+s/pouakai/todo/
+s/deffi/todo/
+s/^\([0-9]*\)\(-[0-9]*-[0-9]*\)\(.*\)/ * Copyright (C) \1 -\3/
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: head1.h
+Type: text/x-chdr
+Size: 78 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20090122/2169aab2/attachment.h>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: head2.h
+Type: text/x-chdr
+Size: 687 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20090122/2169aab2/attachment-0001.h>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: insertheader.sh
+Type: application/x-sh
+Size: 817 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20090122/2169aab2/attachment.sh>
+
+From jan.reucker at web.de  Thu Jan 22 21:47:15 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Thu, 22 Jan 2009 21:47:15 +0100
+Subject: [Crrcsim-devel] copyright header,
+ was: The debanisation of CRRCsim
+In-Reply-To: <20090122174051.GB4425@localhost>
+References: <1232068925.15630.16.camel@chris-laptop>
+	<20090117130636.140c73d1.jan.reucker@web.de>
+	<57c30d030901170938i390762bdsddd31d635cfd0ede@mail.gmail.com>
+	<57c30d030901170944p6df3a8c6r2b04f959d92dc7f3@mail.gmail.com>
+	<20090117185849.af951285.jan.reucker@web.de>
+	<20090118112952.0c25c0b2.jan.reucker@web.de>
+	<20090121172913.GA4716@localhost>
+	<20090121214703.d49246a9.jan.reucker@web.de>
+	<20090122174051.GB4425@localhost>
+Message-ID: <20090122214715.fcc1fd76.jan.reucker@web.de>
+
+Am Thu, 22 Jan 2009 18:40:51 +0100 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> Hi there,
+> 
+> so here is my quick attempt for a script to automatically add a header. It
+> is _not_ perfect or beautiful, but works -- which is ok for me, given the
+> number of files which has to be edited and the limited time I have. 
+
+Hi Jens,
+
+it works fine, thanks! I started yesterday to convert the files in GUI
+using a half-automated process, and it definitely turned out to be a lot
+of work.
+
+One remark: I had to quote the wildcard argument to avoid shell expansion
+(so I called:  sh insertheader.sh "src/GUI/*.cpp").
+
+How do we handle multiple contributions in different years? My first thought
+was to list only the first contribution of each author, but maybe we should
+leave the script output as it is (each author is listed once per year). One
+minor flaw is that the original author is listed twice if he contributed to
+the file a second time in the same year, but I think this is bearable because
+we have to inspect and maybe edit each file by hand anyway after running the
+script, e.g. to remove old headers.
+
+> I miss two real names -- does anyone know about them?
+
+s/pouakai/Chris Bayley/
+s/deffi/Martin Herrmann/
+
+(just try https://sourceforge.net/users/USERNAME/ to find the real names...)
+
+So how do we proceed? Shall we split up the work by directories instead of
+looking for our own files only? Just to make sure we edit all files and don't
+omit some.
+
+My proposal:
+src root	JR
+GUI		JR
+mod_chardevice	done (own headers)
+mod_cntrl	JWW
+mod_env		JWW
+mod_fdm		JWW
+mod_inputdev	JWW
+mod_landscape	JR
+mod_main	JR
+mod_math	JWW
+mod_misc	JR
+mod_mode	JR
+mod_windfield	JR
+
+If this exceeds the amount of time you can spend for CRRCsim this weekend
+feel free to reassign more directories to me.
+
+I won't start before friday evening, so if there are more volunteers just
+go ahead.
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Fri Jan 23 20:36:50 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Fri, 23 Jan 2009 20:36:50 +0100
+Subject: [Crrcsim-devel] copyright header,
+	was: The debanisation of CRRCsim
+In-Reply-To: <20090122214715.fcc1fd76.jan.reucker@web.de>
+References: <1232068925.15630.16.camel@chris-laptop>
+	<20090117130636.140c73d1.jan.reucker@web.de>
+	<57c30d030901170938i390762bdsddd31d635cfd0ede@mail.gmail.com>
+	<57c30d030901170944p6df3a8c6r2b04f959d92dc7f3@mail.gmail.com>
+	<20090117185849.af951285.jan.reucker@web.de>
+	<20090118112952.0c25c0b2.jan.reucker@web.de>
+	<20090121172913.GA4716@localhost>
+	<20090121214703.d49246a9.jan.reucker@web.de>
+	<20090122174051.GB4425@localhost>
+	<20090122214715.fcc1fd76.jan.reucker@web.de>
+Message-ID: <20090123193650.GA4390@localhost>
+
+Hi Jan,
+
+I'll start tomorrow and will spend some time, as my girlfriend leaves for
+one or two days ;-)
+
+> How do we handle multiple contributions in different years? My first thought
+> was to list only the first contribution of each author, but maybe we should
+> leave the script output as it is (each author is listed once per year). One
+> minor flaw is that the original author is listed twice if he contributed to
+> the file a second time in the same year, but I think this is bearable because
+> we have to inspect and maybe edit each file by hand anyway after running the
+> script, e.g. to remove old headers.
+Yes, sounds fine. I plan to change the layout once again, though, in order
+to have lines like
+ Copyright (C) 2004, 2005, 2007, 2008 Coding Cody
+The header is just to long otherwise.
+
+> s/pouakai/Chris Bayley/
+> s/deffi/Martin Herrmann/
+> 
+> (just try https://sourceforge.net/users/USERNAME/ to find the real names...)
+Thanks!
+
+> So how do we proceed? Shall we split up the work by directories instead of
+> looking for our own files only? Just to make sure we edit all files and don't
+> omit some.
+> 
+> My proposal:
+> src root	JR
+> GUI		JR
+> mod_chardevice	done (own headers)
+> mod_cntrl	JWW
+> mod_env		JWW
+> mod_fdm		JWW
+> mod_inputdev	JWW
+> mod_landscape	JR
+> mod_main	JR
+> mod_math	JWW
+> mod_misc	JR
+> mod_mode	JR
+> mod_windfield	JR
+Yes, maybe...maybe I can do misc or windfield, too. Lets see how far we've
+come tomorrow night.
+
+Jens
+
+
+From jan.reucker at web.de  Sat Jan 24 00:13:58 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sat, 24 Jan 2009 00:13:58 +0100
+Subject: [Crrcsim-devel] copyright header,
+ was: The debanisation of CRRCsim
+In-Reply-To: <20090123193650.GA4390@localhost>
+References: <1232068925.15630.16.camel@chris-laptop>
+	<20090117130636.140c73d1.jan.reucker@web.de>
+	<57c30d030901170938i390762bdsddd31d635cfd0ede@mail.gmail.com>
+	<57c30d030901170944p6df3a8c6r2b04f959d92dc7f3@mail.gmail.com>
+	<20090117185849.af951285.jan.reucker@web.de>
+	<20090118112952.0c25c0b2.jan.reucker@web.de>
+	<20090121172913.GA4716@localhost>
+	<20090121214703.d49246a9.jan.reucker@web.de>
+	<20090122174051.GB4425@localhost>
+	<20090122214715.fcc1fd76.jan.reucker@web.de>
+	<20090123193650.GA4390@localhost>
+Message-ID: <20090124001358.4a251322.jan.reucker@web.de>
+
+Am Fri, 23 Jan 2009 20:36:50 +0100 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> Yes, sounds fine. I plan to change the layout once again, though, in order
+> to have lines like
+>  Copyright (C) 2004, 2005, 2007, 2008 Coding Cody
+> The header is just to long otherwise.
+
+Hi Jens,
+
+I adopted this change and finished GUI and the src root tonight. Changes are
+already available at BerliOS.
+
+After I was done with all files, I noticed that your original head2.txt
+contained a somewhat strange text passage, so I ran
+
+for n in src/GUI/*.h; do cat $n | sed -e "s/it under the terms of the GNU General Public License as published by/it under the terms of the GNU General Public License version 2/" -e "s/the Free Software Foundation; either version 2 of the License./as published by the Free Software Foundation\./" > $n.new;mv $n.new $n; done
+
+on all files. The first paragraph of the header now reads:
+
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2
+ * as published by the Free Software Foundation.
+
+I've tried to recover as much of the file's "C" history as possible. The authors
+of some .c files that were converted to .cpp and deleted from CVS are not
+preserved in the hg repo (shame on CVS for not providing a "move" command).
+
+Many .c files, however, were broken into pieces or totally rewritten in C++.
+Tracking theses changes would be a tedious task, so I didn't care about it.
+
+Status:
+
+src root	done
+GUI		done
+mod_chardevice	done (own headers)
+mod_cntrl	JWW
+mod_env		JWW
+mod_fdm		JWW
+mod_inputdev	JWW
+mod_landscape	JR
+mod_main	JR
+mod_math	JWW
+mod_misc	JR
+mod_mode	JR
+mod_windfield	JR
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Sat Jan 24 11:26:41 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Sat, 24 Jan 2009 11:26:41 +0100
+Subject: [Crrcsim-devel] copyright header,
+	was: The debanisation of CRRCsim
+In-Reply-To: <20090124001358.4a251322.jan.reucker@web.de>
+References: <57c30d030901170938i390762bdsddd31d635cfd0ede@mail.gmail.com>
+	<57c30d030901170944p6df3a8c6r2b04f959d92dc7f3@mail.gmail.com>
+	<20090117185849.af951285.jan.reucker@web.de>
+	<20090118112952.0c25c0b2.jan.reucker@web.de>
+	<20090121172913.GA4716@localhost>
+	<20090121214703.d49246a9.jan.reucker@web.de>
+	<20090122174051.GB4425@localhost>
+	<20090122214715.fcc1fd76.jan.reucker@web.de>
+	<20090123193650.GA4390@localhost>
+	<20090124001358.4a251322.jan.reucker@web.de>
+Message-ID: <20090124102641.GA4407@localhost>
+
+Hi Jan,
+
+> on all files. The first paragraph of the header now reads:
+Oh, thanks. Obviously I made a mistake when (quickly) changing from "version
+2 or later".
+
+> I've tried to recover as much of the file's "C" history as possible. The authors
+> of some .c files that were converted to .cpp and deleted from CVS are not
+> preserved in the hg repo (shame on CVS for not providing a "move" command).
+So we can't look them up in CVS anymore? 
+
+> Many .c files, however, were broken into pieces or totally rewritten in C++.
+> Tracking theses changes would be a tedious task, so I didn't care about it.
+Yeah, that's similar to the previous paragraph: our copyright/author history
+is lossy. But I'll think about that later (when I got a feeling of how bad
+it is).
+
+Now I'll tune the script...
+
+Jens 
+
+
+From jens_w2 at gmx.net  Sat Jan 24 13:06:42 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Sat, 24 Jan 2009 13:06:42 +0100
+Subject: [Crrcsim-devel] copyright header,
+	was: The debanisation of CRRCsim
+In-Reply-To: <20090124102641.GA4407@localhost>
+References: <57c30d030901170944p6df3a8c6r2b04f959d92dc7f3@mail.gmail.com>
+	<20090117185849.af951285.jan.reucker@web.de>
+	<20090118112952.0c25c0b2.jan.reucker@web.de>
+	<20090121172913.GA4716@localhost>
+	<20090121214703.d49246a9.jan.reucker@web.de>
+	<20090122174051.GB4425@localhost>
+	<20090122214715.fcc1fd76.jan.reucker@web.de>
+	<20090123193650.GA4390@localhost>
+	<20090124001358.4a251322.jan.reucker@web.de>
+	<20090124102641.GA4407@localhost>
+Message-ID: <20090124120642.GB4407@localhost>
+
+Hi Jan, 
+
+here's the update. I changed the style in contrast to what Christopher
+suggested: it lists authors once, but the year several times. This is what I
+saw on other projects, too, and which appears cleaner to me.
+
+Jens
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: head1.h
+Type: text/x-chdr
+Size: 78 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20090124/4e36d122/attachment.h>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: head2.h
+Type: text/x-chdr
+Size: 661 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20090124/4e36d122/attachment-0001.h>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: insertheader.sh
+Type: application/x-sh
+Size: 2017 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20090124/4e36d122/attachment.sh>
+-------------- next part --------------
+s/kansky/Jan Edward Kansky/
+s/slowhand_47/Jan Reucker/
+s/jwwulf/Jens Wilhelm Wulf/
+s/jens_w2/Jens Wilhelm Wulf/
+s/lemmens/Kees Lemmens/
+s/lcailler/Lionel Cailler/
+s/Joel/Joel Lienard/
+s/joellienard/Joel Lienard/
+s/oborf3f/Olivier Bordes/
+s/ttempleton/Todd Templeton/
+s/bp_jww/Bob Parks/
+s/ainanous/Ahmet Inan/
+s/pouakai/Chris Bayley/
+s/deffi/Martin Herrmann/
+
+
+From jan.reucker at web.de  Sat Jan 24 12:45:44 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sat, 24 Jan 2009 12:45:44 +0100
+Subject: [Crrcsim-devel] copyright header,
+ was: The debanisation of CRRCsim
+In-Reply-To: <20090124102641.GA4407@localhost>
+References: <57c30d030901170938i390762bdsddd31d635cfd0ede@mail.gmail.com>
+	<57c30d030901170944p6df3a8c6r2b04f959d92dc7f3@mail.gmail.com>
+	<20090117185849.af951285.jan.reucker@web.de>
+	<20090118112952.0c25c0b2.jan.reucker@web.de>
+	<20090121172913.GA4716@localhost>
+	<20090121214703.d49246a9.jan.reucker@web.de>
+	<20090122174051.GB4425@localhost>
+	<20090122214715.fcc1fd76.jan.reucker@web.de>
+	<20090123193650.GA4390@localhost>
+	<20090124001358.4a251322.jan.reucker@web.de>
+	<20090124102641.GA4407@localhost>
+Message-ID: <20090124124544.693ae590.jan.reucker@web.de>
+
+Am Sat, 24 Jan 2009 11:26:41 +0100 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> > I've tried to recover as much of the file's "C" history as possible. The authors
+> > of some .c files that were converted to .cpp and deleted from CVS are not
+> > preserved in the hg repo (shame on CVS for not providing a "move" command).
+> So we can't look them up in CVS anymore? 
+
+You can still look them up (I used the web interface at SF.net which allows you
+to show "dead files"). But they're not linked to their .cpp counterparts,
+because CVS does not care about moving files. We moved the files locally,
+deleted the .c files and added the .cpp files, so the history that is preserved
+in hg starts from the point where the file was added as .cpp.
+ 
+> Yeah, that's similar to the previous paragraph: our copyright/author history
+> is lossy. But I'll think about that later (when I got a feeling of how bad
+> it is).
+
+Well, I don't think it's that bad. I think for the fdm_larcsim parts you can
+easily lookup the original authors from the "dead" ls_*.[ch] files in CVS.
+
+One thing we don't know, however, is the license under which LarcSim originally
+was released. Bruce Jackson didn't provide any licensing information in
+his original files. I already talked with Jan K. about this issue. Maybe we
+can contact Bruce directly. I guess there shouldn't be any problems, because
+other projects like FlightGear also use his code.
+
+Finally, I don't think it's a problem if the history of a couple of files isn't
+listed 100% bullet proof in the header. The repositories at SF.net and BerliOS
+are open to the public, so anybody interested in the exact history can dig
+through it.
+
+Kind regars,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Sat Jan 24 12:48:18 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sat, 24 Jan 2009 12:48:18 +0100
+Subject: [Crrcsim-devel] copyright header,
+ was: The debanisation of CRRCsim
+In-Reply-To: <20090124120642.GB4407@localhost>
+References: <57c30d030901170944p6df3a8c6r2b04f959d92dc7f3@mail.gmail.com>
+	<20090117185849.af951285.jan.reucker@web.de>
+	<20090118112952.0c25c0b2.jan.reucker@web.de>
+	<20090121172913.GA4716@localhost>
+	<20090121214703.d49246a9.jan.reucker@web.de>
+	<20090122174051.GB4425@localhost>
+	<20090122214715.fcc1fd76.jan.reucker@web.de>
+	<20090123193650.GA4390@localhost>
+	<20090124001358.4a251322.jan.reucker@web.de>
+	<20090124102641.GA4407@localhost> <20090124120642.GB4407@localhost>
+Message-ID: <20090124124818.f28a60fe.jan.reucker@web.de>
+
+Am Sat, 24 Jan 2009 13:06:42 +0100 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> Hi Jan, 
+> 
+> here's the update. I changed the style in contrast to what Christopher
+> suggested: it lists authors once, but the year several times. This is what I
+> saw on other projects, too, and which appears cleaner to me.
+
+Yes, that's what I did manually for GUI and root tonight. And I slightly adjusted
+head1.h so that it no longer produces a blank line above the copyrights.
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: head1.h
+Type: text/x-chdr
+Size: 81 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20090124/8421b682/attachment.h>
+
+From jens_w2 at gmx.net  Sun Jan 25 16:57:09 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Sun, 25 Jan 2009 16:57:09 +0100
+Subject: [Crrcsim-devel] license header progress
+In-Reply-To: <20090124001358.4a251322.jan.reucker@web.de>
+References: <57c30d030901170938i390762bdsddd31d635cfd0ede@mail.gmail.com>
+	<57c30d030901170944p6df3a8c6r2b04f959d92dc7f3@mail.gmail.com>
+	<20090117185849.af951285.jan.reucker@web.de>
+	<20090118112952.0c25c0b2.jan.reucker@web.de>
+	<20090121172913.GA4716@localhost>
+	<20090121214703.d49246a9.jan.reucker@web.de>
+	<20090122174051.GB4425@localhost>
+	<20090122214715.fcc1fd76.jan.reucker@web.de>
+	<20090123193650.GA4390@localhost>
+	<20090124001358.4a251322.jan.reucker@web.de>
+Message-ID: <20090125155709.GB4599@localhost>
+
+Hi Jan,
+
+so I'm nearly done:
+
+src root	done
+GUI		done
+mod_chardevice	done (own headers)
+mod_cntrl	JWW, done
+mod_env		JWW, done
+mod_fdm		JWW, done
+mod_inputdev	JWW, done (except mnav; sent email to Todd)
+mod_landscape	JR
+mod_main	JR
+mod_math	JWW, done
+mod_misc	JR
+mod_mode	JR
+mod_windfield	JR
+
+
+Jens
+
+
+From Chris at Chrisswift.eu  Sun Jan 25 19:11:26 2009
+From: Chris at Chrisswift.eu (Christopher Swift)
+Date: Sun, 25 Jan 2009 18:11:26 +0000
+Subject: [Crrcsim-devel] license header progress
+Message-ID: <20090125181129.B6E4F30BC5@mail.berlios.de>
+
+Great! It's not long until perhaps the package is able to appear in Jaunty when this is complete. Also if you happen to know of any Debian Developers feel free to use "my" diff.gz for an upload to Debian rather than waiting for the Jaunty/Debian synchronisation. When the copyright has finished, I'll keep you up to date with every change that I make via REVU. 
+
+Regards,
+Chris
+--
+Christopher Swift <Chris at Chrisswift.eu>
+
+-----Original Message-----
+From: Jens Wilhelm Wulf <jens_w2 at gmx.net>
+Sent: 25 January 2009 15:57
+To: Jan Reucker <jan.reucker at web.de>
+Cc: crrcsim-devel at lists.berlios.de
+Subject: [Crrcsim-devel] license header progress
+
+Hi Jan,
+
+so I'm nearly done:
+
+src root	done
+GUI		done
+mod_chardevice	done (own headers)
+mod_cntrl	JWW, done
+mod_env		JWW, done
+mod_fdm		JWW, done
+mod_inputdev	JWW, done (except mnav; sent email to Todd)
+mod_landscape	JR
+mod_main	JR
+mod_math	JWW, done
+mod_misc	JR
+mod_mode	JR
+mod_windfield	JR
+
+
+Jens
+_______________________________________________
+Crrcsim-devel mailing list
+Crrcsim-devel at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+
+
+
+
+From jan.reucker at web.de  Mon Jan 26 22:58:11 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Mon, 26 Jan 2009 22:58:11 +0100
+Subject: [Crrcsim-devel] license header progress
+In-Reply-To: <E1LR9SD-0000Fe-00@mx15.web.de>
+References: <E1LR9SD-0000Fe-00@mx15.web.de>
+Message-ID: <20090126225811.deaed021.jan.reucker@web.de>
+
+Am Sun, 25 Jan 2009 18:11:26 +0000 schrieb Christopher Swift <Chris at Chrisswift.eu>:
+
+> Great! It's not long until perhaps the package is able to appear in Jaunty when
+> this is complete. Also if you happen to know of any Debian Developers feel free
+> to use "my" diff.gz for an upload to Debian rather than waiting for the 
+> Jaunty/Debian synchronisation. When the copyright has finished, I'll keep you up
+> to date with every change that I make via REVU. 
+
+Hi all,
+
+my status:
+
+> src root	done
+> GUI		done
+> mod_chardevice	done (own headers)
+> mod_cntrl	JWW, done
+> mod_env		JWW, done
+> mod_fdm		JWW, done
+> mod_inputdev	JWW, done (except mnav; sent email to Todd)
+> mod_landscape	JR, done
+> mod_main	JR, done
+> mod_math	JWW, done
+> mod_misc	JR, done
+> mod_mode	JR, done
+> mod_windfield	JR, done
+
+So the issue with the missing license headers should be fixed.
+
+Regarding the open bug #015028, I'm currently testing a solution, so expect a
+fix to be pushed soon. I found out that it does not only affect joysticks but
+all interfaces that can provide more than TX_MAXAXIS axes.
+
+While I did some tests on WinXP I experienced another familiar bug. I thought
+it was fixed a long time ago, but now it is back, at least on XP. The
+soundserver may segfault when exiting CRRCsim. I guess it's a race condition
+when the different threads are shutting down. However, this shouldn't be a
+show stopper for the Ubuntu activities as I can't reproduce it on Linux.
+
+Another issue that needs discussion: Should we clean up the list of airplanes
+delivered with the base package? I think we should maybe remove some of the
+lower quality models (e.g. the "Delta" things that show some very
+interesting flat-spinning when handled incorrectly, or models that are
+just duplicates of the Allegro FDM parameters) and maybe add one or two
+of the higher quality models from crrcsim-addon-models (like the Supra or
+the Fireworks III with Bob's fine-tuned FDM parameters).
+
+And what about scenery files?
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From joel.lienard at free.fr  Tue Jan 27 09:23:42 2009
+From: joel.lienard at free.fr (=?iso-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Tue, 27 Jan 2009 09:23:42 +0100
+Subject: [Crrcsim-devel] license header progress
+In-Reply-To: <20090126225811.deaed021.jan.reucker@web.de>
+References: <E1LR9SD-0000Fe-00@mx15.web.de>
+	<20090126225811.deaed021.jan.reucker@web.de>
+Message-ID: <6E26955912074AE5BF280F114E3B2BB0@PCdeJol>
+
+
+
+>> So the issue with the missing license headers should be fixed.
+
+Cheer with Jan and Jens for this large quickly undertaken work!
+
+
+>> Another issue that needs discussion: Should we clean up the list of
+airplanes delivered with the base package? I think we should maybe remove
+some of the lower quality models (e.g. the "Delta" things that show some
+very interesting flat-spinning when handled incorrectly, or models that are
+just duplicates of the Allegro FDM parameters) and maybe add one or two
+of the higher quality models from crrcsim-addon-models (like the Supra or
+the Fireworks III with Bob's fine-tuned FDM parameters).
+
+Yes
+
+>> And what about scenery files?
+
+It would be logical to replace the old ones ("built-in") by the new ones
+("model-based"). It would be perhaps possible for Davis but not for Cape
+Code : it misses the waves animation and especially it misses the wind.
+
+>> What do you propose for the large files out of HG?
+
+Cordially
+
+Jo?l
+
+
+
+From jan.reucker at web.de  Tue Jan 27 22:11:59 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Tue, 27 Jan 2009 22:11:59 +0100
+Subject: [Crrcsim-devel] license header progress
+In-Reply-To: <6E26955912074AE5BF280F114E3B2BB0@PCdeJol>
+References: <E1LR9SD-0000Fe-00@mx15.web.de>
+	<20090126225811.deaed021.jan.reucker@web.de>
+	<6E26955912074AE5BF280F114E3B2BB0@PCdeJol>
+Message-ID: <20090127221159.59b53d3b.jan.reucker@web.de>
+
+Am Tue, 27 Jan 2009 09:23:42 +0100 schrieb Jo?l Li?nard <joel.lienard at free.fr>:
+
+> >> Another issue that needs discussion: Should we clean up the list of
+> airplanes delivered with the base package? I think we should maybe remove
+> some of the lower quality models (e.g. the "Delta" things that show some
+> very interesting flat-spinning when handled incorrectly, or models that are
+> just duplicates of the Allegro FDM parameters) and maybe add one or two
+> of the higher quality models from crrcsim-addon-models (like the Supra or
+> the Fireworks III with Bob's fine-tuned FDM parameters).
+> 
+> Yes
+
+So here's my proposal for the models:
+
+allegro.xml      keep
+apogee.xml       keep
+arkanj-mg11.xml  remove
+biplane2.xml     ? (based on sport.xml, but nice to have a biplane)
+delta1c.xml      remove
+delta1d.xml      remove
+delta1e.xml      remove
+FlexiflyXLM.xml  keep
+gap65.xml        keep
+heli.xml         keep
+k2-f3f2.xml      ?
+k2-f3f.xml       ?
+k2.xml           keep
+mav0.xml         ?
+mav.xml          ?
+melyan_01.xml    remove
+outrage.xml      keep
+quickie01.xml    keep
+Skimmer_MK_I.xml remove
+Skorpion.xml     keep
+sovereign.xml    keep
+spirit.xml       remove
+sport.xml        keep
+superzagi.xml    keep
+tug.xml          remove
+zagi.xml         ?
+zagi-xs.xml      keep
+zip60.xml        remove
+zipper.xml       keep
+
+And from addon-models:
+
+Crossfire.xml
+Erwin.xml
+fireworks3_C.xml (with Bob's parameter adjustment)
+supra.xml (with Bob's parameter adjustment)
+ 
+> >> And what about scenery files?
+> 
+> It would be logical to replace the old ones ("built-in") by the new ones
+> ("model-based"). It would be perhaps possible for Davis but not for Cape
+> Code : it misses the waves animation and especially it misses the wind.
+
+Therefore I'd like to stick with the "built-in" versions, at least for the
+next release.
+
+> >> What do you propose for the large files out of HG?
+
+We can serve them from the BerliOS server without storing them in the repo.
+I can simply create a .zip file and upload them as a data package. For the
+Ubuntu packaging process I'd separate them from the main package. Maybe
+Chris can create something like a "crrcsim-extra-data" package. Many projects
+seem to do it this way. The base package just provides a basic set of
+data files while large addons are offered as a separate download for those
+with a broadband connection.
+
+Just when I thought I had fixed the last bug (the soundserver issue, fix not
+tested yet, but I guess I know the cause), two more have appeared in the
+bug tracker :-(
+
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=15138&group_id=9957
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=15139&group_id=9957
+
+Any help in reproducing and fixing these bugs is appreciated! Regarding
+#015139, I think something similar was reported before on one of the mailing lists,
+but I never managed to reproduce it.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From Chris at Chrisswift.eu  Tue Jan 27 23:09:07 2009
+From: Chris at Chrisswift.eu (Christopher Swift)
+Date: Tue, 27 Jan 2009 22:09:07 +0000
+Subject: [Crrcsim-devel] license header progress
+In-Reply-To: <497F63D6.3000906@fejoz.net>
+References: <20090125181129.B6E4F30BC5@mail.berlios.de>
+	<497F63D6.3000906@fejoz.net>
+Message-ID: <57c30d030901271409x7cb05e97tea44b45cb16fe66c@mail.gmail.com>
+
+Sure, you can go to here and register a
+teamhttps://launchpad.net/people/+newteam<%20https://launchpad.net/people/+newteam>.
+I'm not quite sure what you mean though, however if it is about packaging,
+feel free to include myself.
+
+Regarding Jan Reucker's email; yes it is possible to have crrcsim-extra-data
+if required. There is however one small problem, Ubuntu is going into a
+feature freeze at Feb 19th which means that the archive admins may not
+process my request if I try to upload after that time. There is a process of
+advocation which means that I need 2 other developers to say yes to my
+package which can take up to a week but sometimes just 2 days.
+
+Regards,
+Chris.
+
+------------------------------
+*Christopher Swift*
+Swansea, Wales
+
+PGP Signature: http://www.chrisswift.eu/signature.asc
+*<Chris at Chrisswift.eu>*
+
+*
+
+**On Tue, Jan 27, 2009 at 7:43 PM, Lo?c Fejoz <loic at fejoz.net> wrote:
+*
+>
+> *Hi all and Christopher,
+>
+> I was wondering if I would apply some packages to Debian, crrcsim
+> included. But what do you think of creating a mixed group of
+> Debian/Ubuntu packagers to maintain aeromodelism related software.
+>
+> Indeed I have already created an avl package that can be usefull and
+> recommended by crrcsim.
+>
+> Maybe a group can be created on Launchpad or other?
+>
+> --
+> Regards,
+> Lo?c Fejoz
+>
+> Christopher Swift a ?crit :
+> *
+> *> Great! It's not long until perhaps the package is able to appear in
+> Jaunty when this is complete. Also if you happen to know of any Debian
+> Developers feel free to use "my" diff.gz for an upload to Debian rather than
+> waiting for the Jaunty/Debian synchronisation. When the copyright has
+> finished, I'll keep you up to date with every change that I make via REVU.
+> >
+> > Regards,
+> > Chris
+>
+> *
+>
+*
+*
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20090127/8034083a/attachment.html>
+
+From loic at fejoz.net  Wed Jan 28 08:49:13 2009
+From: loic at fejoz.net (=?ISO-8859-1?Q?Lo=EFc_Fejoz?=)
+Date: Wed, 28 Jan 2009 08:49:13 +0100
+Subject: [Crrcsim-devel] license header progress
+In-Reply-To: <57c30d030901271409x7cb05e97tea44b45cb16fe66c@mail.gmail.com>
+References: <20090125181129.B6E4F30BC5@mail.berlios.de>	
+	<497F63D6.3000906@fejoz.net>
+	<57c30d030901271409x7cb05e97tea44b45cb16fe66c@mail.gmail.com>
+Message-ID: <49800DF9.5030200@fejoz.net>
+
+Hi,
+
+I mean that we can create a packagers team. You, me and whoever wants to 
+package software related to aeromodelism for Debian and/or Ubuntu.
+
+I do not know if it best to use Launchpad or <http://alioth.debian.org/> 
+or any forge.
+
+-- 
+Cheers,
+Lo?c
+
+Christopher Swift a ?crit :
+> Sure, you can go to here and register a team 
+> https://launchpad.net/people/+newteam 
+> <%20https://launchpad.net/people/+newteam>. I'm not quite sure what you 
+> mean though, however if it is about packaging, feel free to include myself.
+> 
+> Regarding Jan Reucker's email; yes it is possible to have 
+> crrcsim-extra-data if required. There is however one small problem, 
+> Ubuntu is going into a feature freeze at Feb 19th which means that the 
+> archive admins may not process my request if I try to upload after that 
+> time. There is a process of advocation which means that I need 2 other 
+> developers to say yes to my package which can take up to a week but 
+> sometimes just 2 days.
+> 
+> Regards,
+> Chris.
+> 
+>     ------------------------------------------------------------------------
+>     *Christopher Swift*
+>     Swansea, Wales
+> 
+>     PGP Signature: http://www.chrisswift.eu/signature.asc
+>     <http://www.chrisswift.eu/signature.asc>
+>     /<Chris at Chrisswift.eu>/
+> 
+> ********************************************************
+> 
+> ********************************************************
+> ********************************************************On Tue, Jan 27, 
+> 2009 at 7:43 PM, Lo?c Fejoz <loic at fejoz.net <mailto:loic at fejoz.net>> wrote:
+> ********************************************************
+> 
+>     ********************************************************Hi all and
+>     Christopher,
+> 
+>     I was wondering if I would apply some packages to Debian, crrcsim
+>     included. But what do you think of creating a mixed group of
+>     Debian/Ubuntu packagers to maintain aeromodelism related software.
+> 
+>     Indeed I have already created an avl package that can be usefull and
+>     recommended by crrcsim.
+> 
+>     Maybe a group can be created on Launchpad or other?
+> 
+>     --
+>     Regards,
+>     Lo?c Fejoz
+> 
+>     Christopher Swift a ?crit :
+>     ********************************************************
+>     ********************************************************> Great!
+>     It's not long until perhaps the package is able to appear in Jaunty
+>     when this is complete. Also if you happen to know of any Debian
+>     Developers feel free to use "my" diff.gz for an upload to Debian
+>     rather than waiting for the Jaunty/Debian synchronisation. When the
+>     copyright has finished, I'll keep you up to date with every change
+>     that I make via REVU.
+>      >
+>      > Regards,
+>      > Chris
+> 
+>     ********************************************************
+> 
+> ********************************************************
+> ********************************************************
+
+
+From olivier at obordes.com  Wed Jan 28 09:55:06 2009
+From: olivier at obordes.com (Olivier Bordes)
+Date: Wed, 28 Jan 2009 09:55:06 +0100
+Subject: [Crrcsim-devel] license header progress
+In-Reply-To: <49800DF9.5030200@fejoz.net>
+References: <20090125181129.B6E4F30BC5@mail.berlios.de>		<497F63D6.3000906@fejoz.net>	<57c30d030901271409x7cb05e97tea44b45cb16fe66c@mail.gmail.com>
+	<49800DF9.5030200@fejoz.net>
+Message-ID: <49801D6A.8060703@obordes.com>
+
+Hi,
+Please note that there is already a package for Arch-Linux.
+The two packages are currently updated and maitained by me.
+Let me know when the update header is completed, I 'll update them 
+accordingly.
+
+Other than that, sorry,  I don't have much time to help, I am very busy 
+these days with my  RCcontrol project  :)
+
+Olivier
+
+
+
+
+From jan.reucker at web.de  Fri Jan 30 23:01:55 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Fri, 30 Jan 2009 23:01:55 +0100
+Subject: [Crrcsim-devel] Joystick bugfixes
+Message-ID: <20090130230155.c0d68256.jan.reucker@web.de>
+
+Hi all,
+
+the recently opened bugs #015138 and #015139 have been closed, because they
+are already fixed in the current tip. However, when I looked closer at the
+joystick configuration dialogs I discovered that Options->Controls->Buttons
+still offers the ability to assign functions to axes, although the
+underlying functionality has been removed in 2005! I filed a new bug report
+for this (#15161), including a proposed fix:
+
+https://developer.berlios.de/bugs/?func=detailbug&group_id=9957&bug_id=15161
+
+If there are no objections, I'll remove the axis assignment stuff from
+the dialog.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Fri Jan 30 23:38:55 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Fri, 30 Jan 2009 23:38:55 +0100
+Subject: [Crrcsim-devel] Release planning for 0.9.10
+Message-ID: <20090130233855.0ddb860f.jan.reucker@web.de>
+
+Hi all,
+
+I guess it's time to discuss the remaining few steps until we can release
+CRRCsim 0.9.10. I've just updated the TaskList in the Wiki
+(http://crrcsim.berlios.de/wiki/index.php?n=CRRCsim.TaskList). Here's a
+summary of open points:
+
+#1 Verification of spoiler and flap parameters needed. Parameters for more models needed. (coordinated by JWW) 
+#2 Verify that configuration of new functions also works on the command line. (open)
+#3 Heli-FDM: Verification and/or improvement of FDM parameters needed. (coordinated by JWW) 
+#4 Bug #15161 (Axis assignment in Options->Controls->Buttons does not work). (open) 
+#5 Unix manpage may need some corrections due to new input functions. (open) 
+#6 New scenery selection dialog:should display more information (like airplane selection
+  dialog) (open) 
+#7 Experimental landscape files should not be part of the final distribution tarball/binary
+  packages to avoid confusing the user. Verify autotools scripts. (open) 
+
+And from my recent mail:
+#8 List of models needs a cleanup. Remove some, add some from addon-models.
+
+
+My comments:
+
+#1 no showstopper
+#2 I guess that the configuration of axis functions on the command line no
+   longer works (see bug #15161: it uses the same internal mechanism which
+   was removed 2005). Need to verify this and maybe remove the corresponding
+   CLI options.
+#3 no showstopper
+#4 can be solved within a few days
+#5 could be outdated, see #2. Nevertheless, the man page needs some corrections and
+   a thorough review.
+#6 should be postponed to a later release (quite a bit of work)
+#7 needs discussion. I'd say that we only ship cape_cod-orig.xml, davis-orig.xml
+   and maybe simple.xml (as an example for potential scenery builders) with the
+   tarball and remove the other files from the distribution (by adapting the
+   Makefile.am's, not by removing them from the repo).
+#8 can be solved within a few days
+
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From ttemplet at eecs.berkeley.edu  Sat Jan 31 19:53:35 2009
+From: ttemplet at eecs.berkeley.edu (Todd Templeton)
+Date: Sat, 31 Jan 2009 10:53:35 -0800
+Subject: [Crrcsim-devel] license header progress
+In-Reply-To: <20090125155709.GB4599@localhost>
+References: <57c30d030901170938i390762bdsddd31d635cfd0ede@mail.gmail.com>
+	<57c30d030901170944p6df3a8c6r2b04f959d92dc7f3@mail.gmail.com>
+	<20090117185849.af951285.jan.reucker@web.de>
+	<20090118112952.0c25c0b2.jan.reucker@web.de>
+	<20090121172913.GA4716@localhost>
+	<20090121214703.d49246a9.jan.reucker@web.de>
+	<20090122174051.GB4425@localhost>
+	<20090122214715.fcc1fd76.jan.reucker@web.de>
+	<20090123193650.GA4390@localhost>
+	<20090124001358.4a251322.jan.reucker@web.de>
+	<20090125155709.GB4599@localhost>
+Message-ID: <49849E2F.7030605@eecs.berkeley.edu>
+
+Licenses are now in place for the MNAV files. I probably overdid what
+needed to be included, especially since the MNAV license is also GPL v2,
+but in the end I decided to add the headers from the original files, as
+well as some additional info about the license and contact info for the
+MNAV author, since neither were in the original file headers.
+
+Todd
+
+
+Jens Wilhelm Wulf wrote:
+> Hi Jan,
+> 
+> so I'm nearly done:
+> 
+> src root	done
+> GUI		done
+> mod_chardevice	done (own headers)
+> mod_cntrl	JWW, done
+> mod_env		JWW, done
+> mod_fdm		JWW, done
+> mod_inputdev	JWW, done (except mnav; sent email to Todd)
+> mod_landscape	JR
+> mod_main	JR
+> mod_math	JWW, done
+> mod_misc	JR
+> mod_mode	JR
+> mod_windfield	JR
+> 
+> 
+> Jens
+> _______________________________________________
+> Crrcsim-devel mailing list
+> Crrcsim-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+
+

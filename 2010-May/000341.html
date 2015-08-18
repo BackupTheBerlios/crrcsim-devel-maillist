@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Problems with the shadow of the aeroplane.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Problems%20with%20the%20shadow%20of%20the%20aeroplane.&In-Reply-To=%3C20100506215437.5c16e290%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000339.html">
+   <LINK REL="Next"  HREF="000342.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Problems with the shadow of the aeroplane.</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Problems%20with%20the%20shadow%20of%20the%20aeroplane.&In-Reply-To=%3C20100506215437.5c16e290%40web.de%3E"
+       TITLE="[Crrcsim-devel] Problems with the shadow of the aeroplane.">jan.reucker at web.de
+       </A><BR>
+    <I>Thu May  6 21:54:37 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000339.html">[Crrcsim-devel] Problems with the shadow of the aeroplane.
+</A></li>
+        <LI>Next message: <A HREF="000342.html">[Crrcsim-devel] Problems with the shadow of the aeroplane.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#341">[ date ]</a>
+              <a href="thread.html#341">[ thread ]</a>
+              <a href="subject.html#341">[ subject ]</a>
+              <a href="author.html#341">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, 6 May 2010 17:17:39 +0200
+Jens Wilhelm Wulf &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">jens_w2 at gmx.net</A>&gt; wrote:
+
+&gt;<i> ...so this was long ago. Obviously I had not been sure about this change,
+</I>&gt;<i> but it did fix some behaviour for me and nobody objected to it. I don't
+</I>&gt;<i> recall more detailed circumstances...
+</I>&gt;<i>   
+</I>&gt;<i> Maybe this flashing only happens with model-based sceneries?
+</I>
+I don't know if it's related to the scenery. But the problem with the small
+offset is that the shadow sometimes appears to be above the airplane.
+
+A *real* shadowing algorithm would be great. I experimented with stencil
+buffer shadowing some time ago (which would allow for smooth, translucent
+shadows), but I didn't get it to work with CRRCsim (it worked in a small
+PLIB demo application). And some GPU's still don't support stencil
+buffers, so we need both implementations in parallel.
+
+Regarding the altitude problem: The shadow matrices are calculated for
+zero altitude, for 100 feet  (on Cape Cod) and for the slope at Cape Cod.
+This means that for all other sceneries, shadows will either not
+work at all or look strange if they are not close to zero elevation.
+
+Kind regards,
+Jan R.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000339.html">[Crrcsim-devel] Problems with the shadow of the aeroplane.
+</A></li>
+	<LI>Next message: <A HREF="000342.html">[Crrcsim-devel] Problems with the shadow of the aeroplane.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#341">[ date ]</a>
+              <a href="thread.html#341">[ thread ]</a>
+              <a href="subject.html#341">[ subject ]</a>
+              <a href="author.html#341">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

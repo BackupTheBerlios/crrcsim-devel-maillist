@@ -1,0 +1,2013 @@
+From jens_w2 at gmx.net  Sun Feb  1 15:25:00 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Sun, 1 Feb 2009 15:25:00 +0100
+Subject: [Crrcsim-devel] which models to distribute
+In-Reply-To: <20090127221159.59b53d3b.jan.reucker@web.de>
+References: <E1LR9SD-0000Fe-00@mx15.web.de>
+	<20090126225811.deaed021.jan.reucker@web.de>
+	<6E26955912074AE5BF280F114E3B2BB0@PCdeJol>
+	<20090127221159.59b53d3b.jan.reucker@web.de>
+Message-ID: <20090201142459.GB4611@localhost>
+
+Hi Jan,
+
+I mainly agree with you on the selection of models:
+
+> biplane2.xml     ? (based on sport.xml, but nice to have a biplane)
+> melyan_01.xml    remove
+keep because of their different look
+
+> k2-f3f2.xml      ?
+> k2-f3f.xml       ?
+> k2.xml           keep
+Remove at least one of them. Which one? Olivier Bordes once added the
+original k2-f3f2.air, maybe he has an opinion...
+
+> mav0.xml         ?
+remove
+
+> mav.xml          ?
+keep
+
+
+Maybe those models should be (re)moved to something like addon-models so
+users can still install them.
+
+Jens
+
+
+From jens_w2 at gmx.net  Sun Feb  1 15:27:50 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Sun, 1 Feb 2009 15:27:50 +0100
+Subject: [Crrcsim-devel] Release planning for 0.9.10
+In-Reply-To: <20090130233855.0ddb860f.jan.reucker@web.de>
+References: <20090130233855.0ddb860f.jan.reucker@web.de>
+Message-ID: <20090201142750.GC4611@localhost>
+
+Hi Jan,
+
+apart from what you said, there is a bug concerning the airplanes initial
+position. It is where your feet are when starting from the ground and where
+your head is when doing a hand launch -- this is not realistic in any case
+and differs from previous CRRCSim behaviour. I don't know who changed this
+and why, but I consider this a showstopper for the next release.
+
+Jens
+
+
+From jan.reucker at web.de  Sun Feb  1 15:56:15 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sun, 1 Feb 2009 15:56:15 +0100
+Subject: [Crrcsim-devel] Release planning for 0.9.10
+In-Reply-To: <20090201142750.GC4611@localhost>
+References: <20090130233855.0ddb860f.jan.reucker@web.de>
+	<20090201142750.GC4611@localhost>
+Message-ID: <20090201155615.2eeca389.jan.reucker@web.de>
+
+Am Sun, 1 Feb 2009 15:27:50 +0100 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> apart from what you said, there is a bug concerning the airplanes initial
+> position. It is where your feet are when starting from the ground and where
+> your head is when doing a hand launch -- this is not realistic in any case
+> and differs from previous CRRCSim behaviour. I don't know who changed this
+> and why, but I consider this a showstopper for the next release.
+
+I filed a bug report for this one:
+
+https://developer.berlios.de/bugs/?func=detailbug&bug_id=15180&group_id=9957
+
+I guess it was introduced by Joel's coordinate system cleanup, but I don't
+know for sure. I agree that it should be fixed. For a helicopter it's
+impossible to start this way.
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Tue Feb  3 23:09:18 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Tue, 3 Feb 2009 23:09:18 +0100
+Subject: [Crrcsim-devel] Release planning for 0.9.10
+In-Reply-To: <20090201155615.2eeca389.jan.reucker@web.de>
+References: <20090130233855.0ddb860f.jan.reucker@web.de>
+	<20090201142750.GC4611@localhost>
+	<20090201155615.2eeca389.jan.reucker@web.de>
+Message-ID: <20090203230918.7fce747b.jan.reucker@web.de>
+
+Hi all,
+
+here's an updated TODO list (uncritical entries from my first email have been
+removed for clarity):
+
+#2 Verify that configuration of new functions also works on the command line. (open)
+   jr: I guess that the configuration of axis functions on the command line no
+       longer works (see bug #15161: it uses the same internal mechanism which
+       was removed 2005). Need to verify this and maybe remove the corresponding
+       CLI options.
+
+#4 Bug #15161 --> fixed
+
+#5 Unix manpage may need some corrections due to new input functions. (open) 
+   jr: could be outdated, see #2. Nevertheless, the man page needs some
+       corrections and a thorough review.
+
+#6 New scenery selection dialog 
+   --> no action, fix later. Recorded as Feature Request #4470.
+
+#7 Experimental landscape files should not be part of the final
+   distribution tarball/binary packages to avoid confusing the user.
+   Verify autotools scripts. (open)
+   --> The autotools scripts need to be adapted to only include
+       cape_cod-orig.xml, davis-orig.xml, simple.xml and the associated
+       3D models and textures.
+
+#8 List of models needs a cleanup. Remove some, add some from addon-models.
+   --> Do the changes to the repository and adjust the autotools scripts.
+   arkanj-mg11.xml  remove
+   delta1c.xml      remove
+   delta1d.xml      remove
+   delta1e.xml      remove
+   k2-f3f2.xml      ?
+   k2-f3f.xml       ?
+   k2.xml           ?
+   mav0.xml         remove
+   Skimmer_MK_I.xml remove
+   spirit.xml       remove
+   tug.xml          remove
+   zagi.xml         ?
+   zip60.xml        remove
+
+   Crossfire.xml    add from crrcsim-addon-models
+   Erwin.xml        add from crrcsim-addon-models
+   fireworks3_C.xml add from crrcsim-addon-models, with Bob's parameter adjustment
+                    from the Yahoo group file section
+   supra.xml        add from crrcsim-addon-models, with Bob's parameter adjustment
+                    from the Yahoo group file section
+
+#9 Bug #015180 Initial airplane position
+   --> This bug was introduced by changeset 1014:c0820cd28e4d (import Windata 3D,
+       JPEG texture) and should be fixed before releasing 0.9.10 (open)
+
+
+My next tasks will be #2 and #5. Joel, do you have time to take care of #9 during
+the next few days?
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From joel.lienard at free.fr  Sun Feb  8 17:21:46 2009
+From: joel.lienard at free.fr (=?iso-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Sun, 8 Feb 2009 17:21:46 +0100
+Subject: [Crrcsim-devel] Release planning for 0.9.10
+In-Reply-To: <20090203230918.7fce747b.jan.reucker@web.de>
+References: <20090130233855.0ddb860f.jan.reucker@web.de><20090201142750.GC4611@localhost><20090201155615.2eeca389.jan.reucker@web.de>
+	<20090203230918.7fce747b.jan.reucker@web.de>
+Message-ID: <2F9E25D053914ED28BB0E8D5F1F50F40@PCdeJol>
+
+I return one week of absence.
+I look quickly at this bug "initial position".
+
+Jo?l
+
+-----Message d'origine-----
+De?: crrcsim-devel-bounces at lists.berlios.de
+[mailto:crrcsim-devel-bounces at lists.berlios.de] De la part de Jan Reucker
+Envoy??: mardi 3 f?vrier 2009 23:09
+??: crrcsim-devel at lists.berlios.de
+Objet?: Re: [Crrcsim-devel] Release planning for 0.9.10
+
+Hi all,
+
+here's an updated TODO list (uncritical entries from my first email have
+been
+removed for clarity):
+
+#2 Verify that configuration of new functions also works on the command
+line. (open)
+   jr: I guess that the configuration of axis functions on the command line
+no
+       longer works (see bug #15161: it uses the same internal mechanism
+which
+       was removed 2005). Need to verify this and maybe remove the
+corresponding
+       CLI options.
+
+#4 Bug #15161 --> fixed
+
+#5 Unix manpage may need some corrections due to new input functions. (open)
+
+   jr: could be outdated, see #2. Nevertheless, the man page needs some
+       corrections and a thorough review.
+
+#6 New scenery selection dialog 
+   --> no action, fix later. Recorded as Feature Request #4470.
+
+#7 Experimental landscape files should not be part of the final
+   distribution tarball/binary packages to avoid confusing the user.
+   Verify autotools scripts. (open)
+   --> The autotools scripts need to be adapted to only include
+       cape_cod-orig.xml, davis-orig.xml, simple.xml and the associated
+       3D models and textures.
+
+#8 List of models needs a cleanup. Remove some, add some from addon-models.
+   --> Do the changes to the repository and adjust the autotools scripts.
+   arkanj-mg11.xml  remove
+   delta1c.xml      remove
+   delta1d.xml      remove
+   delta1e.xml      remove
+   k2-f3f2.xml      ?
+   k2-f3f.xml       ?
+   k2.xml           ?
+   mav0.xml         remove
+   Skimmer_MK_I.xml remove
+   spirit.xml       remove
+   tug.xml          remove
+   zagi.xml         ?
+   zip60.xml        remove
+
+   Crossfire.xml    add from crrcsim-addon-models
+   Erwin.xml        add from crrcsim-addon-models
+   fireworks3_C.xml add from crrcsim-addon-models, with Bob's parameter
+adjustment
+                    from the Yahoo group file section
+   supra.xml        add from crrcsim-addon-models, with Bob's parameter
+adjustment
+                    from the Yahoo group file section
+
+#9 Bug #015180 Initial airplane position
+   --> This bug was introduced by changeset 1014:c0820cd28e4d (import
+Windata 3D,
+       JPEG texture) and should be fixed before releasing 0.9.10 (open)
+
+
+My next tasks will be #2 and #5. Joel, do you have time to take care of #9
+during
+the next few days?
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+_______________________________________________
+Crrcsim-devel mailing list
+Crrcsim-devel at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+
+
+
+From joel.lienard at free.fr  Mon Feb  9 17:38:25 2009
+From: joel.lienard at free.fr (=?iso-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Mon, 9 Feb 2009 17:38:25 +0100
+Subject: [Crrcsim-devel] Release planning for 0.9.10
+In-Reply-To: <20090201155615.2eeca389.jan.reucker@web.de>
+References: <20090130233855.0ddb860f.jan.reucker@web.de><20090201142750.GC4611@localhost>
+	<20090201155615.2eeca389.jan.reucker@web.de>
+Message-ID: <79C9335B2E4B45298C2319B35DCF824D@PCdeJol>
+
+Hello,
+
+Since my modifications, the initial position of the plane is player
+relative. This mode is adapted to the current scenes without tracks. This
+position is modifiable in crrcsim.xml by launch.x and lauch.y. I had
+unfortunately left these values to zero, which was not adapted to the
+motorized models (sport and heli). Now, with x=y=10, that seems to be
+appropriate.
+
+I nevertheless added a commutation by launch.from_player. If
+launch.from_player=0, the initial position is determined by "<start>
+<position ..."  in scenery.html. This mode will be necessary for scenes with
+a track of takeoff. I did not adapt the dialogue of launching to take into
+account these parameters. I propose to do it later.
+
+Jo?l
+
+
+-----Message d'origine-----
+De?: crrcsim-devel-bounces at lists.berlios.de
+[mailto:crrcsim-devel-bounces at lists.berlios.de] De la part de Jan Reucker
+Envoy??: dimanche 1 f?vrier 2009 15:56
+??: crrcsim-devel at lists.berlios.de
+Objet?: Re: [Crrcsim-devel] Release planning for 0.9.10
+
+Am Sun, 1 Feb 2009 15:27:50 +0100 schrieb Jens Wilhelm Wulf
+<jens_w2 at gmx.net>:
+
+> apart from what you said, there is a bug concerning the airplanes initial
+> position. It is where your feet are when starting from the ground and
+where
+> your head is when doing a hand launch -- this is not realistic in any case
+> and differs from previous CRRCSim behaviour. I don't know who changed this
+> and why, but I consider this a showstopper for the next release.
+
+I filed a bug report for this one:
+
+https://developer.berlios.de/bugs/?func=detailbug&bug_id=15180&group_id=9957
+
+I guess it was introduced by Joel's coordinate system cleanup, but I don't
+know for sure. I agree that it should be fixed. For a helicopter it's
+impossible to start this way.
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+_______________________________________________
+Crrcsim-devel mailing list
+Crrcsim-devel at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+
+
+
+From jan.reucker at web.de  Mon Feb  9 23:27:00 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Mon, 9 Feb 2009 23:27:00 +0100
+Subject: [Crrcsim-devel] Release planning for 0.9.10
+In-Reply-To: <79C9335B2E4B45298C2319B35DCF824D@PCdeJol>
+References: <20090130233855.0ddb860f.jan.reucker@web.de>
+	<20090201142750.GC4611@localhost>
+	<20090201155615.2eeca389.jan.reucker@web.de>
+	<79C9335B2E4B45298C2319B35DCF824D@PCdeJol>
+Message-ID: <20090209232700.6b82b4ed.jan.reucker@web.de>
+
+Am Mon, 9 Feb 2009 17:38:25 +0100 schrieb Jo?l Li?nard <joel.lienard at free.fr>:
+
+> Since my modifications, the initial position of the plane is player
+> relative. This mode is adapted to the current scenes without tracks. This
+> position is modifiable in crrcsim.xml by launch.x and lauch.y. I had
+> unfortunately left these values to zero, which was not adapted to the
+> motorized models (sport and heli). Now, with x=y=10, that seems to be
+> appropriate.
+
+Hello Joel,
+
+this seems to work, at least if I create a new crrcsim.xml from scratch.
+Using my existing configuration the plane still appeared on my feet.
+I don't know what happens if someone keeps his existing configuration
+from 0.9.9 and then upgrades to 0.9.10.
+
+For a helicopter it would be better to stand right behind it (just like
+before) instead of launching with a 45 degree offset. And it won't hurt
+for planes. What do you think?
+ 
+> I nevertheless added a commutation by launch.from_player. If
+> launch.from_player=0, the initial position is determined by "<start>
+> <position ..."  in scenery.html. This mode will be necessary for scenes with
+> a track of takeoff. I did not adapt the dialogue of launching to take into
+> account these parameters. I propose to do it later.
+
+Maybe we should add some more logic: If from_player=0 and there's a
+<start> in the scenery.html, use this. If from_player=0 and there's
+no <start>, treat this like from_player=1.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Mon Feb  9 23:31:39 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Mon, 9 Feb 2009 23:31:39 +0100
+Subject: [Crrcsim-devel] Release planning for 0.9.10
+In-Reply-To: <20090203230918.7fce747b.jan.reucker@web.de>
+References: <20090130233855.0ddb860f.jan.reucker@web.de>
+	<20090201142750.GC4611@localhost>
+	<20090201155615.2eeca389.jan.reucker@web.de>
+	<20090203230918.7fce747b.jan.reucker@web.de>
+Message-ID: <20090209233139.f1fe93f3.jan.reucker@web.de>
+
+Am Tue, 3 Feb 2009 23:09:18 +0100 schrieb Jan Reucker <jan.reucker at web.de>:
+
+Update:
+
+#2 Verify that configuration of new functions also works on the command line. (in_work,JR)
+   jr: Axis function assignment does not work through the command line. I'll
+       remove all the code related to this.
+
+#5 Unix manpage may need some corrections due to new input functions. (in_work,JR) 
+   jr: see #2. Axis assignment option needs to be removed from the manpage.
+       I'll take care of this.
+
+#7 Experimental landscape files should not be part of the final
+   distribution tarball/binary packages to avoid confusing the user.
+   Verify autotools scripts. (open)
+   --> The autotools scripts need to be adapted to only include
+       cape_cod-orig.xml, davis-orig.xml, simple.xml and the associated
+       3D models and textures.
+
+#8 List of models needs a cleanup. Remove some, add some from addon-models.
+   --> Do the changes to the repository and adjust the autotools scripts.
+   arkanj-mg11.xml  remove
+   delta1c.xml      remove
+   delta1d.xml      remove
+   delta1e.xml      remove
+   k2-f3f2.xml      ?
+   k2-f3f.xml       ?
+   k2.xml           ?
+   mav0.xml         remove
+   Skimmer_MK_I.xml remove
+   spirit.xml       remove
+   tug.xml          remove
+   zagi.xml         ?
+   zip60.xml        remove
+
+   Crossfire.xml    add from crrcsim-addon-models
+   Erwin.xml        add from crrcsim-addon-models
+   fireworks3_C.xml add from crrcsim-addon-models, with Bob's parameter adjustment
+                    from the Yahoo group file section
+   supra.xml        add from crrcsim-addon-models, with Bob's parameter adjustment
+                    from the Yahoo group file section
+
+#9 Bug #015180 Initial airplane position (in_work, JL)
+   --> This bug was introduced by changeset 1014:c0820cd28e4d (import Windata 3D,
+       JPEG texture) and should be fixed before releasing 0.9.10 
+   --> A first fix was pushed by Joel, may need some fine-tuning.
+
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Wed Feb 11 21:09:19 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Wed, 11 Feb 2009 21:09:19 +0100
+Subject: [Crrcsim-devel] Release planning for 0.9.10
+In-Reply-To: <20090209233139.f1fe93f3.jan.reucker@web.de>
+References: <20090130233855.0ddb860f.jan.reucker@web.de>
+	<20090201142750.GC4611@localhost>
+	<20090201155615.2eeca389.jan.reucker@web.de>
+	<20090203230918.7fce747b.jan.reucker@web.de>
+	<20090209233139.f1fe93f3.jan.reucker@web.de>
+Message-ID: <20090211210919.b7945b95.jan.reucker@web.de>
+
+Update:
+ 
+#2 done
+#5 done
+
+#7 Experimental landscape files should not be part of the final
+   distribution tarball/binary packages to avoid confusing the user.
+   Verify autotools scripts. (open)
+   --> The autotools scripts need to be adapted to only include
+       cape_cod-orig.xml, davis-orig.xml, simple.xml and the associated
+       3D models and textures.
+
+#8 List of models needs a cleanup. Remove some, add some from addon-models.
+   --> Do the changes to the repository and adjust the autotools scripts.
+   arkanj-mg11.xml  remove
+   delta1c.xml      remove
+   delta1d.xml      remove
+   delta1e.xml      remove
+   k2-f3f2.xml      ?
+   k2-f3f.xml       ?
+   k2.xml           ?
+   mav0.xml         remove
+   Skimmer_MK_I.xml remove
+   spirit.xml       remove
+   tug.xml          remove
+   zagi.xml         ?
+   zip60.xml        remove
+
+   Crossfire.xml    add from crrcsim-addon-models
+   Erwin.xml        add from crrcsim-addon-models
+   fireworks3_C.xml add from crrcsim-addon-models, with Bob's parameter adjustment
+                    from the Yahoo group file section
+   supra.xml        add from crrcsim-addon-models, with Bob's parameter adjustment
+                    from the Yahoo group file section
+
+#9 Bug #015180 Initial airplane position (in_work, JL)
+   --> This bug was introduced by changeset 1014:c0820cd28e4d (import Windata 3D,
+       JPEG texture) and should be fixed before releasing 0.9.10 
+   --> A first fix was pushed by Joel, may need some fine-tuning.
+
+
+I guess I'll work on #8 next.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From joel.lienard at free.fr  Wed Feb 11 22:28:58 2009
+From: joel.lienard at free.fr (=?iso-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Wed, 11 Feb 2009 22:28:58 +0100
+Subject: [Crrcsim-devel] Release planning for 0.9.10
+In-Reply-To: <20090209232700.6b82b4ed.jan.reucker@web.de>
+References: <20090130233855.0ddb860f.jan.reucker@web.de><20090201142750.GC4611@localhost><20090201155615.2eeca389.jan.reucker@web.de><79C9335B2E4B45298C2319B35DCF824D@PCdeJol>
+	<20090209232700.6b82b4ed.jan.reucker@web.de>
+Message-ID: <DE2A1F80027748D59F46AD972FD918CF@PCdeJol>
+
+Hello Jan,
+
+>this seems to work, at least if I create a new crrcsim.xml from scratch.
+>Using my existing configuration the plane still appeared on my feet.
+
+Yes, launch.x, lannch.y are not overwritten
+
+>I don't know what happens if someone keeps his existing configuration
+>from 0.9.9 and then upgrades to 0.9.10.
+
+Is OK : the parameters not present are initialised with the default values
+
+>For a helicopter it would be better to stand right behind it (just like
+>before) instead of launching with a 45 degree offset. And it won't hurt
+>for planes. What do you think?
+
+=> default to launch.x=10, launch.y=0.
+ 
+>> I nevertheless added a commutation by launch.from_player. If
+>> launch.from_player=0, the initial position is determined by "<start>
+>> <position ..."  in scenery.html. This mode will be necessary for scenes
+with
+>> a track of takeoff. I did not adapt the dialogue of launching to take
+into
+>> account these parameters. I propose to do it later.
+
+
+>Maybe we should add some more logic: If from_player=0 and there's a
+><start> in the scenery.html, use this. If from_player=0 and there's
+>no <start>, treat this like from_player=1.
+
+Ok it is done.
+
+
+Jo?l
+
+
+
+
+
+
+From jan.reucker at web.de  Thu Feb 12 22:26:38 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Thu, 12 Feb 2009 22:26:38 +0100
+Subject: [Crrcsim-devel] Release planning for 0.9.10
+In-Reply-To: <DE2A1F80027748D59F46AD972FD918CF@PCdeJol>
+References: <20090130233855.0ddb860f.jan.reucker@web.de>
+	<20090201142750.GC4611@localhost>
+	<20090201155615.2eeca389.jan.reucker@web.de>
+	<79C9335B2E4B45298C2319B35DCF824D@PCdeJol>
+	<20090209232700.6b82b4ed.jan.reucker@web.de>
+	<DE2A1F80027748D59F46AD972FD918CF@PCdeJol>
+Message-ID: <20090212222638.a10b0837.jan.reucker@web.de>
+
+Am Wed, 11 Feb 2009 22:28:58 +0100 schrieb Jo?l Li?nard <joel.lienard at free.fr>:
+
+> => default to launch.x=10, launch.y=0.
+
+O.k., that works now. Much better!
+  
+> >Maybe we should add some more logic: If from_player=0 and there's a
+> ><start> in the scenery.html, use this. If from_player=0 and there's
+> >no <start>, treat this like from_player=1.
+> 
+> Ok it is done.
+
+Fine, thanks!
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Thu Feb 12 22:27:34 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Thu, 12 Feb 2009 22:27:34 +0100
+Subject: [Crrcsim-devel] Release planning for 0.9.10
+In-Reply-To: <20090211210919.b7945b95.jan.reucker@web.de>
+References: <20090130233855.0ddb860f.jan.reucker@web.de>
+	<20090201142750.GC4611@localhost>
+	<20090201155615.2eeca389.jan.reucker@web.de>
+	<20090203230918.7fce747b.jan.reucker@web.de>
+	<20090209233139.f1fe93f3.jan.reucker@web.de>
+	<20090211210919.b7945b95.jan.reucker@web.de>
+Message-ID: <20090212222734.1591211e.jan.reucker@web.de>
+
+Am Wed, 11 Feb 2009 21:09:19 +0100 schrieb Jan Reucker <jan.reucker at web.de>:
+
+Update:
+ 
+#7 Experimental landscape files should not be part of the final
+   distribution tarball/binary packages to avoid confusing the user.
+   Verify autotools scripts. (open)
+   --> The autotools scripts need to be adapted to only include
+       cape_cod-orig.xml, davis-orig.xml, simple.xml and the associated
+       3D models and textures.
+
+#8 List of models needs a cleanup. Remove some, add some from addon-models.
+   --> Do the changes to the repository and adjust the autotools scripts.
+   arkanj-mg11.xml  remove
+   delta1c.xml      remove
+   delta1d.xml      remove
+   delta1e.xml      remove
+   k2-f3f2.xml      ?
+   k2-f3f.xml       ?
+   k2.xml           ?
+   mav0.xml         remove
+   Skimmer_MK_I.xml remove
+   spirit.xml       remove
+   tug.xml          remove
+   zagi.xml         ?
+   zip60.xml        remove
+
+   Crossfire.xml    add from crrcsim-addon-models
+   Erwin.xml        add from crrcsim-addon-models
+   fireworks3_C.xml add from crrcsim-addon-models, with Bob's parameter adjustment
+                    from the Yahoo group file section
+   supra.xml        add from crrcsim-addon-models, with Bob's parameter adjustment
+                    from the Yahoo group file section
+
+#9 fixed
+
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jwilliam at xmission.com  Thu Feb 12 22:35:55 2009
+From: jwilliam at xmission.com (Jerry Williams)
+Date: Thu, 12 Feb 2009 14:35:55 -0700
+Subject: [Crrcsim-devel] Release planning for 0.9.10
+In-Reply-To: <20090212222734.1591211e.jan.reucker@web.de>
+References: <20090130233855.0ddb860f.jan.reucker@web.de><20090201142750.GC4611@localhost><20090201155615.2eeca389.jan.reucker@web.de><20090203230918.7fce747b.jan.reucker@web.de><20090209233139.f1fe93f3.jan.reucker@web.de><20090211210919.b7945b95.jan.reucker@web.de>
+	<20090212222734.1591211e.jan.reucker@web.de>
+Message-ID: <84A867EFA6264DE2820D135882C3DEC2@Q9450>
+
+I wish the PilatusB4.xml was a model in the list from crrcsim-addon-models.
+But I am okay if it doesn't make it.
+I just like it a lot.
+
+> -----Original Message-----
+> From: crrcsim-devel-bounces at lists.berlios.de [mailto:crrcsim-devel-
+> bounces at lists.berlios.de] On Behalf Of Jan Reucker
+> Sent: Thursday, February 12, 2009 2:28 PM
+> To: crrcsim-devel at lists.berlios.de
+> Subject: Re: [Crrcsim-devel] Release planning for 0.9.10
+> 
+> Am Wed, 11 Feb 2009 21:09:19 +0100 schrieb Jan Reucker
+> <jan.reucker at web.de>:
+> 
+> Update:
+> 
+> #7 Experimental landscape files should not be part of the final
+>    distribution tarball/binary packages to avoid confusing the user.
+>    Verify autotools scripts. (open)
+>    --> The autotools scripts need to be adapted to only include
+>        cape_cod-orig.xml, davis-orig.xml, simple.xml and the associated
+>        3D models and textures.
+> 
+> #8 List of models needs a cleanup. Remove some, add some from addon-
+> models.
+>    --> Do the changes to the repository and adjust the autotools scripts.
+>    arkanj-mg11.xml  remove
+>    delta1c.xml      remove
+>    delta1d.xml      remove
+>    delta1e.xml      remove
+>    k2-f3f2.xml      ?
+>    k2-f3f.xml       ?
+>    k2.xml           ?
+>    mav0.xml         remove
+>    Skimmer_MK_I.xml remove
+>    spirit.xml       remove
+>    tug.xml          remove
+>    zagi.xml         ?
+>    zip60.xml        remove
+> 
+>    Crossfire.xml    add from crrcsim-addon-models
+>    Erwin.xml        add from crrcsim-addon-models
+>    fireworks3_C.xml add from crrcsim-addon-models, with Bob's parameter
+> adjustment
+>                     from the Yahoo group file section
+>    supra.xml        add from crrcsim-addon-models, with Bob's parameter
+> adjustment
+>                     from the Yahoo group file section
+> 
+> #9 fixed
+> 
+> 
+> Kind regards,
+> Jan R.
+> 
+> --
+> Jan Reucker
+> Ober-Ramstadt, Germany
+> PGP-Key: http://www.reucker-online.de/pgpkey.asc
+> _______________________________________________
+> Crrcsim-devel mailing list
+> Crrcsim-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+
+
+
+
+From jan.reucker at web.de  Thu Feb 12 22:49:12 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Thu, 12 Feb 2009 22:49:12 +0100
+Subject: [Crrcsim-devel] Release planning for 0.9.10
+In-Reply-To: <84A867EFA6264DE2820D135882C3DEC2@Q9450>
+References: <20090130233855.0ddb860f.jan.reucker@web.de>
+	<20090201142750.GC4611@localhost>
+	<20090201155615.2eeca389.jan.reucker@web.de>
+	<20090203230918.7fce747b.jan.reucker@web.de>
+	<20090209233139.f1fe93f3.jan.reucker@web.de>
+	<20090211210919.b7945b95.jan.reucker@web.de>
+	<20090212222734.1591211e.jan.reucker@web.de>
+	<84A867EFA6264DE2820D135882C3DEC2@Q9450>
+Message-ID: <20090212224912.acf00295.jan.reucker@web.de>
+
+Am Thu, 12 Feb 2009 14:35:55 -0700 schrieb "Jerry Williams" <jwilliam at xmission.com>:
+
+> I wish the PilatusB4.xml was a model in the list from crrcsim-addon-models.
+> But I am okay if it doesn't make it.
+> I just like it a lot.
+
+Update:
+ 
+#7 Experimental landscape files should not be part of the final
+   distribution tarball/binary packages to avoid confusing the user.
+   Verify autotools scripts. (open)
+   --> The autotools scripts need to be adapted to only include
+       cape_cod-orig.xml, davis-orig.xml, simple.xml and the associated
+       3D models and textures.
+
+#8 List of models needs a cleanup. Remove some, add some from addon-models.
+   --> Do the changes to the repository and adjust the autotools scripts.
+   arkanj-mg11.xml  remove
+   delta1c.xml      remove
+   delta1d.xml      remove
+   delta1e.xml      remove
+   k2-f3f2.xml      ?
+   k2-f3f.xml       ?
+   k2.xml           ?
+   mav0.xml         remove
+   Skimmer_MK_I.xml remove
+   spirit.xml       remove
+   tug.xml          remove
+   zagi.xml         ?
+   zip60.xml        remove
+
+   Crossfire.xml    add from crrcsim-addon-models
+   Erwin.xml        add from crrcsim-addon-models
+   PilatusB4.xml    add from crrcsim-addon-models
+   fireworks3_C.xml add from crrcsim-addon-models, with Bob's parameter adjustment
+                    from the Yahoo group file section
+   supra.xml        add from crrcsim-addon-models, with Bob's parameter adjustment
+                    from the Yahoo group file section
+
+Does that sound better?
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jwilliam at xmission.com  Fri Feb 13 00:59:04 2009
+From: jwilliam at xmission.com (Jerry Williams)
+Date: Thu, 12 Feb 2009 16:59:04 -0700
+Subject: [Crrcsim-devel] Release planning for 0.9.10
+In-Reply-To: <20090212224912.acf00295.jan.reucker@web.de>
+References: <20090130233855.0ddb860f.jan.reucker@web.de><20090201142750.GC4611@localhost><20090201155615.2eeca389.jan.reucker@web.de><20090203230918.7fce747b.jan.reucker@web.de><20090209233139.f1fe93f3.jan.reucker@web.de><20090211210919.b7945b95.jan.reucker@web.de><20090212222734.1591211e.jan.reucker@web.de><84A867EFA6264DE2820D135882C3DEC2@Q9450>
+	<20090212224912.acf00295.jan.reucker@web.de>
+Message-ID: <1689562CA40B4E7DA159F44426A06861@Q9450>
+
+Very nice. :-)
+Thanks a lot!
+
+> -----Original Message-----
+> From: crrcsim-devel-bounces at lists.berlios.de [mailto:crrcsim-devel-
+> bounces at lists.berlios.de] On Behalf Of Jan Reucker
+> Sent: Thursday, February 12, 2009 2:49 PM
+> To: crrcsim-devel at lists.berlios.de
+> Subject: Re: [Crrcsim-devel] Release planning for 0.9.10
+> 
+> Am Thu, 12 Feb 2009 14:35:55 -0700 schrieb "Jerry Williams"
+> <jwilliam at xmission.com>:
+> 
+> > I wish the PilatusB4.xml was a model in the list from crrcsim-addon-
+> models.
+> > But I am okay if it doesn't make it.
+> > I just like it a lot.
+> 
+> Update:
+> 
+> #7 Experimental landscape files should not be part of the final
+>    distribution tarball/binary packages to avoid confusing the user.
+>    Verify autotools scripts. (open)
+>    --> The autotools scripts need to be adapted to only include
+>        cape_cod-orig.xml, davis-orig.xml, simple.xml and the associated
+>        3D models and textures.
+> 
+> #8 List of models needs a cleanup. Remove some, add some from addon-
+> models.
+>    --> Do the changes to the repository and adjust the autotools scripts.
+>    arkanj-mg11.xml  remove
+>    delta1c.xml      remove
+>    delta1d.xml      remove
+>    delta1e.xml      remove
+>    k2-f3f2.xml      ?
+>    k2-f3f.xml       ?
+>    k2.xml           ?
+>    mav0.xml         remove
+>    Skimmer_MK_I.xml remove
+>    spirit.xml       remove
+>    tug.xml          remove
+>    zagi.xml         ?
+>    zip60.xml        remove
+> 
+>    Crossfire.xml    add from crrcsim-addon-models
+>    Erwin.xml        add from crrcsim-addon-models
+>    PilatusB4.xml    add from crrcsim-addon-models
+>    fireworks3_C.xml add from crrcsim-addon-models, with Bob's parameter
+> adjustment
+>                     from the Yahoo group file section
+>    supra.xml        add from crrcsim-addon-models, with Bob's parameter
+> adjustment
+>                     from the Yahoo group file section
+> 
+> Does that sound better?
+> 
+> Kind regards,
+> Jan R.
+> 
+> --
+> Jan Reucker
+> Ober-Ramstadt, Germany
+> PGP-Key: http://www.reucker-online.de/pgpkey.asc
+> _______________________________________________
+> Crrcsim-devel mailing list
+> Crrcsim-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+
+
+
+
+From joel.lienard at inpg.fr  Sun Feb  8 16:54:13 2009
+From: joel.lienard at inpg.fr (=?iso-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Sun, 8 Feb 2009 16:54:13 +0100
+Subject: [Crrcsim-devel] Release planning for 0.9.10
+In-Reply-To: <20090203230918.7fce747b.jan.reucker@web.de>
+References: <20090130233855.0ddb860f.jan.reucker@web.de><20090201142750.GC4611@localhost><20090201155615.2eeca389.jan.reucker@web.de>
+	<20090203230918.7fce747b.jan.reucker@web.de>
+Message-ID: <F7F025D8E9F94B1685FE54CF39B21325@PCdeJol>
+
+I return one week of absence.
+I look quickly at this bug "initial position".
+
+Jo?l
+
+
+-----Message d'origine-----
+De?: crrcsim-devel-bounces at lists.berlios.de
+[mailto:crrcsim-devel-bounces at lists.berlios.de] De la part de Jan Reucker
+Envoy??: mardi 3 f?vrier 2009 23:09
+??: crrcsim-devel at lists.berlios.de
+Objet?: Re: [Crrcsim-devel] Release planning for 0.9.10
+
+Hi all,
+
+here's an updated TODO list (uncritical entries from my first email have
+been
+removed for clarity):
+
+#2 Verify that configuration of new functions also works on the command
+line. (open)
+   jr: I guess that the configuration of axis functions on the command line
+no
+       longer works (see bug #15161: it uses the same internal mechanism
+which
+       was removed 2005). Need to verify this and maybe remove the
+corresponding
+       CLI options.
+
+#4 Bug #15161 --> fixed
+
+#5 Unix manpage may need some corrections due to new input functions. (open)
+
+   jr: could be outdated, see #2. Nevertheless, the man page needs some
+       corrections and a thorough review.
+
+#6 New scenery selection dialog 
+   --> no action, fix later. Recorded as Feature Request #4470.
+
+#7 Experimental landscape files should not be part of the final
+   distribution tarball/binary packages to avoid confusing the user.
+   Verify autotools scripts. (open)
+   --> The autotools scripts need to be adapted to only include
+       cape_cod-orig.xml, davis-orig.xml, simple.xml and the associated
+       3D models and textures.
+
+#8 List of models needs a cleanup. Remove some, add some from addon-models.
+   --> Do the changes to the repository and adjust the autotools scripts.
+   arkanj-mg11.xml  remove
+   delta1c.xml      remove
+   delta1d.xml      remove
+   delta1e.xml      remove
+   k2-f3f2.xml      ?
+   k2-f3f.xml       ?
+   k2.xml           ?
+   mav0.xml         remove
+   Skimmer_MK_I.xml remove
+   spirit.xml       remove
+   tug.xml          remove
+   zagi.xml         ?
+   zip60.xml        remove
+
+   Crossfire.xml    add from crrcsim-addon-models
+   Erwin.xml        add from crrcsim-addon-models
+   fireworks3_C.xml add from crrcsim-addon-models, with Bob's parameter
+adjustment
+                    from the Yahoo group file section
+   supra.xml        add from crrcsim-addon-models, with Bob's parameter
+adjustment
+                    from the Yahoo group file section
+
+#9 Bug #015180 Initial airplane position
+   --> This bug was introduced by changeset 1014:c0820cd28e4d (import
+Windata 3D,
+       JPEG texture) and should be fixed before releasing 0.9.10 (open)
+
+
+My next tasks will be #2 and #5. Joel, do you have time to take care of #9
+during
+the next few days?
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+_______________________________________________
+Crrcsim-devel mailing list
+Crrcsim-devel at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+
+
+
+From joel.lienard at inpg.fr  Fri Feb 13 09:20:46 2009
+From: joel.lienard at inpg.fr (=?iso-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Fri, 13 Feb 2009 09:20:46 +0100
+Subject: [Crrcsim-devel] Release planning for 0.9.10
+In-Reply-To: <84A867EFA6264DE2820D135882C3DEC2@Q9450>
+References: <20090130233855.0ddb860f.jan.reucker@web.de><20090201142750.GC4611@localhost><20090201155615.2eeca389.jan.reucker@web.de><20090203230918.7fce747b.jan.reucker@web.de><20090209233139.f1fe93f3.jan.reucker@web.de><20090211210919.b7945b95.jan.reucker@web.de><20090212222734.1591211e.jan.reucker@web.de>
+	<84A867EFA6264DE2820D135882C3DEC2@Q9450>
+Message-ID: <38DBDA135A9B4B8E87C5664784EF1D01@PCdeJol>
+
+Hello,
+
+Pilatus and Fox are attractive. But it seems to me that they have a bug.
+Movements repeated by the rudder accelerate them.
+
+Joel
+
+-----Message d'origine-----
+De?: crrcsim-devel-bounces at lists.berlios.de
+[mailto:crrcsim-devel-bounces at lists.berlios.de] De la part de Jerry Williams
+Envoy??: jeudi 12 f?vrier 2009 22:36
+??: 'Jan Reucker'; crrcsim-devel at lists.berlios.de
+Objet?: Re: [Crrcsim-devel] Release planning for 0.9.10
+
+I wish the PilatusB4.xml was a model in the list from crrcsim-addon-models.
+But I am okay if it doesn't make it.
+I just like it a lot.
+
+> -----Original Message-----
+> From: crrcsim-devel-bounces at lists.berlios.de [mailto:crrcsim-devel-
+> bounces at lists.berlios.de] On Behalf Of Jan Reucker
+> Sent: Thursday, February 12, 2009 2:28 PM
+> To: crrcsim-devel at lists.berlios.de
+> Subject: Re: [Crrcsim-devel] Release planning for 0.9.10
+> 
+> Am Wed, 11 Feb 2009 21:09:19 +0100 schrieb Jan Reucker
+> <jan.reucker at web.de>:
+> 
+> Update:
+> 
+> #7 Experimental landscape files should not be part of the final
+>    distribution tarball/binary packages to avoid confusing the user.
+>    Verify autotools scripts. (open)
+>    --> The autotools scripts need to be adapted to only include
+>        cape_cod-orig.xml, davis-orig.xml, simple.xml and the associated
+>        3D models and textures.
+> 
+> #8 List of models needs a cleanup. Remove some, add some from addon-
+> models.
+>    --> Do the changes to the repository and adjust the autotools scripts.
+>    arkanj-mg11.xml  remove
+>    delta1c.xml      remove
+>    delta1d.xml      remove
+>    delta1e.xml      remove
+>    k2-f3f2.xml      ?
+>    k2-f3f.xml       ?
+>    k2.xml           ?
+>    mav0.xml         remove
+>    Skimmer_MK_I.xml remove
+>    spirit.xml       remove
+>    tug.xml          remove
+>    zagi.xml         ?
+>    zip60.xml        remove
+> 
+>    Crossfire.xml    add from crrcsim-addon-models
+>    Erwin.xml        add from crrcsim-addon-models
+>    fireworks3_C.xml add from crrcsim-addon-models, with Bob's parameter
+> adjustment
+>                     from the Yahoo group file section
+>    supra.xml        add from crrcsim-addon-models, with Bob's parameter
+> adjustment
+>                     from the Yahoo group file section
+> 
+> #9 fixed
+> 
+> 
+> Kind regards,
+> Jan R.
+> 
+> --
+> Jan Reucker
+> Ober-Ramstadt, Germany
+> PGP-Key: http://www.reucker-online.de/pgpkey.asc
+> _______________________________________________
+> Crrcsim-devel mailing list
+> Crrcsim-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+
+
+_______________________________________________
+Crrcsim-devel mailing list
+Crrcsim-devel at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+
+
+
+From jan.reucker at web.de  Tue Feb 17 21:55:50 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Tue, 17 Feb 2009 21:55:50 +0100
+Subject: [Crrcsim-devel] Release planning for 0.9.10
+In-Reply-To: <20090212224912.acf00295.jan.reucker@web.de>
+References: <20090130233855.0ddb860f.jan.reucker@web.de>
+	<20090201142750.GC4611@localhost>
+	<20090201155615.2eeca389.jan.reucker@web.de>
+	<20090203230918.7fce747b.jan.reucker@web.de>
+	<20090209233139.f1fe93f3.jan.reucker@web.de>
+	<20090211210919.b7945b95.jan.reucker@web.de>
+	<20090212222734.1591211e.jan.reucker@web.de>
+	<84A867EFA6264DE2820D135882C3DEC2@Q9450>
+	<20090212224912.acf00295.jan.reucker@web.de>
+Message-ID: <20090217215550.bd7e47ac.jan.reucker@web.de>
+
+Update:
+ 
+#7 Experimental landscape files should not be part of the final
+   distribution tarball/binary packages to avoid confusing the user.
+   Verify autotools scripts. (open)
+   --> The autotools scripts need to be adapted to only include
+       cape_cod-orig.xml, davis-orig.xml, simple.xml and the associated
+       3D models and textures.
+
+#8 List of models needs a cleanup. Remove some, add some from addon-models.
+   (done)
+
+New files were added as proposed. The old models are still available as a
+separate download:
+
+https://developer.berlios.de/project/showfiles.php?group_id=9957
+
+So there's not much work left until I will prepare a first release
+candidate.
+
+Kind regards,
+Jan R.
+
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Mon Feb 23 23:24:01 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Mon, 23 Feb 2009 23:24:01 +0100
+Subject: [Crrcsim-devel] Release candidate 1 for 0.9.10
+Message-ID: <20090223232401.aaeb9860.jan.reucker@web.de>
+
+Hello,
+
+I've completed the list of open tasks for 0.9.10 and prepared a first
+release candidate from changeset 1068:f7296b405e32. You can download
+the source tarball from here:
+
+http://www.reucker-online.de/files/crrcsim-2009-02-23_f7296b405e32.tar.gz
+
+I hope that I can provide a Win32 installer built from this tarball soon.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Tue Feb 24 20:43:43 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Tue, 24 Feb 2009 20:43:43 +0100
+Subject: [Crrcsim-devel] Release candidate 1 for 0.9.10
+In-Reply-To: <20090223232401.aaeb9860.jan.reucker@web.de>
+References: <20090223232401.aaeb9860.jan.reucker@web.de>
+Message-ID: <20090224194343.GB3783@knusper.jensens.local>
+
+Hi,
+
+I just looked at the current state and at what happened in the
+meantime...sorry to say that I'm highly discontent with some of the code and
+config file changes. There will be a proposal (commit to hg) on how to make
+it different tomorrow. 
+
+Jens
+
+
+From jens_w2 at gmx.net  Wed Feb 25 17:24:28 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Wed, 25 Feb 2009 17:24:28 +0100
+Subject: [Crrcsim-devel] Release candidate 1 for 0.9.10
+In-Reply-To: <20090223232401.aaeb9860.jan.reucker@web.de>
+References: <20090223232401.aaeb9860.jan.reucker@web.de>
+Message-ID: <20090225162428.GA9970@knusper.jensens.local>
+
+Hi,
+
+so I pushed my changesets, they partially clean up what I didn't like.
+
+Furthermore, they provide sensible launch defaults for every model (except
+mav, see below) and provide mostly backwards-compatible behaviour. So this
+is the first version which provides a working launch for every model after
+selecting it, without tweaking launch settings. No sports models/heli will
+fall from the sky and no glider will sit on the grass.
+
+I added the player-relative launch position to the launch default section in
+the model file and to launch presets in crrcsim.xml. The new values are
+handled by crrc_launch.cpp -- however, they are not editable using the GUI yet.
+
+'mav' can't be launched in any way, it must be started from the ground. I'll
+look into it -- it has been like this since some time, though...
+
+I recognized that one of the recent changesets changed the player position
+in such a way that when doing a ground start at Davis, the initial field of
+view has changed a lot -- the player has grown taller some feet.
+
+Jens
+
+
+From jens_w2 at gmx.net  Wed Feb 25 17:32:43 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Wed, 25 Feb 2009 17:32:43 +0100
+Subject: [Crrcsim-devel] development quality expectations
+Message-ID: <20090225163243.GB9970@knusper.jensens.local>
+
+Here are some notes about the subject..maybe this is just my two cents,
+maybe we can stick to it... 
+
+ - coding style (we agreed on that some time ago)
+     * no tabs
+     * indentation, braces
+     * no further code on if/else lines despite condition
+ - no inactive (commented out) code without good reason and comment. We DO
+   have a VCS.
+ - code quality in general
+ - don't push what's far from finished if it is visible to the user or in
+   the config files and you don't manage to fix it for the next release 
+ - if you messed up your local repo by adding much-too-big-files, pointless
+   merge changesets or something like that: don't push. Ask on the list about
+   how to fix your local repo (it is possible!), fix it, push afterwards.   
+ - take a look at your changesets regarding the points above before you push 
+
+The current state of CRRCSim is too good to leave traces of bad
+coding/style, obvious regressions or something like this. And we have little
+manpower -- so if we do something, it should be done right or not done at all.
+
+If something worked (well) for a user in version A, it should work at least
+equally well in version B, no matter if it is a fresh install or an upgrade.
+We must not require a user to tweak config files in order to get something
+working again or fix misfeatures.
+
+Best regards,
+Jens
+
+
+From jens_w2 at gmx.net  Wed Feb 25 17:40:03 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Wed, 25 Feb 2009 17:40:03 +0100
+Subject: [Crrcsim-devel] quality criteria -- why?
+Message-ID: <20090225164003.GC9970@knusper.jensens.local>
+
+Why did I write the other email, you may ask.
+
+I feel kind of responsible for CRRCSim. Starting from 2004, Jan Reucker and
+me worked A LOT to get the project to where it is now. So I can't bear to
+see it degrade in any way.
+BUT: the time I can spend on it is very limited, and surely this is true for
+Jan, too.
+For me it is really exhausting if I have to spend time on the project to fix
+things caused by others. Usually the only alternative is letting it degrade
+-- even writing an email (stating what's wrong) takes time.
+
+The project needs contributors to make it move forward faster and who might
+take over caring about it one day, therefore I don't want make contributing
+harder. But if many contributions result in me (or Jan) having to fix things
+or watching the project degrade, I'd rather keep up quality by
+accepting/rejecting changesets/patches by persons acting as gatekeepers than
+letting CRRCSim degrade (this development model makes contributing harder of
+course).
+
+Please keep in mind: at the moment there is nothing like CRRCSim, there is
+nothing on the horizon. It is something valuable, so we should treat it like
+that.
+
+Best regards,
+Jens
+
+
+From jens_w2 at gmx.net  Wed Feb 25 18:36:28 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Wed, 25 Feb 2009 18:36:28 +0100
+Subject: [Crrcsim-devel] mav launch problem
+Message-ID: <20090225173628.GA11559@knusper.jensens.local>
+
+Hi there,
+
+I'll commit a fix for not-starting-from-ground mav (and gap65, sports and
+others) tomorrow morning.
+
+Best regards,
+Jens
+
+
+From jan.reucker at web.de  Wed Feb 25 21:13:37 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Wed, 25 Feb 2009 21:13:37 +0100
+Subject: [Crrcsim-devel] development quality expectations
+In-Reply-To: <20090225163243.GB9970@knusper.jensens.local>
+References: <20090225163243.GB9970@knusper.jensens.local>
+Message-ID: <20090225211337.124b4a15.jan.reucker@web.de>
+
+Am Wed, 25 Feb 2009 17:32:43 +0100 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> Here are some notes about the subject..maybe this is just my two cents,
+> maybe we can stick to it... 
+
+Hi Jens,
+
+many thanks for your clear words. I agree to all points you stated in both
+your quality related emails, and I hope that we can continue improving CRRCsim
+with these points on our minds.
+
+I hope that it's not necessary to switch to the "gatekeeper" development
+model, allthough hg makes it easy for contributors to prepare patches
+or export whole changesets and send them to the gatekeeper instead of
+committing directly. The "gatekeeper" model puts some extra load on the
+shoulders of the core team, because they have to review every incoming
+piece of code. And as you already said, our time for CRRCsim is very
+limited.
+
+Well, we often talked about coding style and "best practice" development,
+but I guess it's time to write it down on a wiki page. Everything was
+written down in different emails, some knowledge is retained in the
+astyle and indent command lines in the old Makefiles. But I should write
+it down in the wiki to have it all in one place.
+
+But before, I think that we should get 0.9.10 on the road. I hope that I can
+take a look at your changes later. 
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Thu Feb 26 10:25:42 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Thu, 26 Feb 2009 10:25:42 +0100
+Subject: [Crrcsim-devel] Compiler warning
+Message-ID: <20090226092542.GA24858@knusper.jensens.local>
+
+Hi Joel,
+
+there is a warning...don't know if you know about it and whether it is
+something one should care about (I am not familiar with what's done there):
+
+src/mod_landscape/crrc_scenery.cpp: In member function ?void ModelBasedScenery::tiling_terrain(ssgEntity*, float (*)[4])?:
+src/mod_landscape/crrc_scenery.cpp:2896: warning: the address of ?xform? will always evaluate as ?true?
+
+Best regards,
+Jens
+
+
+From jens_w2 at gmx.net  Thu Feb 26 10:29:55 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Thu, 26 Feb 2009 10:29:55 +0100
+Subject: [Crrcsim-devel] 0.9.10
+In-Reply-To: <20090225211337.124b4a15.jan.reucker@web.de>
+References: <20090225163243.GB9970@knusper.jensens.local>
+	<20090225211337.124b4a15.jan.reucker@web.de>
+Message-ID: <20090226092955.GB24858@knusper.jensens.local>
+
+> But before, I think that we should get 0.9.10 on the road. I hope that I can
+> take a look at your changes later. 
+Don't know if I got you wrong, but I strongly suggest to release 0.9.10
+*including* the changes I pushed.
+
+Jens
+
+
+From jens_w2 at gmx.net  Thu Feb 26 10:41:43 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Thu, 26 Feb 2009 10:41:43 +0100
+Subject: [Crrcsim-devel] development quality expectations
+In-Reply-To: <20090225211337.124b4a15.jan.reucker@web.de>
+References: <20090225163243.GB9970@knusper.jensens.local>
+	<20090225211337.124b4a15.jan.reucker@web.de>
+Message-ID: <20090226094143.GC24858@knusper.jensens.local>
+
+> committing directly. The "gatekeeper" model puts some extra load on the
+> shoulders of the core team, because they have to review every incoming
+> piece of code. And as you already said, our time for CRRCsim is very
+> limited.
+You are right, but if 'contributions' keep recent quality, I'd rather
+act as a gatekeeper -- if quality is more important than features/changes,
+then being gatekeeper means less work. I'd only accept changesets with a
+clear scope and certain quality -- so there is no worrying about who fixes
+things or when things will be fixed as long as they are not in the main repo.
+
+> Well, we often talked about coding style and "best practice" development,
+and it has not been a problem for a long time!
+
+> but I guess it's time to write it down on a wiki page. Everything was
+> written down in different emails, some knowledge is retained in the
+> astyle and indent command lines in the old Makefiles. But I should write
+> it down in the wiki to have it all in one place.
+Yes, it should be there. However, it is not of much use as long as people
+don't contribute or even join the dev team.
+
+Jens
+
+
+From jens_w2 at gmx.net  Thu Feb 26 10:42:43 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Thu, 26 Feb 2009 10:42:43 +0100
+Subject: [Crrcsim-devel] mav launch problem
+In-Reply-To: <20090225173628.GA11559@knusper.jensens.local>
+References: <20090225173628.GA11559@knusper.jensens.local>
+Message-ID: <20090226094243.GA12231@knusper.jensens.local>
+
+Done.
+
+
+From joel.lienard at free.fr  Thu Feb 26 13:54:01 2009
+From: joel.lienard at free.fr (=?iso-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Thu, 26 Feb 2009 13:54:01 +0100
+Subject: [Crrcsim-devel] Compiler warning
+In-Reply-To: <20090226092542.GA24858@knusper.jensens.local>
+References: <20090226092542.GA24858@knusper.jensens.local>
+Message-ID: <D239D38B30654218A3A896846913F948@PCdeJol>
+
+I do not understand the warning message: the test is on "xform0",
+not on " xform ".
+
+To avoid any problem, I modified the code (pushed on hg)
+
+Jo?l
+
+-----Message d'origine-----
+De?: crrcsim-devel-bounces at lists.berlios.de
+[mailto:crrcsim-devel-bounces at lists.berlios.de] De la part de Jens Wilhelm
+Wulf
+Envoy??: jeudi 26 f?vrier 2009 10:26
+??: Mailinglist CRRCSim Mailinglist CRRCSim
+Objet?: [Crrcsim-devel] Compiler warning
+
+Hi Joel,
+
+there is a warning...don't know if you know about it and whether it is
+something one should care about (I am not familiar with what's done there):
+
+src/mod_landscape/crrc_scenery.cpp: In member function ?void
+ModelBasedScenery::tiling_terrain(ssgEntity*, float (*)[4])?:
+src/mod_landscape/crrc_scenery.cpp:2896: warning: the address of ?xform?
+will always evaluate as ?true?
+
+Best regards,
+Jens
+_______________________________________________
+Crrcsim-devel mailing list
+Crrcsim-devel at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+
+
+
+From joel.lienard at free.fr  Thu Feb 26 14:33:59 2009
+From: joel.lienard at free.fr (=?iso-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Thu, 26 Feb 2009 14:33:59 +0100
+Subject: [Crrcsim-devel] Release candidate 1 for 0.9.10
+In-Reply-To: <20090223232401.aaeb9860.jan.reucker@web.de>
+References: <20090223232401.aaeb9860.jan.reucker@web.de>
+Message-ID: <B2EEB6CB1B704AE0937DD46570E177B2@PCdeJol>
+
+- Make OK on my Window+msys
+
+- I suggest changing the names of scenery for cleaner "Select location"
+dialog.
+
+In file davis-orig.xml : "Davis"
+In file cape_cod-orig.xml : "Cape Cod"
+In file davis.xml : "Davis(ModelBased)"
+In file cape_cod.xml : "Cape Cod(ModelBased)"
+
+Jo?l
+
+-----Message d'origine-----
+De?: crrcsim-devel-bounces at lists.berlios.de
+[mailto:crrcsim-devel-bounces at lists.berlios.de] De la part de Jan Reucker
+Envoy??: lundi 23 f?vrier 2009 23:24
+??: crrcsim-devel
+Objet?: [Crrcsim-devel] Release candidate 1 for 0.9.10
+
+Hello,
+
+I've completed the list of open tasks for 0.9.10 and prepared a first
+release candidate from changeset 1068:f7296b405e32. You can download
+the source tarball from here:
+
+http://www.reucker-online.de/files/crrcsim-2009-02-23_f7296b405e32.tar.gz
+
+I hope that I can provide a Win32 installer built from this tarball soon.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+_______________________________________________
+Crrcsim-devel mailing list
+Crrcsim-devel at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+
+
+
+From jan.reucker at web.de  Thu Feb 26 20:45:51 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Thu, 26 Feb 2009 20:45:51 +0100
+Subject: [Crrcsim-devel] Release candidate 1 for 0.9.10
+In-Reply-To: <B2EEB6CB1B704AE0937DD46570E177B2@PCdeJol>
+References: <20090223232401.aaeb9860.jan.reucker@web.de>
+	<B2EEB6CB1B704AE0937DD46570E177B2@PCdeJol>
+Message-ID: <20090226204551.226449b5.jan.reucker@web.de>
+
+Am Thu, 26 Feb 2009 14:33:59 +0100 schrieb Jo?l Li?nard <joel.lienard at free.fr>:
+
+> In file davis.xml : "Davis(ModelBased)"
+> In file cape_cod.xml : "Cape Cod(ModelBased)"
+
+Hi Joel,
+
+these two files should not be part of the distributed tarball, as they
+are only experimental and of no real use to the enduser. "simple.xml"
+is experimental, too, but it should stay in the distribution to
+act as an example for potential scenery builders.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Thu Feb 26 20:47:24 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Thu, 26 Feb 2009 20:47:24 +0100
+Subject: [Crrcsim-devel] 0.9.10
+In-Reply-To: <20090226092955.GB24858@knusper.jensens.local>
+References: <20090225163243.GB9970@knusper.jensens.local>
+	<20090225211337.124b4a15.jan.reucker@web.de>
+	<20090226092955.GB24858@knusper.jensens.local>
+Message-ID: <20090226204724.248a5518.jan.reucker@web.de>
+
+Am Thu, 26 Feb 2009 10:29:55 +0100 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> > But before, I think that we should get 0.9.10 on the road. I hope that I can
+> > take a look at your changes later. 
+> Don't know if I got you wrong, but I strongly suggest to release 0.9.10
+> *including* the changes I pushed.
+
+Definitely. I meant that I'll provide a new RC first, and then take care
+of writing down something about code quality in the wiki.
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Thu Feb 26 20:50:48 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Thu, 26 Feb 2009 20:50:48 +0100
+Subject: [Crrcsim-devel] development quality expectations
+In-Reply-To: <20090226094143.GC24858@knusper.jensens.local>
+References: <20090225163243.GB9970@knusper.jensens.local>
+	<20090225211337.124b4a15.jan.reucker@web.de>
+	<20090226094143.GC24858@knusper.jensens.local>
+Message-ID: <20090226205048.d1fcb9c8.jan.reucker@web.de>
+
+Am Thu, 26 Feb 2009 10:41:43 +0100 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> Yes, it should be there. However, it is not of much use as long as people
+> don't contribute or even join the dev team.
+
+You're right, but I think I'll get it done before CRRCsim hits the Ubuntu
+repository. This might slightly increase CRRCsim's popularity, so there's
+a chance that there might be a patch or two every now and then...
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Thu Feb 26 21:11:33 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Thu, 26 Feb 2009 21:11:33 +0100
+Subject: [Crrcsim-devel] Compiler warning
+In-Reply-To: <D239D38B30654218A3A896846913F948@PCdeJol>
+References: <20090226092542.GA24858@knusper.jensens.local>
+	<D239D38B30654218A3A896846913F948@PCdeJol>
+Message-ID: <20090226211133.a2edf5e4.jan.reucker@web.de>
+
+Am Thu, 26 Feb 2009 13:54:01 +0100 schrieb Jo?l Li?nard <joel.lienard at free.fr>:
+
+> I do not understand the warning message: the test is on "xform0",
+> not on " xform ".
+
+No, the offending line 2896 read:
+
+if( xform) sgPreMultMat4  ( xform, xform1 ) ;//Pre or Post ???
+
+And because "sgMat4" is just an array, "xform" will evaluate to the address of
+the first element, therefore always being != 0.
+
+> To avoid any problem, I modified the code (pushed on hg)
+
+Thanks. But I think you didn't really fix the issue, you just told the
+compiler that xform might be pointing to NULL now (by passing it in as
+a parameter, the compiler loses the ability to track its value). The real
+problem is that the "if" clause (now in line 2893) doesn't do anything
+useful:
+
+- it doesn't check if "xform" is all zeros
+- it doesn't check if "xform" is an identity matrix
+- it is always true, because you always pass a pointer to an automatic
+  variable to the function (which is always != NULL)
+
+So I suggest that you just remove the "if (xform)" or tell us what you
+wanted to achieve with it so that we can think of a working solution.
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From joel.lienard at free.fr  Thu Feb 26 22:59:17 2009
+From: joel.lienard at free.fr (=?iso-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Thu, 26 Feb 2009 22:59:17 +0100
+Subject: [Crrcsim-devel] Compiler warning
+In-Reply-To: <20090226211133.a2edf5e4.jan.reucker@web.de>
+References: <20090226092542.GA24858@knusper.jensens.local><D239D38B30654218A3A896846913F948@PCdeJol>
+	<20090226211133.a2edf5e4.jan.reucker@web.de>
+Message-ID: <DA38C5A8D2CD481FB0F7A5A9F799DB5E@PCdeJol>
+
+I did not look at the good line!
+Now, it is clear.
+It is effectively necessary to delete this test which is not any more right
+of exist.
+
+Jo?l
+
+-----Message d'origine-----
+De?: crrcsim-devel-bounces at lists.berlios.de
+[mailto:crrcsim-devel-bounces at lists.berlios.de] De la part de Jan Reucker
+Envoy??: jeudi 26 f?vrier 2009 21:12
+??: crrcsim-devel at lists.berlios.de
+Objet?: Re: [Crrcsim-devel] Compiler warning
+
+Am Thu, 26 Feb 2009 13:54:01 +0100 schrieb Jo?l Li?nard
+<joel.lienard at free.fr>:
+
+> I do not understand the warning message: the test is on "xform0",
+> not on " xform ".
+
+No, the offending line 2896 read:
+
+if( xform) sgPreMultMat4  ( xform, xform1 ) ;//Pre or Post ???
+
+And because "sgMat4" is just an array, "xform" will evaluate to the address
+of
+the first element, therefore always being != 0.
+
+> To avoid any problem, I modified the code (pushed on hg)
+
+Thanks. But I think you didn't really fix the issue, you just told the
+compiler that xform might be pointing to NULL now (by passing it in as
+a parameter, the compiler loses the ability to track its value). The real
+problem is that the "if" clause (now in line 2893) doesn't do anything
+useful:
+
+- it doesn't check if "xform" is all zeros
+- it doesn't check if "xform" is an identity matrix
+- it is always true, because you always pass a pointer to an automatic
+  variable to the function (which is always != NULL)
+
+So I suggest that you just remove the "if (xform)" or tell us what you
+wanted to achieve with it so that we can think of a working solution.
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+_______________________________________________
+Crrcsim-devel mailing list
+Crrcsim-devel at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+
+
+
+From jens_w2 at gmx.net  Fri Feb 27 11:30:38 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Fri, 27 Feb 2009 11:30:38 +0100
+Subject: [Crrcsim-devel] Compiler warnings -- to be taken serious
+Message-ID: <20090227103037.GA4205@knusper.jensens.local>
+
+Hi there,
+
+as I've definitely switched to cmake now, warnings become visible. There is
+one related to physics in fdm_002 about which I'll care about later, as this
+code is not in use.
+
+
+
+There is one I related to 'shadow_matrix', which I'm not familiar with. Jan,
+can you care about it, please? The compiler says:
+  +--------------------------------------------------------
+  | [ 87%] Building CXX object CMakeFiles/crrcsim.dir/src/crrc_graphics.cpp.o
+  | /usr/include/plib/sg.h: In function ?void makeShadowMatrix(float (*)[4], float, float)?:
+  | /usr/include/plib/sg.h:291: warning: array subscript is above array bounds
+  | /usr/include/plib/sg.h: In function ?void display()?:
+  | /usr/include/plib/sg.h:291: warning: array subscript is above array bounds
+  +--------------------------------------------------------
+The surrounding lines in my /usr/include/plib/sg.h are:
+  +--------------------------------------------------------
+  | inline void sgCopyVec3 ( sgVec3 dst, const sgVec3 src )
+  | {
+  |   dst [ 0 ] = src [ 0 ] ;
+  |   dst [ 1 ] = src [ 1 ] ;
+  |   dst [ 2 ] = src [ 2 ] ;
+  | }
+  | 
+  | inline void sgCopyVec4 ( sgVec4 dst, const sgVec4 src )
+  | {
+  |   dst [ 0 ] = src [ 0 ] ;
+  |   dst [ 1 ] = src [ 1 ] ;
+  |   dst [ 2 ] = src [ 2 ] ;
+  |   dst [ 3 ] = src [ 3 ] ;      // this is line 291
+  | }
+  | 
+  | 
+  | inline void sgAddVec2 ( sgVec2 dst, const sgVec2 src )
+  | {
+  |   dst [ 0 ] += src [ 0 ] ;
+  |   dst [ 1 ] += src [ 1 ] ;
+  | }
+  +--------------------------------------------------------
+
+
+  
+There was another bug like that in handlerF3F.cpp, I fixed it.
+
+
+
+Some more warnings (I will not care about those):
+
+
+
+[ 51%] Building CXX object src/mod_landscape/CMakeFiles/mod_landscape.dir/ssgLoadJPG.cpp.o
+src/mod_landscape/ssgLoadJPG.cpp: In function ?bool ssgLoadJPG(const char*, ssgTextureInfo*)?:
+src/mod_landscape/ssgLoadJPG.cpp:62: warning: comparison between signed and unsigned integer expressions
+
+
+
+
+
+
+Joel, this related to what I already asked you to do: indent your code,
+remove code you have commented out and unused variables due to that:
+
+[ 48%] Building CXX object src/mod_windfield/CMakeFiles/mod_windfield.dir/windfield.cpp.o
+src/mod_windfield/windfield.cpp: In function ?int calculate_wind(double, double, double, double&, double&, double&)?:
+src/mod_windfield/windfield.cpp:579: warning: unused variable ?flWindVel?
+
+
+
+[  3%] Building CXX object src/mod_chardevice/CMakeFiles/mod_chardevice.dir/chardevicewrapper.cpp.o
+src/mod_chardevice/chardevicewrapper.cpp: In member function ?ssize_t CharDeviceWrapper::LogReader::read_log(uint64_t, const void*, size_t)?:
+src/mod_chardevice/chardevicewrapper.cpp:150: warning: comparison between signed and unsigned integer expressions
+src/mod_chardevice/chardevicewrapper.cpp: In member function ?int CharDeviceWrapper::run_script(const char*)?:
+src/mod_chardevice/chardevicewrapper.cpp:316: warning: comparison between signed and unsigned integer expressions
+
+
+
+
+Best regards,
+Jens
+
+  
+
+
+From jens_w2 at gmx.net  Fri Feb 27 11:32:45 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Fri, 27 Feb 2009 11:32:45 +0100
+Subject: [Crrcsim-devel] development quality expectations
+In-Reply-To: <20090226205048.d1fcb9c8.jan.reucker@web.de>
+References: <20090225163243.GB9970@knusper.jensens.local>
+	<20090225211337.124b4a15.jan.reucker@web.de>
+	<20090226094143.GC24858@knusper.jensens.local>
+	<20090226205048.d1fcb9c8.jan.reucker@web.de>
+Message-ID: <20090227103245.GB4205@knusper.jensens.local>
+
+Yes, being easily accessible for ubuntu users might significantly increase
+popularity...
+
+
+From jan.reucker at web.de  Fri Feb 27 21:05:13 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Fri, 27 Feb 2009 21:05:13 +0100
+Subject: [Crrcsim-devel] Compiler warnings -- to be taken serious
+In-Reply-To: <20090227103037.GA4205@knusper.jensens.local>
+References: <20090227103037.GA4205@knusper.jensens.local>
+Message-ID: <20090227210513.7c46f6e1.jan.reucker@web.de>
+
+Am Fri, 27 Feb 2009 11:30:38 +0100 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> There is one I related to 'shadow_matrix', which I'm not familiar with. Jan,
+> can you care about it, please? The compiler says:
+>   +--------------------------------------------------------
+>   | [ 87%] Building CXX object CMakeFiles/crrcsim.dir/src/crrc_graphics.cpp.o
+>   | /usr/include/plib/sg.h: In function ?void makeShadowMatrix(float (*)[4], float, float)?:
+>   | /usr/include/plib/sg.h:291: warning: array subscript is above array bounds
+>   | /usr/include/plib/sg.h: In function ?void display()?:
+>   | /usr/include/plib/sg.h:291: warning: array subscript is above array bounds
+>   +--------------------------------------------------------
+
+Hi Jens,
+
+sure, I'll take care of this. And I'll also take a look at the chardevice
+issue.
+
+Joel, instead of indenting your code manually, I recommend using astyle
+or indent. I guess you don't have them at hand on Windows, shall I do
+it for you (no problem)?
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From joel.lienard at free.fr  Sat Feb 28 09:18:49 2009
+From: joel.lienard at free.fr (=?iso-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Sat, 28 Feb 2009 09:18:49 +0100
+Subject: [Crrcsim-devel] Compiler warnings -- to be taken serious
+In-Reply-To: <20090227210513.7c46f6e1.jan.reucker@web.de>
+References: <20090227103037.GA4205@knusper.jensens.local>
+	<20090227210513.7c46f6e1.jan.reucker@web.de>
+Message-ID: <FCBCF7D017CC4251BDD7373A6F5EE7BE@PCdeJol>
+
+I thought of making these modifications (indent...)  after the version 9.10.
+If you think useful to make it at once, I could take charge of it tomorrow.
+No problem, obviously, if Jan has time to advance the work!
+
+Jo?l
+
+
+-----Message d'origine-----
+De?: crrcsim-devel-bounces at lists.berlios.de
+[mailto:crrcsim-devel-bounces at lists.berlios.de] De la part de Jan Reucker
+Envoy??: vendredi 27 f?vrier 2009 21:05
+??: crrcsim-devel at lists.berlios.de
+Objet?: Re: [Crrcsim-devel] Compiler warnings -- to be taken serious
+
+Am Fri, 27 Feb 2009 11:30:38 +0100 schrieb Jens Wilhelm Wulf
+<jens_w2 at gmx.net>:
+
+> There is one I related to 'shadow_matrix', which I'm not familiar with.
+Jan,
+> can you care about it, please? The compiler says:
+>   +--------------------------------------------------------
+>   | [ 87%] Building CXX object
+CMakeFiles/crrcsim.dir/src/crrc_graphics.cpp.o
+>   | /usr/include/plib/sg.h: In function ?void makeShadowMatrix(float
+(*)[4], float, float)?:
+>   | /usr/include/plib/sg.h:291: warning: array subscript is above array
+bounds
+>   | /usr/include/plib/sg.h: In function ?void display()?:
+>   | /usr/include/plib/sg.h:291: warning: array subscript is above array
+bounds
+>   +--------------------------------------------------------
+
+Hi Jens,
+
+sure, I'll take care of this. And I'll also take a look at the chardevice
+issue.
+
+Joel, instead of indenting your code manually, I recommend using astyle
+or indent. I guess you don't have them at hand on Windows, shall I do
+it for you (no problem)?
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+_______________________________________________
+Crrcsim-devel mailing list
+Crrcsim-devel at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+
+
+
+From jan.reucker at web.de  Sat Feb 28 11:52:01 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sat, 28 Feb 2009 11:52:01 +0100
+Subject: [Crrcsim-devel] Compiler warnings -- to be taken serious
+In-Reply-To: <FCBCF7D017CC4251BDD7373A6F5EE7BE@PCdeJol>
+References: <20090227103037.GA4205@knusper.jensens.local>
+	<20090227210513.7c46f6e1.jan.reucker@web.de>
+	<FCBCF7D017CC4251BDD7373A6F5EE7BE@PCdeJol>
+Message-ID: <20090228115201.f1f00a0f.jan.reucker@web.de>
+
+Am Sat, 28 Feb 2009 09:18:49 +0100 schrieb Jo?l Li?nard <joel.lienard at free.fr>:
+
+> I thought of making these modifications (indent...)  after the version 9.10.
+> If you think useful to make it at once, I could take charge of it tomorrow.
+> No problem, obviously, if Jan has time to advance the work!
+
+I think the most important issue is fixing the remaining compiler warnings,
+but it would be nice if you could fix the indentation as well. Using astyle
+or indent it's just a matter of some minutes.
+
+One problem is that we all seem to use different versions of g++. On Windows
+you're usually stuck at version 3.4.5 (I don't know if the 4.x.x packages
+are stable enough). On Ubuntu I'm using 4.3.2. Jens, which version are you
+using? 4.3.2 didn't report the (serious) issue with the sgVec's.
+
+This issue and the two warnings in CharDeviceWrapper should be fixed now.
+I can't confirm it for the sgVec issue with g++ 4.3.2...
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Sat Feb 28 20:09:02 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Sat, 28 Feb 2009 20:09:02 +0100
+Subject: [Crrcsim-devel] Compiler warnings -- to be taken serious
+In-Reply-To: <20090228115201.f1f00a0f.jan.reucker@web.de>
+References: <20090227103037.GA4205@knusper.jensens.local>
+	<20090227210513.7c46f6e1.jan.reucker@web.de>
+	<FCBCF7D017CC4251BDD7373A6F5EE7BE@PCdeJol>
+	<20090228115201.f1f00a0f.jan.reucker@web.de>
+Message-ID: <20090228190902.GA3806@knusper.jensens.local>
+
+The only warnings I see with 84ba8e909ed7 are:
+
+src/mod_landscape/ssgLoadJPG.cpp: In function ?bool ssgLoadJPG(const char*, ssgTextureInfo*)?:
+src/mod_landscape/ssgLoadJPG.cpp:62: warning: comparison between signed and unsigned integer expressions
+
+src/mod_windfield/windfield.cpp: In function ?int calculate_wind(double, double, double, double&, double&, double&)?:
+src/mod_windfield/windfield.cpp:579: warning: unused variable ?flWindVel?
+
+
+
+jens at knusper:~/cvs/crrcsim/crrcsim-jens$ g++ -v
+Using built-in specs.
+Target: i486-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Debian 4.3.2-1.1' --with-bugurl=file:///usr/share/doc/gcc-4.3/README.Bugs --enable-languages=c,c++,fortran,objc,obj-c++ --prefix=/usr --enable-shared --with-system-zlib --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --enable-nls --with-gxx-include-dir=/usr/include/c++/4.3 --program-suffix=-4.3 --enable-clocale=gnu --enable-libstdcxx-debug --enable-objc-gc --enable-mpfr --enable-targets=all --enable-cld --enable-checking=release --build=i486-linux-gnu --host=i486-linux-gnu --target=i486-linux-gnu
+Thread model: posix
+gcc version 4.3.2 (Debian 4.3.2-1.1) 
+
+
+Jens
+
+
+From jan.reucker at web.de  Sat Feb 28 22:18:29 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sat, 28 Feb 2009 22:18:29 +0100
+Subject: [Crrcsim-devel] Compiler warnings -- to be taken serious
+Message-ID: <956944849@web.de>
+
+> -----Urspr?ngliche Nachricht-----
+> Von: "Jens Wilhelm Wulf" <jens_w2 at gmx.net>
+
+> The only warnings I see with 84ba8e909ed7 are:
+> 
+> gcc version 4.3.2 (Debian 4.3.2-1.1) 
+
+Hi Jens,
+
+so you're using the same gcc version. Strange. Does cmake use any additional compiler flags to enable stricter checking?
+
+Kind regards,
+Jan R.
+____________________________________________________________________
+Psssst! Schon vom neuen WEB.DE MultiMessenger geh?rt? 
+Der kann`s mit allen: http://www.produkte.web.de/messenger/?did=3123
+
+
+

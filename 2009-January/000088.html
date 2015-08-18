@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Fwd:  The debanisation of CRRCsim
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Fwd%3A%20%20The%20debanisation%20of%20CRRCsim&In-Reply-To=%3C57c30d030901170944p6df3a8c6r2b04f959d92dc7f3%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000086.html">
+   <LINK REL="Next"  HREF="000089.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Fwd:  The debanisation of CRRCsim</H1>
+    <B>Christopher Swift</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Fwd%3A%20%20The%20debanisation%20of%20CRRCsim&In-Reply-To=%3C57c30d030901170944p6df3a8c6r2b04f959d92dc7f3%40mail.gmail.com%3E"
+       TITLE="[Crrcsim-devel] Fwd:  The debanisation of CRRCsim">Chris at Chrisswift.eu
+       </A><BR>
+    <I>Sat Jan 17 18:44:08 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000086.html">[Crrcsim-devel] The debanisation of CRRCsim
+</A></li>
+        <LI>Next message: <A HREF="000089.html">[Crrcsim-devel] Fwd:  The debanisation of CRRCsim
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#88">[ date ]</a>
+              <a href="thread.html#88">[ thread ]</a>
+              <a href="subject.html#88">[ subject ]</a>
+              <a href="author.html#88">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hopefully I'm trying to get some headers similar to this (if it was GPL v2):
+/*
+ * App name - Short Description of App
+ * Copyright (C) 200x - Author
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
+You don't require the _full_ license on each file, just a shortened
+one like the one above. In the debian/copyright file I will have
+listed a place on the user's system where they can find the licences,
+/usr/share/common-licenses/GPL. As long as each sourcefile has some
+sort of header with the date of copyright, author &amp; license it
+should be OK! Other than that, a new tarball will be required but it
+doesn't need to be a new version of the software. Just repackage the
+original one and place it on the SF.net download page. Other than
+that, I have to write-up a manpage for the project. When I have
+finished this manpage, I shall forward back upstream to you if you
+wish to include it in your project.
+
+Regards,
+Chris.
+
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: <A HREF="http://getfiregpg.org">http://getfiregpg.org</A>
+
+iEYEARECAAYFAklyF5MACgkQYckxdhCgq45ZIwCff2TgEA4Z0GthfHMgygwZT/TQ
+YskAnisMQGwuYhwuT0ehGk7U/qgeu+i1
+=CpzA
+-----END PGP SIGNATURE-----
+
+On Sat, Jan 17, 2009 at 12:06 PM, Jan Reucker &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">jan.reucker at web.de</A>&gt; wrote:
+
+&gt;<i> Am Fri, 16 Jan 2009 01:22:05 +0000 schrieb Christopher Swift
+</I>&gt;<i> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">Chris at Chrisswift.eu</A>&gt;:
+</I>&gt;<i>
+</I>&gt;<i> &gt; Hello to the CRRCsim developers, Jan Kansky may have already told you
+</I>&gt;<i> &gt; that I have been in contact with him already if not I shall start from
+</I>&gt;<i> &gt; the top. My name is Chris and I am an Ubuntu developer in training who
+</I>&gt;<i> &gt; has accepted the task of packaging your application for usage in the
+</I>&gt;<i> &gt; Ubuntu repositories which will later be ported over to the Debian ones.
+</I>&gt;<i>
+</I>&gt;<i> Hi Chris,
+</I>&gt;<i>
+</I>&gt;<i> welcome to the CRRCsim community! Being an Ubuntu (and former Debian) user
+</I>&gt;<i> myself, I really appreciate your plans to debianize CRRCsim.
+</I>&gt;<i>
+</I>&gt;<i> Most files in CRRCsim are released under the GPL v2, I guess that
+</I>&gt;<i> mod_chardevice is the only exception. It's no problem to add license
+</I>&gt;<i> headers to those files who are missing a proper header.
+</I>&gt;<i>
+</I>&gt;<i> What's the minimum content of this header? Is it sufficient to name
+</I>&gt;<i> the original author of the file and that the file is licensed under
+</I>&gt;<i> GNU GPLv2? Here's a proposal:
+</I>&gt;<i>
+</I>&gt;<i> /**
+</I>&gt;<i>  *  CRRCsim, the Charles River Radio Control Club Flight Simulator Project
+</I>&gt;<i>  *
+</I>&gt;<i>  *  \file crrc_system.cpp
+</I>&gt;<i>  *
+</I>&gt;<i>  *  This file contains some platform-specific stuff for
+</I>&gt;<i>  *  system interaction.
+</I>&gt;<i>  *
+</I>&gt;<i>  *  Copyright:
+</I>&gt;<i>  *    (C) 2005 Jan Reucker &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">slowhand_47 at gmx.de</A>&gt;
+</I>&gt;<i>  *
+</I>&gt;<i>  *  This file is licensed under the GNU GPLv2. You should have received a
+</I>&gt;<i>  *  copy of this license with this source package (file COPYING).
+</I>&gt;<i>  */
+</I>&gt;<i>
+</I>&gt;<i> What do you think?
+</I>&gt;<i>
+</I>&gt;<i> Kind regards,
+</I>&gt;<i> Jan R.
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Jan Reucker
+</I>&gt;<i> Ober-Ramstadt, Germany
+</I>&gt;<i> PGP-Key: <A HREF="http://www.reucker-online.de/pgpkey.asc">http://www.reucker-online.de/pgpkey.asc</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Crrcsim-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">Crrcsim-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">https://lists.berlios.de/mailman/listinfo/crrcsim-devel</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20090117/61a0d2ad/attachment.html">https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20090117/61a0d2ad/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000086.html">[Crrcsim-devel] The debanisation of CRRCsim
+</A></li>
+	<LI>Next message: <A HREF="000089.html">[Crrcsim-devel] Fwd:  The debanisation of CRRCsim
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#88">[ date ]</a>
+              <a href="thread.html#88">[ thread ]</a>
+              <a href="subject.html#88">[ subject ]</a>
+              <a href="author.html#88">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

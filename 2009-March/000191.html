@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] CMake build
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-March/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20CMake%20build&In-Reply-To=%3C995082353%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000190.html">
+   <LINK REL="Next"  HREF="000192.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] CMake build</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20CMake%20build&In-Reply-To=%3C995082353%40web.de%3E"
+       TITLE="[Crrcsim-devel] CMake build">jan.reucker at web.de
+       </A><BR>
+    <I>Tue Mar 24 22:37:08 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000190.html">[Crrcsim-devel] Release 0.9.10
+</A></li>
+        <LI>Next message: <A HREF="000192.html">[Crrcsim-devel] CMake build
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#191">[ date ]</a>
+              <a href="thread.html#191">[ thread ]</a>
+              <a href="subject.html#191">[ subject ]</a>
+              <a href="author.html#191">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+first of all, sorry for accidentally breaking the CMake build, I forgot to add the CMakeList to the newly created module directory. When I pushed my fix I found out that Jens once again was faster than me...
+
+I've started to use CMake for my daily work on CRRCsim some days ago. First I was just curious, but in the meantime I think that it really has the potential to replace the autotools build files (aka &quot;autohell&quot; ;)). I didn't try all features yet, especially building on Windows, but I will do that soon. Building on Linux works flawlessly as expected, and the configuration files are looking nice and clean compared to configure.ac and the files in the m4 subfolder...
+
+What I'm missing most: the &quot;make distcheck&quot; target, which automatically creates a lean source tarball and cross-checks it by doing a clean build. But I guess CPack could be used for this task. Jens, do you have any experience with that tool? I read that it also can directly create NSIS installers, which would be an ideal solution for Windows, and it should be able to create a useable installer solution for MacOSX as well.
+
+Kind regards,
+Jan R.
+_______________________________________________________________________
+DSL zum Nulltarif + 20 Euro Extrapr&#228;mie bei Online-Bestellung &#252;ber die
+DSL Freundschaftswerbung! <A HREF="http://dsl.web.de/?ac=OM.AD.AD008K15279B7069a">http://dsl.web.de/?ac=OM.AD.AD008K15279B7069a</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000190.html">[Crrcsim-devel] Release 0.9.10
+</A></li>
+	<LI>Next message: <A HREF="000192.html">[Crrcsim-devel] CMake build
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#191">[ date ]</a>
+              <a href="thread.html#191">[ thread ]</a>
+              <a href="subject.html#191">[ subject ]</a>
+              <a href="author.html#191">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

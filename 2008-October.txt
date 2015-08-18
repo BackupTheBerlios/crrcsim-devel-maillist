@@ -1,0 +1,493 @@
+From jens_w2 at gmx.net  Fri Oct  3 01:39:52 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Fri, 3 Oct 2008 01:39:52 +0200
+Subject: [Crrcsim-devel] Updates, retractable hard points
+Message-ID: <20081002233952.GA5520@localhost>
+
+Hi Jan,
+
+I pushed some changesets and based them on a12b714d1b40, so 3949d96f0ca3
+('Implemented retractable hardpoints') is not included in current tip. I did
+that on purpose, as I understood from our recent talk that we don't want to
+keep that implementation of retractable hardpoints.
+
+It'd be nice if you could compile a new Win test version -- I added some
+parameters/effects to the heli model.
+
+Best regards,
+Jens
+
+
+From jan.reucker at web.de  Fri Oct  3 21:44:47 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Fri, 3 Oct 2008 21:44:47 +0200
+Subject: [Crrcsim-devel] Updates, retractable hard points
+In-Reply-To: <20081002233952.GA5520@localhost>
+References: <20081002233952.GA5520@localhost>
+Message-ID: <20081003214447.5381a78e.jan.reucker@web.de>
+
+Am Fri, 3 Oct 2008 01:39:52 +0200 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> I pushed some changesets and based them on a12b714d1b40, so 3949d96f0ca3
+> ('Implemented retractable hardpoints') is not included in current tip. I did
+> that on purpose, as I understood from our recent talk that we don't want to
+> keep that implementation of retractable hardpoints.
+
+Hi Jens,
+
+that's right, I'll revert most of that changeset's changes and merge it
+back ASAP to get rid of that extra head.
+ 
+> It'd be nice if you could compile a new Win test version -- I added some
+> parameters/effects to the heli model.
+
+http://www.reucker-online.de/files/CRRCsim-Win32-0.9.10-alpha2.exe
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Mon Oct  6 21:40:39 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Mon, 6 Oct 2008 21:40:39 +0200
+Subject: [Crrcsim-devel] Wiki edit password
+Message-ID: <20081006214039.d6c9a3a1.jan.reucker@web.de>
+
+Hi all,
+
+I just wondered why the Wiki is edit-protected again. Did someone change the
+config file? It seems to have changed on Sep. 10, but I'm quite sure that
+I didn't touch it this time. Was it done on purpose? Just curious.
+
+If there are no objections, I'll remove the password protection again.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Mon Oct 13 23:50:03 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Mon, 13 Oct 2008 23:50:03 +0200
+Subject: [Crrcsim-devel] Hard point handling
+In-Reply-To: <20080930215436.3f153e65.jan.reucker@web.de>
+References: <20080921120952.9e0dbf47.valid.but.only.for.spam@gmx.net>
+	<gb8m5o+no7d@eGroups.com>
+	<20080922214948.4ab03227.valid.but.only.for.spam@gmx.net>
+	<20080927063014.GA4391@localhost>
+	<20080927113809.54fc2057.jan.reucker@web.de>
+	<20080927203416.GA5782@localhost>
+	<20080928100805.445ec2fa.jan.reucker@web.de>
+	<20080928094336.GA4393@localhost>
+	<20080928210909.5871a696.jan.reucker@web.de>
+	<20080929145721.GA4409@localhost>
+	<20080929220855.d22042da.jan.reucker@web.de>
+	<20080930215436.3f153e65.jan.reucker@web.de>
+Message-ID: <20081013235003.3555d2fb.jan.reucker@web.de>
+
+Am Tue, 30 Sep 2008 21:54:36 +0200 schrieb Jan Reucker <jan.reucker at web.de>:
+
+> So what about a class that provides a "master interface" to everything that
+> is related to a single airplane? This master class can also provide the
+> necessary coupling between the parts of an airplane (so that an animation
+> from the CRRCAirplane part can call a method in the WheelSystem of the
+> FDM part), but in a way that all parts only have to know the parent class,
+> and the parent does not need to know details like PLIB data types or methods
+> (if you want to compile the FDM without graphics).
+
+Hi all,
+
+here's a more (but not too) detailed proposal for this "master interface":
+
+class Aircraft
+{
+  public:
+    Aircraft()
+    : model_(NULL), fdm_(NULL)
+    {
+    }
+
+    ModFDMInterface*  getFDM() const {return fdm_;}
+    void              setFDM(ModFDMInterface *fdm)
+    {
+      if (fdm_ != NULL)
+      {
+        delete fdm_;
+      }
+      fdm_ = fdm;
+    }
+
+    CRRCAirplane*     getModel() const {return model_;}
+    void              setModel(CRRCAirplane* model)
+    {
+      if (model_ != NULL)
+      {
+        delete model_;
+      }
+      model_ = model;
+    }
+
+  private:
+    CRRCAirplane*    model_;       ///< The airplane model.
+    ModFDMInterface* fdm_;         ///< The fdm which is in use.
+};
+
+Global::airplane and Global::fdm are replaced by a single Global::aircraft.
+
+As I said, it doesn't contain too many details yet, and it doesn't simplify
+anything yet. It only puts model (3D, sound, ...) and physics (FDM) into
+a single compound.
+
+Missing stuff:
+
+- a constructor that can instanciate both components from a single XML file
+- pointers to "Aircraft" in the CRRCAirplane and ModFDMInterface classes to
+  allow any part of the compound to access "Aircraft" methods (or maybe
+  even methods in other parts of the compound)
+- more methods to access important stuff in the parts directly from "Aircraft"
+  methods (to avoid long chains like Global::aircraft->getFDM()->fdm->whatever)
+
+Is this approach o.k.? Or are there any objections / constructive criticism?
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Tue Oct 14 18:37:41 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Tue, 14 Oct 2008 18:37:41 +0200
+Subject: [Crrcsim-devel] Hard point handling
+In-Reply-To: <20081013235003.3555d2fb.jan.reucker@web.de>
+References: <20080927063014.GA4391@localhost>
+	<20080927113809.54fc2057.jan.reucker@web.de>
+	<20080927203416.GA5782@localhost>
+	<20080928100805.445ec2fa.jan.reucker@web.de>
+	<20080928094336.GA4393@localhost>
+	<20080928210909.5871a696.jan.reucker@web.de>
+	<20080929145721.GA4409@localhost>
+	<20080929220855.d22042da.jan.reucker@web.de>
+	<20080930215436.3f153e65.jan.reucker@web.de>
+	<20081013235003.3555d2fb.jan.reucker@web.de>
+Message-ID: <20081014163741.GA5394@localhost>
+
+Hi Jan,
+
+> - more methods to access important stuff in the parts directly from "Aircraft"
+>   methods (to avoid long chains like Global::aircraft->getFDM()->fdm->whatever)
+> 
+> Is this approach o.k.? Or are there any objections / constructive criticism?
+As long as those chains are not used to often, I'd rather like using them
+instead of writing lots of code which is nothing but a redirection. Maybe
+go for a tradeoff: put functions to retrieve often used pointers into 'class
+Aircraft'? Maybe just rename the proposed getFDM/setFDM to
+get/setFDMInterface and add getFDM, which returns 'fdm_->fdm'. Of course,
+similar things for other often used objects.
+
+Missing stuff: you had the idea of introducing this class in order to
+decouple FDM and graphics, but let one of them calculate a retractable
+hard points position and the other one ask its position. There is no means
+to provide this function yet, is there? I don't have any objections
+regarding your proposal, but in case it is a key element in your strategie
+to solve the above problem, you have to explain it to me. If a solution to
+this problem is still totally open, everything is fine. I just want to ask
+in case I haven't understood something ;-)
+
+Best regards,
+Jens
+
+
+From jan.reucker at web.de  Tue Oct 14 22:19:30 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Tue, 14 Oct 2008 22:19:30 +0200
+Subject: [Crrcsim-devel] Hard point handling
+In-Reply-To: <20081014163741.GA5394@localhost>
+References: <20080927063014.GA4391@localhost>
+	<20080927113809.54fc2057.jan.reucker@web.de>
+	<20080927203416.GA5782@localhost>
+	<20080928100805.445ec2fa.jan.reucker@web.de>
+	<20080928094336.GA4393@localhost>
+	<20080928210909.5871a696.jan.reucker@web.de>
+	<20080929145721.GA4409@localhost>
+	<20080929220855.d22042da.jan.reucker@web.de>
+	<20080930215436.3f153e65.jan.reucker@web.de>
+	<20081013235003.3555d2fb.jan.reucker@web.de>
+	<20081014163741.GA5394@localhost>
+Message-ID: <20081014221930.24ed5b1e.jan.reucker@web.de>
+
+Am Tue, 14 Oct 2008 18:37:41 +0200 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+> As long as those chains are not used to often, I'd rather like using them
+> instead of writing lots of code which is nothing but a redirection. Maybe
+> go for a tradeoff: put functions to retrieve often used pointers into 'class
+> Aircraft'? Maybe just rename the proposed getFDM/setFDM to
+> get/setFDMInterface and add getFDM, which returns 'fdm_->fdm'. Of course,
+> similar things for other often used objects.
+
+Hi Jens,
+
+sounds good, but I usually tend to go into the opposite direction: add redirection
+inside a "super" class to hide knowledge about the class' components
+from the outside. I think it is more "natural" to ask the aircraft for
+its position than to ask the aircraft for its fdm pointer and then query
+the current position from the fdm. Why should any module interacting
+with an instance of "class Aircraft" need to have a concept of flight
+dynamics models or scenegraphs if the interaction is limited to simple actions
+like querying its position or triggering the rendering process.
+ 
+> Missing stuff: you had the idea of introducing this class in order to
+> decouple FDM and graphics, but let one of them calculate a retractable
+> hard points position and the other one ask its position. There is no means
+> to provide this function yet, is there? I don't have any objections
+
+That's what I meant when I wrote:
+
+>> - pointers to "Aircraft" in the CRRCAirplane and ModFDMInterface classes to
+>>   allow any part of the compound to access "Aircraft" methods (or maybe
+>>   even methods in other parts of the compound)
+
+The components, in this case the fdm, need a pointer to its "Aircraft" instance.
+Then fdm can ask the Aircraft to transform the "Wheel" point (using something like 
+Aircraft::transform() which redirects this request to CRRCAirplane or the
+associated CRRCAnimations) or ask the Aircraft for a pointer to the class that
+offers this service.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Sat Oct 25 22:32:34 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sat, 25 Oct 2008 22:32:34 +0200
+Subject: [Crrcsim-devel] Hard point handling
+In-Reply-To: <20081014221930.24ed5b1e.jan.reucker@web.de>
+References: <20080927063014.GA4391@localhost>
+	<20080927113809.54fc2057.jan.reucker@web.de>
+	<20080927203416.GA5782@localhost>
+	<20080928100805.445ec2fa.jan.reucker@web.de>
+	<20080928094336.GA4393@localhost>
+	<20080928210909.5871a696.jan.reucker@web.de>
+	<20080929145721.GA4409@localhost>
+	<20080929220855.d22042da.jan.reucker@web.de>
+	<20080930215436.3f153e65.jan.reucker@web.de>
+	<20081013235003.3555d2fb.jan.reucker@web.de>
+	<20081014163741.GA5394@localhost>
+	<20081014221930.24ed5b1e.jan.reucker@web.de>
+Message-ID: <20081025223234.82a6e828.jan.reucker@web.de>
+
+Hi all,
+
+I've just pushed a couple of changesets that contain the basic concept of a
+"class Aircraft" as a container for the FDM and the visual model.
+
+No, the intended coupling from 3D animations to the WheelSystem is not implemented
+yet. But the changes have become quite complex and I didn't want to risk
+drifting away from the main branch.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jan.reucker at web.de  Sun Oct 26 15:50:35 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sun, 26 Oct 2008 15:50:35 +0100
+Subject: [Crrcsim-devel] Hard point handling
+In-Reply-To: <20081025223234.82a6e828.jan.reucker@web.de>
+References: <20080927063014.GA4391@localhost>
+	<20080927113809.54fc2057.jan.reucker@web.de>
+	<20080927203416.GA5782@localhost>
+	<20080928100805.445ec2fa.jan.reucker@web.de>
+	<20080928094336.GA4393@localhost>
+	<20080928210909.5871a696.jan.reucker@web.de>
+	<20080929145721.GA4409@localhost>
+	<20080929220855.d22042da.jan.reucker@web.de>
+	<20080930215436.3f153e65.jan.reucker@web.de>
+	<20081013235003.3555d2fb.jan.reucker@web.de>
+	<20081014163741.GA5394@localhost>
+	<20081014221930.24ed5b1e.jan.reucker@web.de>
+	<20081025223234.82a6e828.jan.reucker@web.de>
+Message-ID: <20081026155035.86ae8e35.jan.reucker@web.de>
+
+Am Sat, 25 Oct 2008 22:32:34 +0200 schrieb Jan Reucker <jan.reucker at web.de>:
+
+> No, the intended coupling from 3D animations to the WheelSystem is not implemented
+> yet. But the changes have become quite complex and I didn't want to risk
+> drifting away from the main branch.
+
+O.k., this should work now. See sport.xml as an example or take a look at the
+file_format documentation.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Mon Oct 27 19:39:33 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Mon, 27 Oct 2008 19:39:33 +0100
+Subject: [Crrcsim-devel] Hard point handling
+In-Reply-To: <20081026155035.86ae8e35.jan.reucker@web.de>
+References: <20080928094336.GA4393@localhost>
+	<20080928210909.5871a696.jan.reucker@web.de>
+	<20080929145721.GA4409@localhost>
+	<20080929220855.d22042da.jan.reucker@web.de>
+	<20080930215436.3f153e65.jan.reucker@web.de>
+	<20081013235003.3555d2fb.jan.reucker@web.de>
+	<20081014163741.GA5394@localhost>
+	<20081014221930.24ed5b1e.jan.reucker@web.de>
+	<20081025223234.82a6e828.jan.reucker@web.de>
+	<20081026155035.86ae8e35.jan.reucker@web.de>
+Message-ID: <20081027183933.GA4394@localhost>
+
+Hi Jan,
+
+thanks for your work. Unfortunately I'm very short in time (which may last until
+mid of january from now on), but I took a quick look and tried it out.
+
+1. I get the BSoC again. Local IDs:
+   1004 bad
+   1002 ok
+   1003 ok
+   1004 ok...no, bad after some restarts..what's happening here?
+   1003 ok, even after some restarts
+   1004 first start ok, afterwards BSoC appears.
+   So ab800251e6df is the first revision causing problems. If I comment out 
+  +--------------------------------------------------------
+  |   if (animation != NULL)
+  |   {
+  |     animation->transformPoint(v_P_wheel_cg_body);
+  |   }
+  +--------------------------------------------------------
+   in gear.cpp, everything is fine.
+   
+2. mod_fdm does depend on crrc_animation.* now, which in turn depends on ssg
+   stuff and so on. Previously it has been possible to put together a
+   'headless' simulation using
+      mod_cntrl  
+      mod_env    
+      mod_fdm
+      mod_fdm_config.h   
+      mod_math
+      mod_misc
+   and very little 'glue code'. By doing so, every feature of the FDM could
+   be tested or simply used for some simulation without GUI. Now one needs
+   to provide a stripped down version of crrc_animation.* at least, but it
+   won't provide moving hard points, unless it replicates this functionality
+   without using ssg stuff. This is not too bad, but if I had time and/or
+   worked on this simulation application again, I'd separate it, so that the
+   transformation would be part of mod_fdm (after all, 'gear' is part of
+   mod_fdm, so why shouldn't be 'moving gear'?).
+
+
+Best regards,
+Jens
+
+
+From jan.reucker at web.de  Tue Oct 28 22:10:07 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Tue, 28 Oct 2008 22:10:07 +0100
+Subject: [Crrcsim-devel] Hard point handling
+In-Reply-To: <20081027183933.GA4394@localhost>
+References: <20080928094336.GA4393@localhost>
+	<20080928210909.5871a696.jan.reucker@web.de>
+	<20080929145721.GA4409@localhost>
+	<20080929220855.d22042da.jan.reucker@web.de>
+	<20080930215436.3f153e65.jan.reucker@web.de>
+	<20081013235003.3555d2fb.jan.reucker@web.de>
+	<20081014163741.GA5394@localhost>
+	<20081014221930.24ed5b1e.jan.reucker@web.de>
+	<20081025223234.82a6e828.jan.reucker@web.de>
+	<20081026155035.86ae8e35.jan.reucker@web.de>
+	<20081027183933.GA4394@localhost>
+Message-ID: <20081028221007.4446933e.jan.reucker@web.de>
+
+Am Mon, 27 Oct 2008 19:39:33 +0100 schrieb Jens Wilhelm Wulf <jens_w2 at gmx.net>:
+
+Hi Jens, 
+
+> 1. I get the BSoC again. Local IDs:
+>    1004 bad
+
+I had the BSoC once and then everything was fine. But I found an uninitialized
+matrix in the animation code that should have been the cause for the BSoC.
+Please try if it works for you now.
+
+> 2. mod_fdm does depend on crrc_animation.* now, which in turn depends on ssg
+>    stuff and so on. Previously it has been possible to put together a
+>    'headless' simulation using
+[...]
+>    without using ssg stuff. This is not too bad, but if I had time and/or
+>    worked on this simulation application again, I'd separate it, so that the
+>    transformation would be part of mod_fdm (after all, 'gear' is part of
+>    mod_fdm, so why shouldn't be 'moving gear'?).
+
+The animation stuff was inspired by the way Flight Gear handles it. And it works
+fine for moving 3D parts, because it is seamlessly integrated into the
+scene graph. Moving parts that are more or less associated to the FDM was just an
+idea to avoid duplicating code. Maybe a simple compiler switch would solve your
+problem, if you don't really need the moving hardpoints?
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From jens_w2 at gmx.net  Wed Oct 29 20:32:15 2008
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Wed, 29 Oct 2008 20:32:15 +0100
+Subject: [Crrcsim-devel] Hard point handling
+In-Reply-To: <20081028221007.4446933e.jan.reucker@web.de>
+References: <20080929145721.GA4409@localhost>
+	<20080929220855.d22042da.jan.reucker@web.de>
+	<20080930215436.3f153e65.jan.reucker@web.de>
+	<20081013235003.3555d2fb.jan.reucker@web.de>
+	<20081014163741.GA5394@localhost>
+	<20081014221930.24ed5b1e.jan.reucker@web.de>
+	<20081025223234.82a6e828.jan.reucker@web.de>
+	<20081026155035.86ae8e35.jan.reucker@web.de>
+	<20081027183933.GA4394@localhost>
+	<20081028221007.4446933e.jan.reucker@web.de>
+Message-ID: <20081029193215.GB4394@localhost>
+
+> Maybe a simple compiler switch would solve your
+> problem, if you don't really need the moving hardpoints?
+Yes, maybe this is the way to go, maybe something else. Anyway, I don't have
+time to care about now. Maybe next year.
+
+Best regards,
+Jens
+
+

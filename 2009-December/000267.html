@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] F3F on all scenery
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20F3F%20on%20all%20scenery&In-Reply-To=%3C4B2FBDA6.9000704%40obordes.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000266.html">
+   <LINK REL="Next"  HREF="000268.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] F3F on all scenery</H1>
+    <B>Olivier Bordes</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20F3F%20on%20all%20scenery&In-Reply-To=%3C4B2FBDA6.9000704%40obordes.com%3E"
+       TITLE="[Crrcsim-devel] F3F on all scenery">olivier at obordes.com
+       </A><BR>
+    <I>Mon Dec 21 19:25:42 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000266.html">[Crrcsim-devel] F3F on all scenery
+</A></li>
+        <LI>Next message: <A HREF="000268.html">[Crrcsim-devel] F3F on all scenery
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#267">[ date ]</a>
+              <a href="thread.html#267">[ thread ]</a>
+              <a href="subject.html#267">[ subject ]</a>
+              <a href="author.html#267">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+Jan Reucker wrote:
+&gt;<i> On Mon, 21 Dec 2009 09:34:15 +0100
+</I>&gt;<i> obordes &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">olivier at obordes.com</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>&gt;&gt;<i> I believe it would be cleaner that the F3F XML conf contains it own section 
+</I>&gt;&gt;<i> depending on the scenery it will be use in.
+</I>&gt;&gt;<i>     
+</I>&gt;<i>
+</I>&gt;<i> Yes, but that means that if someone wants to create a new F3F scenery, he has
+</I>&gt;<i> to modify the F3F XML conf to make CRRCsim aware of it. The other way round,
+</I>&gt;<i> he can provide all information with his scenery file and CRRCsim is immediately
+</I>&gt;<i> able to use it.
+</I>&gt;<i>   
+</I>Yes, but the other way around, if someone want to add a new game mode, 
+he has to modify each scenery config file, one by one.
+But one method has to be choosen, so let's pick one (the one that will 
+be implemented) and stick with it.
+
+&gt;<i> Of course this means that each Scenery has to provide game mode info. But if
+</I>&gt;<i> a scenery does not contain this info, we can still fall back to some defaults.
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>&gt;&gt;<i> I prefer to have the dependance:  F3F  --&gt; Scenery , instead of the opposite.
+</I>&gt;&gt;<i> But that's philosophy :)
+</I>&gt;&gt;<i>     
+</I>&gt;<i>
+</I>&gt;<i> The call dependency works exactly as you described: The game mode object is
+</I>&gt;<i> aware of the scenery object and calls its methods to retrieve data. We need
+</I>&gt;<i> this awareness to query the height at the starting point or at the pylon locations.
+</I>&gt;<i> Therefore, if we already must expose the scenery object to the game mode object,
+</I>&gt;<i> we can introduce a method to retrieve arbitrary data from the scenery without
+</I>&gt;<i> more coupling.
+</I>&gt;<i>   
+</I>But that's configuration. It looks strange to me that some configuration 
+data  has to be passed through function call through another object.
+Probably,  this problem could be solved by automatic generation of 
+object config files. This makes things more complex but  bring more 
+flexibility.
+
+
+&gt;<i> Kind regards,
+</I>&gt;<i> Jan R.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20091221/b09d9917/attachment.html">https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20091221/b09d9917/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000266.html">[Crrcsim-devel] F3F on all scenery
+</A></li>
+	<LI>Next message: <A HREF="000268.html">[Crrcsim-devel] F3F on all scenery
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#267">[ date ]</a>
+              <a href="thread.html#267">[ thread ]</a>
+              <a href="subject.html#267">[ subject ]</a>
+              <a href="author.html#267">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

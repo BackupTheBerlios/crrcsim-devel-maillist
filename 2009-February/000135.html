@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Release planning for 0.9.10
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-February/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Release%20planning%20for%200.9.10&In-Reply-To=%3CF7F025D8E9F94B1685FE54CF39B21325%40PCdeJol%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000123.html">
+   <LINK REL="Next"  HREF="000124.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Release planning for 0.9.10</H1>
+    <B>Jo&#235;l Li&#233;nard</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Release%20planning%20for%200.9.10&In-Reply-To=%3CF7F025D8E9F94B1685FE54CF39B21325%40PCdeJol%3E"
+       TITLE="[Crrcsim-devel] Release planning for 0.9.10">joel.lienard at inpg.fr
+       </A><BR>
+    <I>Sun Feb  8 16:54:13 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000123.html">[Crrcsim-devel] Release planning for 0.9.10
+</A></li>
+        <LI>Next message: <A HREF="000124.html">[Crrcsim-devel] Release planning for 0.9.10
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#135">[ date ]</a>
+              <a href="thread.html#135">[ thread ]</a>
+              <a href="subject.html#135">[ subject ]</a>
+              <a href="author.html#135">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I return one week of absence.
+I look quickly at this bug &quot;initial position&quot;.
+
+Jo&#235;l
+
+
+-----Message d'origine-----
+De&#160;: <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">crrcsim-devel-bounces at lists.berlios.de</A>
+[mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">crrcsim-devel-bounces at lists.berlios.de</A>] De la part de Jan Reucker
+Envoy&#233;&#160;: mardi 3 f&#233;vrier 2009 23:09
+&#192;&#160;: <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">crrcsim-devel at lists.berlios.de</A>
+Objet&#160;: Re: [Crrcsim-devel] Release planning for 0.9.10
+
+Hi all,
+
+here's an updated TODO list (uncritical entries from my first email have
+been
+removed for clarity):
+
+#2 Verify that configuration of new functions also works on the command
+line. (open)
+   jr: I guess that the configuration of axis functions on the command line
+no
+       longer works (see bug #15161: it uses the same internal mechanism
+which
+       was removed 2005). Need to verify this and maybe remove the
+corresponding
+       CLI options.
+
+#4 Bug #15161 --&gt; fixed
+
+#5 Unix manpage may need some corrections due to new input functions. (open)
+
+   jr: could be outdated, see #2. Nevertheless, the man page needs some
+       corrections and a thorough review.
+
+#6 New scenery selection dialog 
+   --&gt; no action, fix later. Recorded as Feature Request #4470.
+
+#7 Experimental landscape files should not be part of the final
+   distribution tarball/binary packages to avoid confusing the user.
+   Verify autotools scripts. (open)
+   --&gt; The autotools scripts need to be adapted to only include
+       cape_cod-orig.xml, davis-orig.xml, simple.xml and the associated
+       3D models and textures.
+
+#8 List of models needs a cleanup. Remove some, add some from addon-models.
+   --&gt; Do the changes to the repository and adjust the autotools scripts.
+   arkanj-mg11.xml  remove
+   delta1c.xml      remove
+   delta1d.xml      remove
+   delta1e.xml      remove
+   k2-f3f2.xml      ?
+   k2-f3f.xml       ?
+   k2.xml           ?
+   mav0.xml         remove
+   Skimmer_MK_I.xml remove
+   spirit.xml       remove
+   tug.xml          remove
+   zagi.xml         ?
+   zip60.xml        remove
+
+   Crossfire.xml    add from crrcsim-addon-models
+   Erwin.xml        add from crrcsim-addon-models
+   fireworks3_C.xml add from crrcsim-addon-models, with Bob's parameter
+adjustment
+                    from the Yahoo group file section
+   supra.xml        add from crrcsim-addon-models, with Bob's parameter
+adjustment
+                    from the Yahoo group file section
+
+#9 Bug #015180 Initial airplane position
+   --&gt; This bug was introduced by changeset 1014:c0820cd28e4d (import
+Windata 3D,
+       JPEG texture) and should be fixed before releasing 0.9.10 (open)
+
+
+My next tasks will be #2 and #5. Joel, do you have time to take care of #9
+during
+the next few days?
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: <A HREF="http://www.reucker-online.de/pgpkey.asc">http://www.reucker-online.de/pgpkey.asc</A>
+_______________________________________________
+Crrcsim-devel mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">Crrcsim-devel at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">https://lists.berlios.de/mailman/listinfo/crrcsim-devel</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000123.html">[Crrcsim-devel] Release planning for 0.9.10
+</A></li>
+	<LI>Next message: <A HREF="000124.html">[Crrcsim-devel] Release planning for 0.9.10
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#135">[ date ]</a>
+              <a href="thread.html#135">[ thread ]</a>
+              <a href="subject.html#135">[ subject ]</a>
+              <a href="author.html#135">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

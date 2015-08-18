@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] collision management
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20collision%20management&In-Reply-To=%3C20091221102501.GD22609%40bitwizard.nl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000262.html">
+   <LINK REL="Next"  HREF="000269.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] collision management</H1>
+    <B>Rogier Wolff</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20collision%20management&In-Reply-To=%3C20091221102501.GD22609%40bitwizard.nl%3E"
+       TITLE="[Crrcsim-devel] collision management">R.E.Wolff at BitWizard.nl
+       </A><BR>
+    <I>Mon Dec 21 11:25:01 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000262.html">[Crrcsim-devel] collision management
+</A></li>
+        <LI>Next message: <A HREF="000269.html">[Crrcsim-devel] collision management
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#265">[ date ]</a>
+              <a href="thread.html#265">[ thread ]</a>
+              <a href="subject.html#265">[ subject ]</a>
+              <a href="author.html#265">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Dec 20, 2009 at 10:00:31PM +0100, Jan Reucker wrote:
+&gt;<i> On Sun, 20 Dec 2009 09:28:00 +0100
+</I>&gt;<i> Jo&#235;l Li&#233;nard &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">joel.lienard at free.fr</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; cases. Except, maybe, in that this: the plane rolls slowly and touches a
+</I>&gt;<i> &gt; vertical plan ( outhouse ). It is going to be crashed while it would
+</I>&gt;<i> &gt; only be stopped or diverted. To handle correctly this case, the
+</I>&gt;<i> &gt; information &quot; Height of ground &quot; is not sufficient. But it is not very
+</I>&gt;<i> &gt; annoying for a flight simulator!
+</I>&gt;<i> 
+</I>&gt;<i> You are right, we would need collision boxes and the corresponding intersection
+</I>&gt;<i> testing algorithms. PLIB provides the mechanisms for this, but it consumes
+</I>&gt;<i> additional CPU resources. Don't know if it's worth the effort for a flight
+</I>&gt;<i> simulator that should focus on flying.
+</I>&gt;<i> 
+</I>&gt;<i> Do you want to work on this topic? Rogier Wolff wanted to look into
+</I>&gt;<i> it (see the &quot;learning to fly and land&quot; thread), maybe you should get
+</I>&gt;<i> into contact with him to avoid doing things twice.
+</I>
+Still here. A bit. (I have other things on my todo list as well...)
+
+My opinion is that &quot;quick and dirty&quot; is preferable for crrcsim. Look
+at how enjoyable it already is to fly a plane with crrcsim without the
+crash-detection.
+
+Anyway, I think that a &quot;rough&quot; crash-detection is good. Even if it
+sometimes would detect a crash when in real life it wouldn't really
+damage the plane.
+
+Anyway, I was personally thinking about a crash-o-meter. Visually the
+same as the battery meter. 
+
+Crash damage is additive. So if you &quot;hit&quot; below indicated
+max-allowable force, no damage is done. If you hit between 1x and 2x
+max allowable force, the plane is damaged, but in real life
+repairable, in crrcsim flyable. Above 2x max force, the damage is
+considered irrepairable and the plane becomes unflyable in crrcsim.
+
+The damage meter would be green for the bottom third, yellow for the
+middle third, and red for the top third.
+
+So if you hit at .75x max force, the damage-meter would show green to
+75% of the first third. This would &quot;bleed off&quot; slowly to allow people
+to see how close they were to the yellow part.
+
+If you hit at 1.25x max force, the damage meter would show yellow to 
+.25 along the yellow part (5/12th of the total). 
+
+Next if you hit at 1.50x max force, you'd still be allowed to fly, but
+the damage meter would go up to .75 of the yellow part. Another hit of
+more than 1.25x max force would now damage the plane enough to stop
+being flyable in crrcsim.
+
+We could make a damaged-but-flyable plane more fragile by reducing all
+max-forces proportionally. :-)
+
+	Roger.
+
+-- 
+** <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">R.E.Wolff at BitWizard.nl</A> ** <A HREF="http://www.BitWizard.nl/">http://www.BitWizard.nl/</A> ** +31-15-2600998 **
+**    Delftechpark 26 2628 XH  Delft, The Netherlands. KVK: 27239233    **
+*-- BitWizard writes Linux device drivers for any device you may have! --*
+Q: It doesn't work. A: Look buddy, doesn't work is an ambiguous statement. 
+Does it sit on the couch all day? Is it unemployed? Please be specific! 
+Define 'it' and what it isn't doing. --------- Adapted from lxrbot FAQ
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000262.html">[Crrcsim-devel] collision management
+</A></li>
+	<LI>Next message: <A HREF="000269.html">[Crrcsim-devel] collision management
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#265">[ date ]</a>
+              <a href="thread.html#265">[ thread ]</a>
+              <a href="subject.html#265">[ subject ]</a>
+              <a href="author.html#265">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

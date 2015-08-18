@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Release candidate 2 for 0.9.10
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-March/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Release%20candidate%202%20for%200.9.10&In-Reply-To=%3C29E30859A08349A9B1225AB47F623347%40Q9450%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000181.html">
+   <LINK REL="Next"  HREF="000185.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Release candidate 2 for 0.9.10</H1>
+    <B>Jerry Williams</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Release%20candidate%202%20for%200.9.10&In-Reply-To=%3C29E30859A08349A9B1225AB47F623347%40Q9450%3E"
+       TITLE="[Crrcsim-devel] Release candidate 2 for 0.9.10">jwilliam at xmission.com
+       </A><BR>
+    <I>Fri Mar  6 23:59:38 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000181.html">[Crrcsim-devel] Release candidate 2 for 0.9.10
+</A></li>
+        <LI>Next message: <A HREF="000185.html">[Crrcsim-devel] Release candidate 2 for 0.9.10
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#183">[ date ]</a>
+              <a href="thread.html#183">[ thread ]</a>
+              <a href="subject.html#183">[ subject ]</a>
+              <a href="author.html#183">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">crrcsim-devel-bounces at lists.berlios.de</A> [mailto:crrcsim-devel-
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">bounces at lists.berlios.de</A>] On Behalf Of Jan Reucker
+</I>&gt;<i> Sent: Friday, March 06, 2009 3:36 PM
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">crrcsim-devel at lists.berlios.de</A>
+</I>&gt;<i> Subject: Re: [Crrcsim-devel] Release candidate 2 for 0.9.10
+</I>&gt;<i> 
+</I>&gt;<i> Am Thu, 5 Mar 2009 21:47:35 -0700 schrieb &quot;Jerry Williams&quot;
+</I>&gt;<i> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">jwilliam at xmission.com</A>&gt;:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; In the select location box it is really hard to tell what you have
+</I>&gt;<i> selected.
+</I>&gt;<i> &gt; It looks like there are some menus that show a like 3D box and others
+</I>&gt;<i> there
+</I>&gt;<i> &gt; seems to be a very light change in color.
+</I>&gt;<i> 
+</I>&gt;<i> Hi Jerry,
+</I>&gt;<i> 
+</I>&gt;<i> this problem shows up in several dialogs, but I don't think that it's
+</I>&gt;<i> really
+</I>&gt;<i> a showstopper for the 0.9.10 release. We can easily change the color theme
+</I>&gt;<i> of the GUI for more contrast. It could even be made adjustable.
+</I>&gt;<i> 
+</I>&gt;<i> &gt; I am wondering if we need a key to toggle full screen?  Like maybe f?
+</I>&gt;<i> 
+</I>&gt;<i> Maybe. But this is Linux-specific. On Windows, you currently can't switch
+</I>&gt;<i> between video modes on-the-fly without reloading the whole OpenGL context.
+</I>&gt;<i> This is not yet implemented in CRRCsim.
+</I>
+It seems like it just causes me problems if I click on it and I can't seem
+to go back.  It could be a vbox thing since that is what I was using to test
+it.
+
+&gt;<i> 
+</I>&gt;<i> &gt; I did have a time that I couldn't get out of the program and had to turn
+</I>&gt;<i> off
+</I>&gt;<i> &gt; the box to get out.  I haven't been able to recreate the problem.
+</I>&gt;<i> 
+</I>&gt;<i> Did CRRCsim still run or was it some kind of xserver lockup/freeze?
+</I>
+CRRCsim was running just fine, I just couldn't get &lt;ESC&gt; or q to work.
+
+&gt;<i> 
+</I>&gt;<i> &gt; I had to change the crrcsim.spec file for Fedora 10, and I am wondering
+</I>&gt;<i> if
+</I>&gt;<i> &gt; there is a way to add the version number to the file?
+</I>&gt;<i> 
+</I>&gt;<i> I've updated the files in my local repository. As Fedora 6 and 8 are a
+</I>&gt;<i> bit outdated I decided to put both files into the main packages/Fedora
+</I>&gt;<i> directory and remove 6 and 8 from the tarball. They are still in the
+</I>&gt;<i> repository if someone needs them.
+</I>&gt;<i> 
+</I>&gt;<i> &gt; I am not sure what we need/use any of the Makefile, Makefile.am,
+</I>&gt;<i> Makefile.in
+</I>&gt;<i> &gt; files in any of the Fedora directories.  Do we?
+</I>&gt;<i> 
+</I>&gt;<i> The Makefiles are needed to control the distribution of files, although
+</I>&gt;<i> nothing has to be built inside these directories.
+</I>&gt;<i> 
+</I>&gt;<i> &gt; Also it seems like some of the required packages has changed.
+</I>&gt;<i> &gt; Like freeglut is gone.  Not sure I have all of the required stuff in the
+</I>&gt;<i> &gt; spec file.
+</I>&gt;<i> 
+</I>&gt;<i> Glut is gone, yes. And we've added a new dependency on libjpeg, and an
+</I>&gt;<i> optional
+</I>&gt;<i> dependency on CGAL. So maybe you have to add this dependency manually
+</I>&gt;<i> before
+</I>&gt;<i> building the final RPM, or you trust on libjpeg being installed on every
+</I>&gt;<i> Linux system (which should be pretty much o.k. I guess).
+</I>
+I did take Glut out and added libjpeg to the spec file so we should be good.
+When you install the rpm is should complain and not install if you don't
+have everything you need.  So it is nice to get it right.  Because you don't
+want it to install and then need something and break.
+
+I have Linux installed as another boot, but my sound card is too new so
+their aren't drivers for it yet.  That is part of the reason for
+running/testing under a virtual machine.
+
+Sounds like with the changes you made we should be good to go.
+Will you take out the rc2 from the version line in the spec files when you
+are ready to release?
+
+&gt;<i> 
+</I>&gt;<i> Kind regards,
+</I>&gt;<i> Jan R.
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Jan Reucker
+</I>&gt;<i> Ober-Ramstadt, Germany
+</I>&gt;<i> PGP-Key: <A HREF="http://www.reucker-online.de/pgpkey.asc">http://www.reucker-online.de/pgpkey.asc</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Crrcsim-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">Crrcsim-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">https://lists.berlios.de/mailman/listinfo/crrcsim-devel</A>
+</I>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000181.html">[Crrcsim-devel] Release candidate 2 for 0.9.10
+</A></li>
+	<LI>Next message: <A HREF="000185.html">[Crrcsim-devel] Release candidate 2 for 0.9.10
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#183">[ date ]</a>
+              <a href="thread.html#183">[ thread ]</a>
+              <a href="subject.html#183">[ subject ]</a>
+              <a href="author.html#183">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] collision management
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20collision%20management&In-Reply-To=%3C20091221220001.7407dc01%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000265.html">
+   <LINK REL="Next"  HREF="000270.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] collision management</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20collision%20management&In-Reply-To=%3C20091221220001.7407dc01%40web.de%3E"
+       TITLE="[Crrcsim-devel] collision management">jan.reucker at web.de
+       </A><BR>
+    <I>Mon Dec 21 22:00:01 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000265.html">[Crrcsim-devel] collision management
+</A></li>
+        <LI>Next message: <A HREF="000270.html">[Crrcsim-devel] collision management
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#269">[ date ]</a>
+              <a href="thread.html#269">[ thread ]</a>
+              <a href="subject.html#269">[ subject ]</a>
+              <a href="author.html#269">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, 21 Dec 2009 11:25:01 +0100
+Rogier Wolff &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">R.E.Wolff at BitWizard.nl</A>&gt; wrote:
+
+&gt;<i> My opinion is that &quot;quick and dirty&quot; is preferable for crrcsim. Look
+</I>&gt;<i> at how enjoyable it already is to fly a plane with crrcsim without the
+</I>&gt;<i> crash-detection.
+</I>
+Then maybe I should implement a &quot;quick-and-dirty&quot; crash detection now.
+It's really not much work and could be the foundation for later
+additions (e.g. your crash-o-meter). I will implement the new XML file
+attribute and some kind of crash event for the SimStateHandler.
+Any objections?
+ 
+&gt;<i> Crash damage is additive. So if you &quot;hit&quot; below indicated
+</I>&gt;<i> max-allowable force, no damage is done. If you hit between 1x and 2x
+</I>&gt;<i> max allowable force, the plane is damaged, but in real life
+</I>&gt;<i> repairable, in crrcsim flyable. Above 2x max force, the damage is
+</I>&gt;<i> considered irrepairable and the plane becomes unflyable in crrcsim.
+</I>
+How do you handle crashes with different hardpoints? Is everything
+accumulated, or will every hardpoint be treated separately?
+
+Kind regards,
+Jan R.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000265.html">[Crrcsim-devel] collision management
+</A></li>
+	<LI>Next message: <A HREF="000270.html">[Crrcsim-devel] collision management
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#269">[ date ]</a>
+              <a href="thread.html#269">[ thread ]</a>
+              <a href="subject.html#269">[ subject ]</a>
+              <a href="author.html#269">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

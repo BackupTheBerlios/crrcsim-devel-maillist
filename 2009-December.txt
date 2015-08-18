@@ -1,0 +1,1999 @@
+From admin at berlios.de  Sat Dec  5 16:05:52 2009
+From: admin at berlios.de (admin at berlios.de)
+Date: Sat, 5 Dec 2009 16:05:52 +0100 (CET)
+Subject: [Crrcsim-devel] [Bug #16505] Spolier/Flaps non-functional
+Message-ID: <200912051505.nB5F5q5X017123@unicorn.berlios.de>
+
+Bug #16505, was updated on 2009-Dec-01 04:57
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: Remind
+Bug Group: None
+Priority: 5
+Submitted by: wheeldweller
+Assigned to : jreucker
+Summary: Spolier/Flaps non-functional
+
+Details: It's probably the only thing 'advertised' that doesn't work: spoilers and flaps.
+
+My joystick is being sensed properly- axis 3 can be used to operate the throttle, for instance. It's a lot of fun, too!
+
+And I've tried just about every high-dollar glider, especially the high-aspect ratio types, and changing the spoiler setting never shows up, and it never changes the flight characteristics, either. Inverted or normal, no change at all.
+
+In Huntsville, Alabama we had a gusty, windy day. I pointed it into the wind, facing me, and popped the spoilers of my Aquila to make it land at my feet.  People having trouble that day actually cheered. I'd know if they were working.  :)
+
+If they aren't coded, let's just get rid of the labels and such. Exactly as it stands it's a spectacular program and I enjoy it very, very much.  It'd just be nice if the spoilers/flaps worked, so I could land it more easily.
+
+Thanks
+
+Follow-Ups:
+
+Date: 2009-Dec-02 21:05
+By: jreucker
+
+Comment:
+Hello,
+
+thanks for your bug report. However, I have to mark it as invalid. Spoilers and flaps are modelled in CRRCsim (since version 0.9.10). But right now there's AFAIK only one model that provides spoiler and flap settings: the Scorpion.
+
+If you are interested in adding working spoilers and/or flaps to one of the other gliders, please read documentation/file_format/index.html in the CRRCsim folder and take a look at models/Scorpion.xml to see how it is done. Feel free to submit a patch or at least the parameters if you created something that "feels just right".
+
+Kind regards,
+Jan R.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=16505&group_id=9957
+
+
+From admin at berlios.de  Sat Dec  5 22:25:31 2009
+From: admin at berlios.de (admin at berlios.de)
+Date: Sat, 5 Dec 2009 22:25:31 +0100 (CET)
+Subject: [Crrcsim-devel] [Bug #16505] Spolier/Flaps non-functional
+Message-ID: <200912052125.nB5LPV10007282@unicorn.berlios.de>
+
+Bug #16505, was updated on 2009-Dec-01 04:57
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 9
+Submitted by: wheeldweller
+Assigned to : jreucker
+Summary: Spolier/Flaps non-functional
+
+Details: It's probably the only thing 'advertised' that doesn't work: spoilers and flaps.
+
+My joystick is being sensed properly- axis 3 can be used to operate the throttle, for instance. It's a lot of fun, too!
+
+And I've tried just about every high-dollar glider, especially the high-aspect ratio types, and changing the spoiler setting never shows up, and it never changes the flight characteristics, either. Inverted or normal, no change at all.
+
+In Huntsville, Alabama we had a gusty, windy day. I pointed it into the wind, facing me, and popped the spoilers of my Aquila to make it land at my feet.  People having trouble that day actually cheered. I'd know if they were working.  :)
+
+If they aren't coded, let's just get rid of the labels and such. Exactly as it stands it's a spectacular program and I enjoy it very, very much.  It'd just be nice if the spoilers/flaps worked, so I could land it more easily.
+
+Thanks
+
+Follow-Ups:
+
+Date: 2009-Dec-05 22:25
+By: jreucker
+
+Comment:
+Found the cause of the bug. Working on a fix.
+-------------------------------------------------------
+
+Date: 2009-Dec-02 21:05
+By: jreucker
+
+Comment:
+Hello,
+
+thanks for your bug report. However, I have to mark it as invalid. Spoilers and flaps are modelled in CRRCsim (since version 0.9.10). But right now there's AFAIK only one model that provides spoiler and flap settings: the Scorpion.
+
+If you are interested in adding working spoilers and/or flaps to one of the other gliders, please read documentation/file_format/index.html in the CRRCsim folder and take a look at models/Scorpion.xml to see how it is done. Feel free to submit a patch or at least the parameters if you created something that "feels just right".
+
+Kind regards,
+Jan R.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=16505&group_id=9957
+
+
+From admin at berlios.de  Sun Dec  6 18:17:05 2009
+From: admin at berlios.de (admin at berlios.de)
+Date: Sun, 6 Dec 2009 18:17:05 +0100 (CET)
+Subject: [Crrcsim-devel] [Bug #16505] Spolier/Flaps non-functional
+Message-ID: <200912061717.nB6HH56c017988@unicorn.berlios.de>
+
+Bug #16505, was updated on 2009-Dec-01 04:57
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Closed
+Resolution: Fixed
+Bug Group: None
+Priority: 9
+Submitted by: wheeldweller
+Assigned to : jreucker
+Summary: Spolier/Flaps non-functional
+
+Details: It's probably the only thing 'advertised' that doesn't work: spoilers and flaps.
+
+My joystick is being sensed properly- axis 3 can be used to operate the throttle, for instance. It's a lot of fun, too!
+
+And I've tried just about every high-dollar glider, especially the high-aspect ratio types, and changing the spoiler setting never shows up, and it never changes the flight characteristics, either. Inverted or normal, no change at all.
+
+In Huntsville, Alabama we had a gusty, windy day. I pointed it into the wind, facing me, and popped the spoilers of my Aquila to make it land at my feet.  People having trouble that day actually cheered. I'd know if they were working.  :)
+
+If they aren't coded, let's just get rid of the labels and such. Exactly as it stands it's a spectacular program and I enjoy it very, very much.  It'd just be nice if the spoilers/flaps worked, so I could land it more easily.
+
+Thanks
+
+Follow-Ups:
+
+Date: 2009-Dec-06 18:17
+By: jreucker
+
+Comment:
+Bug was fixed in changeset 4d584700c189.
+-------------------------------------------------------
+
+Date: 2009-Dec-05 22:25
+By: jreucker
+
+Comment:
+Found the cause of the bug. Working on a fix.
+-------------------------------------------------------
+
+Date: 2009-Dec-02 21:05
+By: jreucker
+
+Comment:
+Hello,
+
+thanks for your bug report. However, I have to mark it as invalid. Spoilers and flaps are modelled in CRRCsim (since version 0.9.10). But right now there's AFAIK only one model that provides spoiler and flap settings: the Scorpion.
+
+If you are interested in adding working spoilers and/or flaps to one of the other gliders, please read documentation/file_format/index.html in the CRRCsim folder and take a look at models/Scorpion.xml to see how it is done. Feel free to submit a patch or at least the parameters if you created something that "feels just right".
+
+Kind regards,
+Jan R.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=16505&group_id=9957
+
+
+From admin at berlios.de  Wed Dec  9 22:38:32 2009
+From: admin at berlios.de (admin at berlios.de)
+Date: Wed, 9 Dec 2009 22:38:32 +0100 (CET)
+Subject: [Crrcsim-devel] [Feature #4271] Slider for model volume control in
+	GUI
+Message-ID: <200912092138.nB9LcW2K022219@unicorn.berlios.de>
+
+Feature Request #4271, was updated on 2008-Aug-17 00:17
+You can respond by visiting: 
+http://developer.berlios.de/feature/?func=detailfeature&feature_id=4271&group_id=9957
+
+Category: None
+Status: Closed
+Priority: 5
+Summary: Slider for model volume control in GUI
+
+By: jreucker
+Date: 2009-Dec-09 22:38
+
+Message:
+Logged In: YES 
+user_id=47235
+Browser: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.1.5) Gecko/20091106 Shiretoko/3.5.5
+
+Resolved in changeset 64e905715296.
+
+----------------------------------------------------------------------
+
+By: jreucker
+Date: 2008-Aug-17 00:17
+
+Message:
+Logged In: YES 
+user_id=47235
+Browser: Mozilla/5.0 (X11; U; Linux x86_64; de; rv:1.9.0.1) Gecko/2008072820 Firefox/3.0.1
+
+The new config item "sound.model.vol" introduced in
+changeset 53dd91459f7b should be configurable through
+the GUI.
+
+
+----------------------------------------------------------------------
+You can respond by visiting: 
+http://developer.berlios.de/feature/?func=detailfeature&feature_id=4271&group_id=9957
+
+
+From admin at berlios.de  Mon Dec 14 14:15:54 2009
+From: admin at berlios.de (admin at berlios.de)
+Date: Mon, 14 Dec 2009 14:15:54 +0100 (CET)
+Subject: [Crrcsim-devel] [Bug #16552] Collision detection with multiple
+	objects fail
+Message-ID: <200912141315.nBEDFsQI008738@unicorn.berlios.de>
+
+Bug #16552, was updated on 2009-Dec-14 14:15
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: dl6lr
+Assigned to : none
+Summary: Collision detection with multiple objects fail
+
+Details: When using multiple instances of objects in a scenary, only the first object will be handled for collision detection.
+Example: Simple Scenary: You can hit the first outhouse (leftmost), but not the other two.
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=16552&group_id=9957
+
+
+From admin at berlios.de  Mon Dec 14 20:54:24 2009
+From: admin at berlios.de (admin at berlios.de)
+Date: Mon, 14 Dec 2009 20:54:24 +0100 (CET)
+Subject: [Crrcsim-devel] [Bug #16552] Collision detection with multiple
+	objects fail
+Message-ID: <200912141954.nBEJsOCt014114@unicorn.berlios.de>
+
+Bug #16552, was updated on 2009-Dec-14 14:15
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: dl6lr
+Assigned to : none
+Summary: Collision detection with multiple objects fail
+
+Details: When using multiple instances of objects in a scenary, only the first object will be handled for collision detection.
+Example: Simple Scenary: You can hit the first outhouse (leftmost), but not the other two.
+
+Follow-Ups:
+
+Date: 2009-Dec-14 20:54
+By: dl6lr
+
+Comment:
+It seems that only one (the first) instance of an object is used for collision detection. 
+
+  <scene type="model-based">
+    <object filename="small.ac" terrain="1">
+      <instance x="0" y="0" z="0" />
+    </object>
+    <object filename="outhouse.ac">
+      <instance x="-160" y="34.0" z="0" />
+      <instance x="-160" y="27.0" z="0" />
+      <instance x="-160" y="20.0" z="0" />
+    </object>
+	<object filename="freqboard.ac">
+      <instance x="-160" y="0.0" z="0" h="90" p="0" r="0" />
+    </object>
+  </scene>
+
+You can hit the leftmost outhouse.
+
+  <scene type="model-based">
+    <object filename="small.ac" terrain="1">
+      <instance x="0" y="0" z="0" />
+    </object>
+    <object filename="trashcan.ac">
+      <instance x="-160" y="0.0" z="0" h="90" p="0" r="0" />
+    </object>
+    <object filename="outhouse.ac">
+      <instance x="-160" y="34.0" z="0" />
+      <instance x="-160" y="27.0" z="0" />
+      <instance x="-160" y="20.0" z="0" />
+    </object>
+  </scene>
+
+You can hit the trashcan only.
+
+So it is not dependent on multiple instances of one object, but only the first very instance seems to be used for collision detection.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=16552&group_id=9957
+
+
+From admin at berlios.de  Tue Dec 15 12:23:36 2009
+From: admin at berlios.de (admin at berlios.de)
+Date: Tue, 15 Dec 2009 12:23:36 +0100 (CET)
+Subject: [Crrcsim-devel] [Bug #16552] Collision detection with multiple
+	objects fail
+Message-ID: <200912151123.nBFBNaIB026584@unicorn.berlios.de>
+
+Bug #16552, was updated on 2009-Dec-14 14:15
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Closed
+Resolution: Fixed
+Bug Group: None
+Priority: 5
+Submitted by: dl6lr
+Assigned to : jreucker
+Summary: Collision detection with multiple objects fail
+
+Details: When using multiple instances of objects in a scenary, only the first object will be handled for collision detection.
+Example: Simple Scenary: You can hit the first outhouse (leftmost), but not the other two.
+
+Follow-Ups:
+
+Date: 2009-Dec-15 12:23
+By: jreucker
+
+Comment:
+Fixed in changeset ae09ffcceb52.
+-------------------------------------------------------
+
+Date: 2009-Dec-14 20:54
+By: dl6lr
+
+Comment:
+It seems that only one (the first) instance of an object is used for collision detection. 
+
+  <scene type="model-based">
+    <object filename="small.ac" terrain="1">
+      <instance x="0" y="0" z="0" />
+    </object>
+    <object filename="outhouse.ac">
+      <instance x="-160" y="34.0" z="0" />
+      <instance x="-160" y="27.0" z="0" />
+      <instance x="-160" y="20.0" z="0" />
+    </object>
+	<object filename="freqboard.ac">
+      <instance x="-160" y="0.0" z="0" h="90" p="0" r="0" />
+    </object>
+  </scene>
+
+You can hit the leftmost outhouse.
+
+  <scene type="model-based">
+    <object filename="small.ac" terrain="1">
+      <instance x="0" y="0" z="0" />
+    </object>
+    <object filename="trashcan.ac">
+      <instance x="-160" y="0.0" z="0" h="90" p="0" r="0" />
+    </object>
+    <object filename="outhouse.ac">
+      <instance x="-160" y="34.0" z="0" />
+      <instance x="-160" y="27.0" z="0" />
+      <instance x="-160" y="20.0" z="0" />
+    </object>
+  </scene>
+
+You can hit the trashcan only.
+
+So it is not dependent on multiple instances of one object, but only the first very instance seems to be used for collision detection.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=16552&group_id=9957
+
+
+From admin at berlios.de  Tue Dec 15 20:40:16 2009
+From: admin at berlios.de (admin at berlios.de)
+Date: Tue, 15 Dec 2009 20:40:16 +0100 (CET)
+Subject: [Crrcsim-devel] [Bug #16204] core dump on karmic
+Message-ID: <200912151940.nBFJeG9g028173@unicorn.berlios.de>
+
+Bug #16204, was updated on 2009-Sep-01 14:09
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: brand77
+Assigned to : jreucker
+Summary: core dump on karmic
+
+Details: almost a fresh karmic alpha4 install, dist-upgrade at 31/08/2009, and with:
+
+apt-get -y install \
+  mercurial \
+  automake autoconf \
+  libsdl1.2debian-alsa libsdl1.2-dev \
+  libplib1 libplib-dev \
+  libportaudio0 libportaudio-dev \
+  libcgal3 libcgal-dev
+
+andrea at sibilla:~$ uname -a
+Linux sibilla 2.6.31-8-generic #28-Ubuntu SMP Thu Aug 27 14:42:57 UTC 2009 x86_64 GNU/Linux
+
+andrea at sibilla:~$ gcc --version
+gcc (Ubuntu 4.4.1-3ubuntu3) 4.4.1
+
+andrea at sibilla:~$ lsb_release -crd
+Description:    Ubuntu karmic (development branch)
+Release:        9.10
+Codename:       karmic
+
+andrea at sibilla:~$ crrcsim
+terminate called after throwing an instance of 'CGAL::Assertion_exception'
+  what():  CGAL ERROR: assertion violation!
+Expr: -CGAL_IA_MUL(-1.1, 10.1) != CGAL_IA_MUL(1.1, 10.1)
+File: /usr/include/CGAL/Interval_nt.h
+Line: 154
+Explanation: Wrong rounding: did you forget the -frounding-math option if you use GCC?
+Aborted (core dumped)
+
+don't know if the problem is in cgal or crrcsim...
+
+
+Follow-Ups:
+
+Date: 2009-Dec-01 04:59
+By: wheeldweller
+
+Comment:
+Why was this so much trouble to install for you?
+
+Take a peek at http://PlayDeb.net. Set it up (it's easy and well-documented) where you can click one button and install it.  That's how I'm running it.  Just let the system get whatever parts it needs.
+
+And feel free to mail me with any other Jaunty/Karmic stuff, aye? 
+
+WheelDweller at gmail.com
+-------------------------------------------------------
+
+Date: 2009-Sep-01 22:23
+By: jreucker
+
+Comment:
+Hi,
+
+could you please try to recompile CRRCsim with the mentioned gcc option? You can add this option to the compiler call by configuring CRRCsim with
+
+./configure CXXFLAGS="-g3 -O0 -frounding-math"
+
+Kind regards,
+Jan R.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=16204&group_id=9957
+
+
+From admin at berlios.de  Tue Dec 15 23:00:04 2009
+From: admin at berlios.de (admin at berlios.de)
+Date: Tue, 15 Dec 2009 23:00:04 +0100 (CET)
+Subject: [Crrcsim-devel] [Bug #16204] core dump on karmic
+Message-ID: <200912152200.nBFM04P6016607@unicorn.berlios.de>
+
+Bug #16204, was updated on 2009-Sep-01 14:09
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Closed
+Resolution: Fixed
+Bug Group: None
+Priority: 5
+Submitted by: brand77
+Assigned to : jreucker
+Summary: core dump on karmic
+
+Details: almost a fresh karmic alpha4 install, dist-upgrade at 31/08/2009, and with:
+
+apt-get -y install \
+  mercurial \
+  automake autoconf \
+  libsdl1.2debian-alsa libsdl1.2-dev \
+  libplib1 libplib-dev \
+  libportaudio0 libportaudio-dev \
+  libcgal3 libcgal-dev
+
+andrea at sibilla:~$ uname -a
+Linux sibilla 2.6.31-8-generic #28-Ubuntu SMP Thu Aug 27 14:42:57 UTC 2009 x86_64 GNU/Linux
+
+andrea at sibilla:~$ gcc --version
+gcc (Ubuntu 4.4.1-3ubuntu3) 4.4.1
+
+andrea at sibilla:~$ lsb_release -crd
+Description:    Ubuntu karmic (development branch)
+Release:        9.10
+Codename:       karmic
+
+andrea at sibilla:~$ crrcsim
+terminate called after throwing an instance of 'CGAL::Assertion_exception'
+  what():  CGAL ERROR: assertion violation!
+Expr: -CGAL_IA_MUL(-1.1, 10.1) != CGAL_IA_MUL(1.1, 10.1)
+File: /usr/include/CGAL/Interval_nt.h
+Line: 154
+Explanation: Wrong rounding: did you forget the -frounding-math option if you use GCC?
+Aborted (core dumped)
+
+don't know if the problem is in cgal or crrcsim...
+
+
+Follow-Ups:
+
+Date: 2009-Dec-15 23:00
+By: jreucker
+
+Comment:
+Fixed in changeset 840e4c94588f by passing the -frounding-math option to gcc when compiling with CGAL support.
+-------------------------------------------------------
+
+Date: 2009-Dec-01 04:59
+By: wheeldweller
+
+Comment:
+Why was this so much trouble to install for you?
+
+Take a peek at http://PlayDeb.net. Set it up (it's easy and well-documented) where you can click one button and install it.  That's how I'm running it.  Just let the system get whatever parts it needs.
+
+And feel free to mail me with any other Jaunty/Karmic stuff, aye? 
+
+WheelDweller at gmail.com
+-------------------------------------------------------
+
+Date: 2009-Sep-01 22:23
+By: jreucker
+
+Comment:
+Hi,
+
+could you please try to recompile CRRCsim with the mentioned gcc option? You can add this option to the compiler call by configuring CRRCsim with
+
+./configure CXXFLAGS="-g3 -O0 -frounding-math"
+
+Kind regards,
+Jan R.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=16204&group_id=9957
+
+
+From jan.reucker at web.de  Thu Dec 17 07:19:48 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Thu, 17 Dec 2009 07:19:48 +0100
+Subject: [Crrcsim-devel] Proposal: Drag from extended gear
+Message-ID: <20091217071948.78ebb428@web.de>
+
+Hello,
+
+one thing I'm missing in the current FDM implementation: if I extend the retractable
+gear of the Sport, the flight performance doesn't change in any way. I'd like to
+add a configurable drag and lift change to the FDM: The extended gear will
+definitely add more drag, and most likely reduce lift because the airflow on
+the wing's underside is disturbed.
+
+Therefore the implementation could be similar to the spoiler implementation,
+using an additional <retract drag="..." lift="..." /> tag in the model file
+and linearly adding the lift and drag components based on the retract input.
+Of course a linear behaviour is physically incorrect, but I think this can be
+neglected because the gear is usually either fully retracted or fully extended.
+
+Any objections and/or additional ideas?
+
+Kind regards,
+Jan R.
+
+
+From jens_w2 at gmx.net  Thu Dec 17 15:33:48 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Thu, 17 Dec 2009 15:33:48 +0100
+Subject: [Crrcsim-devel] Proposal: Drag from extended gear
+In-Reply-To: <20091217071948.78ebb428@web.de>
+References: <20091217071948.78ebb428@web.de>
+Message-ID: <20091217143348.GA3834@knusper>
+
+No, this sounds fine.
+
+
+From olivier at obordes.com  Thu Dec 17 17:44:38 2009
+From: olivier at obordes.com (Olivier Bordes)
+Date: Thu, 17 Dec 2009 17:44:38 +0100
+Subject: [Crrcsim-devel] Proposal: Drag from extended gear
+In-Reply-To: <20091217071948.78ebb428@web.de>
+References: <20091217071948.78ebb428@web.de>
+Message-ID: <4B2A5FF6.8050706@obordes.com>
+
+Great !
+
+Jan Reucker wrote:
+> Hello,
+>
+> one thing I'm missing in the current FDM implementation: if I extend the retractable
+> gear of the Sport, the flight performance doesn't change in any way. I'd like to
+> add a configurable drag and lift change to the FDM: The extended gear will
+> definitely add more drag, and most likely reduce lift because the airflow on
+> the wing's underside is disturbed.
+>
+> Therefore the implementation could be similar to the spoiler implementation,
+> using an additional <retract drag="..." lift="..." /> tag in the model file
+> and linearly adding the lift and drag components based on the retract input.
+> Of course a linear behaviour is physically incorrect, but I think this can be
+> neglected because the gear is usually either fully retracted or fully extended.
+>
+> Any objections and/or additional ideas?
+>
+> Kind regards,
+> Jan R.
+> _______________________________________________
+> Crrcsim-devel mailing list
+> Crrcsim-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+>
+>   
+
+
+From jan.reucker at web.de  Fri Dec 18 10:42:42 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Fri, 18 Dec 2009 10:42:42 +0100
+Subject: [Crrcsim-devel] Proposal: Drag from extended gear
+In-Reply-To: <20091217071948.78ebb428@web.de>
+References: <20091217071948.78ebb428@web.de>
+Message-ID: <20091218104242.1884b9ec@web.de>
+
+On Thu, 17 Dec 2009 07:19:48 +0100
+Jan Reucker <jan.reucker at web.de> wrote:
+
+> I'd like to add a configurable drag and lift change to the FDM
+
+Hi all,
+
+thanks for the positive feedback! The new feature is implemented in changeset
+085292ff5534. If you compare the lift and drag coefficients I used for the
+Sport's gear with the Skorpion's spoiler, you might think that the values for
+the gear are too high:
+
+Sport:    <retract drag="0.04"  lift="-0.3"/>
+Skorpion: <spoiler drag="0.02"  lift="-0.2" />
+
+But on the other hand I want to "feel" that something is happening when I retract
+or extend the gears. In normal flight you'll notice that the Sport feels more
+"saggy" with lowered gears, and its flight performance will be better if
+you retract them. The gear's influence is not *that* big that the plane is
+unflyable without retracting it. But if you lower the gear during a slow and low
+turn in your landing approach, you will immediately notice that this might have
+been a bad idea... ;-)
+
+Maybe we should increase the spoiler values for the Skorpion a bit. Maybe we
+should even increase the general drag coefficients for this model. Its energy
+retention is much better than any "real" plane I've ever flown. But maybe
+we can leave everything "as-is" and I must start saving some money for one of
+these F3B/F3F type gliders to adjust my own concept of reality ;-)
+
+Kind regards, 
+Jan R.
+
+
+From joel.lienard at laposte.net  Sat Dec 19 22:54:26 2009
+From: joel.lienard at laposte.net (=?ISO-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Sat, 19 Dec 2009 22:54:26 +0100
+Subject: [Crrcsim-devel] collision management
+Message-ID: <1261259666.5650.54.camel@joel-portable>
+
+Hello to all, 
+I am back from 8 days "of line".
+Thanks to Jan of the correction of the bug " Collision multiple
+detection with objects ". And it is a good idea to have split the file
+crrc_scenery.c.
+
+But It would be necessary to manage better the collisions. A complete
+management is a big work. In the meantime, I propose you the addition of
+some line in the file "mod_fdm/gear01/gear.cpp". It is very imperfect.
+There are some values empirical. But it seems to me better than
+anything.
+
+Joel
+--------------
+/* Rotate into local (N-E-D) axes */
+
+  v_F_wheel_local.r[0] = forward_wheel_force *cos_wheel_hdg_angle
+                       - sideward_wheel_force*sin_wheel_hdg_angle;
+  v_F_wheel_local.r[1] = forward_wheel_force *sin_wheel_hdg_angle
+                       + sideward_wheel_force*cos_wheel_hdg_angle;
+  v_F_wheel_local.r[2] = reaction_normal_force;
+
+/////////////// begin insertion
+#if 1
+/*
+Rudimentary management of the collision:
+If the plane is under ground, it is because there was collision with an
+object. If we leave the normal code, the plane is very strongly
+propelled in the air. To avoid it we create a strong strength of damping
+on three axes. We leave a low vertical strength to avoid that the plane
+sinks slowly.
+*/
+float underground_limit=1;
+float damping = .999;
+if( v_P_wheel_rwy_local.r[2] > (z_earth + underground_limit))
+  {
+  v_F_wheel_local.r[0] = - v_V_wheel_local.r[0]*damping;
+  v_F_wheel_local.r[1] = - v_V_wheel_local.r[1]*damping;
+  v_F_wheel_local.r[2] = - v_V_wheel_local.r[2]*damping -
+spring_constant* 0.001;
+  }
+#endif
+///////////// end insertion
+
+
+
+From jan.reucker at web.de  Sun Dec 20 08:46:00 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sun, 20 Dec 2009 08:46:00 +0100
+Subject: [Crrcsim-devel] collision management
+In-Reply-To: <1261259666.5650.54.camel@joel-portable>
+References: <1261259666.5650.54.camel@joel-portable>
+Message-ID: <20091220084600.437e8b26@web.de>
+
+On Sat, 19 Dec 2009 22:54:26 +0100
+Jo?l Li?nard <joel.lienard at laposte.net> wrote:
+
+> detection with objects ". And it is a good idea to have split the file
+> crrc_scenery.c.
+
+Maybe I'll even create more files for the various sub-classes. It makes things
+much easier to browse and find. But I've started to do some clean-ups in
+the landscape module anyway, so I'll see later what goes where.
+
+Tasks that I plan to accomplish in the near future:
+- Write up some documentation on the existing scenery file format (similar to
+  the existing documentation in the file_format folder).
+- Maybe do some harmonisation between the existing file formats (e.g. use the
+  same coordinate system for scenery and FDM, support metric units in scenery
+  files using the "units" attribute). This may lead to a version "4" of the
+  scenery description format.
+- Refactor the existing height calculation mechanism into its own hierarchy
+  of classes to build a generic interface for the FDM and windfield algorithms.
+  This should make it easier to select between different height calculation
+  mechanisms (like what you started with the getHeight_mode attribute) and,
+  later on, different windfield implementations.
+ 
+> But It would be necessary to manage better the collisions. A complete
+> management is a big work. In the meantime, I propose you the addition of
+> some line in the file "mod_fdm/gear01/gear.cpp". It is very imperfect.
+> There are some values empirical. But it seems to me better than
+> anything.
+
+What about the following approach:
+
+- The existing code already calculates the force that acts on each hardpoint.
+- We could extend the hardpoint description with a new attribute "max_force".
+- After calculating the force for a hardpoint, we compare it to the max_force
+  and emit a CRASH_EVENT or something like this if the maximum is exceeded.
+- The SimStateHandler is extended to catch this event and go to a CRASHED state
+  that can only be left by a simulation reset command.
+- If max_force is not defined for a hardpoint, we do nothing.
+
+All this should be easy to implement. The hardest part is finding appropriate
+empirical values for the max_force. But the biggest advantage is that we get
+different behaviour for different hardpoints: you can set the max_force for a
+propeller to a very low value, while the gear itself can take much more load
+without breaking. 
+
+Of course, your code is "better than nothing" compared to the current state with
+the unrealistic "frisbee" collisions, but I think it's easy to "make it right"
+here.
+
+Kind regards,
+Jan R.
+
+
+From joel.lienard at free.fr  Sun Dec 20 09:28:00 2009
+From: joel.lienard at free.fr (=?ISO-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Sun, 20 Dec 2009 09:28:00 +0100
+Subject: [Crrcsim-devel] collision management
+In-Reply-To: <20091220084600.437e8b26@web.de>
+References: <1261259666.5650.54.camel@joel-portable>
+	<20091220084600.437e8b26@web.de>
+Message-ID: <1261297680.5650.130.camel@joel-portable>
+
+
+> - The existing code already calculates the force that acts on each hardpoint.
+> - We could extend the hardpoint description with a new attribute "max_force".
+> - After calculating the force for a hardpoint, we compare it to the max_force
+>   and emit a CRASH_EVENT or something like this if the maximum is exceeded.
+> - The SimStateHandler is extended to catch this event and go to a CRASHED state
+>   that can only be left by a simulation reset command.
+> - If max_force is not defined for a hardpoint, we do nothing.
+> 
+> All this should be easy to implement. The hardest part is finding appropriate
+> empirical values for the max_force. But the biggest advantage is that we get
+> different behaviour for different hardpoints: you can set the max_force for a
+> propeller to a very low value, while the gear itself can take much more load
+> without breaking. 
+
+I think that it is a good way of making. It will answer most of the
+cases. Except, maybe, in that this: the plane rolls slowly and touches a
+vertical plan ( outhouse ). It is going to be crashed while it would
+only be stopped or diverted. To handle correctly this case, the
+information " Height of ground " is not sufficient. But it is not very
+annoying for a flight simulator!
+
+
+> Of course, your code is "better than nothing" compared to the current state with
+> the unrealistic "frisbee" collisions, but I think it's easy to "make it right"
+> here.
+> 
+> Kind regards,
+> Jan R.
+> _______________________________________________
+> Crrcsim-devel mailing list
+> Crrcsim-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+
+
+
+From joel.lienard at laposte.net  Sun Dec 20 09:38:10 2009
+From: joel.lienard at laposte.net (=?ISO-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Sun, 20 Dec 2009 09:38:10 +0100
+Subject: [Crrcsim-devel] F3F on all scenery
+Message-ID: <1261298290.5650.151.camel@joel-portable>
+
+
+I prepared minor modifications for the code F3F so that he can work on
+all scenery.
+But it is necessary to define the position of bases according to the
+scenery. It is then logical to put these parameters in files scenery. If
+these parameters are read by loadScenery and stored in the scenery
+object, it create a dependence  scenery/f3f code.
+To avoid it, we can, in the scenery object, make public the name of the
+file or the object " SimpleXMLTransfer xml ".
+
+Do you see a better solution?
+
+Jo?l
+
+
+
+
+
+From joel.lienard at laposte.net  Sun Dec 20 13:59:02 2009
+From: joel.lienard at laposte.net (=?ISO-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Sun, 20 Dec 2009 13:59:02 +0100
+Subject: [Crrcsim-devel] Scenery, windfield
+In-Reply-To: <20091209213223.3ca4caaf@gmx.net>
+References: <hfmcqs+ij3q@eGroups.com> <1260361932.4622.117.camel@joel-portable>
+	<20091209170109.GA3817@knusper> <20091209213223.3ca4caaf@gmx.net>
+Message-ID: <1261313942.5650.406.camel@joel-portable>
+
+Le mercredi 09 d?cembre 2009 ? 21:32 +0100, Slowhand a ?crit :
+>   
+
+> > I guess yours is not linked from the wiki? Why not?
+> 
+> Yes, please add more information to the Wiki.
+
+I have no more the password to edit the page " download " of the wiki
+
+
+> > Is the automatic windfield computation the only thing missing in
+> order to use more general sceneries like that?
+> 
+> I guess the hardest part is getting realistic height information.
+Yes !! 
+For the flight, it is enough to have the information of height close to
+pilot to obtain a realistic landing. What I obtain well enough with my
+technique of stereoscopy.
+For the wind, it is necessary to go much more far (is 1 kilometer
+sufficient?). I try to complete by map or aerial photos
+
+>  I think Joel uses some kind of trial-and-error process to generate a
+> sparsely populated height matrix, and CGAL interpolates between these
+> values.
+The representation of the heights is not problematic because in two
+dimensions. The mesh can be regular (as in " simple scenery ") or not.
+The interpolation is easy.
+The wind, him, is three dimensional.
+The current simulation was not made by me. See:
+http://jugiraud1.free.fr/brie.htm
+It uses a professional software. I do not know how is obtained the mesh.
+This mesh is not regular. It is for the interpolation of the result of
+this simulator that I use CGAL. The data are at present 2D but the code
+is planned for 3D.
+CGAL to be very powerful and rather easy to use but it is true that it
+is pointlessly heavy and difficult to install under Windows. 
+
+In the hypothesis of a calculation of the windfield  in CRRCSIM, I do
+not know if it is reasonable to use a regular grid:
+If we take the low hypotheses of Jan, 1 kilometre squared and a step of
+2m but by adding the third dimension on 100m we obtain a grid of
+500x500x50=12500.000 cells. In every cell, are needed at least 3
+components of winds and others values to make the calculation. Let us
+say 6 float. It gives 300 Mb of memory. Possible with a modern computer.
+If one to be more precise, we take a square of 2x2 kilometers and a step
+of 0,5m. One need that then 16 times more, that is almost 5 Go, what is
+not reasonable.
+
+Jo?l
+
+
+
+
+
+
+
+From olivier at obordes.com  Sun Dec 20 15:45:49 2009
+From: olivier at obordes.com (Olivier Bordes)
+Date: Sun, 20 Dec 2009 15:45:49 +0100
+Subject: [Crrcsim-devel] F3F on all scenery
+In-Reply-To: <1261298290.5650.151.camel@joel-portable>
+References: <1261298290.5650.151.camel@joel-portable>
+Message-ID: <4B2E389D.8000903@obordes.com>
+
+Hello Joel,
+Thanks for the question.
+
+Game mode brings rules, physical and times constraints to the 
+simulation. They should be valid on every location, even if it does not 
+really make sense to do F3F on all scenery.
+Game mode should need a central point to initialize  (the center of the 
+course) , and a direction (toward which the race will happen).
+Once this is defined,  pylons can  be located relatively to this point. 
+But their real location will be subject to  relief  contraints (as in 
+the real life :).
+
+So, this suggest *no* dependances between the scenery and the game mode: 
+it  means, that a scenery shoud be able to tell the altitude of the 
+ground at a certain point, and then  the F3F game mode should ask to the 
+scenery: what is the ground altitude of this point ? and then start 
+drawing the pylons from that location.
+
+In term of code, each Scenery object should implement an additional 
+method (Virtual function  mandatory) that they have to implement.
+The "F3F game mode" to be changed when drawing the pylons, to first 
+require the "altitude" of the starting point.
+
+Olivier
+
+
+Jo?l Li?nard wrote:
+> I prepared minor modifications for the code F3F so that he can work on
+> all scenery.
+> But it is necessary to define the position of bases according to the
+> scenery. It is then logical to put these parameters in files scenery. If
+> these parameters are read by loadScenery and stored in the scenery
+> object, it create a dependence  scenery/f3f code.
+> To avoid it, we can, in the scenery object, make public the name of the
+> file or the object " SimpleXMLTransfer xml ".
+>
+> Do you see a better solution?
+>
+> Jo?l
+>
+>
+>
+> _______________________________________________
+> Crrcsim-devel mailing list
+> Crrcsim-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+>   
+
+
+
+From joel.lienard at laposte.net  Sun Dec 20 18:32:21 2009
+From: joel.lienard at laposte.net (=?ISO-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Sun, 20 Dec 2009 18:32:21 +0100
+Subject: [Crrcsim-devel] F3F on all scenery
+In-Reply-To: <4B2E389D.8000903@obordes.com>
+References: <1261298290.5650.151.camel@joel-portable>
+	<4B2E389D.8000903@obordes.com>
+Message-ID: <1261330341.5650.439.camel@joel-portable>
+
+ Hello Olivier,
+
+ I prepared the modifications to parametrize the direction and the
+positions. No difficulty to obtain then the height, the method already
+exist.
+A question is to know where to store these parameters. They can be in
+the general configuration file but it seems to me useful to put values
+by default in scenery files.
+To add a method F3F in the object scene to read these parameters does
+not seem to me good as regards the modularity of the code, I thus
+suggest making it in the object F3F.
+
+Jo?l
+
+Le dimanche 20 d?cembre 2009 ? 15:45 +0100, Olivier Bordes a ?crit :
+> Hello Joel,
+> Thanks for the question.
+> 
+> Game mode brings rules, physical and times constraints to the 
+> simulation. They should be valid on every location, even if it does not 
+> really make sense to do F3F on all scenery.
+> Game mode should need a central point to initialize  (the center of the 
+> course) , and a direction (toward which the race will happen).
+> Once this is defined,  pylons can  be located relatively to this point. 
+> But their real location will be subject to  relief  contraints (as in 
+> the real life :).
+> 
+> So, this suggest *no* dependances between the scenery and the game mode: 
+> it  means, that a scenery shoud be able to tell the altitude of the 
+> ground at a certain point, and then  the F3F game mode should ask to the 
+> scenery: what is the ground altitude of this point ? and then start 
+> drawing the pylons from that location.
+> 
+> In term of code, each Scenery object should implement an additional 
+> method (Virtual function  mandatory) that they have to implement.
+> The "F3F game mode" to be changed when drawing the pylons, to first 
+> require the "altitude" of the starting point.
+> 
+> Olivier
+> 
+> 
+> Jo?l Li?nard wrote:
+> > I prepared minor modifications for the code F3F so that he can work on
+> > all scenery.
+> > But it is necessary to define the position of bases according to the
+> > scenery. It is then logical to put these parameters in files scenery. If
+> > these parameters are read by loadScenery and stored in the scenery
+> > object, it create a dependence  scenery/f3f code.
+> > To avoid it, we can, in the scenery object, make public the name of the
+> > file or the object " SimpleXMLTransfer xml ".
+> >
+> > Do you see a better solution?
+> >
+> > Jo?l
+> >
+> >
+> >
+> > _______________________________________________
+> > Crrcsim-devel mailing list
+> > Crrcsim-devel at lists.berlios.de
+> > https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+> >   
+> 
+> 
+
+
+
+From olivier at obordes.com  Sun Dec 20 18:43:16 2009
+From: olivier at obordes.com (Olivier Bordes)
+Date: Sun, 20 Dec 2009 18:43:16 +0100
+Subject: [Crrcsim-devel] F3F on all scenery
+In-Reply-To: <1261330341.5650.439.camel@joel-portable>
+References: <1261298290.5650.151.camel@joel-portable>	<4B2E389D.8000903@obordes.com>
+	<1261330341.5650.439.camel@joel-portable>
+Message-ID: <4B2E6234.9060206@obordes.com>
+
+Configuration parameters related to the scenery of the F3F game  can be 
+put in  the "F3F parameters" section of the conf file.
+None of these parameters should be scenery dependant anyway, so adding 
+(x,y,z) for the middle of the game, and (dx,dy,dz) for the direction 
+should be enough.
+Pylons (x,y,z) position will be computed based on that, and on the 
+return result from the altitude method of the scenery.
+It is not needed to add a method in the scenery related to F3F.
+
+
+Jo?l Li?nard wrote:
+>  Hello Olivier,
+>
+>  I prepared the modifications to parametrize the direction and the
+> positions. No difficulty to obtain then the height, the method already
+> exist.
+> A question is to know where to store these parameters. They can be in
+> the general configuration file but it seems to me useful to put values
+> by default in scenery files.
+> To add a method F3F in the object scene to read these parameters does
+> not seem to me good as regards the modularity of the code, I thus
+> suggest making it in the object F3F.
+>
+> Jo?l
+>
+> Le dimanche 20 d?cembre 2009 ? 15:45 +0100, Olivier Bordes a ?crit :
+>   
+>> Hello Joel,
+>> Thanks for the question.
+>>
+>> Game mode brings rules, physical and times constraints to the 
+>> simulation. They should be valid on every location, even if it does not 
+>> really make sense to do F3F on all scenery.
+>> Game mode should need a central point to initialize  (the center of the 
+>> course) , and a direction (toward which the race will happen).
+>> Once this is defined,  pylons can  be located relatively to this point. 
+>> But their real location will be subject to  relief  contraints (as in 
+>> the real life :).
+>>
+>> So, this suggest *no* dependances between the scenery and the game mode: 
+>> it  means, that a scenery shoud be able to tell the altitude of the 
+>> ground at a certain point, and then  the F3F game mode should ask to the 
+>> scenery: what is the ground altitude of this point ? and then start 
+>> drawing the pylons from that location.
+>>
+>> In term of code, each Scenery object should implement an additional 
+>> method (Virtual function  mandatory) that they have to implement.
+>> The "F3F game mode" to be changed when drawing the pylons, to first 
+>> require the "altitude" of the starting point.
+>>
+>> Olivier
+>>
+>>
+>> Jo?l Li?nard wrote:
+>>     
+>>> I prepared minor modifications for the code F3F so that he can work on
+>>> all scenery.
+>>> But it is necessary to define the position of bases according to the
+>>> scenery. It is then logical to put these parameters in files scenery. If
+>>> these parameters are read by loadScenery and stored in the scenery
+>>> object, it create a dependence  scenery/f3f code.
+>>> To avoid it, we can, in the scenery object, make public the name of the
+>>> file or the object " SimpleXMLTransfer xml ".
+>>>
+>>> Do you see a better solution?
+>>>
+>>> Jo?l
+>>>
+>>>
+>>>
+>>> _______________________________________________
+>>> Crrcsim-devel mailing list
+>>> Crrcsim-devel at lists.berlios.de
+>>> https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+>>>   
+>>>       
+>>     
+>
+> _______________________________________________
+> Crrcsim-devel mailing list
+> Crrcsim-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+>   
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20091220/25a21a56/attachment.html>
+
+From jan.reucker at web.de  Sun Dec 20 21:48:39 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sun, 20 Dec 2009 21:48:39 +0100
+Subject: [Crrcsim-devel] Scenery, windfield
+In-Reply-To: <1261313942.5650.406.camel@joel-portable>
+References: <hfmcqs+ij3q@eGroups.com> <1260361932.4622.117.camel@joel-portable>
+	<20091209170109.GA3817@knusper> <20091209213223.3ca4caaf@gmx.net>
+	<1261313942.5650.406.camel@joel-portable>
+Message-ID: <20091220214839.7ec0ff63@web.de>
+
+On Sun, 20 Dec 2009 13:59:02 +0100
+Jo?l Li?nard <joel.lienard at laposte.net> wrote:
+
+Hi Joel and others!
+
+> I have no more the password to edit the page " download " of the wiki
+
+I'll send you the credentials in a private email.
+ 
+> For the wind, it is necessary to go much more far (is 1 kilometer
+> sufficient?). I try to complete by map or aerial photos
+
+Maybe Google Earth can help here? At least for a very coarse grid (which
+should be enough for the big distance calculations) you can directly
+enter the N/E coordinates and then read out the height value. I don't know
+if there's a free API to access these values without using GE as a
+frontend. I guess most parts of the GE API are only for premium users.
+ 
+> In the hypothesis of a calculation of the windfield  in CRRCSIM, I do
+> not know if it is reasonable to use a regular grid:
+> If we take the low hypotheses of Jan, 1 kilometre squared and a step of
+> 2m but by adding the third dimension on 100m we obtain a grid of
+> 500x500x50=12500.000 cells. In every cell, are needed at least 3
+> components of winds and others values to make the calculation. Let us
+> say 6 float. It gives 300 Mb of memory. Possible with a modern computer.
+> If one to be more precise, we take a square of 2x2 kilometers and a step
+> of 0,5m. One need that then 16 times more, that is almost 5 Go, what is
+> not reasonable.
+
+I agree. And I'd really like to continue to run CRRCsim on my netbook with
+only 512 MB of RAM in the future ;-) (without having to rip it apart to add
+another 512 MBs).
+
+Maybe we should lower our standards regarding wind component precision. Do
+we really need floating point precision? And which values do we need apart
+from x/y/z components of the wind vector at this point. Let's see: typical
+flying conditions are somewhere between 0 and 10 bft., which equals 0 to
+about 25 m/s. If we use one byte per component, we get a resolution of about
+0.1 m/s per bit. I guess that should be enough, considering the fact that
+we always use interpolated values with a much finer resolution. And I really
+think that 2m should be enough as long as we don't want to simulate every
+little bit of turbulence behind the outhouse. ;-)
+
+12.500.000 cells * 3 byte = 36.6 MByte
+
+And maybe we can make this configurable, using a wider grid on low-power
+machines.
+
+Kind regards,
+Jan R.
+
+
+From jan.reucker at web.de  Sun Dec 20 22:00:31 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sun, 20 Dec 2009 22:00:31 +0100
+Subject: [Crrcsim-devel] collision management
+In-Reply-To: <1261297680.5650.130.camel@joel-portable>
+References: <1261259666.5650.54.camel@joel-portable>
+	<20091220084600.437e8b26@web.de>
+	<1261297680.5650.130.camel@joel-portable>
+Message-ID: <20091220220031.37e45265@web.de>
+
+On Sun, 20 Dec 2009 09:28:00 +0100
+Jo?l Li?nard <joel.lienard at free.fr> wrote:
+
+> cases. Except, maybe, in that this: the plane rolls slowly and touches a
+> vertical plan ( outhouse ). It is going to be crashed while it would
+> only be stopped or diverted. To handle correctly this case, the
+> information " Height of ground " is not sufficient. But it is not very
+> annoying for a flight simulator!
+
+You are right, we would need collision boxes and the corresponding intersection
+testing algorithms. PLIB provides the mechanisms for this, but it consumes
+additional CPU resources. Don't know if it's worth the effort for a flight
+simulator that should focus on flying.
+
+Do you want to work on this topic? Rogier Wolff wanted to look into it
+(see the "learning to fly and land" thread), maybe you should get into
+contact with him to avoid doing things twice.
+
+Kind regards,
+Jan R. 
+
+
+From jan.reucker at web.de  Sun Dec 20 22:15:18 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sun, 20 Dec 2009 22:15:18 +0100
+Subject: [Crrcsim-devel] F3F on all scenery
+In-Reply-To: <4B2E6234.9060206@obordes.com>
+References: <1261298290.5650.151.camel@joel-portable>
+	<4B2E389D.8000903@obordes.com>
+	<1261330341.5650.439.camel@joel-portable>
+	<4B2E6234.9060206@obordes.com>
+Message-ID: <20091220221518.733b54ed@web.de>
+
+On Sun, 20 Dec 2009 18:43:16 +0100
+Olivier Bordes <olivier at obordes.com> wrote:
+
+> Configuration parameters related to the scenery of the F3F game  can be 
+> put in  the "F3F parameters" section of the conf file.
+> None of these parameters should be scenery dependant anyway, so adding 
+> (x,y,z) for the middle of the game, and (dx,dy,dz) for the direction 
+> should be enough.
+> Pylons (x,y,z) position will be computed based on that, and on the 
+> return result from the altitude method of the scenery.
+> It is not needed to add a method in the scenery related to F3F.
+
+Hmm, but the starting point and the direction DO depend on the scenery,
+don't they?
+
+What about a totally generic query method in the scenery object that
+allows other objects to retrieve a part of the XML file as a
+SimpleXMLTransfer pointer? The scenery can contain a section for each
+game mode that can be run there, and the game mode object can then
+ask for whatever it is interested in.
+
+For the scenery object hierarchy, this wouldn't create an additional
+dependency.
+
+Kind regards,
+Jan R.
+
+
+From joel.lienard at free.fr  Mon Dec 21 09:03:30 2009
+From: joel.lienard at free.fr (=?ISO-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Mon, 21 Dec 2009 09:03:30 +0100
+Subject: [Crrcsim-devel] collision management
+In-Reply-To: <20091220220031.37e45265@web.de>
+References: <1261259666.5650.54.camel@joel-portable>
+	<20091220084600.437e8b26@web.de>
+	<1261297680.5650.130.camel@joel-portable>
+	<20091220220031.37e45265@web.de>
+Message-ID: <1261382610.5650.444.camel@joel-portable>
+
+
+
+> You are right, we would need collision boxes and the corresponding intersection
+> testing algorithms. PLIB provides the mechanisms for this, but it consumes
+> additional CPU resources. Don't know if it's worth the effort for a flight
+> simulator that should focus on flying.
+> 
+> Do you want to work on this topic?
+
+
+Not now.
+I prefer to work on the panoramic scenery improvement  and windfield.
+
+Jo?l
+
+
+
+From joel.lienard at free.fr  Mon Dec 21 09:07:49 2009
+From: joel.lienard at free.fr (=?ISO-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Mon, 21 Dec 2009 09:07:49 +0100
+Subject: [Crrcsim-devel] F3F on all scenery
+In-Reply-To: <20091220221518.733b54ed@web.de>
+References: <1261298290.5650.151.camel@joel-portable>
+	<4B2E389D.8000903@obordes.com>
+	<1261330341.5650.439.camel@joel-portable>
+	<4B2E6234.9060206@obordes.com>  <20091220221518.733b54ed@web.de>
+Message-ID: <1261382869.5650.446.camel@joel-portable>
+
+
+> What about a totally generic query method in the scenery object that
+> allows other objects to retrieve a part of the XML file as a
+> SimpleXMLTransfer pointer? The scenery can contain a section for each
+> game mode that can be run there, and the game mode object can then
+> ask for whatever it is interested in.
+> 
+> For the scenery object hierarchy, this wouldn't create an additional
+> dependency.
+> 
+
+We agree!
+
+
+
+From olivier at obordes.com  Mon Dec 21 09:34:15 2009
+From: olivier at obordes.com (obordes)
+Date: Mon, 21 Dec 2009 09:34:15 +0100
+Subject: [Crrcsim-devel] F3F on all scenery
+In-Reply-To: <1261382869.5650.446.camel@joel-portable>
+References: <1261298290.5650.151.camel@joel-portable>
+	<20091220221518.733b54ed@web.de>
+	<1261382869.5650.446.camel@joel-portable>
+Message-ID: <200912210934.16293.obor00@yahoo.fr>
+
+I believe it would be cleaner that the F3F XML conf contains it own section 
+depending on the scenery it will be use in.
+I prefer to have the dependance:  F3F  --> Scenery , instead of the opposite.
+But that's philosophy :)
+
+
+On Monday 21 December 2009 09:07:49 Jo?l Li?nard wrote:
+> > What about a totally generic query method in the scenery object that
+> > allows other objects to retrieve a part of the XML file as a
+> > SimpleXMLTransfer pointer? The scenery can contain a section for each
+> > game mode that can be run there, and the game mode object can then
+> > ask for whatever it is interested in.
+> >
+> > For the scenery object hierarchy, this wouldn't create an additional
+> > dependency.
+>
+> We agree!
+>
+> _______________________________________________
+> Crrcsim-devel mailing list
+> Crrcsim-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/crrcsim-devel
+
+
+
+
+From R.E.Wolff at BitWizard.nl  Mon Dec 21 11:25:01 2009
+From: R.E.Wolff at BitWizard.nl (Rogier Wolff)
+Date: Mon, 21 Dec 2009 11:25:01 +0100
+Subject: [Crrcsim-devel] collision management
+In-Reply-To: <20091220220031.37e45265@web.de>
+References: <1261259666.5650.54.camel@joel-portable>
+	<20091220084600.437e8b26@web.de>
+	<1261297680.5650.130.camel@joel-portable>
+	<20091220220031.37e45265@web.de>
+Message-ID: <20091221102501.GD22609@bitwizard.nl>
+
+On Sun, Dec 20, 2009 at 10:00:31PM +0100, Jan Reucker wrote:
+> On Sun, 20 Dec 2009 09:28:00 +0100
+> Jo?l Li?nard <joel.lienard at free.fr> wrote:
+> 
+> > cases. Except, maybe, in that this: the plane rolls slowly and touches a
+> > vertical plan ( outhouse ). It is going to be crashed while it would
+> > only be stopped or diverted. To handle correctly this case, the
+> > information " Height of ground " is not sufficient. But it is not very
+> > annoying for a flight simulator!
+> 
+> You are right, we would need collision boxes and the corresponding intersection
+> testing algorithms. PLIB provides the mechanisms for this, but it consumes
+> additional CPU resources. Don't know if it's worth the effort for a flight
+> simulator that should focus on flying.
+> 
+> Do you want to work on this topic? Rogier Wolff wanted to look into
+> it (see the "learning to fly and land" thread), maybe you should get
+> into contact with him to avoid doing things twice.
+
+Still here. A bit. (I have other things on my todo list as well...)
+
+My opinion is that "quick and dirty" is preferable for crrcsim. Look
+at how enjoyable it already is to fly a plane with crrcsim without the
+crash-detection.
+
+Anyway, I think that a "rough" crash-detection is good. Even if it
+sometimes would detect a crash when in real life it wouldn't really
+damage the plane.
+
+Anyway, I was personally thinking about a crash-o-meter. Visually the
+same as the battery meter. 
+
+Crash damage is additive. So if you "hit" below indicated
+max-allowable force, no damage is done. If you hit between 1x and 2x
+max allowable force, the plane is damaged, but in real life
+repairable, in crrcsim flyable. Above 2x max force, the damage is
+considered irrepairable and the plane becomes unflyable in crrcsim.
+
+The damage meter would be green for the bottom third, yellow for the
+middle third, and red for the top third.
+
+So if you hit at .75x max force, the damage-meter would show green to
+75% of the first third. This would "bleed off" slowly to allow people
+to see how close they were to the yellow part.
+
+If you hit at 1.25x max force, the damage meter would show yellow to 
+.25 along the yellow part (5/12th of the total). 
+
+Next if you hit at 1.50x max force, you'd still be allowed to fly, but
+the damage meter would go up to .75 of the yellow part. Another hit of
+more than 1.25x max force would now damage the plane enough to stop
+being flyable in crrcsim.
+
+We could make a damaged-but-flyable plane more fragile by reducing all
+max-forces proportionally. :-)
+
+	Roger.
+
+-- 
+** R.E.Wolff at BitWizard.nl ** http://www.BitWizard.nl/ ** +31-15-2600998 **
+**    Delftechpark 26 2628 XH  Delft, The Netherlands. KVK: 27239233    **
+*-- BitWizard writes Linux device drivers for any device you may have! --*
+Q: It doesn't work. A: Look buddy, doesn't work is an ambiguous statement. 
+Does it sit on the couch all day? Is it unemployed? Please be specific! 
+Define 'it' and what it isn't doing. --------- Adapted from lxrbot FAQ
+
+
+From jan.reucker at web.de  Mon Dec 21 18:10:02 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Mon, 21 Dec 2009 18:10:02 +0100
+Subject: [Crrcsim-devel] F3F on all scenery
+In-Reply-To: <200912210934.16293.obor00@yahoo.fr>
+References: <1261298290.5650.151.camel@joel-portable>
+	<20091220221518.733b54ed@web.de>
+	<1261382869.5650.446.camel@joel-portable>
+	<200912210934.16293.obor00@yahoo.fr>
+Message-ID: <20091221181002.100bacb5@web.de>
+
+On Mon, 21 Dec 2009 09:34:15 +0100
+obordes <olivier at obordes.com> wrote:
+
+> I believe it would be cleaner that the F3F XML conf contains it own section 
+> depending on the scenery it will be use in.
+
+Yes, but that means that if someone wants to create a new F3F scenery, he has
+to modify the F3F XML conf to make CRRCsim aware of it. The other way round,
+he can provide all information with his scenery file and CRRCsim is immediately
+able to use it.
+
+Of course this means that each Scenery has to provide game mode info. But if
+a scenery does not contain this info, we can still fall back to some defaults.
+
+> I prefer to have the dependance:  F3F  --> Scenery , instead of the opposite.
+> But that's philosophy :)
+
+The call dependency works exactly as you described: The game mode object is
+aware of the scenery object and calls its methods to retrieve data. We need
+this awareness to query the height at the starting point or at the pylon locations.
+Therefore, if we already must expose the scenery object to the game mode object,
+we can introduce a method to retrieve arbitrary data from the scenery without
+more coupling.
+
+Kind regards,
+Jan R.
+
+
+
+From olivier at obordes.com  Mon Dec 21 19:25:42 2009
+From: olivier at obordes.com (Olivier Bordes)
+Date: Mon, 21 Dec 2009 19:25:42 +0100
+Subject: [Crrcsim-devel] F3F on all scenery
+In-Reply-To: <20091221181002.100bacb5@web.de>
+References: <1261298290.5650.151.camel@joel-portable>	<20091220221518.733b54ed@web.de>	<1261382869.5650.446.camel@joel-portable>	<200912210934.16293.obor00@yahoo.fr>
+	<20091221181002.100bacb5@web.de>
+Message-ID: <4B2FBDA6.9000704@obordes.com>
+
+
+
+Jan Reucker wrote:
+> On Mon, 21 Dec 2009 09:34:15 +0100
+> obordes <olivier at obordes.com> wrote:
+>
+>   
+>> I believe it would be cleaner that the F3F XML conf contains it own section 
+>> depending on the scenery it will be use in.
+>>     
+>
+> Yes, but that means that if someone wants to create a new F3F scenery, he has
+> to modify the F3F XML conf to make CRRCsim aware of it. The other way round,
+> he can provide all information with his scenery file and CRRCsim is immediately
+> able to use it.
+>   
+Yes, but the other way around, if someone want to add a new game mode, 
+he has to modify each scenery config file, one by one.
+But one method has to be choosen, so let's pick one (the one that will 
+be implemented) and stick with it.
+
+> Of course this means that each Scenery has to provide game mode info. But if
+> a scenery does not contain this info, we can still fall back to some defaults.
+>
+>   
+>> I prefer to have the dependance:  F3F  --> Scenery , instead of the opposite.
+>> But that's philosophy :)
+>>     
+>
+> The call dependency works exactly as you described: The game mode object is
+> aware of the scenery object and calls its methods to retrieve data. We need
+> this awareness to query the height at the starting point or at the pylon locations.
+> Therefore, if we already must expose the scenery object to the game mode object,
+> we can introduce a method to retrieve arbitrary data from the scenery without
+> more coupling.
+>   
+But that's configuration. It looks strange to me that some configuration 
+data  has to be passed through function call through another object.
+Probably,  this problem could be solved by automatic generation of 
+object config files. This makes things more complex but  bring more 
+flexibility.
+
+
+> Kind regards,
+> Jan R.
+>
+>
+>   
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20091221/b09d9917/attachment.html>
+
+From jan.reucker at web.de  Mon Dec 21 21:19:03 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Mon, 21 Dec 2009 21:19:03 +0100
+Subject: [Crrcsim-devel] F3F on all scenery
+In-Reply-To: <4B2FBDA6.9000704@obordes.com>
+References: <1261298290.5650.151.camel@joel-portable>
+	<20091220221518.733b54ed@web.de>
+	<1261382869.5650.446.camel@joel-portable>
+	<200912210934.16293.obor00@yahoo.fr>
+	<20091221181002.100bacb5@web.de> <4B2FBDA6.9000704@obordes.com>
+Message-ID: <20091221211903.70214b92@web.de>
+
+On Mon, 21 Dec 2009 19:25:42 +0100
+Olivier Bordes <olivier at obordes.com> wrote:
+
+> Yes, but the other way around, if someone want to add a new game mode, 
+> he has to modify each scenery config file, one by one.
+
+Absolutely true. At least if the game mode really needs information from
+the scenery.
+
+IMHO adding a game mode is developer stuff. To do this, a lot of stuff has
+to be touched and modified. So adding some more stuff to the two or three
+sceneries that come with CRRCsim doesn't really matter.
+
+Adding a scenery should be user stuff. A scenery maker should be able to
+design game mode features into his sceneries. The scenery is passed on to
+other users, they load them and can immediately play the game mode.
+This can only be achieved if the scenery contains everything that each
+game mode might need. And if it doesn't, CRRCsim can still provide
+(adjustable) default values, e.g. for F3F pylon positions.
+
+> But one method has to be choosen, so let's pick one (the one that will 
+> be implemented) and stick with it.
+
+I agree.
+
+Kind regards,
+Jan R.
+
+
+From jan.reucker at web.de  Mon Dec 21 22:00:01 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Mon, 21 Dec 2009 22:00:01 +0100
+Subject: [Crrcsim-devel] collision management
+In-Reply-To: <20091221102501.GD22609@bitwizard.nl>
+References: <1261259666.5650.54.camel@joel-portable>
+	<20091220084600.437e8b26@web.de>
+	<1261297680.5650.130.camel@joel-portable>
+	<20091220220031.37e45265@web.de>
+	<20091221102501.GD22609@bitwizard.nl>
+Message-ID: <20091221220001.7407dc01@web.de>
+
+On Mon, 21 Dec 2009 11:25:01 +0100
+Rogier Wolff <R.E.Wolff at BitWizard.nl> wrote:
+
+> My opinion is that "quick and dirty" is preferable for crrcsim. Look
+> at how enjoyable it already is to fly a plane with crrcsim without the
+> crash-detection.
+
+Then maybe I should implement a "quick-and-dirty" crash detection now.
+It's really not much work and could be the foundation for later
+additions (e.g. your crash-o-meter). I will implement the new XML file
+attribute and some kind of crash event for the SimStateHandler.
+Any objections?
+ 
+> Crash damage is additive. So if you "hit" below indicated
+> max-allowable force, no damage is done. If you hit between 1x and 2x
+> max allowable force, the plane is damaged, but in real life
+> repairable, in crrcsim flyable. Above 2x max force, the damage is
+> considered irrepairable and the plane becomes unflyable in crrcsim.
+
+How do you handle crashes with different hardpoints? Is everything
+accumulated, or will every hardpoint be treated separately?
+
+Kind regards,
+Jan R.
+
+
+From jan.reucker at web.de  Wed Dec 23 13:01:08 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Wed, 23 Dec 2009 13:01:08 +0100
+Subject: [Crrcsim-devel] collision management
+In-Reply-To: <20091221220001.7407dc01@web.de>
+References: <1261259666.5650.54.camel@joel-portable>
+	<20091220084600.437e8b26@web.de>
+	<1261297680.5650.130.camel@joel-portable>
+	<20091220220031.37e45265@web.de>
+	<20091221102501.GD22609@bitwizard.nl>
+	<20091221220001.7407dc01@web.de>
+Message-ID: <20091223130108.3978ea40@web.de>
+
+On Mon, 21 Dec 2009 22:00:01 +0100
+Jan Reucker <jan.reucker at web.de> wrote:
+
+> Then maybe I should implement a "quick-and-dirty" crash detection now.
+
+Done. Please see the file_format documentation for details. The "Sport" is the
+only model that already uses the new max_force atttribute. Crashing the plane
+will stop the simulation. You have to reset the simulation ("r") to continue.
+
+Kind regards,
+Jan R.
+
+
+From joel.lienard at free.fr  Sun Dec 27 18:55:31 2009
+From: joel.lienard at free.fr (=?ISO-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Sun, 27 Dec 2009 18:55:31 +0100
+Subject: [Crrcsim-devel] Scenery, windfield
+In-Reply-To: <20091220214839.7ec0ff63@web.de>
+References: <hfmcqs+ij3q@eGroups.com> <1260361932.4622.117.camel@joel-portable>
+	<20091209170109.GA3817@knusper> <20091209213223.3ca4caaf@gmx.net>
+	<1261313942.5650.406.camel@joel-portable>
+	<20091220214839.7ec0ff63@web.de>
+Message-ID: <1261936531.25792.16.camel@joel-portable>
+
+
+> > For the wind, it is necessary to go much more far (is 1 kilometer
+> > sufficient?). I try to complete by map or aerial photos
+> 
+> Maybe Google Earth can help here? At least for a very coarse grid (which
+> should be enough for the big distance calculations) you can directly
+> enter the N/E coordinates and then read out the height value. I don't know
+> if there's a free API to access these values without using GE as a
+> frontend. I guess most parts of the GE API are only for premium users.
+>  
+In Google Earth the heights are not not very precise everywhere. In the
+particular case of Bri?, there is a very big error. Fortunately, we have
+in France maps and aerial photos of IGN(NATIONAL GEOGRAPHIC INSTITUTE)
+which are more precise.
+http://www.geoportail.fr/visu2D.do?cg=djoxLjEqYzptZXRyb3BvbGUqY3Y6MS4wKnZ2OjEuMSp4eTo1Ljc5MjQxMjIyNTU0MzMyMTV8NDUuMTE2NjgzNDQzMTI2Njkqczo2KnB2OjEuMCpwOmV4cGVydCpsOlBob3RvfDF8MTAwfDAsU2NhbnwxfDB8Mg%3D%3D
+Difficulties is to link with my panoramic photos. 
+
+Jo?l
+
+
+
+From joel.lienard at free.fr  Mon Dec 28 12:41:22 2009
+From: joel.lienard at free.fr (=?ISO-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Mon, 28 Dec 2009 12:41:22 +0100
+Subject: [Crrcsim-devel] F3F on all scenery
+In-Reply-To: <20091220221518.733b54ed@web.de>
+References: <1261298290.5650.151.camel@joel-portable>
+	<4B2E389D.8000903@obordes.com>
+	<1261330341.5650.439.camel@joel-portable>
+	<4B2E6234.9060206@obordes.com>  <20091220221518.733b54ed@web.de>
+Message-ID: <1262000482.25792.35.camel@joel-portable>
+
+Hello, 
+It is done.
+It is possible to define the default values (orientation, position and
+width) in the scenery.xml file. Then, the modifications made by the F3F
+dialogue are stored in config.xml in the sections of every scenery. (As
+for the wind).
+
+Olivier, verify that it is OK. I updated files CapeCod.xml.
+In the file Brie.xml, I put 
+<!-- F3F settings -->
+<F3F orientation="316" position_north="42" position_east="-42"
+plan_limit="260"/>
+
+Jo?l
+
+
+
+
+
+
+
+From admin at berlios.de  Mon Dec 28 17:35:09 2009
+From: admin at berlios.de (admin at berlios.de)
+Date: Mon, 28 Dec 2009 16:35:09 GMT
+Subject: [Crrcsim-devel] [Bug #16603] Compiling crrcsim 0.9.10 on Ubuntu
+	9.10 (karmic) ...
+Message-ID: <200912281635.nBSGZ9ZJ025087@unicorn.berlios.de>
+
+Bug #16603, was updated on 2009-Dec-28 16:35
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: aanno
+Assigned to : none
+Summary: Compiling crrcsim 0.9.10 on Ubuntu 9.10 (karmic) ...
+
+Details: ... works. But the executable throws an uncatched exception:
+
+/opt/crrcsim/bin/crrcsim
+terminate called after throwing an instance of 'CGAL::Assertion_exception'
+  what():  CGAL ERROR: assertion violation!
+Expr: -CGAL_IA_MUL(-1.1, 10.1) != CGAL_IA_MUL(1.1, 10.1)
+File: /usr/include/CGAL/Interval_nt.h
+Line: 154
+Explanation: Wrong rounding: did you forget the -frounding-math option if you use GCC?
+Aborted
+
+GCAL was used, but installed from deb package...
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=16603&group_id=9957
+
+
+From admin at berlios.de  Mon Dec 28 17:37:51 2009
+From: admin at berlios.de (admin at berlios.de)
+Date: Mon, 28 Dec 2009 16:37:51 GMT
+Subject: [Crrcsim-devel] [Bug #16603] Compiling crrcsim 0.9.10 on Ubuntu
+	9.10 (karmic) ...
+Message-ID: <200912281637.nBSGbpa9027300@unicorn.berlios.de>
+
+Bug #16603, was updated on 2009-Dec-28 16:35
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: aanno
+Assigned to : none
+Summary: Compiling crrcsim 0.9.10 on Ubuntu 9.10 (karmic) ...
+
+Details: ... works. But the executable throws an uncatched exception:
+
+/opt/crrcsim/bin/crrcsim
+terminate called after throwing an instance of 'CGAL::Assertion_exception'
+  what():  CGAL ERROR: assertion violation!
+Expr: -CGAL_IA_MUL(-1.1, 10.1) != CGAL_IA_MUL(1.1, 10.1)
+File: /usr/include/CGAL/Interval_nt.h
+Line: 154
+Explanation: Wrong rounding: did you forget the -frounding-math option if you use GCC?
+Aborted
+
+GCAL was used, but installed from deb package...
+
+Follow-Ups:
+
+Date: 2009-Dec-28 16:37
+By: aanno
+
+Comment:
+The problem could be fixed with:
+
+> export CXXFLAGS="-O3 -frounding-math"
+> export CFLAGS="-O3 -frounding-math"
+
+Before the 'make'. Adding '-frounding-math' should be done automatically. 
+
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=16603&group_id=9957
+
+
+From admin at berlios.de  Mon Dec 28 21:45:26 2009
+From: admin at berlios.de (admin at berlios.de)
+Date: Mon, 28 Dec 2009 21:45:26 +0100 (CET)
+Subject: [Crrcsim-devel] [Bug #16603] Compiling crrcsim 0.9.10 on Ubuntu
+	9.10 (karmic) ...
+Message-ID: <200912282045.nBSKjQPh004317@unicorn.berlios.de>
+
+Bug #16603, was updated on 2009-Dec-28 17:35
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Closed
+Resolution: Duplicate
+Bug Group: None
+Priority: 5
+Submitted by: aanno
+Assigned to : none
+Summary: Compiling crrcsim 0.9.10 on Ubuntu 9.10 (karmic) ...
+
+Details: ... works. But the executable throws an uncatched exception:
+
+/opt/crrcsim/bin/crrcsim
+terminate called after throwing an instance of 'CGAL::Assertion_exception'
+  what():  CGAL ERROR: assertion violation!
+Expr: -CGAL_IA_MUL(-1.1, 10.1) != CGAL_IA_MUL(1.1, 10.1)
+File: /usr/include/CGAL/Interval_nt.h
+Line: 154
+Explanation: Wrong rounding: did you forget the -frounding-math option if you use GCC?
+Aborted
+
+GCAL was used, but installed from deb package...
+
+Follow-Ups:
+
+Date: 2009-Dec-28 21:45
+By: jreucker
+
+Comment:
+This is a duplicate of bug #16204 which was fixed recently. You can use the latest Mercurial tip snapshot instead of version 0.9.10: https://hg.berlios.de/repos/crrcsim/archive/tip.tar.gz
+-------------------------------------------------------
+
+Date: 2009-Dec-28 17:37
+By: aanno
+
+Comment:
+The problem could be fixed with:
+
+> export CXXFLAGS="-O3 -frounding-math"
+> export CFLAGS="-O3 -frounding-math"
+
+Before the 'make'. Adding '-frounding-math' should be done automatically. 
+
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=16603&group_id=9957
+
+
+From joel.lienard at free.fr  Tue Dec 29 15:21:32 2009
+From: joel.lienard at free.fr (=?ISO-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Tue, 29 Dec 2009 15:21:32 +0100
+Subject: [Crrcsim-devel] Crash on audio interface
+In-Reply-To: <20091220221518.733b54ed@web.de>
+References: <1261298290.5650.151.camel@joel-portable>
+	<4B2E389D.8000903@obordes.com>
+	<1261330341.5650.439.camel@joel-portable>
+	<4B2E6234.9060206@obordes.com>  <20091220221518.733b54ed@web.de>
+Message-ID: <1262096492.25792.156.camel@joel-portable>
+
+Hello,
+
+I diagnosed a problem under Linux if the audio interface (/dev/dsp) is
+not useful in the launch of CRRCSIM.(It can be reproduced by launching
+two CRRCSIM.
+
+Two errors:
+- in the launch, if audio is configured
+- during the audio choice by the dialogue
+
+I fixed both. To verify!
+
+There is another small problem: if the audio is configured, the
+automatic message of reconfiguration to mouse is not visible. It would
+be preferable to have a alarm.
+
+Jo?l
+
+
+
+From joel.lienard at free.fr  Wed Dec 30 18:08:49 2009
+From: joel.lienard at free.fr (=?ISO-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Wed, 30 Dec 2009 18:08:49 +0100
+Subject: [Crrcsim-devel] CGAL install on Windows
+In-Reply-To: <20091220221518.733b54ed@web.de>
+References: <1261298290.5650.151.camel@joel-portable>
+	<4B2E389D.8000903@obordes.com>
+	<1261330341.5650.439.camel@joel-portable>
+	<4B2E6234.9060206@obordes.com>  <20091220221518.733b54ed@web.de>
+Message-ID: <1262192929.25792.185.camel@joel-portable>
+
+Hello,
+
+On the occasion of a complete installation of the compilation tools
+under Windows (with msys), I revised the procedure of installation of
+CGAL. I updated the compile.txt file. Below the added lines. It is not
+finally complicated. The size of files added on the disk is limited to
+23Mo ( BOOST) + 23Mo ( CGAL) if we delete the temporary directories of
+installation.
+
+Jo?l
+
+=======================================================
+7. Install BOOST (necessary for the installation of CGAL)
+----------------
+http://www.boost.org.
+The version 1.32 is sufficient and lighter than recent version.
+Direct link:
+"http://sourceforge.net/projects/boost/files/boost/1.32.0/boost_1_32_0.tar.gz/download"
+Download the source package to your MSYS home directory, start MSYS,
+untar the file
+("tar xvzf boost_1_32_0.tar.gz").
+No compilation needed, only headers are useful. To copy the directory
+boost in the directory include of Mingw. 
+("cp -R boost_1_32_0/boost/  ../../MinGW/include")
+
+
+8. Install CGAL (necessary for Windfield import in model-based Scnery
+(like Brie Scenery))
+----------------
+
+Download the source package cgal-3.3.1 to your MSYS home directory, from
+http://www.cgal.org.
+(direct link:
+"ftp://ftp.mpi-sb.mpg.de/pub/outgoing/CGAL/CGAL-3.3.1.tar.gz"),
+ start MSYS, untar the file ("tar xvzf CGAL-3.3.1.tar.gz").
+cd to the newly created CGAL-3.3.1 directory
+and type
+"./install_cgal --prefix /usr"
+===================================
+
+
+
+
+
+From jan.reucker at web.de  Wed Dec 30 22:15:50 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Wed, 30 Dec 2009 22:15:50 +0100
+Subject: [Crrcsim-devel] CGAL install on Windows
+In-Reply-To: <1262192929.25792.185.camel@joel-portable>
+References: <1261298290.5650.151.camel@joel-portable>
+	<4B2E389D.8000903@obordes.com>
+	<1261330341.5650.439.camel@joel-portable>
+	<4B2E6234.9060206@obordes.com> <20091220221518.733b54ed@web.de>
+	<1262192929.25792.185.camel@joel-portable>
+Message-ID: <20091230221550.75e2abee@web.de>
+
+On Wed, 30 Dec 2009 18:08:49 +0100
+Jo?l Li?nard <joel.lienard at free.fr> wrote:
+
+> Hello,
+> 
+> On the occasion of a complete installation of the compilation tools
+> under Windows (with msys), I revised the procedure of installation of
+> CGAL. I updated the compile.txt file. Below the added lines. It is not
+> finally complicated. The size of files added on the disk is limited to
+> 23Mo ( BOOST) + 23Mo ( CGAL) if we delete the temporary directories of
+> installation.
+
+Thanks, I'll try this out when building the binary package for the next
+release.
+
+Kind regards,
+Jan R.
+
+

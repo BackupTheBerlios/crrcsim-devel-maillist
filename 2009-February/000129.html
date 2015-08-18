@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Release planning for 0.9.10
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-February/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Release%20planning%20for%200.9.10&In-Reply-To=%3CDE2A1F80027748D59F46AD972FD918CF%40PCdeJol%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000126.html">
+   <LINK REL="Next"  HREF="000130.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Release planning for 0.9.10</H1>
+    <B>Jo&#235;l Li&#233;nard</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Release%20planning%20for%200.9.10&In-Reply-To=%3CDE2A1F80027748D59F46AD972FD918CF%40PCdeJol%3E"
+       TITLE="[Crrcsim-devel] Release planning for 0.9.10">joel.lienard at free.fr
+       </A><BR>
+    <I>Wed Feb 11 22:28:58 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000126.html">[Crrcsim-devel] Release planning for 0.9.10
+</A></li>
+        <LI>Next message: <A HREF="000130.html">[Crrcsim-devel] Release planning for 0.9.10
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#129">[ date ]</a>
+              <a href="thread.html#129">[ thread ]</a>
+              <a href="subject.html#129">[ subject ]</a>
+              <a href="author.html#129">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Jan,
+
+&gt;<i>this seems to work, at least if I create a new crrcsim.xml from scratch.
+</I>&gt;<i>Using my existing configuration the plane still appeared on my feet.
+</I>
+Yes, launch.x, lannch.y are not overwritten
+
+&gt;<i>I don't know what happens if someone keeps his existing configuration
+</I>&gt;<i>from 0.9.9 and then upgrades to 0.9.10.
+</I>
+Is OK : the parameters not present are initialised with the default values
+
+&gt;<i>For a helicopter it would be better to stand right behind it (just like
+</I>&gt;<i>before) instead of launching with a 45 degree offset. And it won't hurt
+</I>&gt;<i>for planes. What do you think?
+</I>
+=&gt; default to launch.x=10, launch.y=0.
+ 
+&gt;&gt;<i> I nevertheless added a commutation by launch.from_player. If
+</I>&gt;&gt;<i> launch.from_player=0, the initial position is determined by &quot;&lt;start&gt;
+</I>&gt;&gt;<i> &lt;position ...&quot;  in scenery.html. This mode will be necessary for scenes
+</I>with
+&gt;&gt;<i> a track of takeoff. I did not adapt the dialogue of launching to take
+</I>into
+&gt;&gt;<i> account these parameters. I propose to do it later.
+</I>
+
+&gt;<i>Maybe we should add some more logic: If from_player=0 and there's a
+</I>&gt;<i>&lt;start&gt; in the scenery.html, use this. If from_player=0 and there's
+</I>&gt;<i>no &lt;start&gt;, treat this like from_player=1.
+</I>
+Ok it is done.
+
+
+Jo&#235;l
+
+
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000126.html">[Crrcsim-devel] Release planning for 0.9.10
+</A></li>
+	<LI>Next message: <A HREF="000130.html">[Crrcsim-devel] Release planning for 0.9.10
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#129">[ date ]</a>
+              <a href="thread.html#129">[ thread ]</a>
+              <a href="subject.html#129">[ subject ]</a>
+              <a href="author.html#129">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

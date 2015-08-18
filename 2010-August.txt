@@ -1,0 +1,163 @@
+From admin at berlios.de  Sun Aug  8 15:48:09 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Sun, 8 Aug 2010 15:48:09 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3044] Airplane specific controls
+	configuration
+Message-ID: <201008081348.o78Dm9AF007290@unicorn.berlios.de>
+
+Patch #3044 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: jreucker
+Assigned to : none
+Summary: Airplane specific controls configuration
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3044&group_id=9957
+
+
+From admin at berlios.de  Sun Aug  8 15:49:58 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Sun, 8 Aug 2010 15:49:58 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3044] Airplane specific controls
+	configuration
+Message-ID: <201008081349.o78DnwnP009478@unicorn.berlios.de>
+
+Patch #3044 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: jreucker
+Assigned to : jreucker
+Summary: Airplane specific controls configuration
+
+Follow-Ups:
+
+Date: 2010-Aug-08 15:49
+By: jreucker
+
+Comment:
+Submitted on behalf of Bernd Laengerich (see CRRCsim Yahoo group posting from 2010-08-04).
+
+Patch to enable model specific input configurations
+
+---------------------------------------------------
+
+
+
+Idea: 
+
+
+
+Model specific configuration options like mixer settings may help in handling of separate models.
+
+Make usage of existing classes and configuration by writing the config to a different position in the xml file.
+
+
+
+GUI:
+
+
+
+The input configuration dialog "Controls" was extended by two components.
+
+The first component is a check box indicating if the current configuration is model specific
+
+The second component is a button to enable migration of the current config to either a model 
+
+specific or a global section, depending on the state the configuration is in.
+
+This button is greyed out if the current configuration option matches the configuration file.
+
+
+
+The xml file:
+
+
+
+The global configuration resides as is in the section <inputMethod /> 
+
+The tag has a new attribute "model_specific=0/1" indicating if the new feature should be used. The old behaviour is model_specific=0.
+
+The model specific input configuration resides in a new tree named <models />
+
+Every model has its own section inside <models /> with the name of the model (i.e. <allegro>)
+
+If the model specific section is not found, the configuration falls back to the global section.
+
+
+
+How does it work?
+
+
+
+1. Beginning with the xml file from 0.9.11, crrcsim should work as before.
+
+2. Using the controls dialog, the check box "model specific" is unset, the migration button is deactivated
+
+3. Checking the model specific check box will enable the migration button. 
+
+4. When saving configuration, the only change will be the attribute model_specific set to 1. 
+
+   As there is no specific configuration option for the current airplane, the input configuration will remain the same.
+
+5. Hitting the Migration button "--> Model" will now migrate the global input config to a specific config for the current model.
+
+   Save settings and check the xml file. There should be a copy of the input configuration inside the models tag.
+
+6. Every change you do now will affect the model specific settings, not the global one.
+
+7. Selecting a different airplane will start over as before, beginning with the global config, as there is no specific config.
+
+   Migrate and save the setting
+
+8. Switching between airplanes will now load each specific configuration for each airplane.
+
+9. To write the current model specific configuration as a global config back to the file:
+
+   a) uncheck the model specific setting
+
+   b) hit the migration button "--> Global"
+
+   c) Save settings
+
+   You can reenable the model specific configuration thereafter 
+
+
+
+Further changes:
+
+
+
+- Refactored the crrc_ctrlgen.cpp to have a simple layout scheme with easier calculation of the components
+
+
+
+Known issues:
+
+
+
+- Still in work
+
+- Before saving the settings, the migration button will reappear each time the controls dialog is opened
+
+- Some debugging printf to be removed
+
+- Ugly usage of global function reconfigureInputMethod in crrc_main from the dialog
+
+- Encapsulation of functionalities needs more work
+
+
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3044&group_id=9957
+
+

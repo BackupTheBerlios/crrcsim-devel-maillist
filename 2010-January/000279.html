@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Unified coordinate systems
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Unified%20coordinate%20systems&In-Reply-To=%3C20100109231440.71bfa238%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000280.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Unified coordinate systems</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Unified%20coordinate%20systems&In-Reply-To=%3C20100109231440.71bfa238%40web.de%3E"
+       TITLE="[Crrcsim-devel] Unified coordinate systems">jan.reucker at web.de
+       </A><BR>
+    <I>Sat Jan  9 23:14:40 CET 2010</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000280.html">[Crrcsim-devel] Unified coordinate systems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#279">[ date ]</a>
+              <a href="thread.html#279">[ thread ]</a>
+              <a href="subject.html#279">[ subject ]</a>
+              <a href="author.html#279">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I just pushed a small change in mod_landscape that should unify all coordinate
+systems in CRRCsim scenery files. Now viewpoints, sky box faces and objects
+are defined in the same way (using north/east/height coordinates), and the
+orientation fits into other parts of CRRCsim (e.g. wind direction). Rotation
+of objects is now similar to the FDM: if you load an airplane as a static
+model into the scenery, &quot;h&quot; will control the model's heading, &quot;p&quot; will control
+rotation around the pitch axis and &quot;r&quot; will roll the model around the longitudinal
+axis.
+
+I converted all model based sceneries in the scenery folder to the new orientation,
+and I hope that everything still looks allright. Joel, I think you will have to
+make a change to your Brie scenery to adapt it to the new orientation:
+
+old axis    new axis
+   x          east
+   y          north
+   z          height
+
+Pitch and roll are inverted. Heading is inverted and rotated by 180 degrees:
+
+old heading   new heading
+     0            180
+    90             90
+   180              0
+   270            270
+
+I think it's o.k. to implement these changes without increasing the scenery file
+format version number. The format was never fully specified and documented,
+so let's change the existing sceneries and stick with version 3.
+
+During testing I noticed that loading an airplane as a static object in a scenery
+will heavily increase CPU load. Even a simple model like the allegro made it
+impossible to use CRRCsim on my netbook. The big number of triangles and the
+fact that we make a full H.O.T. intersection test for each hardpoint leads
+to extreme calculation efforts. Terrain tiling doesn't help here, because many
+triangles will be focussed on one grid cell. I guess I'll implement a feature
+that makes it possible to load transparent objects as collision boxes. Then a
+complicated object can be excluded from H.O.T. calculations, and a transparent
+box can provide approximated height values.
+
+Kind regards,
+Jan R.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000280.html">[Crrcsim-devel] Unified coordinate systems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#279">[ date ]</a>
+              <a href="thread.html#279">[ thread ]</a>
+              <a href="subject.html#279">[ subject ]</a>
+              <a href="author.html#279">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Compiler warnings -- to be taken serious
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-February/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Compiler%20warnings%20--%20to%20be%20taken%20serious&In-Reply-To=%3CFCBCF7D017CC4251BDD7373A6F5EE7BE%40PCdeJol%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000158.html">
+   <LINK REL="Next"  HREF="000160.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Compiler warnings -- to be taken serious</H1>
+    <B>Jo&#235;l Li&#233;nard</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Compiler%20warnings%20--%20to%20be%20taken%20serious&In-Reply-To=%3CFCBCF7D017CC4251BDD7373A6F5EE7BE%40PCdeJol%3E"
+       TITLE="[Crrcsim-devel] Compiler warnings -- to be taken serious">joel.lienard at free.fr
+       </A><BR>
+    <I>Sat Feb 28 09:18:49 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000158.html">[Crrcsim-devel] Compiler warnings -- to be taken serious
+</A></li>
+        <LI>Next message: <A HREF="000160.html">[Crrcsim-devel] Compiler warnings -- to be taken serious
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#159">[ date ]</a>
+              <a href="thread.html#159">[ thread ]</a>
+              <a href="subject.html#159">[ subject ]</a>
+              <a href="author.html#159">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I thought of making these modifications (indent...)  after the version 9.10.
+If you think useful to make it at once, I could take charge of it tomorrow.
+No problem, obviously, if Jan has time to advance the work!
+
+Jo&#235;l
+
+
+-----Message d'origine-----
+De&#160;: <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">crrcsim-devel-bounces at lists.berlios.de</A>
+[mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">crrcsim-devel-bounces at lists.berlios.de</A>] De la part de Jan Reucker
+Envoy&#233;&#160;: vendredi 27 f&#233;vrier 2009 21:05
+&#192;&#160;: <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">crrcsim-devel at lists.berlios.de</A>
+Objet&#160;: Re: [Crrcsim-devel] Compiler warnings -- to be taken serious
+
+Am Fri, 27 Feb 2009 11:30:38 +0100 schrieb Jens Wilhelm Wulf
+&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">jens_w2 at gmx.net</A>&gt;:
+
+&gt;<i> There is one I related to 'shadow_matrix', which I'm not familiar with.
+</I>Jan,
+&gt;<i> can you care about it, please? The compiler says:
+</I>&gt;<i>   +--------------------------------------------------------
+</I>&gt;<i>   | [ 87%] Building CXX object
+</I>CMakeFiles/crrcsim.dir/src/crrc_graphics.cpp.o
+&gt;<i>   | /usr/include/plib/sg.h: In function &#145;void makeShadowMatrix(float
+</I>(*)[4], float, float)&#146;:
+&gt;<i>   | /usr/include/plib/sg.h:291: warning: array subscript is above array
+</I>bounds
+&gt;<i>   | /usr/include/plib/sg.h: In function &#145;void display()&#146;:
+</I>&gt;<i>   | /usr/include/plib/sg.h:291: warning: array subscript is above array
+</I>bounds
+&gt;<i>   +--------------------------------------------------------
+</I>
+Hi Jens,
+
+sure, I'll take care of this. And I'll also take a look at the chardevice
+issue.
+
+Joel, instead of indenting your code manually, I recommend using astyle
+or indent. I guess you don't have them at hand on Windows, shall I do
+it for you (no problem)?
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: <A HREF="http://www.reucker-online.de/pgpkey.asc">http://www.reucker-online.de/pgpkey.asc</A>
+_______________________________________________
+Crrcsim-devel mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">Crrcsim-devel at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">https://lists.berlios.de/mailman/listinfo/crrcsim-devel</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000158.html">[Crrcsim-devel] Compiler warnings -- to be taken serious
+</A></li>
+	<LI>Next message: <A HREF="000160.html">[Crrcsim-devel] Compiler warnings -- to be taken serious
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#159">[ date ]</a>
+              <a href="thread.html#159">[ thread ]</a>
+              <a href="subject.html#159">[ subject ]</a>
+              <a href="author.html#159">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

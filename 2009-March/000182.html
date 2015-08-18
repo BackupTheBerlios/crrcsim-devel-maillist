@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Licensing issue with CGAL
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-March/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Licensing%20issue%20with%20CGAL&In-Reply-To=%3C20090306234834.f6a0cf35.jan.reucker%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000175.html">
+   <LINK REL="Next"  HREF="000184.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Licensing issue with CGAL</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Licensing%20issue%20with%20CGAL&In-Reply-To=%3C20090306234834.f6a0cf35.jan.reucker%40web.de%3E"
+       TITLE="[Crrcsim-devel] Licensing issue with CGAL">jan.reucker at web.de
+       </A><BR>
+    <I>Fri Mar  6 23:48:34 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000175.html">[Crrcsim-devel] Release candidate 2 for 0.9.10
+</A></li>
+        <LI>Next message: <A HREF="000184.html">[Crrcsim-devel] Licensing issue with CGAL
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#182">[ date ]</a>
+              <a href="thread.html#182">[ thread ]</a>
+              <a href="subject.html#182">[ subject ]</a>
+              <a href="author.html#182">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+while downloading the necessary dependencies on Windows I noticed that
+CGAL is not fully GPL'ed. In fact the part that Joel included is licensed
+under QPL (Trolltech's Qt license). Here's more information:
+
+<A HREF="http://www.cgal.org/license.html">http://www.cgal.org/license.html</A>
+
+There's a link to the FSF which leads to the following information:
+
+&quot;Since the QPL is incompatible with the GNU GPL, you cannot take a GPL-covered
+program and QPL-covered program and link them together, no matter how.
+
+However, if you have written a program that uses QPL-covered library
+(called FOO), and you want to release your program under the GNU GPL, you can
+easily do that. You can resolve the conflict for your program by adding a
+notice like this to it:
+
+  As a special exception, you have permission to link this program
+  with the FOO library and distribute executables, as long as you
+  follow the requirements of the GNU GPL in regard to all of the
+  software in the executable aside from FOO.
+
+You can do this, legally, if you are the copyright holder for the program.
+Add it in the source files, after the notice that says the program is covered
+by the GNU GPL.&quot;
+
+So I guess we have to do something to cope with this issue. I think at least
+we have to add a notice to the readme file (which, BTW, needs an update
+because it still contains a link to sf.net) and to the source files that
+interact with CGAL.
+
+What do you think?
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: <A HREF="http://www.reucker-online.de/pgpkey.asc">http://www.reucker-online.de/pgpkey.asc</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000175.html">[Crrcsim-devel] Release candidate 2 for 0.9.10
+</A></li>
+	<LI>Next message: <A HREF="000184.html">[Crrcsim-devel] Licensing issue with CGAL
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#182">[ date ]</a>
+              <a href="thread.html#182">[ thread ]</a>
+              <a href="subject.html#182">[ subject ]</a>
+              <a href="author.html#182">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

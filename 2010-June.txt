@@ -1,0 +1,3247 @@
+From jan.reucker at web.de  Wed Jun  2 23:50:11 2010
+From: jan.reucker at web.de (Jan Reucker)
+Date: Wed, 2 Jun 2010 23:50:11 +0200
+Subject: [Crrcsim-devel] New release: CRRCsim 0.9.11
+Message-ID: <20100602235011.d3d9b243.jan.reucker@web.de>
+
+The CRRCsim dev team released version 0.9.11 of the cross-platform R/C model aircraft simulator today. Besides lots of bug fixes, several interesting new features were implemented: Support for simulating multicopters, driver for CT6A transmitters, adjustable model volume, crash detection, a flight recorder that also works in the F3F mode and a stable scenery file format.
+
+Download link for source package and Win32 installer:
+
+http://crrcsim.berlios.de/wiki/index.php?n=CRRCsim.DownLoad
+
+Have fun!
+
+
+
+
+Release Notes for CRRCSim 0.9.11
+--------------------------------
+- Added command line option -V (print version info, configuration options and exit).
+- removed obsolete files from distribution
+- hitting any unused key causes CRRCSim to try reloading the FDMs parameters
+- Fixed bug #15694 Segfault when configuring audio interface (patch provided by Glenn Trigg)
+- Improved helicopter parameters
+- New FDM including an example model: multicopter
+- New CT6A transmitter interface (by Nikolay B. Eremeyev)
+- Implemented real engine downthrust, adjusted Flexifly accordingly
+- Repaired flap and spoiler parameters
+- Implemented feature request #4271: Model volume can now be configured through the GUI
+- Heli and Multicopter: reversed nick input to be like fixed wing
+- Fixed bug #16552 Collision detection with multiple objects fail
+- Fixed bug #16204 core dump on karmic. Fixed CMake build with libCGAL.
+- Simulate influence of retractable gears on aerodynamics
+- Implemented rudimentary crash handling with a new spring.max_force attribute
+- F3F on all scenery
+- Implemented scenery file specification v3 
+- Feature Request #4311 (Replay tool - a shadow plane): You can now save and replay
+  your flights and race against a shadow plane in F3F mode.
+- Fixed bug #017127 Selections are hardly visible in the GUI
+- Fixed bug #017076 Build error when CGAL installed on Ubuntu karmic
+- Implemented feature request #4470 Improve scenery selection dialog
+
+
+From admin at berlios.de  Mon Jun  7 23:11:35 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Mon, 7 Jun 2010 23:11:35 +0200 (CEST)
+Subject: [Crrcsim-devel] [Bug #17218] CRRCsim crashes in location dialog on
+	Ubuntu 9.04
+Message-ID: <201006072111.o57LBZm7029884@unicorn.berlios.de>
+
+Bug #17218, was updated on 2010-Jun-07 23:11
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 7
+Submitted by: jreucker
+Assigned to : none
+Summary: CRRCsim crashes in location dialog on Ubuntu 9.04
+
+Details: Reported in the Yahoo group by <karsten.de.freese at nefkom.net>:
+
+Under Ubuntu 9.04, I had to install the g++ compiler, plus some of the dev packages. Now crrcsim 0.9.11 runs fine, except one thing - it reproducibly crashes when I try to open the 'location' menu. Using the joystick port for control, I initially compiled with portaudio v19, after experiencing the crashes I installed v18.1 (incl. dev package) and re- "./configure && make && make install". The crashes however persist.
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=17218&group_id=9957
+
+
+From admin at berlios.de  Tue Jun  8 19:58:55 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Tue, 8 Jun 2010 19:58:55 +0200 (CEST)
+Subject: [Crrcsim-devel] [Bug #17218] CRRCsim crashes in location dialog on
+	Ubuntu 9.04
+Message-ID: <201006081758.o58HwtGh017280@unicorn.berlios.de>
+
+Bug #17218, was updated on 2010-Jun-07 23:11
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 7
+Submitted by: jreucker
+Assigned to : none
+Summary: CRRCsim crashes in location dialog on Ubuntu 9.04
+
+Details: Reported in the Yahoo group by <karsten.de.freese at nefkom.net>:
+
+Under Ubuntu 9.04, I had to install the g++ compiler, plus some of the dev packages. Now crrcsim 0.9.11 runs fine, except one thing - it reproducibly crashes when I try to open the 'location' menu. Using the joystick port for control, I initially compiled with portaudio v19, after experiencing the crashes I installed v18.1 (incl. dev package) and re- "./configure && make && make install". The crashes however persist.
+
+Follow-Ups:
+
+Date: 2010-Jun-08 19:58
+By: kdf
+
+Comment:
+error message from the console:
+Segmentation fault
+
+Backtrace using gdb:
+Program received signal SIGSEGV, Segmentation fault.
+[Switching to Thread 0xb6bc4710 (LWP 10288)]
+0xb6f6e6eb in strlen () from /lib/tls/i686/cmov/libc.so.6
+(gdb) bt
+#0  0xb6f6e6eb in strlen () from /lib/tls/i686/cmov/libc.so.6
+#1  0xb713e88b in std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string () from /usr/lib/libstdc++.so.6
+#2  0x080722a6 in CGUILocationDialog::updateLocationInfo (this=0xa6fd8f0)
+    at src/GUI/crrc_location.cpp:229
+#3  0x08073f0c in CGUILocationDialog (this=0xa6fd8f0)
+    at src/GUI/crrc_location.cpp:206
+#4  0x08069faa in opt_location_cb (obj=0xa4a6eb0)
+    at src/GUI/crrc_gui_main.cpp:542
+#5  0xb72908e2 in puButton::doHit () from /usr/lib/libplibpu.so.1
+#6  0xb7297a2e in puOneShot::doHit () from /usr/lib/libplibpu.so.1
+#7  0xb72965b6 in puObject::checkHit () from /usr/lib/libplibpu.so.1
+#8  0xb7297f4c in puPopupMenu::checkHit () from /usr/lib/libplibpu.so.1
+#9  0xb7293b5c in puGroup::checkHit () from /usr/lib/libplibpu.so.1
+#10 0xb7293b5c in puGroup::checkHit () from /usr/lib/libplibpu.so.1
+#11 0xb728f5c5 in puMouse () from /usr/lib/libplibpu.so.1
+#12 0x0806a16c in CGUIMain::mouseButtonUpHandler (this=0xa4a3b60, btn=1, 
+    x=202, y=65) at src/GUI/crrc_gui_main.cpp:367
+#13 0x0816508f in EventHandler::handle_events (this=0xbfa3eb80)
+    at src/mod_main/eventhandler.cpp:144
+#14 0x08165155 in EventHandler::Run (this=0xbfa3eb80)
+    at src/mod_main/eventhandler.cpp:55
+#15 0x08118de9 in Scheduler::Run (this=0xbfa3eb88)
+    at src/mod_misc/scheduler.cpp:50
+#16 0x0815808a in main (argc=1, argv=0xbfa3ed34) at src/crrc_main.cpp:808
+
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=17218&group_id=9957
+
+
+From admin at berlios.de  Wed Jun  9 22:14:37 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Wed, 9 Jun 2010 22:14:37 +0200 (CEST)
+Subject: [Crrcsim-devel] [Bug #17218] CRRCsim crashes in location dialog on
+	Ubuntu 9.04
+Message-ID: <201006092014.o59KEbRU018815@unicorn.berlios.de>
+
+Bug #17218, was updated on 2010-Jun-07 23:11
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 7
+Submitted by: jreucker
+Assigned to : none
+Summary: CRRCsim crashes in location dialog on Ubuntu 9.04
+
+Details: Reported in the Yahoo group by <karsten.de.freese at nefkom.net>:
+
+Under Ubuntu 9.04, I had to install the g++ compiler, plus some of the dev packages. Now crrcsim 0.9.11 runs fine, except one thing - it reproducibly crashes when I try to open the 'location' menu. Using the joystick port for control, I initially compiled with portaudio v19, after experiencing the crashes I installed v18.1 (incl. dev package) and re- "./configure && make && make install". The crashes however persist.
+
+Follow-Ups:
+
+Date: 2010-Jun-09 22:14
+By: kdf
+
+Comment:
+new logs from 2010-06-09 (partially with official load, partially with tip load)
+
+===>> it seem that running the tip load did cure something, so that after once running the tip load also the official load did not crash anymore!
+
+========================================================================================================
+1st run, ORIGINAL/OFFICIAL 0.9.11
+=> crashed when trying to open location dialog
+
+CRRCsim 0.9.11 started at 2010-6-9 19:28:56
+Running on Linux 2.6.28-19-generic
+Using plib version 1.8.4
+Compiled with SDL version 1.2.13
+(Linked SDL version is 1.2.13)
+Configured data path: /usr/local/share/crrcsim
+Data file search path:
+  .
+  /home/karsten/.crrcsim
+  /usr/local/share/crrcsim
+  /usr/local/share/games/crrcsim
+  /usr/share/games/crrcsim
+RAND_MAX = 2147483647
+Configuration file is /home/karsten/.crrcsim/crrcsim.xml
+Configuration version is 2
+T_Config: Setting location to /usr/share/crrcsim/scenery/davis-orig.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+std::string reconfigureInputMethod()
+New input method: JOYSTICK
+TInputDev::openJoystick: SDL found 1 joysticks
+0: Analog 4-axis 4-button joystick
+Trying to open joystick 0
+Opened Joystick 0
+Name: Analog 4-axis 4-button joystick
+Number of Axes: 4
+Number of Buttons: 4
+T_TX_Interface::T_TX_Interface
+T_TX_InterfaceSoftware::T_TX_InterfaceSoftware(int method)
+T_TX_Mixer::T_TX_Mixer()
+T_Calibration::T_Calibration()
+int T_TX_InterfaceSoftware::init(SimpleXMLTransfer* config)
+int T_TX_Interface::init(SimpleXMLTransfer* config)
+T_TX_Mixer::init(cfg, child)
+ <-- inputMethod.joystick
+T_AxisMapper::init(cfg, child)
+ <-- inputMethod.joystick
+mapper set to radio type 6
+T_Calibration::init(cfg, child)
+ <-- inputMethod.joystick
+Loading default videomode from config...
+Using the following rendering mode:
+  Renderer:    Mesa DRI R300 20060815 AGP 8x x86/MMX+/3DNow!+/SSE TCL
+  Vendor:      DRI R300 Project
+  GL version:  1.3 Mesa 7.4
+  RGBA bpp:    8/8/8/8
+  Depth bpp:   24
+  Stencil bpp: 0
+  Modelview stack: 1 / 32    Projection stack: 1 / 32
+Opened audio device: 16 bit signed audio (mono) at 48000 Hz
+Initialized sine samples: 480
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+--- Airplane description: ---------------------------------------
+  Wingspan:                   1.99644 m
+  Mass:                       0.256853 kg
+  Velocity in trimmed flight: 6.45627 m/s
+-----------------------------------------------------------------
+Using CRRC_AirplaneSim_Larcsim
+CRRCAirplaneV2(xml)
+soundfile: sounds/glider.wav
+soundserver: 0x87b86d0
+Using airplane sound sounds/glider.wav, type 2, max vol 1
+initAnimations: found 0 children
+Loading scenery "Davis Field (original)"
+  <sky> 7 at child idx 7
+  Using sky variant 0
+Initializing scenery DAVIS from file: /usr/share/crrcsim/scenery/davis-orig.xml
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+T_Config: Setting location to /usr/share/crrcsim/scenery/davis-orig.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+Scheduler::Register(0xbfd4cf00)
+Caught XML exception in CGUIlocationSelectDialog:
+  No child named name in crrcsimSceneryFile
+  File: scenery/coast.xml
+Segmentation fault
+
+
+
+
+
+
+
+========================================================================================================
+2nd run, 0.9.11 DEV with gdb (did not crash!)
+=> gdb output see below
+
+GNU gdb 6.8-debian
+Copyright (C) 2008 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "i486-linux-gnu"...
+(gdb) r
+Starting program: /home/karsten/Source/crrcsim-70b418a0c4f8/crrcsim 
+[Thread debugging using libthread_db enabled]
+CRRCsim dev started at 2010-6-9 19:32:39
+Running on Linux 2.6.28-19-generic
+Using plib version 1.8.4
+Compiled with SDL version 1.2.13
+(Linked SDL version is 1.2.13)
+Configured data path: /usr/local/share/crrcsim
+Data file search path:
+  .
+  /home/karsten/.crrcsim
+  /usr/local/share/crrcsim
+  /usr/local/share/games/crrcsim
+  /usr/share/games/crrcsim
+[New Thread 0xb6d15710 (LWP 25440)]
+[New Thread 0xb2b0cb90 (LWP 25443)]
+[Thread 0xb2b0cb90 (LWP 25443) exited]
+RAND_MAX = 2147483647
+Configuration file is /home/karsten/.crrcsim/crrcsim.xml
+Configuration version is 2
+T_Config: Setting location to /usr/share/crrcsim/scenery/davis-orig.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+std::string reconfigureInputMethod()
+New input method: JOYSTICK
+TInputDev::openJoystick: SDL found 1 joysticks
+0: Analog 4-axis 4-button joystick
+Trying to open joystick 0
+Opened Joystick 0
+Name: Analog 4-axis 4-button joystick
+Number of Axes: 4
+Number of Buttons: 4
+T_TX_Interface::T_TX_Interface
+T_TX_InterfaceSoftware::T_TX_InterfaceSoftware(int method)
+T_TX_Mixer::T_TX_Mixer()
+T_Calibration::T_Calibration()
+int T_TX_InterfaceSoftware::init(SimpleXMLTransfer* config)
+int T_TX_Interface::init(SimpleXMLTransfer* config)
+T_TX_Mixer::init(cfg, child)
+ <-- inputMethod.joystick
+T_AxisMapper::init(cfg, child)
+ <-- inputMethod.joystick
+mapper set to radio type 6
+T_Calibration::init(cfg, child)
+ <-- inputMethod.joystick
+Loading default videomode from config...
+Using the following rendering mode:
+  Renderer:    Mesa DRI R300 20060815 AGP 8x x86/MMX+/3DNow!+/SSE TCL
+  Vendor:      DRI R300 Project
+  GL version:  1.3 Mesa 7.4
+  RGBA bpp:    8/8/8/8
+  Depth bpp:   24
+  Stencil bpp: 0
+  Modelview stack: 1 / 32    Projection stack: 1 / 32
+Opened audio device: 16 bit signed audio (mono) at 48000 Hz
+Initialized sine samples: 480
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+--- Airplane description: ---------------------------------------
+  Wingspan:                   1.99644 m
+  Mass:                       0.256853 kg
+  Velocity in trimmed flight: 6.45627 m/s
+-----------------------------------------------------------------
+Using CRRC_AirplaneSim_Larcsim
+CRRCAirplaneV2(xml)
+soundfile: sounds/glider.wav
+soundserver: 0x93006d0
+Using airplane sound sounds/glider.wav, type 2, max vol 1
+initAnimations: found 0 children
+Loading scenery "Davis Field (original)"
+  <sky> 7 at child idx 7
+  Using sky variant 0
+Initializing scenery DAVIS from file: /usr/share/crrcsim/scenery/davis-orig.xml
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+T_Config: Setting location to /usr/share/crrcsim/scenery/davis-orig.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+Scheduler::Register(0xbfa7b280)
+Scanning scenery directories:
+  Davis Field(scenery/davis-orig.xml)
+  Davis Field (model-based)(scenery/davis.xml)
+  Cape Cod (model-based)(scenery/cape_cod.xml)
+  Simple scenery(scenery/simple.xml)
+  Cape Cod(scenery/cape_cod-orig.xml)
+  Simple scenery(/usr/local/share/crrcsim/scenery/simple.xml)
+  Davis Field(/usr/local/share/crrcsim/scenery/davis-orig.xml)
+  Cape Cod(/usr/local/share/crrcsim/scenery/cape_cod-orig.xml)
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+Loading scenery "Davis Field (model-based)"
+  <sky> 7 at child idx 7
+  Using sky variant 0
+Loading 3D object "objects/davis.ac" (part of terrain)
+  Placing instance at 0;0;0, orientation 2e+02;0;0
+Loading 3D object "objects/outhouse.ac" (part of terrain)
+  Placing instance at 4e+01;4e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/freqboard.ac" (part of terrain)
+  Placing instance at 2e+01;3e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/trashcan.ac" (part of terrain)
+  Placing instance at 2e+01;4e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/log.ac" (part of terrain)
+  Placing instance at 2e+02;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 1e+02;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 8e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 4e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 5;5e+01;0, orientation 2e+02;0;0
+  Placing instance at -3e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at -7e+01;5e+01;0, orientation 2e+02;0;0
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+Scanning scenery directories:
+  Davis Field(scenery/davis-orig.xml)
+  Davis Field (model-based)(scenery/davis.xml)
+    (this is the current scenery)
+  Cape Cod (model-based)(scenery/cape_cod.xml)
+  Simple scenery(scenery/simple.xml)
+  Cape Cod(scenery/cape_cod-orig.xml)
+  Simple scenery(/usr/local/share/crrcsim/scenery/simple.xml)
+  Davis Field(/usr/local/share/crrcsim/scenery/davis-orig.xml)
+  Cape Cod(/usr/local/share/crrcsim/scenery/cape_cod-orig.xml)
+T_Config: Setting location to scenery/simple.xml, sky variant 0
+T_Config: Setting location to scenery/simple.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+Loading scenery "Simple scenery"
+  <sky> 7 at child idx 7
+  Using sky variant 0
+Loading 3D object "objects/small.ac" (part of terrain)
+  Placing instance at 0;0;0, orientation 2e+02;0;0
+Loading 3D object "objects/outhouse.ac" (part of terrain)
+  Placing instance at -2e+02;3e+01;0, orientation 0;0;0
+  Placing instance at -2e+02;3e+01;0, orientation 0;0;0
+  Placing instance at -2e+02;2e+01;0, orientation 0;0;0
+Loading 3D object "objects/freqboard.ac"
+  Placing instance at -2e+02;0;0, orientation 9e+01;0;0
+Loading 3D object "objects/table.ac" (part of terrain)
+  leaf "collbox" is invisible (found -visible attribute)
+  leaf "table" is excluded from terrain calculations (found -terrain attribute)
+  Placing instance at -6e+01;8;0, orientation 0;0;0
+T_Config: Setting location to scenery/simple.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 0.00 deg
+Wind: velocity=3.000000 ft/sec   direction=0.000000
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+Hardpoint 2: max_force exceeded (4.73916 lbf > 3.5 lbf)
+Hardpoint 7: max_force exceeded (4.50356 lbf > 3.5 lbf)
+Scanning scenery directories:
+  Davis Field(scenery/davis-orig.xml)
+  Davis Field (model-based)(scenery/davis.xml)
+  Cape Cod (model-based)(scenery/cape_cod.xml)
+  Simple scenery(scenery/simple.xml)
+    (this is the current scenery)
+  Cape Cod(scenery/cape_cod-orig.xml)
+  Simple scenery(/usr/local/share/crrcsim/scenery/simple.xml)
+    (this is the current scenery)
+  Davis Field(/usr/local/share/crrcsim/scenery/davis-orig.xml)
+  Cape Cod(/usr/local/share/crrcsim/scenery/cape_cod-orig.xml)
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 0.00 deg
+Wind: velocity=3.000000 ft/sec   direction=0.000000
+Loading scenery "Davis Field (model-based)"
+  <sky> 7 at child idx 7
+  Using sky variant 0
+Loading 3D object "objects/davis.ac" (part of terrain)
+  Placing instance at 0;0;0, orientation 2e+02;0;0
+Loading 3D object "objects/outhouse.ac" (part of terrain)
+  Placing instance at 4e+01;4e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/freqboard.ac" (part of terrain)
+  Placing instance at 2e+01;3e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/trashcan.ac" (part of terrain)
+  Placing instance at 2e+01;4e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/log.ac" (part of terrain)
+  Placing instance at 2e+02;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 1e+02;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 8e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 4e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 5;5e+01;0, orientation 2e+02;0;0
+  Placing instance at -3e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at -7e+01;5e+01;0, orientation 2e+02;0;0
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+int T_TX_InterfaceSoftware::putBackIntoCfg(SimpleXMLTransfer* config)
+T_TX_Mixer::putBackIntoCfg(SimpleXMLTransfer* config)
+ --> inputMethod.joystick
+T_AxisMapper::putBackIntoCfg(SimpleXMLTransfer* config)
+ --> inputMethod.joystick
+T_Calibration::putBackIntoCfg(cfg)
+ --> inputMethod.joystick
+Configuration file is /home/karsten/.crrcsim/crrcsim.xml
+Configuration version is 2
+options have been changed
+int T_TX_InterfaceSoftware::putBackIntoCfg(SimpleXMLTransfer* config)
+T_TX_Mixer::putBackIntoCfg(SimpleXMLTransfer* config)
+ --> inputMethod.joystick
+T_AxisMapper::putBackIntoCfg(SimpleXMLTransfer* config)
+ --> inputMethod.joystick
+T_Calibration::putBackIntoCfg(cfg)
+ --> inputMethod.joystick
+Scheduler::UnRegister(0xbfa7b280)
+[New Thread 0xb2b0cb90 (LWP 25444)]
+[New Thread 0xb474cb90 (LWP 25445)]
+[Thread 0xb474cb90 (LWP 25445) exited]
+[Thread 0xb2b0cb90 (LWP 25444) exited]
+
+Program exited normally.
+(gdb) quit
+
+
+
+
+
+========================================================================================================
+consecutive run of ORIGINAL/OFFICIAL 0.9.11 w/o gdb did not crash either anymore!
+terminal output see below
+
+karsten at kdf-ubu:~/Source/crrcsim-70b418a0c4f8$ crrcsim
+CRRCsim 0.9.11 started at 2010-6-9 19:38:36
+Running on Linux 2.6.28-19-generic
+Using plib version 1.8.4
+Compiled with SDL version 1.2.13
+(Linked SDL version is 1.2.13)
+Configured data path: /usr/local/share/crrcsim
+Data file search path:
+  .
+  /home/karsten/.crrcsim
+  /usr/local/share/crrcsim
+  /usr/local/share/games/crrcsim
+  /usr/share/games/crrcsim
+RAND_MAX = 2147483647
+Configuration file is /home/karsten/.crrcsim/crrcsim.xml
+Configuration version is 2
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+std::string reconfigureInputMethod()
+New input method: JOYSTICK
+TInputDev::openJoystick: SDL found 1 joysticks
+0: Analog 4-axis 4-button joystick
+Trying to open joystick 0
+Opened Joystick 0
+Name: Analog 4-axis 4-button joystick
+Number of Axes: 4
+Number of Buttons: 4
+T_TX_Interface::T_TX_Interface
+T_TX_InterfaceSoftware::T_TX_InterfaceSoftware(int method)
+T_TX_Mixer::T_TX_Mixer()
+T_Calibration::T_Calibration()
+int T_TX_InterfaceSoftware::init(SimpleXMLTransfer* config)
+int T_TX_Interface::init(SimpleXMLTransfer* config)
+T_TX_Mixer::init(cfg, child)
+ <-- inputMethod.joystick
+T_AxisMapper::init(cfg, child)
+ <-- inputMethod.joystick
+mapper set to radio type 6
+T_Calibration::init(cfg, child)
+ <-- inputMethod.joystick
+Loading default videomode from config...
+Using the following rendering mode:
+  Renderer:    Mesa DRI R300 20060815 AGP 8x x86/MMX+/3DNow!+/SSE TCL
+  Vendor:      DRI R300 Project
+  GL version:  1.3 Mesa 7.4
+  RGBA bpp:    8/8/8/8
+  Depth bpp:   24
+  Stencil bpp: 0
+  Modelview stack: 1 / 32    Projection stack: 1 / 32
+Opened audio device: 16 bit signed audio (mono) at 48000 Hz
+Initialized sine samples: 480
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+--- Airplane description: ---------------------------------------
+  Wingspan:                   1.99644 m
+  Mass:                       0.256853 kg
+  Velocity in trimmed flight: 6.45627 m/s
+-----------------------------------------------------------------
+Using CRRC_AirplaneSim_Larcsim
+CRRCAirplaneV2(xml)
+soundfile: sounds/glider.wav
+soundserver: 0x9b9b8a8
+Using airplane sound sounds/glider.wav, type 2, max vol 1
+initAnimations: found 0 children
+Loading scenery "Davis Field (model-based)"
+  <sky> 7 at child idx 7
+  Using sky variant 0
+Loading 3D object "objects/davis.ac" (part of terrain)
+  Placing instance at 0;0;0, orientation 2e+02;0;0
+Loading 3D object "objects/outhouse.ac" (part of terrain)
+  Placing instance at 4e+01;4e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/freqboard.ac" (part of terrain)
+  Placing instance at 2e+01;3e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/trashcan.ac" (part of terrain)
+  Placing instance at 2e+01;4e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/log.ac" (part of terrain)
+  Placing instance at 2e+02;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 1e+02;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 8e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 4e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 5;5e+01;0, orientation 2e+02;0;0
+  Placing instance at -3e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at -7e+01;5e+01;0, orientation 2e+02;0;0
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+Scheduler::Register(0xbf95e640)
+Caught XML exception in CGUIlocationSelectDialog:
+  No child named name in crrcsimSceneryFile
+  File: scenery/coast.xml
+T_Config: Setting location to scenery/davis-orig.xml, sky variant 0
+T_Config: Setting location to scenery/davis-orig.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+Loading scenery "Davis Field"
+  <sky> 7 at child idx 7
+  Using sky variant 0
+Initializing scenery DAVIS from file: scenery/davis-orig.xml
+T_Config: Setting location to scenery/davis-orig.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+Caught XML exception in CGUIlocationSelectDialog:
+  No child named name in crrcsimSceneryFile
+  File: scenery/coast.xml
+int T_TX_InterfaceSoftware::putBackIntoCfg(SimpleXMLTransfer* config)
+T_TX_Mixer::putBackIntoCfg(SimpleXMLTransfer* config)
+ --> inputMethod.joystick
+T_AxisMapper::putBackIntoCfg(SimpleXMLTransfer* config)
+ --> inputMethod.joystick
+T_Calibration::putBackIntoCfg(cfg)
+ --> inputMethod.joystick
+Configuration file is /home/karsten/.crrcsim/crrcsim.xml
+Configuration version is 2
+options have been changed
+Scheduler::UnRegister(0xbf95e640)
+Mesa 7.4 implementation error: Unable to delete texture, no context
+Please report at bugzilla.freedesktop.org
+karsten at kdf-ubu:~/Source/crrcsim-70b418a0c4f8$ 
+
+-------------------------------------------------------
+
+Date: 2010-Jun-08 19:58
+By: kdf
+
+Comment:
+error message from the console:
+Segmentation fault
+
+Backtrace using gdb:
+Program received signal SIGSEGV, Segmentation fault.
+[Switching to Thread 0xb6bc4710 (LWP 10288)]
+0xb6f6e6eb in strlen () from /lib/tls/i686/cmov/libc.so.6
+(gdb) bt
+#0  0xb6f6e6eb in strlen () from /lib/tls/i686/cmov/libc.so.6
+#1  0xb713e88b in std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string () from /usr/lib/libstdc++.so.6
+#2  0x080722a6 in CGUILocationDialog::updateLocationInfo (this=0xa6fd8f0)
+    at src/GUI/crrc_location.cpp:229
+#3  0x08073f0c in CGUILocationDialog (this=0xa6fd8f0)
+    at src/GUI/crrc_location.cpp:206
+#4  0x08069faa in opt_location_cb (obj=0xa4a6eb0)
+    at src/GUI/crrc_gui_main.cpp:542
+#5  0xb72908e2 in puButton::doHit () from /usr/lib/libplibpu.so.1
+#6  0xb7297a2e in puOneShot::doHit () from /usr/lib/libplibpu.so.1
+#7  0xb72965b6 in puObject::checkHit () from /usr/lib/libplibpu.so.1
+#8  0xb7297f4c in puPopupMenu::checkHit () from /usr/lib/libplibpu.so.1
+#9  0xb7293b5c in puGroup::checkHit () from /usr/lib/libplibpu.so.1
+#10 0xb7293b5c in puGroup::checkHit () from /usr/lib/libplibpu.so.1
+#11 0xb728f5c5 in puMouse () from /usr/lib/libplibpu.so.1
+#12 0x0806a16c in CGUIMain::mouseButtonUpHandler (this=0xa4a3b60, btn=1, 
+    x=202, y=65) at src/GUI/crrc_gui_main.cpp:367
+#13 0x0816508f in EventHandler::handle_events (this=0xbfa3eb80)
+    at src/mod_main/eventhandler.cpp:144
+#14 0x08165155 in EventHandler::Run (this=0xbfa3eb80)
+    at src/mod_main/eventhandler.cpp:55
+#15 0x08118de9 in Scheduler::Run (this=0xbfa3eb88)
+    at src/mod_misc/scheduler.cpp:50
+#16 0x0815808a in main (argc=1, argv=0xbfa3ed34) at src/crrc_main.cpp:808
+
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=17218&group_id=9957
+
+
+From admin at berlios.de  Wed Jun  9 23:24:31 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Wed, 9 Jun 2010 23:24:31 +0200 (CEST)
+Subject: [Crrcsim-devel] [Bug #17218] CRRCsim crashes in location dialog on
+	Ubuntu 9.04
+Message-ID: <201006092124.o59LOVPX029131@unicorn.berlios.de>
+
+Bug #17218, was updated on 2010-Jun-07 23:11
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 7
+Submitted by: jreucker
+Assigned to : none
+Summary: CRRCsim crashes in location dialog on Ubuntu 9.04
+
+Details: Reported in the Yahoo group by <karsten.de.freese at nefkom.net>:
+
+Under Ubuntu 9.04, I had to install the g++ compiler, plus some of the dev packages. Now crrcsim 0.9.11 runs fine, except one thing - it reproducibly crashes when I try to open the 'location' menu. Using the joystick port for control, I initially compiled with portaudio v19, after experiencing the crashes I installed v18.1 (incl. dev package) and re- "./configure && make && make install". The crashes however persist.
+
+Follow-Ups:
+
+Date: 2010-Jun-09 23:24
+By: jreucker
+
+Comment:
+Karsten,
+
+indeed, interesting results! And from your logs I can see why it crashed and
+what was "cured": The original 0.9.11 tried to open the scenery
+
+/usr/share/crrcsim/scenery/davis-orig.xml
+
+which seems to be on your computer although this directory is not part of the
+search path. Did you have an older Ubuntu package on your computer before?
+This would explain this, because Ubuntu packages use /usr instead of /usr/local
+to install CRRCsim.
+
+However, the location dialog in 0.9.11 does not scan this directory any more,
+so it does not find this scenery. This lead to the crash, because CRRCsim tried
+to set the "current" (highlighted) entry of the location listbox to a non-existing
+index. The tip version performs an extra check before doing this, so it won't
+crash anymore. You get the scenery dialog, select a new scenery, this one is
+stored in your config file on exit. Now you start up 0.9.11 again, it finds
+the scenery from your config file and everything is allright.
+
+I guess I'll add some extra sanity checking to make this kind of bullet-proof...
+
+Many thanks for your support!
+
+(Just a side note: I guess this could have been "fixed" by deleting the configuration file ~/.crrcsim/crrcsim.xml and reconfiguring CRRCsim, but I'm glad that you helped me find the real reason for the crash!)
+
+Jan
+-------------------------------------------------------
+
+Date: 2010-Jun-09 22:14
+By: kdf
+
+Comment:
+new logs from 2010-06-09 (partially with official load, partially with tip load)
+
+===>> it seem that running the tip load did cure something, so that after once running the tip load also the official load did not crash anymore!
+
+========================================================================================================
+1st run, ORIGINAL/OFFICIAL 0.9.11
+=> crashed when trying to open location dialog
+
+CRRCsim 0.9.11 started at 2010-6-9 19:28:56
+Running on Linux 2.6.28-19-generic
+Using plib version 1.8.4
+Compiled with SDL version 1.2.13
+(Linked SDL version is 1.2.13)
+Configured data path: /usr/local/share/crrcsim
+Data file search path:
+  .
+  /home/karsten/.crrcsim
+  /usr/local/share/crrcsim
+  /usr/local/share/games/crrcsim
+  /usr/share/games/crrcsim
+RAND_MAX = 2147483647
+Configuration file is /home/karsten/.crrcsim/crrcsim.xml
+Configuration version is 2
+T_Config: Setting location to /usr/share/crrcsim/scenery/davis-orig.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+std::string reconfigureInputMethod()
+New input method: JOYSTICK
+TInputDev::openJoystick: SDL found 1 joysticks
+0: Analog 4-axis 4-button joystick
+Trying to open joystick 0
+Opened Joystick 0
+Name: Analog 4-axis 4-button joystick
+Number of Axes: 4
+Number of Buttons: 4
+T_TX_Interface::T_TX_Interface
+T_TX_InterfaceSoftware::T_TX_InterfaceSoftware(int method)
+T_TX_Mixer::T_TX_Mixer()
+T_Calibration::T_Calibration()
+int T_TX_InterfaceSoftware::init(SimpleXMLTransfer* config)
+int T_TX_Interface::init(SimpleXMLTransfer* config)
+T_TX_Mixer::init(cfg, child)
+ <-- inputMethod.joystick
+T_AxisMapper::init(cfg, child)
+ <-- inputMethod.joystick
+mapper set to radio type 6
+T_Calibration::init(cfg, child)
+ <-- inputMethod.joystick
+Loading default videomode from config...
+Using the following rendering mode:
+  Renderer:    Mesa DRI R300 20060815 AGP 8x x86/MMX+/3DNow!+/SSE TCL
+  Vendor:      DRI R300 Project
+  GL version:  1.3 Mesa 7.4
+  RGBA bpp:    8/8/8/8
+  Depth bpp:   24
+  Stencil bpp: 0
+  Modelview stack: 1 / 32    Projection stack: 1 / 32
+Opened audio device: 16 bit signed audio (mono) at 48000 Hz
+Initialized sine samples: 480
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+--- Airplane description: ---------------------------------------
+  Wingspan:                   1.99644 m
+  Mass:                       0.256853 kg
+  Velocity in trimmed flight: 6.45627 m/s
+-----------------------------------------------------------------
+Using CRRC_AirplaneSim_Larcsim
+CRRCAirplaneV2(xml)
+soundfile: sounds/glider.wav
+soundserver: 0x87b86d0
+Using airplane sound sounds/glider.wav, type 2, max vol 1
+initAnimations: found 0 children
+Loading scenery "Davis Field (original)"
+  <sky> 7 at child idx 7
+  Using sky variant 0
+Initializing scenery DAVIS from file: /usr/share/crrcsim/scenery/davis-orig.xml
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+T_Config: Setting location to /usr/share/crrcsim/scenery/davis-orig.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+Scheduler::Register(0xbfd4cf00)
+Caught XML exception in CGUIlocationSelectDialog:
+  No child named name in crrcsimSceneryFile
+  File: scenery/coast.xml
+Segmentation fault
+
+
+
+
+
+
+
+========================================================================================================
+2nd run, 0.9.11 DEV with gdb (did not crash!)
+=> gdb output see below
+
+GNU gdb 6.8-debian
+Copyright (C) 2008 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "i486-linux-gnu"...
+(gdb) r
+Starting program: /home/karsten/Source/crrcsim-70b418a0c4f8/crrcsim 
+[Thread debugging using libthread_db enabled]
+CRRCsim dev started at 2010-6-9 19:32:39
+Running on Linux 2.6.28-19-generic
+Using plib version 1.8.4
+Compiled with SDL version 1.2.13
+(Linked SDL version is 1.2.13)
+Configured data path: /usr/local/share/crrcsim
+Data file search path:
+  .
+  /home/karsten/.crrcsim
+  /usr/local/share/crrcsim
+  /usr/local/share/games/crrcsim
+  /usr/share/games/crrcsim
+[New Thread 0xb6d15710 (LWP 25440)]
+[New Thread 0xb2b0cb90 (LWP 25443)]
+[Thread 0xb2b0cb90 (LWP 25443) exited]
+RAND_MAX = 2147483647
+Configuration file is /home/karsten/.crrcsim/crrcsim.xml
+Configuration version is 2
+T_Config: Setting location to /usr/share/crrcsim/scenery/davis-orig.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+std::string reconfigureInputMethod()
+New input method: JOYSTICK
+TInputDev::openJoystick: SDL found 1 joysticks
+0: Analog 4-axis 4-button joystick
+Trying to open joystick 0
+Opened Joystick 0
+Name: Analog 4-axis 4-button joystick
+Number of Axes: 4
+Number of Buttons: 4
+T_TX_Interface::T_TX_Interface
+T_TX_InterfaceSoftware::T_TX_InterfaceSoftware(int method)
+T_TX_Mixer::T_TX_Mixer()
+T_Calibration::T_Calibration()
+int T_TX_InterfaceSoftware::init(SimpleXMLTransfer* config)
+int T_TX_Interface::init(SimpleXMLTransfer* config)
+T_TX_Mixer::init(cfg, child)
+ <-- inputMethod.joystick
+T_AxisMapper::init(cfg, child)
+ <-- inputMethod.joystick
+mapper set to radio type 6
+T_Calibration::init(cfg, child)
+ <-- inputMethod.joystick
+Loading default videomode from config...
+Using the following rendering mode:
+  Renderer:    Mesa DRI R300 20060815 AGP 8x x86/MMX+/3DNow!+/SSE TCL
+  Vendor:      DRI R300 Project
+  GL version:  1.3 Mesa 7.4
+  RGBA bpp:    8/8/8/8
+  Depth bpp:   24
+  Stencil bpp: 0
+  Modelview stack: 1 / 32    Projection stack: 1 / 32
+Opened audio device: 16 bit signed audio (mono) at 48000 Hz
+Initialized sine samples: 480
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+--- Airplane description: ---------------------------------------
+  Wingspan:                   1.99644 m
+  Mass:                       0.256853 kg
+  Velocity in trimmed flight: 6.45627 m/s
+-----------------------------------------------------------------
+Using CRRC_AirplaneSim_Larcsim
+CRRCAirplaneV2(xml)
+soundfile: sounds/glider.wav
+soundserver: 0x93006d0
+Using airplane sound sounds/glider.wav, type 2, max vol 1
+initAnimations: found 0 children
+Loading scenery "Davis Field (original)"
+  <sky> 7 at child idx 7
+  Using sky variant 0
+Initializing scenery DAVIS from file: /usr/share/crrcsim/scenery/davis-orig.xml
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+T_Config: Setting location to /usr/share/crrcsim/scenery/davis-orig.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+Scheduler::Register(0xbfa7b280)
+Scanning scenery directories:
+  Davis Field(scenery/davis-orig.xml)
+  Davis Field (model-based)(scenery/davis.xml)
+  Cape Cod (model-based)(scenery/cape_cod.xml)
+  Simple scenery(scenery/simple.xml)
+  Cape Cod(scenery/cape_cod-orig.xml)
+  Simple scenery(/usr/local/share/crrcsim/scenery/simple.xml)
+  Davis Field(/usr/local/share/crrcsim/scenery/davis-orig.xml)
+  Cape Cod(/usr/local/share/crrcsim/scenery/cape_cod-orig.xml)
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+Loading scenery "Davis Field (model-based)"
+  <sky> 7 at child idx 7
+  Using sky variant 0
+Loading 3D object "objects/davis.ac" (part of terrain)
+  Placing instance at 0;0;0, orientation 2e+02;0;0
+Loading 3D object "objects/outhouse.ac" (part of terrain)
+  Placing instance at 4e+01;4e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/freqboard.ac" (part of terrain)
+  Placing instance at 2e+01;3e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/trashcan.ac" (part of terrain)
+  Placing instance at 2e+01;4e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/log.ac" (part of terrain)
+  Placing instance at 2e+02;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 1e+02;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 8e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 4e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 5;5e+01;0, orientation 2e+02;0;0
+  Placing instance at -3e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at -7e+01;5e+01;0, orientation 2e+02;0;0
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+Scanning scenery directories:
+  Davis Field(scenery/davis-orig.xml)
+  Davis Field (model-based)(scenery/davis.xml)
+    (this is the current scenery)
+  Cape Cod (model-based)(scenery/cape_cod.xml)
+  Simple scenery(scenery/simple.xml)
+  Cape Cod(scenery/cape_cod-orig.xml)
+  Simple scenery(/usr/local/share/crrcsim/scenery/simple.xml)
+  Davis Field(/usr/local/share/crrcsim/scenery/davis-orig.xml)
+  Cape Cod(/usr/local/share/crrcsim/scenery/cape_cod-orig.xml)
+T_Config: Setting location to scenery/simple.xml, sky variant 0
+T_Config: Setting location to scenery/simple.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+Loading scenery "Simple scenery"
+  <sky> 7 at child idx 7
+  Using sky variant 0
+Loading 3D object "objects/small.ac" (part of terrain)
+  Placing instance at 0;0;0, orientation 2e+02;0;0
+Loading 3D object "objects/outhouse.ac" (part of terrain)
+  Placing instance at -2e+02;3e+01;0, orientation 0;0;0
+  Placing instance at -2e+02;3e+01;0, orientation 0;0;0
+  Placing instance at -2e+02;2e+01;0, orientation 0;0;0
+Loading 3D object "objects/freqboard.ac"
+  Placing instance at -2e+02;0;0, orientation 9e+01;0;0
+Loading 3D object "objects/table.ac" (part of terrain)
+  leaf "collbox" is invisible (found -visible attribute)
+  leaf "table" is excluded from terrain calculations (found -terrain attribute)
+  Placing instance at -6e+01;8;0, orientation 0;0;0
+T_Config: Setting location to scenery/simple.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 0.00 deg
+Wind: velocity=3.000000 ft/sec   direction=0.000000
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+Hardpoint 2: max_force exceeded (4.73916 lbf > 3.5 lbf)
+Hardpoint 7: max_force exceeded (4.50356 lbf > 3.5 lbf)
+Scanning scenery directories:
+  Davis Field(scenery/davis-orig.xml)
+  Davis Field (model-based)(scenery/davis.xml)
+  Cape Cod (model-based)(scenery/cape_cod.xml)
+  Simple scenery(scenery/simple.xml)
+    (this is the current scenery)
+  Cape Cod(scenery/cape_cod-orig.xml)
+  Simple scenery(/usr/local/share/crrcsim/scenery/simple.xml)
+    (this is the current scenery)
+  Davis Field(/usr/local/share/crrcsim/scenery/davis-orig.xml)
+  Cape Cod(/usr/local/share/crrcsim/scenery/cape_cod-orig.xml)
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 0.00 deg
+Wind: velocity=3.000000 ft/sec   direction=0.000000
+Loading scenery "Davis Field (model-based)"
+  <sky> 7 at child idx 7
+  Using sky variant 0
+Loading 3D object "objects/davis.ac" (part of terrain)
+  Placing instance at 0;0;0, orientation 2e+02;0;0
+Loading 3D object "objects/outhouse.ac" (part of terrain)
+  Placing instance at 4e+01;4e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/freqboard.ac" (part of terrain)
+  Placing instance at 2e+01;3e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/trashcan.ac" (part of terrain)
+  Placing instance at 2e+01;4e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/log.ac" (part of terrain)
+  Placing instance at 2e+02;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 1e+02;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 8e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 4e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 5;5e+01;0, orientation 2e+02;0;0
+  Placing instance at -3e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at -7e+01;5e+01;0, orientation 2e+02;0;0
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+int T_TX_InterfaceSoftware::putBackIntoCfg(SimpleXMLTransfer* config)
+T_TX_Mixer::putBackIntoCfg(SimpleXMLTransfer* config)
+ --> inputMethod.joystick
+T_AxisMapper::putBackIntoCfg(SimpleXMLTransfer* config)
+ --> inputMethod.joystick
+T_Calibration::putBackIntoCfg(cfg)
+ --> inputMethod.joystick
+Configuration file is /home/karsten/.crrcsim/crrcsim.xml
+Configuration version is 2
+options have been changed
+int T_TX_InterfaceSoftware::putBackIntoCfg(SimpleXMLTransfer* config)
+T_TX_Mixer::putBackIntoCfg(SimpleXMLTransfer* config)
+ --> inputMethod.joystick
+T_AxisMapper::putBackIntoCfg(SimpleXMLTransfer* config)
+ --> inputMethod.joystick
+T_Calibration::putBackIntoCfg(cfg)
+ --> inputMethod.joystick
+Scheduler::UnRegister(0xbfa7b280)
+[New Thread 0xb2b0cb90 (LWP 25444)]
+[New Thread 0xb474cb90 (LWP 25445)]
+[Thread 0xb474cb90 (LWP 25445) exited]
+[Thread 0xb2b0cb90 (LWP 25444) exited]
+
+Program exited normally.
+(gdb) quit
+
+
+
+
+
+========================================================================================================
+consecutive run of ORIGINAL/OFFICIAL 0.9.11 w/o gdb did not crash either anymore!
+terminal output see below
+
+karsten at kdf-ubu:~/Source/crrcsim-70b418a0c4f8$ crrcsim
+CRRCsim 0.9.11 started at 2010-6-9 19:38:36
+Running on Linux 2.6.28-19-generic
+Using plib version 1.8.4
+Compiled with SDL version 1.2.13
+(Linked SDL version is 1.2.13)
+Configured data path: /usr/local/share/crrcsim
+Data file search path:
+  .
+  /home/karsten/.crrcsim
+  /usr/local/share/crrcsim
+  /usr/local/share/games/crrcsim
+  /usr/share/games/crrcsim
+RAND_MAX = 2147483647
+Configuration file is /home/karsten/.crrcsim/crrcsim.xml
+Configuration version is 2
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+std::string reconfigureInputMethod()
+New input method: JOYSTICK
+TInputDev::openJoystick: SDL found 1 joysticks
+0: Analog 4-axis 4-button joystick
+Trying to open joystick 0
+Opened Joystick 0
+Name: Analog 4-axis 4-button joystick
+Number of Axes: 4
+Number of Buttons: 4
+T_TX_Interface::T_TX_Interface
+T_TX_InterfaceSoftware::T_TX_InterfaceSoftware(int method)
+T_TX_Mixer::T_TX_Mixer()
+T_Calibration::T_Calibration()
+int T_TX_InterfaceSoftware::init(SimpleXMLTransfer* config)
+int T_TX_Interface::init(SimpleXMLTransfer* config)
+T_TX_Mixer::init(cfg, child)
+ <-- inputMethod.joystick
+T_AxisMapper::init(cfg, child)
+ <-- inputMethod.joystick
+mapper set to radio type 6
+T_Calibration::init(cfg, child)
+ <-- inputMethod.joystick
+Loading default videomode from config...
+Using the following rendering mode:
+  Renderer:    Mesa DRI R300 20060815 AGP 8x x86/MMX+/3DNow!+/SSE TCL
+  Vendor:      DRI R300 Project
+  GL version:  1.3 Mesa 7.4
+  RGBA bpp:    8/8/8/8
+  Depth bpp:   24
+  Stencil bpp: 0
+  Modelview stack: 1 / 32    Projection stack: 1 / 32
+Opened audio device: 16 bit signed audio (mono) at 48000 Hz
+Initialized sine samples: 480
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+--- Airplane description: ---------------------------------------
+  Wingspan:                   1.99644 m
+  Mass:                       0.256853 kg
+  Velocity in trimmed flight: 6.45627 m/s
+-----------------------------------------------------------------
+Using CRRC_AirplaneSim_Larcsim
+CRRCAirplaneV2(xml)
+soundfile: sounds/glider.wav
+soundserver: 0x9b9b8a8
+Using airplane sound sounds/glider.wav, type 2, max vol 1
+initAnimations: found 0 children
+Loading scenery "Davis Field (model-based)"
+  <sky> 7 at child idx 7
+  Using sky variant 0
+Loading 3D object "objects/davis.ac" (part of terrain)
+  Placing instance at 0;0;0, orientation 2e+02;0;0
+Loading 3D object "objects/outhouse.ac" (part of terrain)
+  Placing instance at 4e+01;4e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/freqboard.ac" (part of terrain)
+  Placing instance at 2e+01;3e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/trashcan.ac" (part of terrain)
+  Placing instance at 2e+01;4e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/log.ac" (part of terrain)
+  Placing instance at 2e+02;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 1e+02;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 8e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 4e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 5;5e+01;0, orientation 2e+02;0;0
+  Placing instance at -3e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at -7e+01;5e+01;0, orientation 2e+02;0;0
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+Scheduler::Register(0xbf95e640)
+Caught XML exception in CGUIlocationSelectDialog:
+  No child named name in crrcsimSceneryFile
+  File: scenery/coast.xml
+T_Config: Setting location to scenery/davis-orig.xml, sky variant 0
+T_Config: Setting location to scenery/davis-orig.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+Loading scenery "Davis Field"
+  <sky> 7 at child idx 7
+  Using sky variant 0
+Initializing scenery DAVIS from file: scenery/davis-orig.xml
+T_Config: Setting location to scenery/davis-orig.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+Caught XML exception in CGUIlocationSelectDialog:
+  No child named name in crrcsimSceneryFile
+  File: scenery/coast.xml
+int T_TX_InterfaceSoftware::putBackIntoCfg(SimpleXMLTransfer* config)
+T_TX_Mixer::putBackIntoCfg(SimpleXMLTransfer* config)
+ --> inputMethod.joystick
+T_AxisMapper::putBackIntoCfg(SimpleXMLTransfer* config)
+ --> inputMethod.joystick
+T_Calibration::putBackIntoCfg(cfg)
+ --> inputMethod.joystick
+Configuration file is /home/karsten/.crrcsim/crrcsim.xml
+Configuration version is 2
+options have been changed
+Scheduler::UnRegister(0xbf95e640)
+Mesa 7.4 implementation error: Unable to delete texture, no context
+Please report at bugzilla.freedesktop.org
+karsten at kdf-ubu:~/Source/crrcsim-70b418a0c4f8$ 
+
+-------------------------------------------------------
+
+Date: 2010-Jun-08 19:58
+By: kdf
+
+Comment:
+error message from the console:
+Segmentation fault
+
+Backtrace using gdb:
+Program received signal SIGSEGV, Segmentation fault.
+[Switching to Thread 0xb6bc4710 (LWP 10288)]
+0xb6f6e6eb in strlen () from /lib/tls/i686/cmov/libc.so.6
+(gdb) bt
+#0  0xb6f6e6eb in strlen () from /lib/tls/i686/cmov/libc.so.6
+#1  0xb713e88b in std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string () from /usr/lib/libstdc++.so.6
+#2  0x080722a6 in CGUILocationDialog::updateLocationInfo (this=0xa6fd8f0)
+    at src/GUI/crrc_location.cpp:229
+#3  0x08073f0c in CGUILocationDialog (this=0xa6fd8f0)
+    at src/GUI/crrc_location.cpp:206
+#4  0x08069faa in opt_location_cb (obj=0xa4a6eb0)
+    at src/GUI/crrc_gui_main.cpp:542
+#5  0xb72908e2 in puButton::doHit () from /usr/lib/libplibpu.so.1
+#6  0xb7297a2e in puOneShot::doHit () from /usr/lib/libplibpu.so.1
+#7  0xb72965b6 in puObject::checkHit () from /usr/lib/libplibpu.so.1
+#8  0xb7297f4c in puPopupMenu::checkHit () from /usr/lib/libplibpu.so.1
+#9  0xb7293b5c in puGroup::checkHit () from /usr/lib/libplibpu.so.1
+#10 0xb7293b5c in puGroup::checkHit () from /usr/lib/libplibpu.so.1
+#11 0xb728f5c5 in puMouse () from /usr/lib/libplibpu.so.1
+#12 0x0806a16c in CGUIMain::mouseButtonUpHandler (this=0xa4a3b60, btn=1, 
+    x=202, y=65) at src/GUI/crrc_gui_main.cpp:367
+#13 0x0816508f in EventHandler::handle_events (this=0xbfa3eb80)
+    at src/mod_main/eventhandler.cpp:144
+#14 0x08165155 in EventHandler::Run (this=0xbfa3eb80)
+    at src/mod_main/eventhandler.cpp:55
+#15 0x08118de9 in Scheduler::Run (this=0xbfa3eb88)
+    at src/mod_misc/scheduler.cpp:50
+#16 0x0815808a in main (argc=1, argv=0xbfa3ed34) at src/crrc_main.cpp:808
+
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=17218&group_id=9957
+
+
+From admin at berlios.de  Thu Jun 10 00:05:21 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Thu, 10 Jun 2010 00:05:21 +0200 (CEST)
+Subject: [Crrcsim-devel] [Bug #17218] CRRCsim crashes in location dialog on
+	Ubuntu 9.04
+Message-ID: <201006092205.o59M5LDY012597@unicorn.berlios.de>
+
+Bug #17218, was updated on 2010-Jun-07 23:11
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 7
+Submitted by: jreucker
+Assigned to : none
+Summary: CRRCsim crashes in location dialog on Ubuntu 9.04
+
+Details: Reported in the Yahoo group by <karsten.de.freese at nefkom.net>:
+
+Under Ubuntu 9.04, I had to install the g++ compiler, plus some of the dev packages. Now crrcsim 0.9.11 runs fine, except one thing - it reproducibly crashes when I try to open the 'location' menu. Using the joystick port for control, I initially compiled with portaudio v19, after experiencing the crashes I installed v18.1 (incl. dev package) and re- "./configure && make && make install". The crashes however persist.
+
+Follow-Ups:
+
+Date: 2010-Jun-10 00:05
+By: kdf
+
+Comment:
+hi Jan,
+
+yes, I did have an earlier Ubuntu package of CRRCsim on my computer (from ppa.launchpad.net/aeromodelling-maintainers/ppa/ubuntu), and I indeed found the data files under /usr/share/crrcsim/.
+
+"you can safely use your self-compiled tip version until then" - that's what I'm doing now :-)
+
+thanks very much for your quick and to-the-point help!
+
+Karsten
+
+
+-------------------------------------------------------
+
+Date: 2010-Jun-09 23:24
+By: jreucker
+
+Comment:
+Karsten,
+
+indeed, interesting results! And from your logs I can see why it crashed and
+what was "cured": The original 0.9.11 tried to open the scenery
+
+/usr/share/crrcsim/scenery/davis-orig.xml
+
+which seems to be on your computer although this directory is not part of the
+search path. Did you have an older Ubuntu package on your computer before?
+This would explain this, because Ubuntu packages use /usr instead of /usr/local
+to install CRRCsim.
+
+However, the location dialog in 0.9.11 does not scan this directory any more,
+so it does not find this scenery. This lead to the crash, because CRRCsim tried
+to set the "current" (highlighted) entry of the location listbox to a non-existing
+index. The tip version performs an extra check before doing this, so it won't
+crash anymore. You get the scenery dialog, select a new scenery, this one is
+stored in your config file on exit. Now you start up 0.9.11 again, it finds
+the scenery from your config file and everything is allright.
+
+I guess I'll add some extra sanity checking to make this kind of bullet-proof...
+
+Many thanks for your support!
+
+(Just a side note: I guess this could have been "fixed" by deleting the configuration file ~/.crrcsim/crrcsim.xml and reconfiguring CRRCsim, but I'm glad that you helped me find the real reason for the crash!)
+
+Jan
+-------------------------------------------------------
+
+Date: 2010-Jun-09 22:14
+By: kdf
+
+Comment:
+new logs from 2010-06-09 (partially with official load, partially with tip load)
+
+===>> it seem that running the tip load did cure something, so that after once running the tip load also the official load did not crash anymore!
+
+========================================================================================================
+1st run, ORIGINAL/OFFICIAL 0.9.11
+=> crashed when trying to open location dialog
+
+CRRCsim 0.9.11 started at 2010-6-9 19:28:56
+Running on Linux 2.6.28-19-generic
+Using plib version 1.8.4
+Compiled with SDL version 1.2.13
+(Linked SDL version is 1.2.13)
+Configured data path: /usr/local/share/crrcsim
+Data file search path:
+  .
+  /home/karsten/.crrcsim
+  /usr/local/share/crrcsim
+  /usr/local/share/games/crrcsim
+  /usr/share/games/crrcsim
+RAND_MAX = 2147483647
+Configuration file is /home/karsten/.crrcsim/crrcsim.xml
+Configuration version is 2
+T_Config: Setting location to /usr/share/crrcsim/scenery/davis-orig.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+std::string reconfigureInputMethod()
+New input method: JOYSTICK
+TInputDev::openJoystick: SDL found 1 joysticks
+0: Analog 4-axis 4-button joystick
+Trying to open joystick 0
+Opened Joystick 0
+Name: Analog 4-axis 4-button joystick
+Number of Axes: 4
+Number of Buttons: 4
+T_TX_Interface::T_TX_Interface
+T_TX_InterfaceSoftware::T_TX_InterfaceSoftware(int method)
+T_TX_Mixer::T_TX_Mixer()
+T_Calibration::T_Calibration()
+int T_TX_InterfaceSoftware::init(SimpleXMLTransfer* config)
+int T_TX_Interface::init(SimpleXMLTransfer* config)
+T_TX_Mixer::init(cfg, child)
+ <-- inputMethod.joystick
+T_AxisMapper::init(cfg, child)
+ <-- inputMethod.joystick
+mapper set to radio type 6
+T_Calibration::init(cfg, child)
+ <-- inputMethod.joystick
+Loading default videomode from config...
+Using the following rendering mode:
+  Renderer:    Mesa DRI R300 20060815 AGP 8x x86/MMX+/3DNow!+/SSE TCL
+  Vendor:      DRI R300 Project
+  GL version:  1.3 Mesa 7.4
+  RGBA bpp:    8/8/8/8
+  Depth bpp:   24
+  Stencil bpp: 0
+  Modelview stack: 1 / 32    Projection stack: 1 / 32
+Opened audio device: 16 bit signed audio (mono) at 48000 Hz
+Initialized sine samples: 480
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+--- Airplane description: ---------------------------------------
+  Wingspan:                   1.99644 m
+  Mass:                       0.256853 kg
+  Velocity in trimmed flight: 6.45627 m/s
+-----------------------------------------------------------------
+Using CRRC_AirplaneSim_Larcsim
+CRRCAirplaneV2(xml)
+soundfile: sounds/glider.wav
+soundserver: 0x87b86d0
+Using airplane sound sounds/glider.wav, type 2, max vol 1
+initAnimations: found 0 children
+Loading scenery "Davis Field (original)"
+  <sky> 7 at child idx 7
+  Using sky variant 0
+Initializing scenery DAVIS from file: /usr/share/crrcsim/scenery/davis-orig.xml
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+T_Config: Setting location to /usr/share/crrcsim/scenery/davis-orig.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+Scheduler::Register(0xbfd4cf00)
+Caught XML exception in CGUIlocationSelectDialog:
+  No child named name in crrcsimSceneryFile
+  File: scenery/coast.xml
+Segmentation fault
+
+
+
+
+
+
+
+========================================================================================================
+2nd run, 0.9.11 DEV with gdb (did not crash!)
+=> gdb output see below
+
+GNU gdb 6.8-debian
+Copyright (C) 2008 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "i486-linux-gnu"...
+(gdb) r
+Starting program: /home/karsten/Source/crrcsim-70b418a0c4f8/crrcsim 
+[Thread debugging using libthread_db enabled]
+CRRCsim dev started at 2010-6-9 19:32:39
+Running on Linux 2.6.28-19-generic
+Using plib version 1.8.4
+Compiled with SDL version 1.2.13
+(Linked SDL version is 1.2.13)
+Configured data path: /usr/local/share/crrcsim
+Data file search path:
+  .
+  /home/karsten/.crrcsim
+  /usr/local/share/crrcsim
+  /usr/local/share/games/crrcsim
+  /usr/share/games/crrcsim
+[New Thread 0xb6d15710 (LWP 25440)]
+[New Thread 0xb2b0cb90 (LWP 25443)]
+[Thread 0xb2b0cb90 (LWP 25443) exited]
+RAND_MAX = 2147483647
+Configuration file is /home/karsten/.crrcsim/crrcsim.xml
+Configuration version is 2
+T_Config: Setting location to /usr/share/crrcsim/scenery/davis-orig.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+std::string reconfigureInputMethod()
+New input method: JOYSTICK
+TInputDev::openJoystick: SDL found 1 joysticks
+0: Analog 4-axis 4-button joystick
+Trying to open joystick 0
+Opened Joystick 0
+Name: Analog 4-axis 4-button joystick
+Number of Axes: 4
+Number of Buttons: 4
+T_TX_Interface::T_TX_Interface
+T_TX_InterfaceSoftware::T_TX_InterfaceSoftware(int method)
+T_TX_Mixer::T_TX_Mixer()
+T_Calibration::T_Calibration()
+int T_TX_InterfaceSoftware::init(SimpleXMLTransfer* config)
+int T_TX_Interface::init(SimpleXMLTransfer* config)
+T_TX_Mixer::init(cfg, child)
+ <-- inputMethod.joystick
+T_AxisMapper::init(cfg, child)
+ <-- inputMethod.joystick
+mapper set to radio type 6
+T_Calibration::init(cfg, child)
+ <-- inputMethod.joystick
+Loading default videomode from config...
+Using the following rendering mode:
+  Renderer:    Mesa DRI R300 20060815 AGP 8x x86/MMX+/3DNow!+/SSE TCL
+  Vendor:      DRI R300 Project
+  GL version:  1.3 Mesa 7.4
+  RGBA bpp:    8/8/8/8
+  Depth bpp:   24
+  Stencil bpp: 0
+  Modelview stack: 1 / 32    Projection stack: 1 / 32
+Opened audio device: 16 bit signed audio (mono) at 48000 Hz
+Initialized sine samples: 480
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+--- Airplane description: ---------------------------------------
+  Wingspan:                   1.99644 m
+  Mass:                       0.256853 kg
+  Velocity in trimmed flight: 6.45627 m/s
+-----------------------------------------------------------------
+Using CRRC_AirplaneSim_Larcsim
+CRRCAirplaneV2(xml)
+soundfile: sounds/glider.wav
+soundserver: 0x93006d0
+Using airplane sound sounds/glider.wav, type 2, max vol 1
+initAnimations: found 0 children
+Loading scenery "Davis Field (original)"
+  <sky> 7 at child idx 7
+  Using sky variant 0
+Initializing scenery DAVIS from file: /usr/share/crrcsim/scenery/davis-orig.xml
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+T_Config: Setting location to /usr/share/crrcsim/scenery/davis-orig.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+Scheduler::Register(0xbfa7b280)
+Scanning scenery directories:
+  Davis Field(scenery/davis-orig.xml)
+  Davis Field (model-based)(scenery/davis.xml)
+  Cape Cod (model-based)(scenery/cape_cod.xml)
+  Simple scenery(scenery/simple.xml)
+  Cape Cod(scenery/cape_cod-orig.xml)
+  Simple scenery(/usr/local/share/crrcsim/scenery/simple.xml)
+  Davis Field(/usr/local/share/crrcsim/scenery/davis-orig.xml)
+  Cape Cod(/usr/local/share/crrcsim/scenery/cape_cod-orig.xml)
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+Loading scenery "Davis Field (model-based)"
+  <sky> 7 at child idx 7
+  Using sky variant 0
+Loading 3D object "objects/davis.ac" (part of terrain)
+  Placing instance at 0;0;0, orientation 2e+02;0;0
+Loading 3D object "objects/outhouse.ac" (part of terrain)
+  Placing instance at 4e+01;4e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/freqboard.ac" (part of terrain)
+  Placing instance at 2e+01;3e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/trashcan.ac" (part of terrain)
+  Placing instance at 2e+01;4e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/log.ac" (part of terrain)
+  Placing instance at 2e+02;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 1e+02;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 8e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 4e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 5;5e+01;0, orientation 2e+02;0;0
+  Placing instance at -3e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at -7e+01;5e+01;0, orientation 2e+02;0;0
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+Scanning scenery directories:
+  Davis Field(scenery/davis-orig.xml)
+  Davis Field (model-based)(scenery/davis.xml)
+    (this is the current scenery)
+  Cape Cod (model-based)(scenery/cape_cod.xml)
+  Simple scenery(scenery/simple.xml)
+  Cape Cod(scenery/cape_cod-orig.xml)
+  Simple scenery(/usr/local/share/crrcsim/scenery/simple.xml)
+  Davis Field(/usr/local/share/crrcsim/scenery/davis-orig.xml)
+  Cape Cod(/usr/local/share/crrcsim/scenery/cape_cod-orig.xml)
+T_Config: Setting location to scenery/simple.xml, sky variant 0
+T_Config: Setting location to scenery/simple.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+Loading scenery "Simple scenery"
+  <sky> 7 at child idx 7
+  Using sky variant 0
+Loading 3D object "objects/small.ac" (part of terrain)
+  Placing instance at 0;0;0, orientation 2e+02;0;0
+Loading 3D object "objects/outhouse.ac" (part of terrain)
+  Placing instance at -2e+02;3e+01;0, orientation 0;0;0
+  Placing instance at -2e+02;3e+01;0, orientation 0;0;0
+  Placing instance at -2e+02;2e+01;0, orientation 0;0;0
+Loading 3D object "objects/freqboard.ac"
+  Placing instance at -2e+02;0;0, orientation 9e+01;0;0
+Loading 3D object "objects/table.ac" (part of terrain)
+  leaf "collbox" is invisible (found -visible attribute)
+  leaf "table" is excluded from terrain calculations (found -terrain attribute)
+  Placing instance at -6e+01;8;0, orientation 0;0;0
+T_Config: Setting location to scenery/simple.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 0.00 deg
+Wind: velocity=3.000000 ft/sec   direction=0.000000
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+Hardpoint 2: max_force exceeded (4.73916 lbf > 3.5 lbf)
+Hardpoint 7: max_force exceeded (4.50356 lbf > 3.5 lbf)
+Scanning scenery directories:
+  Davis Field(scenery/davis-orig.xml)
+  Davis Field (model-based)(scenery/davis.xml)
+  Cape Cod (model-based)(scenery/cape_cod.xml)
+  Simple scenery(scenery/simple.xml)
+    (this is the current scenery)
+  Cape Cod(scenery/cape_cod-orig.xml)
+  Simple scenery(/usr/local/share/crrcsim/scenery/simple.xml)
+    (this is the current scenery)
+  Davis Field(/usr/local/share/crrcsim/scenery/davis-orig.xml)
+  Cape Cod(/usr/local/share/crrcsim/scenery/cape_cod-orig.xml)
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 0.00 deg
+Wind: velocity=3.000000 ft/sec   direction=0.000000
+Loading scenery "Davis Field (model-based)"
+  <sky> 7 at child idx 7
+  Using sky variant 0
+Loading 3D object "objects/davis.ac" (part of terrain)
+  Placing instance at 0;0;0, orientation 2e+02;0;0
+Loading 3D object "objects/outhouse.ac" (part of terrain)
+  Placing instance at 4e+01;4e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/freqboard.ac" (part of terrain)
+  Placing instance at 2e+01;3e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/trashcan.ac" (part of terrain)
+  Placing instance at 2e+01;4e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/log.ac" (part of terrain)
+  Placing instance at 2e+02;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 1e+02;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 8e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 4e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 5;5e+01;0, orientation 2e+02;0;0
+  Placing instance at -3e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at -7e+01;5e+01;0, orientation 2e+02;0;0
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+int T_TX_InterfaceSoftware::putBackIntoCfg(SimpleXMLTransfer* config)
+T_TX_Mixer::putBackIntoCfg(SimpleXMLTransfer* config)
+ --> inputMethod.joystick
+T_AxisMapper::putBackIntoCfg(SimpleXMLTransfer* config)
+ --> inputMethod.joystick
+T_Calibration::putBackIntoCfg(cfg)
+ --> inputMethod.joystick
+Configuration file is /home/karsten/.crrcsim/crrcsim.xml
+Configuration version is 2
+options have been changed
+int T_TX_InterfaceSoftware::putBackIntoCfg(SimpleXMLTransfer* config)
+T_TX_Mixer::putBackIntoCfg(SimpleXMLTransfer* config)
+ --> inputMethod.joystick
+T_AxisMapper::putBackIntoCfg(SimpleXMLTransfer* config)
+ --> inputMethod.joystick
+T_Calibration::putBackIntoCfg(cfg)
+ --> inputMethod.joystick
+Scheduler::UnRegister(0xbfa7b280)
+[New Thread 0xb2b0cb90 (LWP 25444)]
+[New Thread 0xb474cb90 (LWP 25445)]
+[Thread 0xb474cb90 (LWP 25445) exited]
+[Thread 0xb2b0cb90 (LWP 25444) exited]
+
+Program exited normally.
+(gdb) quit
+
+
+
+
+
+========================================================================================================
+consecutive run of ORIGINAL/OFFICIAL 0.9.11 w/o gdb did not crash either anymore!
+terminal output see below
+
+karsten at kdf-ubu:~/Source/crrcsim-70b418a0c4f8$ crrcsim
+CRRCsim 0.9.11 started at 2010-6-9 19:38:36
+Running on Linux 2.6.28-19-generic
+Using plib version 1.8.4
+Compiled with SDL version 1.2.13
+(Linked SDL version is 1.2.13)
+Configured data path: /usr/local/share/crrcsim
+Data file search path:
+  .
+  /home/karsten/.crrcsim
+  /usr/local/share/crrcsim
+  /usr/local/share/games/crrcsim
+  /usr/share/games/crrcsim
+RAND_MAX = 2147483647
+Configuration file is /home/karsten/.crrcsim/crrcsim.xml
+Configuration version is 2
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+std::string reconfigureInputMethod()
+New input method: JOYSTICK
+TInputDev::openJoystick: SDL found 1 joysticks
+0: Analog 4-axis 4-button joystick
+Trying to open joystick 0
+Opened Joystick 0
+Name: Analog 4-axis 4-button joystick
+Number of Axes: 4
+Number of Buttons: 4
+T_TX_Interface::T_TX_Interface
+T_TX_InterfaceSoftware::T_TX_InterfaceSoftware(int method)
+T_TX_Mixer::T_TX_Mixer()
+T_Calibration::T_Calibration()
+int T_TX_InterfaceSoftware::init(SimpleXMLTransfer* config)
+int T_TX_Interface::init(SimpleXMLTransfer* config)
+T_TX_Mixer::init(cfg, child)
+ <-- inputMethod.joystick
+T_AxisMapper::init(cfg, child)
+ <-- inputMethod.joystick
+mapper set to radio type 6
+T_Calibration::init(cfg, child)
+ <-- inputMethod.joystick
+Loading default videomode from config...
+Using the following rendering mode:
+  Renderer:    Mesa DRI R300 20060815 AGP 8x x86/MMX+/3DNow!+/SSE TCL
+  Vendor:      DRI R300 Project
+  GL version:  1.3 Mesa 7.4
+  RGBA bpp:    8/8/8/8
+  Depth bpp:   24
+  Stencil bpp: 0
+  Modelview stack: 1 / 32    Projection stack: 1 / 32
+Opened audio device: 16 bit signed audio (mono) at 48000 Hz
+Initialized sine samples: 480
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+--- Airplane description: ---------------------------------------
+  Wingspan:                   1.99644 m
+  Mass:                       0.256853 kg
+  Velocity in trimmed flight: 6.45627 m/s
+-----------------------------------------------------------------
+Using CRRC_AirplaneSim_Larcsim
+CRRCAirplaneV2(xml)
+soundfile: sounds/glider.wav
+soundserver: 0x9b9b8a8
+Using airplane sound sounds/glider.wav, type 2, max vol 1
+initAnimations: found 0 children
+Loading scenery "Davis Field (model-based)"
+  <sky> 7 at child idx 7
+  Using sky variant 0
+Loading 3D object "objects/davis.ac" (part of terrain)
+  Placing instance at 0;0;0, orientation 2e+02;0;0
+Loading 3D object "objects/outhouse.ac" (part of terrain)
+  Placing instance at 4e+01;4e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/freqboard.ac" (part of terrain)
+  Placing instance at 2e+01;3e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/trashcan.ac" (part of terrain)
+  Placing instance at 2e+01;4e+01;0, orientation 2e+02;0;0
+Loading 3D object "objects/log.ac" (part of terrain)
+  Placing instance at 2e+02;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 1e+02;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 8e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 4e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at 5;5e+01;0, orientation 2e+02;0;0
+  Placing instance at -3e+01;5e+01;0, orientation 2e+02;0;0
+  Placing instance at -7e+01;5e+01;0, orientation 2e+02;0;0
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+T_Config: Setting location to scenery/davis.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+Scheduler::Register(0xbf95e640)
+Caught XML exception in CGUIlocationSelectDialog:
+  No child named name in crrcsimSceneryFile
+  File: scenery/coast.xml
+T_Config: Setting location to scenery/davis-orig.xml, sky variant 0
+T_Config: Setting location to scenery/davis-orig.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+Loading scenery "Davis Field"
+  <sky> 7 at child idx 7
+  Using sky variant 0
+Initializing scenery DAVIS from file: scenery/davis-orig.xml
+T_Config: Setting location to scenery/davis-orig.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Default wind from scenery: 3.00 ft/s at 180.00 deg
+Wind: velocity=3.000000 ft/sec   direction=180.000000
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+Caught XML exception in CGUIlocationSelectDialog:
+  No child named name in crrcsimSceneryFile
+  File: scenery/coast.xml
+int T_TX_InterfaceSoftware::putBackIntoCfg(SimpleXMLTransfer* config)
+T_TX_Mixer::putBackIntoCfg(SimpleXMLTransfer* config)
+ --> inputMethod.joystick
+T_AxisMapper::putBackIntoCfg(SimpleXMLTransfer* config)
+ --> inputMethod.joystick
+T_Calibration::putBackIntoCfg(cfg)
+ --> inputMethod.joystick
+Configuration file is /home/karsten/.crrcsim/crrcsim.xml
+Configuration version is 2
+options have been changed
+Scheduler::UnRegister(0xbf95e640)
+Mesa 7.4 implementation error: Unable to delete texture, no context
+Please report at bugzilla.freedesktop.org
+karsten at kdf-ubu:~/Source/crrcsim-70b418a0c4f8$ 
+
+-------------------------------------------------------
+
+Date: 2010-Jun-08 19:58
+By: kdf
+
+Comment:
+error message from the console:
+Segmentation fault
+
+Backtrace using gdb:
+Program received signal SIGSEGV, Segmentation fault.
+[Switching to Thread 0xb6bc4710 (LWP 10288)]
+0xb6f6e6eb in strlen () from /lib/tls/i686/cmov/libc.so.6
+(gdb) bt
+#0  0xb6f6e6eb in strlen () from /lib/tls/i686/cmov/libc.so.6
+#1  0xb713e88b in std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string () from /usr/lib/libstdc++.so.6
+#2  0x080722a6 in CGUILocationDialog::updateLocationInfo (this=0xa6fd8f0)
+    at src/GUI/crrc_location.cpp:229
+#3  0x08073f0c in CGUILocationDialog (this=0xa6fd8f0)
+    at src/GUI/crrc_location.cpp:206
+#4  0x08069faa in opt_location_cb (obj=0xa4a6eb0)
+    at src/GUI/crrc_gui_main.cpp:542
+#5  0xb72908e2 in puButton::doHit () from /usr/lib/libplibpu.so.1
+#6  0xb7297a2e in puOneShot::doHit () from /usr/lib/libplibpu.so.1
+#7  0xb72965b6 in puObject::checkHit () from /usr/lib/libplibpu.so.1
+#8  0xb7297f4c in puPopupMenu::checkHit () from /usr/lib/libplibpu.so.1
+#9  0xb7293b5c in puGroup::checkHit () from /usr/lib/libplibpu.so.1
+#10 0xb7293b5c in puGroup::checkHit () from /usr/lib/libplibpu.so.1
+#11 0xb728f5c5 in puMouse () from /usr/lib/libplibpu.so.1
+#12 0x0806a16c in CGUIMain::mouseButtonUpHandler (this=0xa4a3b60, btn=1, 
+    x=202, y=65) at src/GUI/crrc_gui_main.cpp:367
+#13 0x0816508f in EventHandler::handle_events (this=0xbfa3eb80)
+    at src/mod_main/eventhandler.cpp:144
+#14 0x08165155 in EventHandler::Run (this=0xbfa3eb80)
+    at src/mod_main/eventhandler.cpp:55
+#15 0x08118de9 in Scheduler::Run (this=0xbfa3eb88)
+    at src/mod_misc/scheduler.cpp:50
+#16 0x0815808a in main (argc=1, argv=0xbfa3ed34) at src/crrc_main.cpp:808
+
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=17218&group_id=9957
+
+
+From admin at berlios.de  Thu Jun 10 18:06:17 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Thu, 10 Jun 2010 18:06:17 +0200 (CEST)
+Subject: [Crrcsim-devel] [Bug #17237] Wrong starting position when loading
+	scenery from cmdline
+Message-ID: <201006101606.o5AG6H57024063@unicorn.berlios.de>
+
+Bug #17237, was updated on 2010-Jun-10 18:06
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: jreucker
+Assigned to : none
+Summary: Wrong starting position when loading scenery from cmdline
+
+Details: When loading a scenery file from the command line (-l option), the starting position for the model is not set correctly.
+
+Example to reproduce the bug:
+
+./crrcsim -l scenery/davis-orig.xml models/gap65.xml
+<exit and save>
+./crrcsim -l scenery/cape_cod-orig.xml
+
+The plane will now start far below ground (and therefore crash immediately).
+
+Side note: loading a new plane at this point will not reset the simulation. AFAIK this has always been different in previous versions? Now it takes a manual simulation reset to launch the plane.
+
+CRRCsim 0.9.11, Linux
+
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=17237&group_id=9957
+
+
+From admin at berlios.de  Fri Jun 11 08:35:05 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Thu, 10 Jun 2010 22:35:05 -0800 (AKDT)
+Subject: [Crrcsim-devel] [Bug #17237] Wrong starting position when loading
+	scenery from cmdline
+Message-ID: <201006110635.o5B6Z5GD027609@unicorn.berlios.de>
+
+Bug #17237, was updated on 2010-Jun-10 08:06
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: jreucker
+Assigned to : lienardj
+Summary: Wrong starting position when loading scenery from cmdline
+
+Details: When loading a scenery file from the command line (-l option), the starting position for the model is not set correctly.
+
+Example to reproduce the bug:
+
+./crrcsim -l scenery/davis-orig.xml models/gap65.xml
+<exit and save>
+./crrcsim -l scenery/cape_cod-orig.xml
+
+The plane will now start far below ground (and therefore crash immediately).
+
+Side note: loading a new plane at this point will not reset the simulation. AFAIK this has always been different in previous versions? Now it takes a manual simulation reset to launch the plane.
+
+CRRCsim 0.9.11, Linux
+
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=17237&group_id=9957
+
+
+From admin at berlios.de  Fri Jun 11 09:05:43 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Thu, 10 Jun 2010 23:05:43 -0800 (AKDT)
+Subject: [Crrcsim-devel] [Bug #17239] Starting position on slope
+Message-ID: <201006110705.o5B75hBa003188@unicorn.berlios.de>
+
+Bug #17239, was updated on 2010-Jun-10 23:05
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: lienardj
+Assigned to : none
+Summary: Starting position on slope
+
+Details: The plane crash immediately if the departure is asked at altitude 0 on a sloping ground  It is necessary to put the plane at the same time as the slope!
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=17239&group_id=9957
+
+
+From admin at berlios.de  Fri Jun 11 09:06:20 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Thu, 10 Jun 2010 23:06:20 -0800 (AKDT)
+Subject: [Crrcsim-devel] [Bug #17239] Starting position on slope
+Message-ID: <201006110706.o5B76KSa003693@unicorn.berlios.de>
+
+Bug #17239, was updated on 2010-Jun-10 23:05
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: lienardj
+Assigned to : lienardj
+Summary: Starting position on slope
+
+Details: The plane crash immediately if the departure is asked at altitude 0 on a sloping ground  It is necessary to put the plane at the same time as the slope!
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=17239&group_id=9957
+
+
+From joel.lienard at free.fr  Fri Jun 11 09:39:51 2010
+From: joel.lienard at free.fr (=?ISO-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Fri, 11 Jun 2010 09:39:51 +0200
+Subject: [Crrcsim-devel] [Bug #17237] Wrong starting position when loading
+ scenery from cmdline
+In-Reply-To: <201006101606.o5AG6H57024063@unicorn.berlios.de>
+References: <201006101606.o5AG6H57024063@unicorn.berlios.de>
+Message-ID: <1276241991.4456.22.camel@joel-portable>
+
+Hello Jan,
+
+
+I am not certain that the problem comes from the load from cmdline.
+
+I did not reproduce the case "start FAR below ground". I only noticed
+the problem of the sloping position (see bug 17239) : A part of the
+plane is slightly under the ground.
+
+The difference which I saw for the cmdline load concerns the plane : in
+mode GUI, the option "Load launch default" is marked by default; on
+cmdline  it is not made.
+
+
+Jo?l
+
+
+
+From admin at berlios.de  Sat Jun 12 12:32:00 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Sat, 12 Jun 2010 12:32:00 +0200 (CEST)
+Subject: [Crrcsim-devel] [Bug #17237] Wrong starting position when loading
+	scenery from cmdline
+Message-ID: <201006121032.o5CAW0h5017394@unicorn.berlios.de>
+
+Bug #17237, was updated on 2010-Jun-10 18:06
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: jreucker
+Assigned to : lienardj
+Summary: Wrong starting position when loading scenery from cmdline
+
+Details: When loading a scenery file from the command line (-l option), the starting position for the model is not set correctly.
+
+Example to reproduce the bug:
+
+./crrcsim -l scenery/davis-orig.xml models/gap65.xml
+<exit and save>
+./crrcsim -l scenery/cape_cod-orig.xml
+
+The plane will now start far below ground (and therefore crash immediately).
+
+Side note: loading a new plane at this point will not reset the simulation. AFAIK this has always been different in previous versions? Now it takes a manual simulation reset to launch the plane.
+
+CRRCsim 0.9.11, Linux
+
+
+Follow-Ups:
+
+Date: 2010-Jun-12 12:31
+By: jreucker
+
+Comment:
+Another try to get reproducable results:
+
+Start with a fresh config:
+crrcsim -g test.xml models/gap65.xml
+
+In CRRCsim: Options -> Launch -> Load preset -> Gap65 default (ground)
+Exit and save.
+
+crrcsim -g test.xml -l scenery/cape_cod-orig.xml
+
+Plane will now start far below ground.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=17237&group_id=9957
+
+
+From jan.reucker at web.de  Sat Jun 12 12:36:00 2010
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sat, 12 Jun 2010 12:36:00 +0200
+Subject: [Crrcsim-devel] [Bug #17237] Wrong starting position when
+ loading scenery from cmdline
+In-Reply-To: <1276241991.4456.22.camel@joel-portable>
+References: <201006101606.o5AG6H57024063@unicorn.berlios.de>
+	<1276241991.4456.22.camel@joel-portable>
+Message-ID: <20100612123600.2b73f93f@web.de>
+
+On Fri, 11 Jun 2010 09:39:51 +0200
+Jo?l Li?nard <joel.lienard at free.fr> wrote:
+
+> I am not certain that the problem comes from the load from cmdline.
+> 
+> I did not reproduce the case "start FAR below ground". I only noticed
+> the problem of the sloping position (see bug 17239) : A part of the
+> plane is slightly under the ground.
+
+Jo?l,
+
+I've added some more information to the tracker, maybe you can reproduce it
+this way.
+
+Kind regards,
+Jan R.
+
+
+From joel.lienard at free.fr  Sat Jun 12 19:52:54 2010
+From: joel.lienard at free.fr (=?ISO-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Sat, 12 Jun 2010 19:52:54 +0200
+Subject: [Crrcsim-devel] [Bug #17237] Wrong starting position when
+ loading scenery from cmdline
+In-Reply-To: <20100612123600.2b73f93f@web.de>
+References: <201006101606.o5AG6H57024063@unicorn.berlios.de>
+	<1276241991.4456.22.camel@joel-portable>
+	<20100612123600.2b73f93f@web.de>
+Message-ID: <1276365174.4077.33.camel@joel-portable>
+
+Le samedi 12 juin 2010 ? 12:36 +0200, Jan Reucker a ?crit :
+> On Fri, 11 Jun 2010 09:39:51 +0200
+> Jo?l Li?nard <joel.lienard at free.fr> wrote:
+> 
+> > I am not certain that the problem comes from the load from cmdline.
+> > 
+> > I did not reproduce the case "start FAR below ground". I only noticed
+> > the problem of the sloping position (see bug 17239) : A part of the
+> > plane is slightly under the ground.
+> 
+> Jo?l,
+> 
+> I've added some more information to the tracker, maybe you can reproduce it
+> this way.
+
+Jan,
+
+I conclusions is identical: only a part of the plane is slightly under
+the ground. We can see that only some points give the message "max_force
+exceeded".
+If we modify the start position, for example in the test.xml
+file,[rel_front="0" rel_right="20"],(or only altitude="4")everything is
+OK.
+It seems to me that if the plane breaks itself everything at the
+beginning of the simulation, view(sight) clocks at the point (0,0,0)
+what persuades that the plane is far under the ground me if it is not
+true. You can see with [altitude="-1" rel_front="0" rel_right="20"].
+
+Kind regards,
+Jo?l
+
+
+
+From jan.reucker at web.de  Sun Jun 13 08:01:08 2010
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sun, 13 Jun 2010 08:01:08 +0200
+Subject: [Crrcsim-devel] [Bug #17237] Wrong starting position when
+ loading scenery from cmdline
+In-Reply-To: <1276365174.4077.33.camel@joel-portable>
+References: <201006101606.o5AG6H57024063@unicorn.berlios.de>
+	<1276241991.4456.22.camel@joel-portable>
+	<20100612123600.2b73f93f@web.de>
+	<1276365174.4077.33.camel@joel-portable>
+Message-ID: <20100613080108.49d39c4c@web.de>
+
+On Sat, 12 Jun 2010 19:52:54 +0200
+Jo?l Li?nard <joel.lienard at free.fr> wrote:
+
+> I conclusions is identical: only a part of the plane is slightly under
+> the ground. We can see that only some points give the message "max_force
+> exceeded".
+
+Jo?l,
+
+I'm a bit puzzled that we get different results. If you exactly follow the
+procedure I described, CRRCsim should start with a fresh config file, so
+the behaviour should always be the same.
+
+If I change line 846 of crrc_main.cpp to "#if 1" and repeat the procedure,
+I can see that the plane starts at about 81 ft at Cape Cod which is 19 ft
+below the terrain.
+
+The other issue (Bug #17239) has always been like this. The planes didn't crash,
+but bounce into the air.
+
+Kind regards,
+Jan R.
+
+
+From admin at berlios.de  Sun Jun 13 08:06:10 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Sun, 13 Jun 2010 08:06:10 +0200 (CEST)
+Subject: [Crrcsim-devel] [Bug #17248] CRRCsim crashes when trying to load
+	invalid model file
+Message-ID: <201006130606.o5D66AIp003736@unicorn.berlios.de>
+
+Bug #17248, was updated on 2010-Jun-13 08:06
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 3
+Submitted by: jreucker
+Assigned to : none
+Summary: CRRCsim crashes when trying to load invalid model file
+
+Details: When specifying an invalid model file on the command line (e.g. specify a scenery file instead of a model file), CRRCsim will segfault:
+
+crrcsim scenery/cape_cod-orig.xml
+
+Output:
+
+[...]
+The file could not be loaded by any FDM.
+The following FDMs are enabled:
+  displaymode: 1
+  heli01:      1
+  larcsim:     1
+  002:         1
+They said:
+  Not CRRC_AirplaneSim_Heli01: No Attribute named type in crrcsimSceneryFile
+  Not CRRC_AirplaneSim_MCopter01: No Attribute named type in crrcsimSceneryFile
+  Not CRRC_AirplaneSim_Larcsim: No child named aero in crrcsimSceneryFile
+  Not CRRC_AirplaneSim_002: No child named aero in crrcsimSceneryFile
+CRRCAirplaneV2(xml)
+Speicherzugriffsfehler  (<-- Segmentation fault)
+
+
+This should be more robust: Either fall back to the default airplane, or at least exit cleanly without segfaulting.
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=17248&group_id=9957
+
+
+From joel.lienard at free.fr  Sun Jun 13 20:57:27 2010
+From: joel.lienard at free.fr (=?ISO-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Sun, 13 Jun 2010 20:57:27 +0200
+Subject: [Crrcsim-devel] [Bug #17237] Wrong starting position when
+ loading scenery from cmdline
+In-Reply-To: <20100613080108.49d39c4c@web.de>
+References: <201006101606.o5AG6H57024063@unicorn.berlios.de>
+	<1276241991.4456.22.camel@joel-portable>
+	<20100612123600.2b73f93f@web.de>
+	<1276365174.4077.33.camel@joel-portable>
+	<20100613080108.49d39c4c@web.de>
+Message-ID: <1276455447.4077.116.camel@joel-portable>
+
+> I'm a bit puzzled that we get different results. If you exactly follow the
+> procedure I described, CRRCsim should start with a fresh config file, so
+> the behaviour should always be the same.
+> 
+> If I change line 846 of crrc_main.cpp to "#if 1" and repeat the procedure,
+> I can see that the plane starts at about 81 ft at Cape Cod which is 19 ft
+> below the terrain.
+=> z=-81.94, not different !
+Is OK, (z negative up) Top of slope : z=-100.
+at 20ft front of pilot, 81 is correct. 
+> 
+> The other issue (Bug #17239) has always been like this. The planes didn't crash,
+> but bounce into the air.
+or crash !! 
+> 
+
+
+
+
+From jan.reucker at web.de  Sun Jun 13 22:09:40 2010
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sun, 13 Jun 2010 22:09:40 +0200
+Subject: [Crrcsim-devel] [Bug #17237] Wrong starting position when
+ loading scenery from cmdline
+In-Reply-To: <1276455447.4077.116.camel@joel-portable>
+References: <201006101606.o5AG6H57024063@unicorn.berlios.de>
+	<1276241991.4456.22.camel@joel-portable>
+	<20100612123600.2b73f93f@web.de>
+	<1276365174.4077.33.camel@joel-portable>
+	<20100613080108.49d39c4c@web.de>
+	<1276455447.4077.116.camel@joel-portable>
+Message-ID: <20100613220940.5632948c@web.de>
+
+On Sun, 13 Jun 2010 20:57:27 +0200
+Jo?l Li?nard <joel.lienard at free.fr> wrote:
+
+> at 20ft front of pilot, 81 is correct. 
+
+Ah, ok, I didn't take into account that the plane starts so far in front of the
+pilot. That explains the strange starting altitude.
+
+So, should we close this issue?
+
+Kind regards,
+Jan R.
+
+
+From joel.lienard at free.fr  Mon Jun 14 15:03:16 2010
+From: joel.lienard at free.fr (=?ISO-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Mon, 14 Jun 2010 15:03:16 +0200
+Subject: [Crrcsim-devel] [Bug #17237] Wrong starting position when loading
+ scenery from cmdline
+In-Reply-To: <20100613220940.5632948c@web.de>
+References: <201006101606.o5AG6H57024063@unicorn.berlios.de>
+	<1276241991.4456.22.camel@joel-portable>
+	<20100612123600.2b73f93f@web.de>
+	<1276365174.4077.33.camel@joel-portable>
+	<20100613080108.49d39c4c@web.de>
+	<1276455447.4077.116.camel@joel-portable>
+	<20100613220940.5632948c@web.de>
+Message-ID: <1276520596.4077.132.camel@joel-portable>
+
+
+> Ah, ok, I didn't take into account that the plane starts so far in front of the
+> pilot. That explains the strange starting altitude.
+> 
+> So, should we close this issue?
+> 
+Yes !
+
+I brought a correction to the bug #17239 (Starting position on slope).
+It is not completed but it is better a lot.
+If it is OK, I also close this one.
+
+Note: I added a parameter (angle Phi) to "initAirplaneState()". The
+consequence is that many files are modified.
+
+Kind regards,
+
+Jo?l
+
+
+
+From admin at berlios.de  Mon Jun 14 15:07:11 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Mon, 14 Jun 2010 05:07:11 -0800 (AKDT)
+Subject: [Crrcsim-devel] [Bug #17237] Wrong starting position when loading
+	scenery from cmdline
+Message-ID: <201006141307.o5ED7BvR029854@unicorn.berlios.de>
+
+Bug #17237, was updated on 2010-Jun-10 08:06
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Closed
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: jreucker
+Assigned to : lienardj
+Summary: Wrong starting position when loading scenery from cmdline
+
+Details: When loading a scenery file from the command line (-l option), the starting position for the model is not set correctly.
+
+Example to reproduce the bug:
+
+./crrcsim -l scenery/davis-orig.xml models/gap65.xml
+<exit and save>
+./crrcsim -l scenery/cape_cod-orig.xml
+
+The plane will now start far below ground (and therefore crash immediately).
+
+Side note: loading a new plane at this point will not reset the simulation. AFAIK this has always been different in previous versions? Now it takes a manual simulation reset to launch the plane.
+
+CRRCsim 0.9.11, Linux
+
+
+Follow-Ups:
+
+Date: 2010-Jun-14 05:07
+By: lienardj
+
+Comment:
+action reported on [Bug #17239] Starting position on slope
+-------------------------------------------------------
+
+Date: 2010-Jun-12 02:31
+By: jreucker
+
+Comment:
+Another try to get reproducable results:
+
+Start with a fresh config:
+crrcsim -g test.xml models/gap65.xml
+
+In CRRCsim: Options -> Launch -> Load preset -> Gap65 default (ground)
+Exit and save.
+
+crrcsim -g test.xml -l scenery/cape_cod-orig.xml
+
+Plane will now start far below ground.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=17237&group_id=9957
+
+
+From admin at berlios.de  Mon Jun 21 00:57:20 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Sun, 20 Jun 2010 14:57:20 -0800 (AKDT)
+Subject: [Crrcsim-devel] [Bug #17282] Current version  CGAL error
+Message-ID: <201006202257.o5KMvKju017974@unicorn.berlios.de>
+
+Bug #17282, was updated on 2010-Jun-20 14:57
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: cozcoz
+Assigned to : none
+Summary: Current version  CGAL error
+
+Details: hello,
+  I compiled  crrcsim onto linux  with no errors or problems and crrcsim runs very well...however i also install 2 of the extra sceneries;
+
+Alpe de Valbonnais 
+Bri? 
+
+Alpe de Valbonnais works very well however    Brie gives this error when tryinig to load
+
+Caught exception: CGAL ERROR: precondition violation!
+Expr: dimension() == 3
+File: /usr/include/CGAL/Triangulation_3.h
+Line: 416
+
+could you help in correcting this issue??
+
+coz
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=17282&group_id=9957
+
+
+From admin at berlios.de  Thu Jun 24 13:49:34 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Thu, 24 Jun 2010 03:49:34 -0800 (AKDT)
+Subject: [Crrcsim-devel] [Bug #17282] Current version  CGAL error
+Message-ID: <201006241149.o5OBnYlR004863@unicorn.berlios.de>
+
+Bug #17282, was updated on 2010-Jun-20 14:57
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: cozcoz
+Assigned to : lienardj
+Summary: Current version  CGAL error
+
+Details: hello,
+  I compiled  crrcsim onto linux  with no errors or problems and crrcsim runs very well...however i also install 2 of the extra sceneries;
+
+Alpe de Valbonnais 
+Bri? 
+
+Alpe de Valbonnais works very well however    Brie gives this error when tryinig to load
+
+Caught exception: CGAL ERROR: precondition violation!
+Expr: dimension() == 3
+File: /usr/include/CGAL/Triangulation_3.h
+Line: 416
+
+could you help in correcting this issue??
+
+coz
+
+Follow-Ups:
+
+Date: 2010-Jun-24 03:49
+By: lienardj
+
+Comment:
+The version 3.3.1  of CGAL is sufficient and
+does not give error.
+
+In the meantime, you can probably use the scenery Brie by renaming the
+file "scenery/Brie_files/wind.data". The lift-generator integrated into
+CRRCSIM will then be used.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=17282&group_id=9957
+
+

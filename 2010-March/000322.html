@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] record/demo/shadow comments?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-March/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20record/demo/shadow%20comments%3F&In-Reply-To=%3C20100328171153.GA24818%40knusper%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000319.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] record/demo/shadow comments?</H1>
+    <B>Jens Wilhelm Wulf</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20record/demo/shadow%20comments%3F&In-Reply-To=%3C20100328171153.GA24818%40knusper%3E"
+       TITLE="[Crrcsim-devel] record/demo/shadow comments?">jens_w2 at gmx.net
+       </A><BR>
+    <I>Sun Mar 28 19:11:53 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000319.html">[Crrcsim-devel] record/demo/shadow comments?
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#322">[ date ]</a>
+              <a href="thread.html#322">[ thread ]</a>
+              <a href="subject.html#322">[ subject ]</a>
+              <a href="author.html#322">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> The other error stays: error XML after several reset in mode &quot; shadow &quot;.
+</I>&gt;<i> It is maybe that the automatic recording is made on the file in the
+</I>&gt;<i> course of reading.( See also my suggestion on the names of files at the
+</I>&gt;<i> end of this message)
+</I>I see -- you used one of the recordXXXX.crrclog files to playback as a
+shadow? Actually, this will fail, yes. 
+
+Maybe it would be better to hide those automatic files from the user, so he
+won't get confused by files he has not created/saved. So saving previous
+runs might be for power users.
+
+&gt;<i> &gt; &gt; *If we replay a flight in mode &quot;demo, replacing to use&quot; the command
+</I>&gt;<i> &gt; &gt; &quot;Remove all robots&quot; is ineffective.
+</I>&gt;<i> &gt; Yes, indeed. You have to load an airplane to regain user input. It would be
+</I>&gt;<i> &gt; possible to change this, but robot and demo are different things, so I
+</I>&gt;<i> &gt; wouldn't want to mix them here...
+</I>&gt;<i> To oblige to change plane to leave the demo mode did not adorn me
+</I>&gt;<i> acceptable. We cannot add a command &quot;Stop the demo mode&quot; ?
+</I>Yes, would be possible, but means additional work/complexity. I'd rather add
+a helpful comment to the load dialog.
+
+
+&gt;<i> I had not well understood how worked the &quot;Save Flight Log As&quot; command.
+</I>&gt;<i> I am not on that it is the most practical. It is not before but after
+</I>&gt;<i> the run which the player will want to save.
+</I>It is not before, you are right. One wants to save a flight as soon as one
+recognizes that a flight is worth saving -- which will surely happen
+during this flight. This is how it works now: once you recognize it is worth
+saving, you give it a name and a comment (both of which can be changed as
+long as the flight is not over yet) and just go on. You don't have to
+remember to save it when it's over.
+
+&gt;<i> And without having to leave the simulator to look where are logfiles and
+</I>&gt;<i> which is the last one!
+</I>Indeed, seems you didn't understand how it works.
+
+
+&gt;<i> Thus, I suggest to modify the &quot;Save Flight Log As&quot; command so that it
+</I>&gt;<i> rename the last automatic recording. It would be more in compliance with
+</I>&gt;<i> the functioning of most of the software: one work and we save then. 
+</I>I disagree. When I start working on a file, I'll save it for the first time
+WHILE working on it. Your proposal is like working on file A, closing file A
+without saving, start working on file B, and then giving a name to file A.
+I'm glad computer programs don't work like this. 
+
+&gt;<i> We could add an option to choose one of the last ones.
+</I>I agree that a 'hey, me stupid idiot forgot to save the last flight, can I
+do it now?' - command might make sense. But this is only for people who are
+overly oblivious.
+
+&gt;<i> A additional suggestion would be to increment always the number of the
+</I>&gt;<i> automatic recordings (and erasing the oldest) so that the chronology is
+</I>&gt;<i> evident.
+</I>Well, no. I'll rather hide them.
+
+.....
+
+I just pushed two changesets: hiding automatic record files and more verbose
+GUI.
+
+.....
+
+Jens
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000319.html">[Crrcsim-devel] record/demo/shadow comments?
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#322">[ date ]</a>
+              <a href="thread.html#322">[ thread ]</a>
+              <a href="subject.html#322">[ subject ]</a>
+              <a href="author.html#322">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

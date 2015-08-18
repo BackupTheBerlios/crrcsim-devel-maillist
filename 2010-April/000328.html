@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] open heads, was: Windows beta package
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-April/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20open%20heads%2C%20was%3A%20Windows%20beta%20package&In-Reply-To=%3C20100416132254.GA3310%40streusel%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000327.html">
+   <LINK REL="Next"  HREF="000329.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] open heads, was: Windows beta package</H1>
+    <B>Jens Wilhelm Wulf</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20open%20heads%2C%20was%3A%20Windows%20beta%20package&In-Reply-To=%3C20100416132254.GA3310%40streusel%3E"
+       TITLE="[Crrcsim-devel] open heads, was: Windows beta package">jens_w2 at gmx.net
+       </A><BR>
+    <I>Fri Apr 16 15:22:54 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000327.html">[Crrcsim-devel] Windows beta package
+</A></li>
+        <LI>Next message: <A HREF="000329.html">[Crrcsim-devel] open heads, was: Windows beta package
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#328">[ date ]</a>
+              <a href="thread.html#328">[ thread ]</a>
+              <a href="subject.html#328">[ subject ]</a>
+              <a href="author.html#328">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Jens, I noticed that there are still two extra heads in the repo. Is there any
+</I>&gt;<i> way to get rid of them or do you want to keep them?
+</I>I usually don't think open heads to be something one should get rid off --
+as long as their number is small and they are there for a reason. Sometimes
+my intention is to document a certain test on the changeset in question
+without adding those code fragments and test results to the main branch,
+because I don't feel that these are of general interest.
+
+Do you understand what I want to achieve? Keeping some artifacts of work
+in their context without polluting the dev/main branch.
+
+I just looked at those changesets and recognized that there is something
+wrong...most probably I transplanted those changesets (because I had some
+tests and intermediate changesets) and transplanted one of them onto the
+wrong ancestor:
+  (2418b3f8c852) timing error of old code:
+should be a child of
+  (07660bd24f61) I forgot to add this file...to much clutter (not handled by
+                 hgignore)
+
+Despite this flaw, do you have a suggestion about how to save artifacts like
+these in a way you like more?
+
+With some effort (involving berlios and everyone being able to push to the
+repo) we could rearrange those heads, otherwise we could use dummy merges
+or some other append-only-operation.
+
+Best regards,
+Jens
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000327.html">[Crrcsim-devel] Windows beta package
+</A></li>
+	<LI>Next message: <A HREF="000329.html">[Crrcsim-devel] open heads, was: Windows beta package
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#328">[ date ]</a>
+              <a href="thread.html#328">[ thread ]</a>
+              <a href="subject.html#328">[ subject ]</a>
+              <a href="author.html#328">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

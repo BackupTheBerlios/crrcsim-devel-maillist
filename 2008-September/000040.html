@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] spoiler and flaps
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20spoiler%20and%20flaps&In-Reply-To=%3C20080917113121.0cc935a5.jan.reucker%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000039.html">
+   <LINK REL="Next"  HREF="000041.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] spoiler and flaps</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20spoiler%20and%20flaps&In-Reply-To=%3C20080917113121.0cc935a5.jan.reucker%40web.de%3E"
+       TITLE="[Crrcsim-devel] spoiler and flaps">jan.reucker at web.de
+       </A><BR>
+    <I>Wed Sep 17 11:31:21 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000039.html">[Crrcsim-devel] spoiler and flaps
+</A></li>
+        <LI>Next message: <A HREF="000041.html">[Crrcsim-devel] spoiler and flaps
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#40">[ date ]</a>
+              <a href="thread.html#40">[ thread ]</a>
+              <a href="subject.html#40">[ subject ]</a>
+              <a href="author.html#40">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Am Wed, 17 Sep 2008 08:17:35 +0200 schrieb Jens Wilhelm Wulf &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">jens_w2 at gmx.net</A>&gt;:
+
+&gt;<i> the current development version of CRRCSim is able to simulate spoiler and
+</I>&gt;<i> flaps now.
+</I>
+Hi Jens,
+
+great addition, many CRRCsim fans have waited for this feature.
+
+But unluckily flaps and spoiler brought back the BSOC (black screen
+of CRRCsim) for any plane other than the Skorpion. Changeset d535944cfb05
+introduced this behaviour. The Skorpion and the heli still work fine.
+Here's some output when starting up with the Gap65 model:
+
+Opening fdm logfile
+Closing fdm logfile
+Not CRRC_AirplaneSim_Heli01: No Attribute named type in CRRCSim_airplane
+Opening fdm logfile
+Closing fdm logfile
+Not CRRC_AirplaneSim_Larcsim: No item named flaps in aero
+Opening fdm logfile
+airplane: Cm_a=-1.354138   Alpha_0=0.000000  Cm_0=0.000000
+airplane: CL_a=4.788372               CL_0=0.101000
+airplane: alpha=0.000000  C_L=0.200000
+trimmedFlightVelocity = 24.3858 m/s
+
+And the log file with all logging options enabled:
+0 -20.93 0 -0.74638 nan nan nan 0 0 0 0 0 0 0 0 0 0 0 0 nan nan nan nan nan nan 
+1 nan nan nan nan nan nan 0 0 0 0 0 0 0 0 0 0 0 0 nan nan nan nan nan nan 
+2 nan nan nan nan nan nan 0 0 0 0 0 0 0 0 0 0 0 0 nan nan nan nan nan nan 
+...
+
+I guess there's some backward compatibility missing, because now fdm_larcsim
+will throw an exception on creation when no flaps or spoiler parameters are
+found. The following patch fixed things for me. Please apply it if you think
+that this is an appropriate solution.
+
+diff -r d8a77c402c5b src/mod_fdm/fdm_larcsim/fdm_larcsim.cpp
+--- a/src/mod_fdm/fdm_larcsim/fdm_larcsim.cpp	Wed Sep 17 11:01:22 2008 +0200
++++ b/src/mod_fdm/fdm_larcsim/fdm_larcsim.cpp	Wed Sep 17 11:27:38 2008 +0200
+@@ -266,12 +266,12 @@
+   Cn_dr = i-&gt;getDouble(&quot;Cn_dr&quot;);
+   Cn_da = i-&gt;getDouble(&quot;Cn_da&quot;);
+   
+-  i = xml-&gt;getChild(&quot;aero.flaps&quot;);
++  i = xml-&gt;getChild(&quot;aero.flaps&quot;, true);
+   flaps_drag = i-&gt;getDouble(&quot;drag&quot;, 0);
+   flaps_lift = i-&gt;getDouble(&quot;lift&quot;, 0);
+   flaps_off  = i-&gt;getDouble(&quot;off&quot;,  0);
+   
+-  i = xml-&gt;getChild(&quot;aero.spoiler&quot;);
++  i = xml-&gt;getChild(&quot;aero.spoiler&quot;, true);
+   spoiler_drag = i-&gt;getDouble(&quot;drag&quot;, 0);
+   spoiler_lift = i-&gt;getDouble(&quot;lift&quot;, 0);
+   
+
+
+
+I hope that I can provide a modified GUI ASAP.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: <A HREF="http://www.reucker-online.de/pgpkey.asc">http://www.reucker-online.de/pgpkey.asc</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000039.html">[Crrcsim-devel] spoiler and flaps
+</A></li>
+	<LI>Next message: <A HREF="000041.html">[Crrcsim-devel] spoiler and flaps
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#40">[ date ]</a>
+              <a href="thread.html#40">[ thread ]</a>
+              <a href="subject.html#40">[ subject ]</a>
+              <a href="author.html#40">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

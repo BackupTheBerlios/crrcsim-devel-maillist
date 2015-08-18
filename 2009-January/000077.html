@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] panorama scenery
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20panorama%20scenery&In-Reply-To=%3CE46E6C3AED1040E1A34C52A2C4B0340B%40PCdeJol%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000076.html">
+   <LINK REL="Next"  HREF="000078.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] panorama scenery</H1>
+    <B>Jo&#235;l Li&#233;nard</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20panorama%20scenery&In-Reply-To=%3CE46E6C3AED1040E1A34C52A2C4B0340B%40PCdeJol%3E"
+       TITLE="[Crrcsim-devel] panorama scenery">joel.lienard at free.fr
+       </A><BR>
+    <I>Sun Jan 11 21:56:39 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000076.html">[Crrcsim-devel] Multiple crrcsim.xml files?
+</A></li>
+        <LI>Next message: <A HREF="000078.html">[Crrcsim-devel] panorama scenery
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#77">[ date ]</a>
+              <a href="thread.html#77">[ thread ]</a>
+              <a href="subject.html#77">[ subject ]</a>
+              <a href="author.html#77">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+ 
+
+I finished the large part of the work of implementation in CRRCSIM.
+
+ 
+
+The importation of the components of wind functions. I have currently only
+values in 2 dimensions but all is envisaged in 3 dimensions.
+
+It is enough to provide a file with values of coordinates (X, Y, Z) of the
+components of wind vx, vy, vz. These values are interpolated linearly.
+
+ 
+
+I also made the importation of textures in JPEG. Plib-Ssg makes it possible
+to add functions to ssgLoadTexture by ssgAddTextureFormat.
+
+ 
+
+ Some difficulties:
+
+ 
+
+ - The importation of the wind is a little slow. The current file is
+unnecessarily large but in 3D it will be necessarily large. This slowness
+does not seem to me really awkward but it would be useful to post a window
+of waiting during the loading of scene. 
+
+ 
+
+- The components of wind are standardized values. They are multiplied by the
+speed of the wind which the user can change. On the other hand, the
+direction is fixed. The adjustment of the direction of the wind is thus
+ineffective. It would thus be necessary to provide to invalidate this
+adjustment or to replace it by the choice of discrete values (This problem
+already exists for Cape_Cod) Idea? 
+
+ 
+
+- I added the use of two new libraries: 
+
+    * libjpeg (<A HREF="http://www.ijg.org/">http://www.ijg.org/</A>) for reading JPEG
+
+    * CGAL (<A HREF="http://www.cgal.org/">http://www.cgal.org/</A>) for 3D triangulation of wind data.
+
+It will thus be necessary to update the procedure of compilation. Jan ?
+
+ 
+
+I pushed source and data file on Berlios. It will be well to remove the
+large files xxx.rgb en scnery/Brie. Jens ?
+
+ 
+
+Jo&#235;l
+
+ 
+
+ 
+
+ 
+
+ 
+
+panorama scenery
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20090111/6ea62b46/attachment.html">https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20090111/6ea62b46/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000076.html">[Crrcsim-devel] Multiple crrcsim.xml files?
+</A></li>
+	<LI>Next message: <A HREF="000078.html">[Crrcsim-devel] panorama scenery
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#77">[ date ]</a>
+              <a href="thread.html#77">[ thread ]</a>
+              <a href="subject.html#77">[ subject ]</a>
+              <a href="author.html#77">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

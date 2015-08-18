@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Hard point handling
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2008-October/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Hard%20point%20handling&In-Reply-To=%3C20081027183933.GA4394%40localhost%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000062.html">
+   <LINK REL="Next"  HREF="000064.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Hard point handling</H1>
+    <B>Jens Wilhelm Wulf</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Hard%20point%20handling&In-Reply-To=%3C20081027183933.GA4394%40localhost%3E"
+       TITLE="[Crrcsim-devel] Hard point handling">jens_w2 at gmx.net
+       </A><BR>
+    <I>Mon Oct 27 19:39:33 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000062.html">[Crrcsim-devel] Hard point handling
+</A></li>
+        <LI>Next message: <A HREF="000064.html">[Crrcsim-devel] Hard point handling
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#63">[ date ]</a>
+              <a href="thread.html#63">[ thread ]</a>
+              <a href="subject.html#63">[ subject ]</a>
+              <a href="author.html#63">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Jan,
+
+thanks for your work. Unfortunately I'm very short in time (which may last until
+mid of january from now on), but I took a quick look and tried it out.
+
+1. I get the BSoC again. Local IDs:
+   1004 bad
+   1002 ok
+   1003 ok
+   1004 ok...no, bad after some restarts..what's happening here?
+   1003 ok, even after some restarts
+   1004 first start ok, afterwards BSoC appears.
+   So ab800251e6df is the first revision causing problems. If I comment out 
+  +--------------------------------------------------------
+  |   if (animation != NULL)
+  |   {
+  |     animation-&gt;transformPoint(v_P_wheel_cg_body);
+  |   }
+  +--------------------------------------------------------
+   in gear.cpp, everything is fine.
+   
+2. mod_fdm does depend on crrc_animation.* now, which in turn depends on ssg
+   stuff and so on. Previously it has been possible to put together a
+   'headless' simulation using
+      mod_cntrl  
+      mod_env    
+      mod_fdm
+      mod_fdm_config.h   
+      mod_math
+      mod_misc
+   and very little 'glue code'. By doing so, every feature of the FDM could
+   be tested or simply used for some simulation without GUI. Now one needs
+   to provide a stripped down version of crrc_animation.* at least, but it
+   won't provide moving hard points, unless it replicates this functionality
+   without using ssg stuff. This is not too bad, but if I had time and/or
+   worked on this simulation application again, I'd separate it, so that the
+   transformation would be part of mod_fdm (after all, 'gear' is part of
+   mod_fdm, so why shouldn't be 'moving gear'?).
+
+
+Best regards,
+Jens
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000062.html">[Crrcsim-devel] Hard point handling
+</A></li>
+	<LI>Next message: <A HREF="000064.html">[Crrcsim-devel] Hard point handling
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#63">[ date ]</a>
+              <a href="thread.html#63">[ thread ]</a>
+              <a href="subject.html#63">[ subject ]</a>
+              <a href="author.html#63">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

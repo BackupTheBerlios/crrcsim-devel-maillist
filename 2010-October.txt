@@ -1,0 +1,456 @@
+From admin at berlios.de  Sat Oct 16 11:04:29 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Sat, 16 Oct 2010 11:04:29 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3062] Patch model specific config only
+Message-ID: <201010160904.o9G94T4S016382@unicorn.berlios.de>
+
+Patch #3062 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: dl6lr
+Assigned to : jreucker
+Summary: Patch model specific config only
+
+Follow-Ups:
+
+Date: 2010-Oct-16 11:04
+By: jreucker
+
+Comment:
+Finally found the time to look more into this patch. I've created an updated version with the missing initialization that caused problems in the last patch revision, and without extra tab characters (I ran selected files through astyle).
+
+I'd really like to apply this patch soon, but I'd like to give the users the opportunity to forget about a model-specific configuration. Right now there's no way to undo a click on the migration button, besides manually editing the config file.
+
+I don't think it's necessary to provide a full migration path for the model-specific config (to use it as a global config), it would be enough to simply throw the model-specific configuration away.
+
+I think I could handle this issue myself, but I'd like to know if you already tried to implement this and ran into problems, or if you think it can be implemented without any problems.
+
+Jan R.
+-------------------------------------------------------
+
+Date: 2010-Sep-26 08:39
+By: jreucker
+
+Comment:
+I tested it again and created a protocol containing all console output. I'll send it to your private email, maybe you can see what's wrong with my setup. When starting with a fresh config, CRRCsim first says that no model specific config was found. I immediately quit without doing anything, then CRRCsim tells me that a model-specific config is used for the Allegro.
+
+-------------------------------------------------------
+
+Date: 2010-Sep-23 22:11
+By: dl6lr
+
+Comment:
+Hi Jan,
+
+I cannot reproduce the problem. With step 5 my config remains global.  I fetched tip and imported my patch (which had another flaw in the diff, as the Makefile.am was incorrrectly patched with the old verboselevel files, fixed)
+-------------------------------------------------------
+
+Date: 2010-Sep-21 22:44
+By: jreucker
+
+Comment:
+Something still is weird... Try the following test:
+
+1.) start CRRCsim with a clean config: crrcsim -g test.xml
+2.) options->controls shows "Config global"
+3.) exit and save
+4.) start CRRCsim with same config: crrcsim -g test.xml
+5.) options->controls shows "Config airplane", although the configuration was never migrated.
+
+-------------------------------------------------------
+
+Date: 2010-Sep-12 21:06
+By: dl6lr
+
+Comment:
+Patch to enable model specific input configurations
+---------------------------------------------------
+
+Idea: 
+
+Model specific configuration options like mixer settings may help in handling of separate models.
+Make usage of existing classes and configuration by writing the config to a different position in the xml file.
+
+GUI:
+
+The input configuration dialog "Controls" was extended by two components.
+The first component is a text box indicating if the current configuration is model specific
+The second component is a button to enable migration of the current config to a model 
+specific section. The way back was not implemented at the moment.
+This button is greyed out if the current configuration is an airplane specific configuration.
+
+The xml file:
+
+The global configuration resides as is in the section <inputMethod /> 
+The model specific input configuration resides in a new tree named <models />
+Every model has its own section inside <models /> with the name of the model (i.e. <allegro>)
+If the model specific section is not found, the configuration falls back to the global section.
+
+How does it work?
+
+1. Beginning with the xml file from 0.9.11, crrcsim should work as before.
+2. Hitting the Migration button "--> Model" will now migrate the global input config to a specific config for the current model.
+   Save settings and check the xml file. There should be a copy of the input configuration inside the models tag.
+3. Every change in controls you do will now affect the model specific settings, not the global one.
+4. Selecting a different airplane will start over as before, beginning with the global config, as there is no specific config.
+   Migrate and save the setting if you want. Or leave the global configuration if you are fine with that.
+   Changing control settings while the global config is in effect will change the global settings.
+5. Switching between airplanes will now load each specific configuration for each airplane.
+6. If you want to write the current model specific configuration as a global config back to the file, 
+   you have to edit the xml file.
+
+Further changes:
+
+- Refactored the crrc_ctrlgen.cpp to have a simple layout scheme with easier calculation of the components
+
+Known issues:
+
+- Still in work
+- Ugly usage of global function reconfigureInputMethod in crrc_main from the dialog
+- Encapsulation of functionalities needs more work
+
+
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3062&group_id=9957
+
+
+From admin at berlios.de  Sat Oct 23 07:43:27 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Sat, 23 Oct 2010 07:43:27 +0200 (CEST)
+Subject: [Crrcsim-devel] [Bug #17248] CRRCsim crashes when trying to load
+	invalid model file
+Message-ID: <201010230543.o9N5hR8N002903@unicorn.berlios.de>
+
+Bug #17248, was updated on 2010-Jun-13 08:06
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Closed
+Resolution: Fixed
+Bug Group: None
+Priority: 3
+Submitted by: jreucker
+Assigned to : none
+Summary: CRRCsim crashes when trying to load invalid model file
+
+Details: When specifying an invalid model file on the command line (e.g. specify a scenery file instead of a model file), CRRCsim will segfault:
+
+crrcsim scenery/cape_cod-orig.xml
+
+Output:
+
+[...]
+The file could not be loaded by any FDM.
+The following FDMs are enabled:
+  displaymode: 1
+  heli01:      1
+  larcsim:     1
+  002:         1
+They said:
+  Not CRRC_AirplaneSim_Heli01: No Attribute named type in crrcsimSceneryFile
+  Not CRRC_AirplaneSim_MCopter01: No Attribute named type in crrcsimSceneryFile
+  Not CRRC_AirplaneSim_Larcsim: No child named aero in crrcsimSceneryFile
+  Not CRRC_AirplaneSim_002: No child named aero in crrcsimSceneryFile
+CRRCAirplaneV2(xml)
+Speicherzugriffsfehler  (<-- Segmentation fault)
+
+
+This should be more robust: Either fall back to the default airplane, or at least exit cleanly without segfaulting.
+
+Follow-Ups:
+
+Date: 2010-Oct-23 07:43
+By: jww
+
+Comment:
+Fixed in (90a2bb68426e) which should be part of any release after 0.9.11.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=17248&group_id=9957
+
+
+From admin at berlios.de  Sat Oct 23 07:27:04 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Sat, 23 Oct 2010 07:27:04 +0200 (CEST)
+Subject: [Crrcsim-devel] [Feature #4309] Replay tool (partially done)
+Message-ID: <201010230527.o9N5R49f009265@unicorn.berlios.de>
+
+Feature Request #4309, was updated on 2008-Sep-17 11:36
+You can respond by visiting: 
+http://developer.berlios.de/feature/?func=detailfeature&feature_id=4309&group_id=9957
+
+Category: None
+Status: Open
+Priority: 5
+Summary: Replay tool (partially done)
+
+By: jww
+Date: 2010-Apr-13 10:36
+
+Message:
+Logged In: YES 
+user_id=47273
+Browser: Mozilla/5.0 (X11; U; Linux i686; de; rv:1.9.0.19) Gecko/2010040116 Ubuntu/9.04 (jaunty) Firefox/3.0.19
+
+Record/playback/shadow mode is in CRRCSim since changeset
+454722c5b272. 
+As of today (13.04.2010), a public release including this
+feature has not 
+been made. However, you can try it out if you're willing to
+compile from
+source.
+
+Note that this does not implement all your requests.
+
+----------------------------------------------------------------------
+
+By: kuga
+Date: 2008-Sep-17 11:36
+
+Message:
+Logged In: YES 
+user_id=47873
+Browser: Mozilla/5.0 (X11; U; Linux i686; pl-PL; rv:1.8.1.3) Gecko/20070310 Iceweasel/2.0.0.3 (Debian-2.0.0.3-1)
+
+features similar to a movie player (start, stop ?,
+pause, step forward, step backward, start from a chosen
+position)
+playing one flight or a flying session
+(one flight - from launch to longer touching the ground
+- useful for gliders)
+
+taken from other simulator or movie player?
+
+----------------------------------------------------------------------
+You can respond by visiting: 
+http://developer.berlios.de/feature/?func=detailfeature&feature_id=4309&group_id=9957
+
+
+From admin at berlios.de  Mon Oct 25 22:30:25 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Mon, 25 Oct 2010 22:30:25 +0200 (CEST)
+Subject: [Crrcsim-devel] [Patch #3062] Patch model specific config only
+Message-ID: <201010252030.o9PKUP20019285@unicorn.berlios.de>
+
+Patch #3062 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: dl6lr
+Assigned to : jreucker
+Summary: Patch model specific config only
+
+Follow-Ups:
+
+Date: 2010-Oct-25 22:30
+By: jreucker
+
+Comment:
+A new problem... If a model is installed in a ".crrcsim" directory in the user's home directory (which is the recommended way to install additional models on all platforms), a slightly confusing config file structure is generated:
+
+  <models>
+    <home/jan/>
+      <crrcsim/models/hellcat>
+        <inputMethod>...
+
+In this example, the file name was /home/jan/.crrcsim/models/hellcat.xml. The cause of the problem is T_TX_Interface::getConfigPath(). It needs a more sophisticated algorithm to isolate the plain basename of the file, without any path information.
+
+Perhaps it would even be better to use something else to identify a model. At least on my PC there are sometimes several versions of the same plane, with slightly different XML files, installed in several locations. Maybe we should generate some kind of "magic" number from some key parameters to identify a specific model, or generate a CRC across the whole XML file. This would also make it independent from the install location. 
+
+And I'm not sure if a tag name like <home/jan/> is conforming to the XML specification... 
+
+What do you think?
+
+I've included another version of the patch, with some more fine-tuning (updated file headers, fixed some warnings that appeared with g++ 4.4.3 on Ubuntu 64-bit).
+
+Jan R.
+-------------------------------------------------------
+
+Date: 2010-Oct-16 11:04
+By: jreucker
+
+Comment:
+Finally found the time to look more into this patch. I've created an updated version with the missing initialization that caused problems in the last patch revision, and without extra tab characters (I ran selected files through astyle).
+
+I'd really like to apply this patch soon, but I'd like to give the users the opportunity to forget about a model-specific configuration. Right now there's no way to undo a click on the migration button, besides manually editing the config file.
+
+I don't think it's necessary to provide a full migration path for the model-specific config (to use it as a global config), it would be enough to simply throw the model-specific configuration away.
+
+I think I could handle this issue myself, but I'd like to know if you already tried to implement this and ran into problems, or if you think it can be implemented without any problems.
+
+Jan R.
+-------------------------------------------------------
+
+Date: 2010-Sep-26 08:39
+By: jreucker
+
+Comment:
+I tested it again and created a protocol containing all console output. I'll send it to your private email, maybe you can see what's wrong with my setup. When starting with a fresh config, CRRCsim first says that no model specific config was found. I immediately quit without doing anything, then CRRCsim tells me that a model-specific config is used for the Allegro.
+
+-------------------------------------------------------
+
+Date: 2010-Sep-23 22:11
+By: dl6lr
+
+Comment:
+Hi Jan,
+
+I cannot reproduce the problem. With step 5 my config remains global.  I fetched tip and imported my patch (which had another flaw in the diff, as the Makefile.am was incorrrectly patched with the old verboselevel files, fixed)
+-------------------------------------------------------
+
+Date: 2010-Sep-21 22:44
+By: jreucker
+
+Comment:
+Something still is weird... Try the following test:
+
+1.) start CRRCsim with a clean config: crrcsim -g test.xml
+2.) options->controls shows "Config global"
+3.) exit and save
+4.) start CRRCsim with same config: crrcsim -g test.xml
+5.) options->controls shows "Config airplane", although the configuration was never migrated.
+
+-------------------------------------------------------
+
+Date: 2010-Sep-12 21:06
+By: dl6lr
+
+Comment:
+Patch to enable model specific input configurations
+---------------------------------------------------
+
+Idea: 
+
+Model specific configuration options like mixer settings may help in handling of separate models.
+Make usage of existing classes and configuration by writing the config to a different position in the xml file.
+
+GUI:
+
+The input configuration dialog "Controls" was extended by two components.
+The first component is a text box indicating if the current configuration is model specific
+The second component is a button to enable migration of the current config to a model 
+specific section. The way back was not implemented at the moment.
+This button is greyed out if the current configuration is an airplane specific configuration.
+
+The xml file:
+
+The global configuration resides as is in the section <inputMethod /> 
+The model specific input configuration resides in a new tree named <models />
+Every model has its own section inside <models /> with the name of the model (i.e. <allegro>)
+If the model specific section is not found, the configuration falls back to the global section.
+
+How does it work?
+
+1. Beginning with the xml file from 0.9.11, crrcsim should work as before.
+2. Hitting the Migration button "--> Model" will now migrate the global input config to a specific config for the current model.
+   Save settings and check the xml file. There should be a copy of the input configuration inside the models tag.
+3. Every change in controls you do will now affect the model specific settings, not the global one.
+4. Selecting a different airplane will start over as before, beginning with the global config, as there is no specific config.
+   Migrate and save the setting if you want. Or leave the global configuration if you are fine with that.
+   Changing control settings while the global config is in effect will change the global settings.
+5. Switching between airplanes will now load each specific configuration for each airplane.
+6. If you want to write the current model specific configuration as a global config back to the file, 
+   you have to edit the xml file.
+
+Further changes:
+
+- Refactored the crrc_ctrlgen.cpp to have a simple layout scheme with easier calculation of the components
+
+Known issues:
+
+- Still in work
+- Ugly usage of global function reconfigureInputMethod in crrc_main from the dialog
+- Encapsulation of functionalities needs more work
+
+
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3062&group_id=9957
+
+
+From jens_w2 at gmx.net  Tue Oct 26 19:59:38 2010
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Tue, 26 Oct 2010 19:59:38 +0200
+Subject: [Crrcsim-devel] Joystick interface debugging
+Message-ID: <20101026175938.GB6068@knusper>
+
+Hi,
+
+there is someone with transmitter (joystick-interface)-problems, see
+http://forum.mikrokopter.de/topic-post249192.html#post249192 :
+
+Control values are not in the range -0.5 .. 0.5 but -0.6 .. 0.4 on one
+channel, another one behaves with offset or nonlinearity, too.
+
+Before I jump into the code: does someone have an idea what may cause this?
+Is there debug code or some documentation regarding this? In case there is
+nothing like that, I'll add it and ask the person to test it (chances are
+good that he's able to compile and test on linux, but this is not sure yet).
+
+Best regards,
+Jens
+
+
+From jan.reucker at web.de  Tue Oct 26 22:20:27 2010
+From: jan.reucker at web.de (Jan Reucker)
+Date: Tue, 26 Oct 2010 22:20:27 +0200
+Subject: [Crrcsim-devel] Joystick interface debugging
+In-Reply-To: <20101026175938.GB6068@knusper>
+References: <20101026175938.GB6068@knusper>
+Message-ID: <20101026222027.597800d1@web.de>
+
+On Tue, 26 Oct 2010 19:59:38 +0200
+Jens Wilhelm Wulf <jens_w2 at gmx.net> wrote:
+
+> Control values are not in the range -0.5 .. 0.5 but -0.6 .. 0.4 on one
+> channel, another one behaves with offset or nonlinearity, too.
+> 
+> Before I jump into the code: does someone have an idea what may cause this?
+> Is there debug code or some documentation regarding this? In case there is
+> nothing like that, I'll add it and ask the person to test it (chances are
+> good that he's able to compile and test on linux, but this is not sure yet).
+
+Hi Jens,
+
+no, I didn't experience anything like this yet. And I don't know what's so 
+special about the joystick interface to make it behave different after
+calibration.
+
+Happy bug-hunting ;-)
+
+Jan R.
+
+
+From jens_w2 at gmx.net  Wed Oct 27 17:22:42 2010
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Wed, 27 Oct 2010 17:22:42 +0200
+Subject: [Crrcsim-devel] Joystick interface debugging
+In-Reply-To: <20101026222027.597800d1@web.de>
+References: <20101026175938.GB6068@knusper> <20101026222027.597800d1@web.de>
+Message-ID: <20101027152242.GA5947@knusper>
+
+Hi Jan,
+
+> no, I didn't experience anything like this yet. And I don't know what's so 
+> special about the joystick interface to make it behave different after
+> calibration.
+> Happy bug-hunting ;-)
+well...and I don't know that interface at all, plus I don't own a joystick or
+joystick interface. However, I'll start hunting...
+
+Best regards,
+Jens
+
+

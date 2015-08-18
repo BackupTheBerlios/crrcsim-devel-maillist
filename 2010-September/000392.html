@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Dereferencing a type-punned pointer
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-September/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Dereferencing%20a%20type-punned%20pointer&In-Reply-To=%3C20100913222124.0dd7ac87%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000391.html">
+   <LINK REL="Next"  HREF="000396.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Dereferencing a type-punned pointer</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Dereferencing%20a%20type-punned%20pointer&In-Reply-To=%3C20100913222124.0dd7ac87%40web.de%3E"
+       TITLE="[Crrcsim-devel] Dereferencing a type-punned pointer">jan.reucker at web.de
+       </A><BR>
+    <I>Mon Sep 13 22:21:24 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000391.html">[Crrcsim-devel] [Patch #3063] Verbosity level configuration only
+</A></li>
+        <LI>Next message: <A HREF="000396.html">[Crrcsim-devel] Dereferencing a type-punned pointer
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#392">[ date ]</a>
+              <a href="thread.html#392">[ thread ]</a>
+              <a href="subject.html#392">[ subject ]</a>
+              <a href="author.html#392">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+I'm currently getting lots of complaints about dereferencing a type-punned pointer
+when compiling files that include fdm_inputs.h:
+
+../src/mod_fdm/fdm_inputs.h: In Elementfunktion &#187;int TSimInputs::getRandNum() const&#171;:
+../src/mod_fdm/fdm_inputs.h:112:35: Warnung: Dereferenzierung eines Type-Pun-Zeigers verletzt strict-aliasing-Regeln
+../src/mod_fdm/fdm_inputs.h:113:35: Warnung: Dereferenzierung eines Type-Pun-Zeigers verletzt strict-aliasing-Regeln
+../src/mod_fdm/fdm_inputs.h:114:37: Warnung: Dereferenzierung eines Type-Pun-Zeigers verletzt strict-aliasing-Regeln
+../src/mod_fdm/fdm_inputs.h:115:37: Warnung: Dereferenzierung eines Type-Pun-Zeigers verletzt strict-aliasing-Regeln
+../src/mod_fdm/fdm_inputs.h:116:33: Warnung: Dereferenzierung eines Type-Pun-Zeigers verletzt strict-aliasing-Regeln
+../src/mod_fdm/fdm_inputs.h:117:36: Warnung: Dereferenzierung eines Type-Pun-Zeigers verletzt strict-aliasing-Regeln
+../src/mod_fdm/fdm_inputs.h:118:36: Warnung: Dereferenzierung eines Type-Pun-Zeigers verletzt strict-aliasing-Regeln
+../src/mod_fdm/fdm_inputs.h:119:34: Warnung: Dereferenzierung eines Type-Pun-Zeigers verletzt strict-aliasing-Regeln
+
+I assume that -fno-strict-alias would cure the symptoms, but fixing the
+real &quot;problem&quot; might be a better approach. This is the source code:
+
+     tmp = *(int*)(void*)(&amp;aileron);
+     tmp ^= *(int*)(void*)(&amp;rudder);
+     tmp ^= *(int*)(void*)(&amp;elevator);
+     ...
+
+The double-cast via void* is usually accepted by most static code analyzation
+tools as a way to express &quot;yes, I really know what I'm doing here and I don't
+want you to complain about it&quot;. But gcc 4.5.1 nevertheless throws the
+warnings.
+
+Does anyone have an idea how to fix it?
+
+Kind regards,
+Jan R.
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000391.html">[Crrcsim-devel] [Patch #3063] Verbosity level configuration only
+</A></li>
+	<LI>Next message: <A HREF="000396.html">[Crrcsim-devel] Dereferencing a type-punned pointer
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#392">[ date ]</a>
+              <a href="thread.html#392">[ thread ]</a>
+              <a href="subject.html#392">[ subject ]</a>
+              <a href="author.html#392">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] [Bug #18218] dead zone with E-sky USB interface
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2011-August/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BBug%20%2318218%5D%20dead%20zone%20with%20E-sky%20USB%20interface&In-Reply-To=%3C201108031757.p73HvwZf027354%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000430.html">
+   <LINK REL="Next"  HREF="000432.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] [Bug #18218] dead zone with E-sky USB interface</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BBug%20%2318218%5D%20dead%20zone%20with%20E-sky%20USB%20interface&In-Reply-To=%3C201108031757.p73HvwZf027354%40unicorn.berlios.de%3E"
+       TITLE="[Crrcsim-devel] [Bug #18218] dead zone with E-sky USB interface">admin at berlios.de
+       </A><BR>
+    <I>Wed Aug  3 19:57:58 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000430.html">[Crrcsim-devel] [Bug #18100] Geodetic latitude calculation has	numerical instability
+</A></li>
+        <LI>Next message: <A HREF="000432.html">[Crrcsim-devel] ComboBox background colour
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#431">[ date ]</a>
+              <a href="thread.html#431">[ thread ]</a>
+              <a href="subject.html#431">[ subject ]</a>
+              <a href="author.html#431">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bug #18218, was updated on 2011-Jul-08 22:11
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: df2qy
+Assigned to : none
+Summary: dead zone with E-sky USB interface
+
+Details: As reported here: <A HREF="http://crrcsim.berlios.de/wiki/index.php?n=CRRCsim.IFJoyStick">http://crrcsim.berlios.de/wiki/index.php?n=CRRCsim.IFJoyStick</A>
+there is a dead zone with the E-sky USB interface in CRRCsim. I can confirm this behavior, but it is not there when I use the same hardware with FMS running in VirtualBox on the same machine with Windows XP. Therefore it has to be a bug in either CRRCsim or the linux driver for the interface cable. Also the dead zone is not at center position but only in one direction between 50% and about 75%. I assume that this is also the cause for the different scaling for positive and negative input.
+
+Tested with current source code from repository on ubuntu 11.04 64bit.
+
+Follow-Ups:
+
+Date: 2011-Aug-03 19:57
+By: jww
+
+Comment:
+Please take a look at
+
+  <A HREF="http://superuser.com/questions/17959/linux-joystick-seems-mis-calibrated-in-an-sdl-game-freespace-2-open">http://superuser.com/questions/17959/linux-joystick-seems-mis-calibrated-in-an-sdl-game-freespace-2-open</A>
+  <A HREF="https://bugs.launchpad.net/ubuntu/+source/libsdl1.2/+bug/410187">https://bugs.launchpad.net/ubuntu/+source/libsdl1.2/+bug/410187</A>
+
+Maybe this
+
+  Set SDL_JOYSTICK_DEVICE=/dev/input/js0 (a user can put this in
+  /etc/environment and reboot to apply it everywhere).
+
+helps for your case, too? In case you are able to recompile SDL, the
+links above do mention other possible solutions.
+
+-------------------------------------------------------
+
+For detailed info, follow this link:
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=18218&amp;group_id=9957">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=18218&amp;group_id=9957</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000430.html">[Crrcsim-devel] [Bug #18100] Geodetic latitude calculation has	numerical instability
+</A></li>
+	<LI>Next message: <A HREF="000432.html">[Crrcsim-devel] ComboBox background colour
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#431">[ date ]</a>
+              <a href="thread.html#431">[ thread ]</a>
+              <a href="subject.html#431">[ subject ]</a>
+              <a href="author.html#431">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

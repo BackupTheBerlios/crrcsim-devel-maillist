@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] win32 build
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-March/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20win32%20build&In-Reply-To=%3C20090326223120.7b5d25cf.jan.reucker%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000195.html">
+   <LINK REL="Next"  HREF="000197.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] win32 build</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20win32%20build&In-Reply-To=%3C20090326223120.7b5d25cf.jan.reucker%40web.de%3E"
+       TITLE="[Crrcsim-devel] win32 build">jan.reucker at web.de
+       </A><BR>
+    <I>Thu Mar 26 22:31:20 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000195.html">[Crrcsim-devel] win32 build
+</A></li>
+        <LI>Next message: <A HREF="000197.html">[Crrcsim-devel] win32 build
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#196">[ date ]</a>
+              <a href="thread.html#196">[ thread ]</a>
+              <a href="subject.html#196">[ subject ]</a>
+              <a href="author.html#196">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Am Thu, 26 Mar 2009 13:38:23 +0100 schrieb Jens Wilhelm Wulf &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">jens_w2 at gmx.net</A>&gt;:
+
+Hi Jens,
+
+glad to hear that my instructions worked for you.
+
+&gt;<i> 1. c689e929683b (or some revision later? Don't know for sure) did not run on
+</I>&gt;<i>    win32, but stopped without an error message.
+</I>
+I can't reproduce that. Builds and runs, just like the current tip. But: I
+noticed a strange problem with airplane config files. CRRCsim fails to load
+the configured airplane and falls back to the Allegro. Then I can load a new
+airplane through the GUI. Saving the config and restarting CRRCsim ends up
+with the same result: Allegro instead of the saved airplane. Pressing 'c'
+(in the tip version) results in &quot;Reloading config: error&quot;. Specifying an
+airplane on the command line will always load the Allegro.
+
+First I thought that your changes might have caused that, but c689e929683b
+already shows this behaviour, while the 0.9.10 build from my installer does
+not. At first glance nothing in between 0.9.10 and c689... could cause such
+a behaviour, so maybe something in my build environment or my local repository
+has gone wrong. I hope that I can find the problem this weekend.
+
+&gt;<i>    btw, do you know the transplant extension? It is powerful and easy to
+</I>&gt;<i>    use...
+</I>
+I read about it but never used it yet.
+
+&gt;<i> 2. 'make win32package' did not work (didn't find sdl.dll). I copied that into
+</I>&gt;<i>    the CRRCSim top level dir and everything was fine. Did I miss something?
+</I>&gt;<i>    Should this be added to the instructions?
+</I>
+Yes, that should be added to the instructions. I always forget it myself.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: <A HREF="http://www.reucker-online.de/pgpkey.asc">http://www.reucker-online.de/pgpkey.asc</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000195.html">[Crrcsim-devel] win32 build
+</A></li>
+	<LI>Next message: <A HREF="000197.html">[Crrcsim-devel] win32 build
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#196">[ date ]</a>
+              <a href="thread.html#196">[ thread ]</a>
+              <a href="subject.html#196">[ subject ]</a>
+              <a href="author.html#196">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

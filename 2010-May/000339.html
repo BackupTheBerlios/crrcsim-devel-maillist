@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Problems with the shadow of the aeroplane.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Problems%20with%20the%20shadow%20of%20the%20aeroplane.&In-Reply-To=%3C20100506151739.GA4097%40knusper%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000338.html">
+   <LINK REL="Next"  HREF="000341.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Problems with the shadow of the aeroplane.</H1>
+    <B>Jens Wilhelm Wulf</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Problems%20with%20the%20shadow%20of%20the%20aeroplane.&In-Reply-To=%3C20100506151739.GA4097%40knusper%3E"
+       TITLE="[Crrcsim-devel] Problems with the shadow of the aeroplane.">jens_w2 at gmx.net
+       </A><BR>
+    <I>Thu May  6 17:17:39 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000338.html">[Crrcsim-devel] Problems with the shadow of the aeroplane.
+</A></li>
+        <LI>Next message: <A HREF="000341.html">[Crrcsim-devel] Problems with the shadow of the aeroplane.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#339">[ date ]</a>
+              <a href="thread.html#339">[ thread ]</a>
+              <a href="subject.html#339">[ subject ]</a>
+              <a href="author.html#339">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> 1. The shadow flashes in certain cases. It seems that the cause is that
+</I>&gt;<i> it is exactly drawn at the height of the ground and that, as a result of
+</I>&gt;<i> calculation errors, she can be above or below. A solution is to put a
+</I>&gt;<i> very light vertical offset to be certain to be above. There is, in
+</I>&gt;<i> &quot;airplane_vis.cpp&quot; a commented line &quot;//jwtodoshadow  m[3][1] += 0.1;&quot;
+</I>&gt;<i> which makes it. Is there a reason not to validate it (with a smaller
+</I>&gt;<i> offset)?
+</I>This line of code was active until I commented it in
+
+  (29fea54a6c98) *Coordinates in 3D file and wheels do not have to be relative to CG anymore
+  2006-03-09 19:29:13
+
+...so this was long ago. Obviously I had not been sure about this change,
+but it did fix some behaviour for me and nobody objected to it. I don't
+recall more detailed circumstances...
+  
+Maybe this flashing only happens with model-based sceneries?
+
+Best regards,
+Jens
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000338.html">[Crrcsim-devel] Problems with the shadow of the aeroplane.
+</A></li>
+	<LI>Next message: <A HREF="000341.html">[Crrcsim-devel] Problems with the shadow of the aeroplane.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#339">[ date ]</a>
+              <a href="thread.html#339">[ thread ]</a>
+              <a href="subject.html#339">[ subject ]</a>
+              <a href="author.html#339">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

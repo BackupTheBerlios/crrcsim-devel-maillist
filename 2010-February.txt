@@ -1,0 +1,162 @@
+From joel.lienard at laposte.net  Sat Feb 13 18:51:42 2010
+From: joel.lienard at laposte.net (=?ISO-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Sat, 13 Feb 2010 18:51:42 +0100
+Subject: [Crrcsim-devel] Simple wind calculation
+Message-ID: <1266083502.3228.89.camel@joel-portable>
+
+Hello,
+
+I began with a very simple solution for the calculation of wind from
+profile of the ground.
+
+Here is the principle: we make locally a modeling of the ground by a
+simple shape. At present a plan, then a horizontal cylinder, a  cylinder
+inclined...). That modeling is made from some points of terrain (2...5).
+The distance from these measurement points  of the terrain is all the
+bigger as the height is big. It makes a kind of smoothing when we rise.
+
+Physically, it is an estimate (still very unrefined) of a flow of a
+perfect fluid : the flux of air stick on the ground. No turbulence,
+obviously. Simulation (for dynamic soaring) of the back-side of a slope
+as that of Brie will be very far from the reality.
+But it is better that nothing. And at least so just as the current model
+of Cape Cod.
+It makes possible the flight on Cape "model based" and on Bri? without
+using of wind datafile. And it is possible to make vary the direction of
+wind.
+A suggestion to Jan: in simple scenery, move closer to the hill of the
+runway. It would allow to make it slope-soaring!
+
+Note : For my tests, I added a utility for drawing the profiles of
+ground and wind. To validate it, add "-Dviewwind" to the compilation.
+Cela ajoute un ?lement dans le menu
+
+Jo?l
+
+ 
+
+
+
+From joel.lienard at laposte.net  Sat Feb 13 19:14:05 2010
+From: joel.lienard at laposte.net (=?ISO-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Sat, 13 Feb 2010 19:14:05 +0100
+Subject: [Crrcsim-devel] coherence convention for Z
+Message-ID: <1266084845.3228.106.camel@joel-portable>
+
+I noticed an incoherence between the parameters of the functions
+"getHeight" and "getWindComponents".
+GetHeight returns a positive value pour up
+getWindComponents uses Z  positive value for down
+
+Which solution prefer you: 
+- we leave as it but we inform well (documentation, comments).
+- we use the intern convention : positive-down
+- we use the convention of the scenery descriptions : positive-up.
+
+
+
+From jan.reucker at web.de  Mon Feb 15 22:53:27 2010
+From: jan.reucker at web.de (Jan Reucker)
+Date: Mon, 15 Feb 2010 22:53:27 +0100
+Subject: [Crrcsim-devel] coherence convention for Z
+In-Reply-To: <1266084845.3228.106.camel@joel-portable>
+References: <1266084845.3228.106.camel@joel-portable>
+Message-ID: <20100215225327.2fc3687b@web.de>
+
+On Sat, 13 Feb 2010 19:14:05 +0100
+Jo?l Li?nard <joel.lienard at laposte.net> wrote:
+
+> I noticed an incoherence between the parameters of the functions
+> "getHeight" and "getWindComponents".
+> GetHeight returns a positive value pour up
+> getWindComponents uses Z  positive value for down
+
+Hi Jo?l,
+
+thanks for implementing the wind simulation, finally we have at least some
+kind of lift in model based sceneries. I guess that's a good starting point
+for more detailed implementations.
+
+But maybe we should take the time and think about the general design of the
+wind simulation in CRRCsim. Right now things are scattered across several
+modules:
+
+- thermal simulation in mod_windfield
+- initialization of mod_windfield in mod_main (Init_mod_windfield)
+- interface getWindComponents in mod_landscape
+- config file interface in config.cpp
+
+We should centralize all this stuff in mod_windfield. I know that I advocated
+the close coupling of wind and scenery stuff in the past, but maybe it's
+a better design if mod_windfield only uses the getHeight interface of mod_scenery
+and takes care of all the rest. mod_fdm already gets its wind information
+directly from mod_windfield.
+
+mod_windfield should offer an abstract base class defining the common interface
+for all future windfield implementations, along with methods to access the config
+file. It should avoid using any PLIB types and methods if possible, so that
+PLIB SG and SSG are only used in mod_landscape and mod_video.
+
+Then maybe all interfaces should stick to the "Z is down" convention. I think
+it's convenient to have "Z is up" externally (e.g. in the scenery files),
+but internally I don't really care if everything is well-documented.
+
+What do you think? Maybe I could start to rearrange some things during the
+next few days.
+
+Kind regards,
+Jan R.
+
+
+
+From joel.lienard at free.fr  Sun Feb 21 18:32:56 2010
+From: joel.lienard at free.fr (=?ISO-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Sun, 21 Feb 2010 18:32:56 +0100
+Subject: [Crrcsim-devel] coherence convention for Z
+In-Reply-To: <20100215225327.2fc3687b@web.de>
+References: <1266084845.3228.106.camel@joel-portable>
+	<20100215225327.2fc3687b@web.de>
+Message-ID: <1266773576.4680.50.camel@joel-portable>
+
+
+> 
+> But maybe we should take the time and think about the general design of the
+> wind simulation in CRRCsim. Right now things are scattered across several
+> modules:
+> 
+> - thermal simulation in mod_windfield
+> - initialization of mod_windfield in mod_main (Init_mod_windfield)
+> - interface getWindComponents in mod_landscape
+> - config file interface in config.cpp
+> 
+> We should centralize all this stuff in mod_windfield. I know that I advocated
+> the close coupling of wind and scenery stuff in the past, but maybe it's
+> a better design if mod_windfield only uses the getHeight interface of mod_scenery
+> and takes care of all the rest. mod_fdm already gets its wind information
+> directly from mod_windfield.
+> 
+> mod_windfield should offer an abstract base class defining the common interface
+> for all future windfield implementations, along with methods to access the config
+> file. 
+
+No objection for model based scenery. But it is going to be difficult
+for Cape-Cod if we want to leave the code of origin.
+
+> It should avoid using any PLIB types and methods if possible, so that
+> PLIB SG and SSG are only used in mod_landscape and mod_video.
+
+Why?
+I had found convenient to use functions of SG Lib in my new file. Do you
+do recommend another lib?
+
+> 
+> Then maybe all interfaces should stick to the "Z is down" convention. I think
+> it's convenient to have "Z is up" externally (e.g. in the scenery files),
+> but internally I don't really care if everything is well-documented.
+> 
+I agree
+
+
+
+
+

@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] [crrcsim] CRRCSim helicopter model
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5Bcrrcsim%5D%20CRRCSim%20helicopter%20model&In-Reply-To=%3C200809062110.31221.lemmens_kees%40yahoo.co.uk%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000013.html">
+   <LINK REL="Next"  HREF="000015.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] [crrcsim] CRRCSim helicopter model</H1>
+    <B>Kees Lemmens</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5Bcrrcsim%5D%20CRRCSim%20helicopter%20model&In-Reply-To=%3C200809062110.31221.lemmens_kees%40yahoo.co.uk%3E"
+       TITLE="[Crrcsim-devel] [crrcsim] CRRCSim helicopter model">lemmens_kees at yahoo.co.uk
+       </A><BR>
+    <I>Sat Sep  6 21:10:31 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000013.html">[Crrcsim-devel] [crrcsim] CRRCSim helicopter model
+</A></li>
+        <LI>Next message: <A HREF="000015.html">[Crrcsim-devel] Interface configuration dialog
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#10">[ date ]</a>
+              <a href="thread.html#10">[ thread ]</a>
+              <a href="subject.html#10">[ subject ]</a>
+              <a href="author.html#10">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Jens,
+
+Just gave the helicopter a try : really a nice piece of work !! I 
+increased the damping for pitch and roll to 0.6 as well and then it 
+flies quite nice with my Walkera transmitter on the serial port 
+(zhenhua) ! With the default settings however it is almost impossible 
+to fly, at least with this transmitter.
+
+2 small things :
+
+- after running make and make install the heli wasn't found anywhere 
+in the list : it turned out I had to put the model and object files 
+in the appropiate places manually. That may be very easily fixed :-)
+
+- Because the model is so simple the orientation is very difficult to 
+guess : most of the time you have no idea whether the tail points 
+towards you or is 180 deg rotated and pointing away from you. Maybe 
+add a little more texture, e.g. on one side of the body and also make 
+it a little less transparant ?
+
+Congratulations with this nice piece of work ! I am a great fan of 
+heli flying and am very happy to see that my favorite simulator can 
+now do helies as well !
+
+Bye,
+Kees Lemmens.
+
+On Friday 05 September 2008, Jens Wilhelm Wulf wrote:
+&gt;<i> Hi folks,
+</I>&gt;<i>
+</I>&gt;<i> there is something new to play with in the development version of
+</I>&gt;<i> CRRCSim!
+</I>&gt;<i>
+</I>&gt;<i> If you are able to compile from source, you can use
+</I>&gt;<i>   <A HREF="http://hg.berlios.de/repos/crrcsim/archive/tip.zip">http://hg.berlios.de/repos/crrcsim/archive/tip.zip</A>
+</I>&gt;<i>
+</I>&gt;<i> If you are experienced with model helicopters, please provide
+</I>&gt;<i> feedback and fiddle around with parameters in
+</I>&gt;<i>   models/heli.xml
+</I>&gt;<i> until it feels realistic.
+</I>&gt;<i> The model already contains different configurations; one for a
+</I>&gt;<i> fixed-pitch heli and two for a collective-pitch heli.
+</I>&gt;<i>
+</I>&gt;<i> The file format of heli.xml is mostly identical to that of the
+</I>&gt;<i> fixed wing models.
+</I>&gt;<i> If it climbs to fast/not fast enough, adjust its force F in the
+</I>&gt;<i> following context
+</I>&gt;<i>   +--------------------------------------------------------
+</I>&gt;<i>
+</I>&gt;<i>   |     &lt;power&gt;
+</I>&gt;<i>   |       &lt;automagic F=&quot;10&quot; V=&quot;1&quot;&gt;
+</I>&gt;<i>
+</I>&gt;<i>   +--------------------------------------------------------
+</I>&gt;<i> of the configuration you use.
+</I>&gt;<i>
+</I>&gt;<i> Other interesting parameters are
+</I>&gt;<i>   +--------------------------------------------------------
+</I>&gt;<i>
+</I>&gt;<i>   |     &lt;aero version=&quot;1&quot; &gt;
+</I>&gt;<i>   |       &lt;yaw   ctrl=&quot;0.6&quot;  damp=&quot;0.05&quot; dist=&quot;0.03&quot; /&gt;
+</I>&gt;<i>   |       &lt;pitch ctrl=&quot;0.15&quot; damp=&quot;0.01&quot; dist=&quot;0.03&quot; /&gt;
+</I>&gt;<i>   |       &lt;roll  ctrl=&quot;0.15&quot; damp=&quot;0.01&quot; dist=&quot;0.03&quot; /&gt;
+</I>&gt;<i>   |       &lt;cp    ctrl=&quot;1.0&quot;  off=&quot;0.55&quot; /&gt;
+</I>&gt;<i>   |       &lt;speed damp=&quot;0.05&quot; /&gt;
+</I>&gt;<i>   |     &lt;/aero&gt;
+</I>&gt;<i>
+</I>&gt;<i>   +--------------------------------------------------------
+</I>&gt;<i> 'ctrl' means control throw, 'damp' is damping (higher numbers make
+</I>&gt;<i> it easier to fly). 'dist' introduces disturbances so you get
+</I>&gt;<i> something to do ;-) 'cp' contains settings for the collective-pitch
+</I>&gt;<i> type only (control throw and offset).
+</I>&gt;<i>
+</I>&gt;<i> throttle controls climb
+</I>&gt;<i> rudder   controls yaw
+</I>&gt;<i> aileron  controls roll
+</I>&gt;<i> elevator controls pitch
+</I>&gt;<i>
+</I>&gt;<i> Taken from the changelog:
+</I>&gt;<i>   +--------------------------------------------------------
+</I>&gt;<i>
+</I>&gt;<i>   | First draft of a simple helicopter FDM and model
+</I>&gt;<i>   |
+</I>&gt;<i>   | Note how simple this is (make a visual diff between fdm_larcsim
+</I>&gt;<i>   | and fdm_heli01!) and keep in mind that...
+</I>&gt;<i>   | - it is NOT backed by physics knowledge
+</I>&gt;<i>   | - it is done by a person who has never flown a helicopter
+</I>&gt;<i>   | (apart from twenty minutes of simulation)
+</I>&gt;<i>   | - no special model for helicopter rotors has been created; the
+</I>&gt;<i>   |   fixed pitch models just use the existing propeller of the
+</I>&gt;<i>   | power system
+</I>&gt;<i>   | - ...yes, the 3D model is done by myself, simple as usual...
+</I>&gt;<i>   |
+</I>&gt;<i>   | However, comparing this to the helicopter simulation I tried
+</I>&gt;<i>   | out some years ago (for twenty minutes; I was told it was quite
+</I>&gt;<i>   | realistic) and to FMS (tried that out last night) this already
+</I>&gt;<i>   | seems better than FMS!
+</I>&gt;<i>
+</I>&gt;<i>   +--------------------------------------------------------
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Have fun,
+</I>&gt;<i> Jens
+</I>
+
+
+-- 
+With best regards,
+Kees Lemmens,
+Email : lemmens&lt;underscore&gt;kees&lt;at&gt;yahoo&lt;dot&gt;co&lt;dot&gt;uk
+----------------------------------------------------------------
+NOTICE: I consider HTML-only based email as SPAM : goes straight into
+        the trash, so send plain text if you want me to read it ;-)
+
+BTW: Ceterum Censeo Microsoftem esse Delendam
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000013.html">[Crrcsim-devel] [crrcsim] CRRCSim helicopter model
+</A></li>
+	<LI>Next message: <A HREF="000015.html">[Crrcsim-devel] Interface configuration dialog
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#10">[ date ]</a>
+              <a href="thread.html#10">[ thread ]</a>
+              <a href="subject.html#10">[ subject ]</a>
+              <a href="author.html#10">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

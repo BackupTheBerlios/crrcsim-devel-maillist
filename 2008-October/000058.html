@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Hard point handling
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2008-October/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Hard%20point%20handling&In-Reply-To=%3C20081013235003.3555d2fb.jan.reucker%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000057.html">
+   <LINK REL="Next"  HREF="000059.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Hard point handling</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Hard%20point%20handling&In-Reply-To=%3C20081013235003.3555d2fb.jan.reucker%40web.de%3E"
+       TITLE="[Crrcsim-devel] Hard point handling">jan.reucker at web.de
+       </A><BR>
+    <I>Mon Oct 13 23:50:03 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000057.html">[Crrcsim-devel] Wiki edit password
+</A></li>
+        <LI>Next message: <A HREF="000059.html">[Crrcsim-devel] Hard point handling
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#58">[ date ]</a>
+              <a href="thread.html#58">[ thread ]</a>
+              <a href="subject.html#58">[ subject ]</a>
+              <a href="author.html#58">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Am Tue, 30 Sep 2008 21:54:36 +0200 schrieb Jan Reucker &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">jan.reucker at web.de</A>&gt;:
+
+&gt;<i> So what about a class that provides a &quot;master interface&quot; to everything that
+</I>&gt;<i> is related to a single airplane? This master class can also provide the
+</I>&gt;<i> necessary coupling between the parts of an airplane (so that an animation
+</I>&gt;<i> from the CRRCAirplane part can call a method in the WheelSystem of the
+</I>&gt;<i> FDM part), but in a way that all parts only have to know the parent class,
+</I>&gt;<i> and the parent does not need to know details like PLIB data types or methods
+</I>&gt;<i> (if you want to compile the FDM without graphics).
+</I>
+Hi all,
+
+here's a more (but not too) detailed proposal for this &quot;master interface&quot;:
+
+class Aircraft
+{
+  public:
+    Aircraft()
+    : model_(NULL), fdm_(NULL)
+    {
+    }
+
+    ModFDMInterface*  getFDM() const {return fdm_;}
+    void              setFDM(ModFDMInterface *fdm)
+    {
+      if (fdm_ != NULL)
+      {
+        delete fdm_;
+      }
+      fdm_ = fdm;
+    }
+
+    CRRCAirplane*     getModel() const {return model_;}
+    void              setModel(CRRCAirplane* model)
+    {
+      if (model_ != NULL)
+      {
+        delete model_;
+      }
+      model_ = model;
+    }
+
+  private:
+    CRRCAirplane*    model_;       ///&lt; The airplane model.
+    ModFDMInterface* fdm_;         ///&lt; The fdm which is in use.
+};
+
+Global::airplane and Global::fdm are replaced by a single Global::aircraft.
+
+As I said, it doesn't contain too many details yet, and it doesn't simplify
+anything yet. It only puts model (3D, sound, ...) and physics (FDM) into
+a single compound.
+
+Missing stuff:
+
+- a constructor that can instanciate both components from a single XML file
+- pointers to &quot;Aircraft&quot; in the CRRCAirplane and ModFDMInterface classes to
+  allow any part of the compound to access &quot;Aircraft&quot; methods (or maybe
+  even methods in other parts of the compound)
+- more methods to access important stuff in the parts directly from &quot;Aircraft&quot;
+  methods (to avoid long chains like Global::aircraft-&gt;getFDM()-&gt;fdm-&gt;whatever)
+
+Is this approach o.k.? Or are there any objections / constructive criticism?
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: <A HREF="http://www.reucker-online.de/pgpkey.asc">http://www.reucker-online.de/pgpkey.asc</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000057.html">[Crrcsim-devel] Wiki edit password
+</A></li>
+	<LI>Next message: <A HREF="000059.html">[Crrcsim-devel] Hard point handling
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#58">[ date ]</a>
+              <a href="thread.html#58">[ thread ]</a>
+              <a href="subject.html#58">[ subject ]</a>
+              <a href="author.html#58">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,819 @@
+From admin at berlios.de  Tue Apr 13 11:28:21 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Tue, 13 Apr 2010 11:28:21 +0200 (SAST)
+Subject: [Crrcsim-devel] [Bug #17076] Build error when CGAL installed on
+	Ubuntu karmic
+Message-ID: <201004130928.o3D9SLkb006270@unicorn.berlios.de>
+
+Bug #17076, was updated on 2010-Apr-13 11:28
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: csindle
+Assigned to : none
+Summary: Build error when CGAL installed on Ubuntu karmic
+
+Details: Steps to reproduce:
+
+$ uname -a
+Linux denali 2.6.31-20-generic #58-Ubuntu SMP Fri Mar 12 04:38:19 UTC 2010 x86_64 GNU/Linux
+
+$ cat /etc/issue
+Ubuntu 9.10 \n \l
+
+$ aptitude show libcgal-dev 
+...
+Package: libcgal-dev
+State: installed
+Automatically installed: no
+Version: 3.4-4ubuntu1
+Priority: optional
+Section: multiverse/libdevel
+...
+
+
+$ hg clone http://hg.berlios.de/repos/crrcsim
+$ cd crrcsim
+$ ./autogen.sh
+$ ./configure 
+...
+config.status: executing depfiles commands
+
+Build options:
+
+    Mousewheel support: yes  (SDL >= 1.2.5)
+    Audio interface:    yes  (found Portaudio V18)
+    Wind data import:   yes  (found CGAL)
+
+(Above libraries are the default ones installed with aptitude)
+
+Then:
+
+$ make
+...
+g++ -DHAVE_CONFIG_H -I.    -pthread  -I/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT -frounding-math -DPU_USE_SDL -DCRRC_DATA_PATH="\"/usr/local/share/crrcsim\"" -g -O2 -Dlinux -Wall -MT crrcsim-crrc_builtin_scenery.o -MD -MP -MF .deps/crrcsim-crrc_builtin_scenery.Tpo -c -o crrcsim-crrc_builtin_scenery.o `test -f 'src/mod_landscape/crrc_builtin_scenery.cpp' || echo './'`src/mod_landscape/crrc_builtin_scenery.cpp
+mv -f .deps/crrcsim-crrc_builtin_scenery.Tpo .deps/crrcsim-crrc_builtin_scenery.Po
+g++ -DHAVE_CONFIG_H -I.    -pthread  -I/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT -frounding-math -DPU_USE_SDL -DCRRC_DATA_PATH="\"/usr/local/share/crrcsim\"" -g -O2 -Dlinux -Wall -MT crrcsim-hd_tilingterrain.o -MD -MP -MF .deps/crrcsim-hd_tilingterrain.Tpo -c -o crrcsim-hd_tilingterrain.o `test -f 'src/mod_landscape/hd_tilingterrain.cpp' || echo './'`src/mod_landscape/hd_tilingterrain.cpp
+mv -f .deps/crrcsim-hd_tilingterrain.Tpo .deps/crrcsim-hd_tilingterrain.Po
+g++ -DHAVE_CONFIG_H -I.    -pthread  -I/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT -frounding-math -DPU_USE_SDL -DCRRC_DATA_PATH="\"/usr/local/share/crrcsim\"" -g -O2 -Dlinux -Wall -MT crrcsim-model_based_scenery.o -MD -MP -MF .deps/crrcsim-model_based_scenery.Tpo -c -o crrcsim-model_based_scenery.o `test -f 'src/mod_landscape/model_based_scenery.cpp' || echo './'`src/mod_landscape/model_based_scenery.cpp
+mv -f .deps/crrcsim-model_based_scenery.Tpo .deps/crrcsim-model_based_scenery.Po
+g++ -DHAVE_CONFIG_H -I.    -pthread  -I/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT -frounding-math -DPU_USE_SDL -DCRRC_DATA_PATH="\"/usr/local/share/crrcsim\"" -g -O2 -Dlinux -Wall -MT crrcsim-winddata3D.o -MD -MP -MF .deps/crrcsim-winddata3D.Tpo -c -o crrcsim-winddata3D.o `test -f 'src/mod_landscape/winddata3D.cpp' || echo './'`src/mod_landscape/winddata3D.cpp
+src/mod_landscape/winddata3D.cpp: In member function ?int ModelBasedScenery::init_wind_data(const char*)?:
+src/mod_landscape/winddata3D.cpp:83: error: ?set_error_behaviour? is not a member of ?CGAL?
+src/mod_landscape/winddata3D.cpp:83: error: ?CONTINUE? is not a member of ?CGAL?
+make[2]: *** [crrcsim-winddata3D.o] Error 1
+
+
+
+
+
+
+If I rebuild after:
+$ aptitude purge libcgal-dev libcgal3 
+$ ./configure 
+...
+    Mousewheel support: yes  (SDL >= 1.2.5)
+    Audio interface:    yes  (found Portaudio V18)
+    Wind data import:   no   (CGAL not found)
+
+
+Then crrcsim builds fine without CGAL support.
+
+
+Thank you.
+
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=17076&group_id=9957
+
+
+From admin at berlios.de  Tue Apr 13 10:33:45 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Tue, 13 Apr 2010 10:33:45 +0200 (CEST)
+Subject: [Crrcsim-devel] [Feature #4536] Groundspeed (and Record-Mode: done)
+Message-ID: <201004130833.o3D8XjUr008254@unicorn.berlios.de>
+
+Feature Request #4536, was updated on 2009-Mar-19 10:21
+You can respond by visiting: 
+http://developer.berlios.de/feature/?func=detailfeature&feature_id=4536&group_id=9957
+
+Category: None
+Status: Open
+Priority: 5
+Summary: Groundspeed (and Record-Mode: done)
+
+By: jww
+Date: 2010-Apr-13 10:33
+
+Message:
+Logged In: YES 
+user_id=47273
+Browser: Mozilla/5.0 (X11; U; Linux i686; de; rv:1.9.0.19) Gecko/2010040116 Ubuntu/9.04 (jaunty) Firefox/3.0.19
+
+Record/playback/shadow mode is in CRRCSim since changeset
+454722c5b272. 
+As of today (13.04.2010), a public release including this
+feature has not 
+been made. However, you can try it out if you're willing to
+compile from
+source.
+
+
+----------------------------------------------------------------------
+
+By: alpinedude
+Date: 2009-Mar-19 10:22
+
+Message:
+Logged In: YES 
+user_id=50850
+Browser: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
+
+Hi guys,
+
+this simulator is grand... not even the expensive 
+sims can simulate DS... but your's can!
+The F3F is excellent aswell.
+
+There are 2 things i really miss:
+
+- Groundspeed is missing
+
+- Record-mode is missing (a other user told me, 
+  that in the early days of CRRCsim this was still 
+  possible, but was stopped because of the slow 
+  computers... now that the PC's have gotten 
+  faster... please think about it.
+
+Thanks again for your great work!
+CRRCsim rocks!
+
+Kind regards, Martin
+
+----------------------------------------------------------------------
+You can respond by visiting: 
+http://developer.berlios.de/feature/?func=detailfeature&feature_id=4536&group_id=9957
+
+
+From admin at berlios.de  Tue Apr 13 10:34:16 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Tue, 13 Apr 2010 10:34:16 +0200 (CEST)
+Subject: [Crrcsim-devel] [Feature #4311] Replay tool - a shadow plane
+Message-ID: <201004130834.o3D8YGkp008757@unicorn.berlios.de>
+
+Feature Request #4311, was updated on 2008-Sep-17 11:42
+You can respond by visiting: 
+http://developer.berlios.de/feature/?func=detailfeature&feature_id=4311&group_id=9957
+
+Category: None
+Status: Closed
+Priority: 5
+Summary: Replay tool - a shadow plane
+
+By: jww
+Date: 2010-Apr-13 10:34
+
+Message:
+Logged In: YES 
+user_id=47273
+Browser: Mozilla/5.0 (X11; U; Linux i686; de; rv:1.9.0.19) Gecko/2010040116 Ubuntu/9.04 (jaunty) Firefox/3.0.19
+
+Record/playback/shadow mode is in CRRCSim since changeset
+454722c5b272. 
+As of today (13.04.2010), a public release including this
+feature has not 
+been made. However, you can try it out if you're willing to
+compile from
+source.
+
+----------------------------------------------------------------------
+
+By: kuga
+Date: 2008-Sep-17 11:42
+
+Message:
+Logged In: YES 
+user_id=47873
+Browser: Mozilla/5.0 (X11; U; Linux i686; pl-PL; rv:1.8.1.3) Gecko/20070310 Iceweasel/2.0.0.3 (Debian-2.0.0.3-1)
+
+a shadow plane from a recorded file (better (optimal)
+performance for comparison), flying in the same conditions
+
+----------------------------------------------------------------------
+You can respond by visiting: 
+http://developer.berlios.de/feature/?func=detailfeature&feature_id=4311&group_id=9957
+
+
+From admin at berlios.de  Tue Apr 13 10:36:47 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Tue, 13 Apr 2010 10:36:47 +0200 (CEST)
+Subject: [Crrcsim-devel] [Feature #4309] Replay tool
+Message-ID: <201004130836.o3D8alJ5011950@unicorn.berlios.de>
+
+Feature Request #4309, was updated on 2008-Sep-17 11:36
+You can respond by visiting: 
+http://developer.berlios.de/feature/?func=detailfeature&feature_id=4309&group_id=9957
+
+Category: None
+Status: Open
+Priority: 5
+Summary: Replay tool
+
+By: jww
+Date: 2010-Apr-13 10:36
+
+Message:
+Logged In: YES 
+user_id=47273
+Browser: Mozilla/5.0 (X11; U; Linux i686; de; rv:1.9.0.19) Gecko/2010040116 Ubuntu/9.04 (jaunty) Firefox/3.0.19
+
+Record/playback/shadow mode is in CRRCSim since changeset
+454722c5b272. 
+As of today (13.04.2010), a public release including this
+feature has not 
+been made. However, you can try it out if you're willing to
+compile from
+source.
+
+Note that this does not implement all your requests.
+
+----------------------------------------------------------------------
+
+By: kuga
+Date: 2008-Sep-17 11:36
+
+Message:
+Logged In: YES 
+user_id=47873
+Browser: Mozilla/5.0 (X11; U; Linux i686; pl-PL; rv:1.8.1.3) Gecko/20070310 Iceweasel/2.0.0.3 (Debian-2.0.0.3-1)
+
+features similar to a movie player (start, stop ?,
+pause, step forward, step backward, start from a chosen
+position)
+playing one flight or a flying session
+(one flight - from launch to longer touching the ground
+- useful for gliders)
+
+taken from other simulator or movie player?
+
+----------------------------------------------------------------------
+You can respond by visiting: 
+http://developer.berlios.de/feature/?func=detailfeature&feature_id=4309&group_id=9957
+
+
+From jan.reucker at web.de  Thu Apr 15 22:29:51 2010
+From: jan.reucker at web.de (Jan Reucker)
+Date: Thu, 15 Apr 2010 22:29:51 +0200
+Subject: [Crrcsim-devel] Windows beta package
+Message-ID: <20100415222951.74d04e33@web.de>
+
+Hello,
+
+now that Jens has merged his changes back in to the main branch, I decided to
+build a "beta" version for Windows from the current tip. There was a minor
+compilation error to be fixed, and the installer script needed some work.
+I set the version to 0.9.11-beta1 and tagged the repo accordingly.
+
+http://rapidshare.com/files/375911959/CRRCsim-Win32-0.9.11-beta1.exe
+
+Jens, I noticed that there are still two extra heads in the repo. Is there any
+way to get rid of them or do you want to keep them?
+
+Kind regards,
+Jan R.
+
+
+
+
+From jens_w2 at gmx.net  Fri Apr 16 15:22:54 2010
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Fri, 16 Apr 2010 15:22:54 +0200
+Subject: [Crrcsim-devel] open heads, was: Windows beta package
+In-Reply-To: <20100415222951.74d04e33@web.de>
+References: <20100415222951.74d04e33@web.de>
+Message-ID: <20100416132254.GA3310@streusel>
+
+> Jens, I noticed that there are still two extra heads in the repo. Is there any
+> way to get rid of them or do you want to keep them?
+I usually don't think open heads to be something one should get rid off --
+as long as their number is small and they are there for a reason. Sometimes
+my intention is to document a certain test on the changeset in question
+without adding those code fragments and test results to the main branch,
+because I don't feel that these are of general interest.
+
+Do you understand what I want to achieve? Keeping some artifacts of work
+in their context without polluting the dev/main branch.
+
+I just looked at those changesets and recognized that there is something
+wrong...most probably I transplanted those changesets (because I had some
+tests and intermediate changesets) and transplanted one of them onto the
+wrong ancestor:
+  (2418b3f8c852) timing error of old code:
+should be a child of
+  (07660bd24f61) I forgot to add this file...to much clutter (not handled by
+                 hgignore)
+
+Despite this flaw, do you have a suggestion about how to save artifacts like
+these in a way you like more?
+
+With some effort (involving berlios and everyone being able to push to the
+repo) we could rearrange those heads, otherwise we could use dummy merges
+or some other append-only-operation.
+
+Best regards,
+Jens
+
+
+From jan.reucker at web.de  Fri Apr 16 21:13:57 2010
+From: jan.reucker at web.de (Jan Reucker)
+Date: Fri, 16 Apr 2010 21:13:57 +0200
+Subject: [Crrcsim-devel] open heads, was: Windows beta package
+In-Reply-To: <20100416132254.GA3310@streusel>
+References: <20100415222951.74d04e33@web.de> <20100416132254.GA3310@streusel>
+Message-ID: <20100416211357.38e60834@web.de>
+
+On Fri, 16 Apr 2010 15:22:54 +0200
+Jens Wilhelm Wulf <jens_w2 at gmx.net> wrote:
+
+> Do you understand what I want to achieve? Keeping some artifacts of work
+> in their context without polluting the dev/main branch.
+
+I understand. And I think that both goals (keeping stuff together that belongs
+together, and not polluting the default branch) are important.
+
+> Despite this flaw, do you have a suggestion about how to save artifacts like
+> these in a way you like more?
+
+When it comes to pure unit-testing, I prefer keeping the tests at the bottom
+of the source file, separated by a compiler switch. Or in a different file,
+if the tests are long. But I don't really mind if there are extra heads.
+I was just wondering why you kept them.
+
+Kind regards,
+Jan R.
+
+
+From admin at berlios.de  Wed Apr 28 17:04:54 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Wed, 28 Apr 2010 16:04:54 +0100 (BST)
+Subject: [Crrcsim-devel] [Bug #17118] Segfault on selecting audio input
+Message-ID: <201004281504.o3SF4sT9001418@unicorn.berlios.de>
+
+Bug #17118, was updated on 2010-Apr-28 16:04
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: pbarnett
+Assigned to : none
+Summary: Segfault on selecting audio input
+
+Details: This happens on Ubuntu 9.10 with crrcsim 0.9.10 and portaudio V18 or V19.
+
+Here's the backtrace (with portaudio 18) -
+
+Program received signal SIGSEGV, Segmentation fault.
+0x00853f6b in strlen () from /lib/tls/i686/cmov/libc.so.6
+(gdb) bt
+#0  0x00853f6b in strlen () from /lib/tls/i686/cmov/libc.so.6
+#1  0x0072950b in std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&) ()
+   from /usr/lib/libstdc++.so.6
+#2  0x0805b975 in CGUICtrlDeviceDialog::activateSelectedInterface (
+    this=0x8808a00) at src/GUI/crrc_ctrldev.cpp:270
+#3  0x0805bb42 in CGUICtrlDeviceCallback (obj=0x8808a00)
+    at src/GUI/crrc_ctrldev.cpp:301
+#4  0x080578fa in puObject::invokeCallback (this=0x8808a00)
+    at /usr/include/plib/pu.h:681
+#5  0x0805ec47 in CRRCDialogOKCallback (obj=0x8808ee8)
+    at src/GUI/crrc_dialog.cpp:274
+#6  0x00596a37 in puButton::doHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#7  0x0059e03e in puOneShot::doHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#8  0x0059cc08 in puObject::checkHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#9  0x00599d89 in puGroup::checkHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#10 0x005958b4 in puMouse(int, int, int, int) () from /usr/lib/libplibpu.so.1
+#11 0x080638c4 in CGUIMain::mouseButtonUpHandler (this=0x8672588, btn=1, 
+    x=657, y=555) at src/GUI/crrc_gui_main.cpp:334
+---Type <return> to continue, or q <return> to quit---
+#12 0x081264cb in EventHandler::handle_events (this=0xbffff278)
+    at src/mod_main/eventhandler.cpp:145
+#13 0x081262bf in EventHandler::Run (this=0xbffff278)
+    at src/mod_main/eventhandler.cpp:56
+#14 0x080ebb5f in Scheduler::Run (this=0xbffff280)
+    at src/mod_misc/scheduler.cpp:50
+#15 0x0811b4ae in main (argc=1, argv=0xbffff484) at src/crrc_main.cpp:749
+(gdb) 
+
+Other than this problem, the code works perfectly...
+
+Pete. 
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=17118&group_id=9957
+
+
+From admin at berlios.de  Wed Apr 28 21:49:25 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Wed, 28 Apr 2010 21:49:25 +0200 (CEST)
+Subject: [Crrcsim-devel] [Bug #17118] Segfault on selecting audio input
+Message-ID: <201004281949.o3SJnPAj027815@unicorn.berlios.de>
+
+Bug #17118, was updated on 2010-Apr-28 17:04
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: pbarnett
+Assigned to : none
+Summary: Segfault on selecting audio input
+
+Details: This happens on Ubuntu 9.10 with crrcsim 0.9.10 and portaudio V18 or V19.
+
+Here's the backtrace (with portaudio 18) -
+
+Program received signal SIGSEGV, Segmentation fault.
+0x00853f6b in strlen () from /lib/tls/i686/cmov/libc.so.6
+(gdb) bt
+#0  0x00853f6b in strlen () from /lib/tls/i686/cmov/libc.so.6
+#1  0x0072950b in std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&) ()
+   from /usr/lib/libstdc++.so.6
+#2  0x0805b975 in CGUICtrlDeviceDialog::activateSelectedInterface (
+    this=0x8808a00) at src/GUI/crrc_ctrldev.cpp:270
+#3  0x0805bb42 in CGUICtrlDeviceCallback (obj=0x8808a00)
+    at src/GUI/crrc_ctrldev.cpp:301
+#4  0x080578fa in puObject::invokeCallback (this=0x8808a00)
+    at /usr/include/plib/pu.h:681
+#5  0x0805ec47 in CRRCDialogOKCallback (obj=0x8808ee8)
+    at src/GUI/crrc_dialog.cpp:274
+#6  0x00596a37 in puButton::doHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#7  0x0059e03e in puOneShot::doHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#8  0x0059cc08 in puObject::checkHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#9  0x00599d89 in puGroup::checkHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#10 0x005958b4 in puMouse(int, int, int, int) () from /usr/lib/libplibpu.so.1
+#11 0x080638c4 in CGUIMain::mouseButtonUpHandler (this=0x8672588, btn=1, 
+    x=657, y=555) at src/GUI/crrc_gui_main.cpp:334
+---Type <return> to continue, or q <return> to quit---
+#12 0x081264cb in EventHandler::handle_events (this=0xbffff278)
+    at src/mod_main/eventhandler.cpp:145
+#13 0x081262bf in EventHandler::Run (this=0xbffff278)
+    at src/mod_main/eventhandler.cpp:56
+#14 0x080ebb5f in Scheduler::Run (this=0xbffff280)
+    at src/mod_misc/scheduler.cpp:50
+#15 0x0811b4ae in main (argc=1, argv=0xbffff484) at src/crrc_main.cpp:749
+(gdb) 
+
+Other than this problem, the code works perfectly...
+
+Pete. 
+
+Follow-Ups:
+
+Date: 2010-Apr-28 21:49
+By: jreucker
+
+Comment:
+This could be related to bug #015694 which was fixed after the 0.9.10 release. Please try to compile the latest tip version to see if the problem remains:
+
+https://hg.berlios.de/repos/crrcsim/archive/tip.tar.gz
+
+Kind regards,
+Jan R.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=17118&group_id=9957
+
+
+From admin at berlios.de  Wed Apr 28 22:28:10 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Wed, 28 Apr 2010 21:28:10 +0100 (BST)
+Subject: [Crrcsim-devel] [Bug #17118] Segfault on selecting audio input
+Message-ID: <201004282028.o3SKSAcR028899@unicorn.berlios.de>
+
+Bug #17118, was updated on 2010-Apr-28 16:04
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: pbarnett
+Assigned to : none
+Summary: Segfault on selecting audio input
+
+Details: This happens on Ubuntu 9.10 with crrcsim 0.9.10 and portaudio V18 or V19.
+
+Here's the backtrace (with portaudio 18) -
+
+Program received signal SIGSEGV, Segmentation fault.
+0x00853f6b in strlen () from /lib/tls/i686/cmov/libc.so.6
+(gdb) bt
+#0  0x00853f6b in strlen () from /lib/tls/i686/cmov/libc.so.6
+#1  0x0072950b in std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&) ()
+   from /usr/lib/libstdc++.so.6
+#2  0x0805b975 in CGUICtrlDeviceDialog::activateSelectedInterface (
+    this=0x8808a00) at src/GUI/crrc_ctrldev.cpp:270
+#3  0x0805bb42 in CGUICtrlDeviceCallback (obj=0x8808a00)
+    at src/GUI/crrc_ctrldev.cpp:301
+#4  0x080578fa in puObject::invokeCallback (this=0x8808a00)
+    at /usr/include/plib/pu.h:681
+#5  0x0805ec47 in CRRCDialogOKCallback (obj=0x8808ee8)
+    at src/GUI/crrc_dialog.cpp:274
+#6  0x00596a37 in puButton::doHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#7  0x0059e03e in puOneShot::doHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#8  0x0059cc08 in puObject::checkHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#9  0x00599d89 in puGroup::checkHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#10 0x005958b4 in puMouse(int, int, int, int) () from /usr/lib/libplibpu.so.1
+#11 0x080638c4 in CGUIMain::mouseButtonUpHandler (this=0x8672588, btn=1, 
+    x=657, y=555) at src/GUI/crrc_gui_main.cpp:334
+---Type <return> to continue, or q <return> to quit---
+#12 0x081264cb in EventHandler::handle_events (this=0xbffff278)
+    at src/mod_main/eventhandler.cpp:145
+#13 0x081262bf in EventHandler::Run (this=0xbffff278)
+    at src/mod_main/eventhandler.cpp:56
+#14 0x080ebb5f in Scheduler::Run (this=0xbffff280)
+    at src/mod_misc/scheduler.cpp:50
+#15 0x0811b4ae in main (argc=1, argv=0xbffff484) at src/crrc_main.cpp:749
+(gdb) 
+
+Other than this problem, the code works perfectly...
+
+Pete. 
+
+Follow-Ups:
+
+Date: 2010-Apr-28 21:28
+By: pbarnett
+
+Comment:
+OK! That fixes the segfault, but I'm still getting an 'Error opening audio interface'. Interesting, as my sound preferences shows the crrcsim ALSA plugin is active - see http://www.charityrallies.org/sites/all/files/Screenshot-Sound%20Preferences.png
+
+Pete.
+-------------------------------------------------------
+
+Date: 2010-Apr-28 20:49
+By: jreucker
+
+Comment:
+This could be related to bug #015694 which was fixed after the 0.9.10 release. Please try to compile the latest tip version to see if the problem remains:
+
+https://hg.berlios.de/repos/crrcsim/archive/tip.tar.gz
+
+Kind regards,
+Jan R.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=17118&group_id=9957
+
+
+From admin at berlios.de  Thu Apr 29 21:35:35 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Thu, 29 Apr 2010 21:35:35 +0200 (CEST)
+Subject: [Crrcsim-devel] [Bug #17118] Segfault on selecting audio input
+Message-ID: <201004291935.o3TJZZm0008647@unicorn.berlios.de>
+
+Bug #17118, was updated on 2010-Apr-28 17:04
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: pbarnett
+Assigned to : none
+Summary: Segfault on selecting audio input
+
+Details: This happens on Ubuntu 9.10 with crrcsim 0.9.10 and portaudio V18 or V19.
+
+Here's the backtrace (with portaudio 18) -
+
+Program received signal SIGSEGV, Segmentation fault.
+0x00853f6b in strlen () from /lib/tls/i686/cmov/libc.so.6
+(gdb) bt
+#0  0x00853f6b in strlen () from /lib/tls/i686/cmov/libc.so.6
+#1  0x0072950b in std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&) ()
+   from /usr/lib/libstdc++.so.6
+#2  0x0805b975 in CGUICtrlDeviceDialog::activateSelectedInterface (
+    this=0x8808a00) at src/GUI/crrc_ctrldev.cpp:270
+#3  0x0805bb42 in CGUICtrlDeviceCallback (obj=0x8808a00)
+    at src/GUI/crrc_ctrldev.cpp:301
+#4  0x080578fa in puObject::invokeCallback (this=0x8808a00)
+    at /usr/include/plib/pu.h:681
+#5  0x0805ec47 in CRRCDialogOKCallback (obj=0x8808ee8)
+    at src/GUI/crrc_dialog.cpp:274
+#6  0x00596a37 in puButton::doHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#7  0x0059e03e in puOneShot::doHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#8  0x0059cc08 in puObject::checkHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#9  0x00599d89 in puGroup::checkHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#10 0x005958b4 in puMouse(int, int, int, int) () from /usr/lib/libplibpu.so.1
+#11 0x080638c4 in CGUIMain::mouseButtonUpHandler (this=0x8672588, btn=1, 
+    x=657, y=555) at src/GUI/crrc_gui_main.cpp:334
+---Type <return> to continue, or q <return> to quit---
+#12 0x081264cb in EventHandler::handle_events (this=0xbffff278)
+    at src/mod_main/eventhandler.cpp:145
+#13 0x081262bf in EventHandler::Run (this=0xbffff278)
+    at src/mod_main/eventhandler.cpp:56
+#14 0x080ebb5f in Scheduler::Run (this=0xbffff280)
+    at src/mod_misc/scheduler.cpp:50
+#15 0x0811b4ae in main (argc=1, argv=0xbffff484) at src/crrc_main.cpp:749
+(gdb) 
+
+Other than this problem, the code works perfectly...
+
+Pete. 
+
+Follow-Ups:
+
+Date: 2010-Apr-29 21:35
+By: jreucker
+
+Comment:
+CRRCsim accesses audio hardware in two different ways (for audio output over SDL and for input over libportaudio). I guess the ALSA plugin in your screenshot is just the audio output.
+
+Please take a look at the output on stdout/stderr, it might give you a clue what's happening. Is your audio hardware detected/listed in the configuration dialog inside CRRCsim?
+-------------------------------------------------------
+
+Date: 2010-Apr-28 22:28
+By: pbarnett
+
+Comment:
+OK! That fixes the segfault, but I'm still getting an 'Error opening audio interface'. Interesting, as my sound preferences shows the crrcsim ALSA plugin is active - see http://www.charityrallies.org/sites/all/files/Screenshot-Sound%20Preferences.png
+
+Pete.
+-------------------------------------------------------
+
+Date: 2010-Apr-28 21:49
+By: jreucker
+
+Comment:
+This could be related to bug #015694 which was fixed after the 0.9.10 release. Please try to compile the latest tip version to see if the problem remains:
+
+https://hg.berlios.de/repos/crrcsim/archive/tip.tar.gz
+
+Kind regards,
+Jan R.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=17118&group_id=9957
+
+
+From admin at berlios.de  Thu Apr 29 23:58:24 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Thu, 29 Apr 2010 22:58:24 +0100 (BST)
+Subject: [Crrcsim-devel] [Bug #17118] Segfault on selecting audio input
+Message-ID: <201004292158.o3TLwOIc009010@unicorn.berlios.de>
+
+Bug #17118, was updated on 2010-Apr-28 16:04
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: pbarnett
+Assigned to : none
+Summary: Segfault on selecting audio input
+
+Details: This happens on Ubuntu 9.10 with crrcsim 0.9.10 and portaudio V18 or V19.
+
+Here's the backtrace (with portaudio 18) -
+
+Program received signal SIGSEGV, Segmentation fault.
+0x00853f6b in strlen () from /lib/tls/i686/cmov/libc.so.6
+(gdb) bt
+#0  0x00853f6b in strlen () from /lib/tls/i686/cmov/libc.so.6
+#1  0x0072950b in std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&) ()
+   from /usr/lib/libstdc++.so.6
+#2  0x0805b975 in CGUICtrlDeviceDialog::activateSelectedInterface (
+    this=0x8808a00) at src/GUI/crrc_ctrldev.cpp:270
+#3  0x0805bb42 in CGUICtrlDeviceCallback (obj=0x8808a00)
+    at src/GUI/crrc_ctrldev.cpp:301
+#4  0x080578fa in puObject::invokeCallback (this=0x8808a00)
+    at /usr/include/plib/pu.h:681
+#5  0x0805ec47 in CRRCDialogOKCallback (obj=0x8808ee8)
+    at src/GUI/crrc_dialog.cpp:274
+#6  0x00596a37 in puButton::doHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#7  0x0059e03e in puOneShot::doHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#8  0x0059cc08 in puObject::checkHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#9  0x00599d89 in puGroup::checkHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#10 0x005958b4 in puMouse(int, int, int, int) () from /usr/lib/libplibpu.so.1
+#11 0x080638c4 in CGUIMain::mouseButtonUpHandler (this=0x8672588, btn=1, 
+    x=657, y=555) at src/GUI/crrc_gui_main.cpp:334
+---Type <return> to continue, or q <return> to quit---
+#12 0x081264cb in EventHandler::handle_events (this=0xbffff278)
+    at src/mod_main/eventhandler.cpp:145
+#13 0x081262bf in EventHandler::Run (this=0xbffff278)
+    at src/mod_main/eventhandler.cpp:56
+#14 0x080ebb5f in Scheduler::Run (this=0xbffff280)
+    at src/mod_misc/scheduler.cpp:50
+#15 0x0811b4ae in main (argc=1, argv=0xbffff484) at src/crrc_main.cpp:749
+(gdb) 
+
+Other than this problem, the code works perfectly...
+
+Pete. 
+
+Follow-Ups:
+
+Date: 2010-Apr-29 22:58
+By: pbarnett
+
+Comment:
+Thanks for your help - it looks like the audio device isn't being detected.
+
+The output to stdout/stderr is as follows
+ <-- inputMethod.audio
+T_AxisMapper::init(cfg, child)
+ <-- inputMethod.audio
+mapper set to radio type 6
+int T_TX_Interface::init(SimpleXMLTransfer* config)
+T_TX_Mixer::T_TX_Mixer(cfg, child)
+T_TX_Mixer::init(cfg, child)
+ <-- inputMethod.audio
+Number of total audio input/output devices : 0.
+Soundcard specified in configuration file () not found,
+falling back to default (ID 0)
+An error occured while using the portaudio stream in audio_rc_open
+Error number: 0
+Error message: Success
+T_TX_InterfaceAudio::~T_TX_InterfaceAudio()
+audio device closed
+
+Pete.
+
+-------------------------------------------------------
+
+Date: 2010-Apr-29 20:35
+By: jreucker
+
+Comment:
+CRRCsim accesses audio hardware in two different ways (for audio output over SDL and for input over libportaudio). I guess the ALSA plugin in your screenshot is just the audio output.
+
+Please take a look at the output on stdout/stderr, it might give you a clue what's happening. Is your audio hardware detected/listed in the configuration dialog inside CRRCsim?
+-------------------------------------------------------
+
+Date: 2010-Apr-28 21:28
+By: pbarnett
+
+Comment:
+OK! That fixes the segfault, but I'm still getting an 'Error opening audio interface'. Interesting, as my sound preferences shows the crrcsim ALSA plugin is active - see http://www.charityrallies.org/sites/all/files/Screenshot-Sound%20Preferences.png
+
+Pete.
+-------------------------------------------------------
+
+Date: 2010-Apr-28 20:49
+By: jreucker
+
+Comment:
+This could be related to bug #015694 which was fixed after the 0.9.10 release. Please try to compile the latest tip version to see if the problem remains:
+
+https://hg.berlios.de/repos/crrcsim/archive/tip.tar.gz
+
+Kind regards,
+Jan R.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=17118&group_id=9957
+
+

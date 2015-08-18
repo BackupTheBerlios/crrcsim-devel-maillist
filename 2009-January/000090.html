@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] panorama scenery
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20panorama%20scenery&In-Reply-To=%3C20090117220954.31fa2bab.jan.reucker%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000087.html">
+   <LINK REL="Next"  HREF="000092.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] panorama scenery</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20panorama%20scenery&In-Reply-To=%3C20090117220954.31fa2bab.jan.reucker%40web.de%3E"
+       TITLE="[Crrcsim-devel] panorama scenery">jan.reucker at web.de
+       </A><BR>
+    <I>Sat Jan 17 22:09:54 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000087.html">[Crrcsim-devel] panorama scenery
+</A></li>
+        <LI>Next message: <A HREF="000092.html">[Crrcsim-devel] panorama scenery
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#90">[ date ]</a>
+              <a href="thread.html#90">[ thread ]</a>
+              <a href="subject.html#90">[ subject ]</a>
+              <a href="author.html#90">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Am Sat, 17 Jan 2009 13:24:12 +0100 schrieb Jan Reucker &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">jan.reucker at web.de</A>&gt;:
+
+&gt;<i> &gt; - Note, I envisaged to be able to compile CRRCSIM without importation of the
+</I>&gt;<i> &gt; data of wind and thus without CGAL (see windata3D.h).
+</I>
+Please note that it only compiled, but did not link without CGAL (-lCGAL was
+always present in Makefile.am).
+ 
+&gt;<i> Then this #define has to be in crrc_config.h, and must be determined
+</I>&gt;<i> by ./configure. I'll see what I can do.
+</I>&gt;<i> And libjpeg should also be detected by ./configure....
+</I>
+This should work now. I've just pushed two changesets with a g++ 4.3.2 compile
+error fix and an extended configure.ac that should detect CGAL and check for
+libjpeg. I still have to test it on a system that doesn't have these libs
+installed (will do this on my Windows box, maybe tomorrow).
+
+If you extend your wind simulation, please use
+
+#if WINDDATA3D == 1
+
+instead of 
+
+#ifdef WINDDATA3D
+
+and include &lt;crrc_config.h&gt; as the first header file in every .cpp file that
+uses this macro. Don't include crrc_config.h into ANY header file! The macros
+will automatically be present in all header files that are included after
+crrc_config.h, so just make sure it's the first included header in any .cpp file.
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: <A HREF="http://www.reucker-online.de/pgpkey.asc">http://www.reucker-online.de/pgpkey.asc</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000087.html">[Crrcsim-devel] panorama scenery
+</A></li>
+	<LI>Next message: <A HREF="000092.html">[Crrcsim-devel] panorama scenery
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#90">[ date ]</a>
+              <a href="thread.html#90">[ thread ]</a>
+              <a href="subject.html#90">[ subject ]</a>
+              <a href="author.html#90">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

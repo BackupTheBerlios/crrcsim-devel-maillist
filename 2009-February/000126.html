@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Release planning for 0.9.10
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-February/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Release%20planning%20for%200.9.10&In-Reply-To=%3C20090209232700.6b82b4ed.jan.reucker%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000125.html">
+   <LINK REL="Next"  HREF="000129.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Release planning for 0.9.10</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Release%20planning%20for%200.9.10&In-Reply-To=%3C20090209232700.6b82b4ed.jan.reucker%40web.de%3E"
+       TITLE="[Crrcsim-devel] Release planning for 0.9.10">jan.reucker at web.de
+       </A><BR>
+    <I>Mon Feb  9 23:27:00 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000125.html">[Crrcsim-devel] Release planning for 0.9.10
+</A></li>
+        <LI>Next message: <A HREF="000129.html">[Crrcsim-devel] Release planning for 0.9.10
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#126">[ date ]</a>
+              <a href="thread.html#126">[ thread ]</a>
+              <a href="subject.html#126">[ subject ]</a>
+              <a href="author.html#126">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Am Mon, 9 Feb 2009 17:38:25 +0100 schrieb Jo&#235;l Li&#233;nard &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">joel.lienard at free.fr</A>&gt;:
+
+&gt;<i> Since my modifications, the initial position of the plane is player
+</I>&gt;<i> relative. This mode is adapted to the current scenes without tracks. This
+</I>&gt;<i> position is modifiable in crrcsim.xml by launch.x and lauch.y. I had
+</I>&gt;<i> unfortunately left these values to zero, which was not adapted to the
+</I>&gt;<i> motorized models (sport and heli). Now, with x=y=10, that seems to be
+</I>&gt;<i> appropriate.
+</I>
+Hello Joel,
+
+this seems to work, at least if I create a new crrcsim.xml from scratch.
+Using my existing configuration the plane still appeared on my feet.
+I don't know what happens if someone keeps his existing configuration
+from 0.9.9 and then upgrades to 0.9.10.
+
+For a helicopter it would be better to stand right behind it (just like
+before) instead of launching with a 45 degree offset. And it won't hurt
+for planes. What do you think?
+ 
+&gt;<i> I nevertheless added a commutation by launch.from_player. If
+</I>&gt;<i> launch.from_player=0, the initial position is determined by &quot;&lt;start&gt;
+</I>&gt;<i> &lt;position ...&quot;  in scenery.html. This mode will be necessary for scenes with
+</I>&gt;<i> a track of takeoff. I did not adapt the dialogue of launching to take into
+</I>&gt;<i> account these parameters. I propose to do it later.
+</I>
+Maybe we should add some more logic: If from_player=0 and there's a
+&lt;start&gt; in the scenery.html, use this. If from_player=0 and there's
+no &lt;start&gt;, treat this like from_player=1.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: <A HREF="http://www.reucker-online.de/pgpkey.asc">http://www.reucker-online.de/pgpkey.asc</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000125.html">[Crrcsim-devel] Release planning for 0.9.10
+</A></li>
+	<LI>Next message: <A HREF="000129.html">[Crrcsim-devel] Release planning for 0.9.10
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#126">[ date ]</a>
+              <a href="thread.html#126">[ thread ]</a>
+              <a href="subject.html#126">[ subject ]</a>
+              <a href="author.html#126">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

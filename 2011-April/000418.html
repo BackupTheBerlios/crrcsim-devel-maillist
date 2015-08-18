@@ -1,0 +1,257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] [Bug #17925] Audio Device Not Detected (Ubuntu	10.10)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2011-April/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BBug%20%2317925%5D%20Audio%20Device%20Not%20Detected%20%28Ubuntu%0A%0910.10%29&In-Reply-To=%3C201104161259.p3GCxWGB023529%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000417.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] [Bug #17925] Audio Device Not Detected (Ubuntu	10.10)</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BBug%20%2317925%5D%20Audio%20Device%20Not%20Detected%20%28Ubuntu%0A%0910.10%29&In-Reply-To=%3C201104161259.p3GCxWGB023529%40unicorn.berlios.de%3E"
+       TITLE="[Crrcsim-devel] [Bug #17925] Audio Device Not Detected (Ubuntu	10.10)">admin at berlios.de
+       </A><BR>
+    <I>Sat Apr 16 14:59:32 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000417.html">[Crrcsim-devel] [Patch #3147] Support for PulseAudio input devices
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#418">[ date ]</a>
+              <a href="thread.html#418">[ thread ]</a>
+              <a href="subject.html#418">[ subject ]</a>
+              <a href="author.html#418">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bug #17925, was updated on 2011-Feb-14 07:55
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: csindle
+Assigned to : none
+Summary: Audio Device Not Detected (Ubuntu 10.10)
+
+Details: The audio device is not detected, and therefore I cannot use my Spektrum Dx5e Transmitter with crrcsim Linux.   (With the same hardware setup, crrcsim 0.9.11 works perfectly in a Windows XP virtualbox machine.) 
+
+
+To reproduce:
+
+Controls -&gt; Input Method -&gt; Audio
+There is nothing in the Device textbox.  Clicking &quot;OK&quot;  results in:
+
+...
+ &lt;-- inputMethod.mouse
+mapper set to radio type 6
+--- GUI error popup ---
+Error opening audio interface
+Failed to initialize selected input method.
+Reverting to mouse input.
+--- end popup ---------
+std::string reconfigureInputMethod()
+New input method: MOUSE
+...
+
+
+Info:
+
+
+$ hg log | head
+changeset:   1370:1d7ccb8e3e64
+tag:         tip
+user:        jreucker &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">jan.reucker at web.de</A>&gt;
+date:        Sat Dec 25 22:52:39 2010 +0100
+summary:     FR #5164 Screen resolutions for flat panels: Added 3 more default resolutions.
+
+
+
+
+$./configure
+...
+Build options:
+
+    Mousewheel support: yes  (SDL &gt;= 1.2.5)
+    Audio interface:    yes  (found Portaudio V18)
+    Wind data import:   no   (CGAL not found)
+
+
+
+
+$ ./crrcsim -i AUDIO
+CRRCsim dev started at 2011-2-13 21:45:47
+Running on Linux 2.6.35-25-generic
+Using plib version 1.8.5
+Compiled with SDL version 1.2.14
+(Linked SDL version is 1.2.14)
+Configured data path: /usr/local/share/crrcsim
+Data file search path:
+  .
+  /home/csindle/.crrcsim
+  /usr/local/share/crrcsim
+  /usr/local/share/games/crrcsim
+  /usr/share/games/crrcsim
+RAND_MAX = 2147483647
+Configuration file is /home/csindle/.crrcsim/crrcsim.xml
+Configuration version is 2
+T_Config: Setting location to scenery/davis-orig.xml, sky variant 0
+Thermals: strength_mean=5.000000 strength_sigma=1.000000 radius_mean=70.000000 radius_sigma=10.000000
+Thermals: density=0.000002 lifetime_mean=240.000000 lifetime_sigma=60.000000
+Wind: velocity=7.000000 ft/sec   direction=270.000000
+std::string reconfigureInputMethod()
+New input method: AUDIO
+T_TX_Interface::T_TX_Interface
+T_TX_InterfacePPM::T_TX_InterfacePPM()
+T_TX_InterfaceAudio::T_TX_InterfaceAudio()
+int T_TX_InterfaceAudio::init(SimpleXMLTransfer* config)
+int T_TX_InterfacePPM::init(SimpleXMLTransfer* config)
+T_Calibration::T_Calibration(cfg, child)
+T_Calibration::init(cfg, child)
+ &lt;-- inputMethod.audio
+Loading calibration settings from inputMethod.audio:
+T_AxisMapper::init(cfg, child)
+ &lt;-- inputMethod.audio
+mapper set to radio type 6
+int T_TX_Interface::init(SimpleXMLTransfer* config)
+T_TX_Mixer::T_TX_Mixer(cfg, child)
+T_TX_Mixer::init(cfg, child)
+ &lt;-- inputMethod.audio
+Loading mixer settings from inputMethod.audio:
+  axis=1 trim=0.000000 exp=0.000000 nrate=1.000000
+  axis=2 trim=0.000000 exp=0.000000 nrate=1.000000
+  axis=3 trim=0.000000 exp=0.000000 nrate=1.000000
+  axis=4 trim=0.000000 exp=0.000000 nrate=1.000000
+  axis=5 trim=0.000000 exp=0.000000 nrate=1.000000
+  axis=6 trim=0.000000 exp=0.000000 nrate=1.000000
+  axis=7 trim=0.000000 exp=0.000000 nrate=1.000000
+  axis=8 trim=0.000000 exp=0.000000 nrate=1.000000
+An error occured while using the portaudio stream in audio_rc_open
+Error number: -10000
+Error message: Host error.
+T_TX_InterfaceAudio::~T_TX_InterfaceAudio()
+audio device closed
+T_TX_Mixer::~T_TX_Mixer()
+T_TX_InterfacePPM::~T_TX_InterfacePPM()
+T_TX_Interface::~T_TX_Interface
+T_TX_Interface::T_TX_Interface
+T_TX_InterfaceSoftware::T_TX_InterfaceSoftware(int method)
+T_TX_Mixer::T_TX_Mixer()
+int T_TX_InterfaceSoftware::init(SimpleXMLTransfer* config)
+int T_TX_Interface::init(SimpleXMLTransfer* config)
+T_TX_Mixer::init(cfg, child)
+ &lt;-- inputMethod.mouse
+Loading mixer settings from inputMethod.mouse:
+  axis=1 trim=0.000000 exp=0.000000 nrate=1.000000
+  axis=2 trim=0.000000 exp=0.000000 nrate=1.000000
+  axis=3 trim=0.000000 exp=0.000000 nrate=1.000000
+  axis=4 trim=0.000000 exp=0.000000 nrate=1.000000
+  axis=5 trim=0.000000 exp=0.000000 nrate=1.000000
+  axis=6 trim=0.000000 exp=0.000000 nrate=1.000000
+  axis=7 trim=0.000000 exp=0.000000 nrate=1.000000
+  axis=8 trim=0.000000 exp=0.000000 nrate=1.000000
+T_AxisMapper::init(cfg, child)
+ &lt;-- inputMethod.mouse
+mapper set to radio type 6
+Error opening audio interface
+Failed to initialize selected input method.
+Reverting to mouse input.Loading default videomode from config...
+Using the following rendering mode:
+  Renderer:    Mesa DRI Intel(R) Ironlake Mobile GEM 20100330 DEVELOPMENT 
+  Vendor:      Tungsten Graphics, Inc
+  GL version:  2.1 Mesa 7.9-devel
+  RGBA bpp:    8/8/8/0
+  Depth bpp:   24
+  Stencil bpp: 8
+  Modelview stack: 1 / 32    Projection stack: 1 / 32
+Opened audio device: 16 bit signed audio (mono) at 48000 Hz
+Initialized sine samples: 480
+--- void ThermikSchalen::init ---------------------------
+  inner:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.566667
+    il_y = 0.433333
+    ol_x = -0.0333333
+    ol_y = 0.166667
+    ou_x = -0.05
+    ou_y = 0.833333
+
+  outer:
+    dzu_y = 0.916667
+    dzl_y = 0.0833333
+    iu_y = 0.5
+    il_y = 0.5
+    ol_x = 0.108333
+    ol_y = 0.5
+    ou_x = 0.108333
+    ou_y = 0.5
+
+  r_ref = 0.0333333
+  r_max = 0.149953
+  Upwards velocity at lower end is 1.5625 times upwards velocity at average height.
+---------------------------------------------------------
+Using Thermal Simulation v3
+--- Airplane description: ---------------------------------------
+  Wingspan:                   1.99644 m
+  Mass:                       0.657867 kg
+  Velocity in trimmed flight: 8.3046 m/s
+-----------------------------------------------------------------
+Using CRRC_AirplaneSim_Larcsim
+CRRCAirplaneV2(xml)
+soundfile: sounds/fan.wav
+soundserver: 0x1b8dba0
+...
+
+
+
+
+Follow-Ups:
+
+Date: 2011-Apr-16 22:59
+By: pdima
+
+Comment:
+You may try to use the PulseAudio patch I uploaded, it works on Linux Mint 10, which is based on Ubuntu 10.10.
+
+<A HREF="https://developer.berlios.de/patch/index.php?func=detailpatch&amp;patch_id=3147&amp;group_id=9957">https://developer.berlios.de/patch/index.php?func=detailpatch&amp;patch_id=3147&amp;group_id=9957</A>
+-------------------------------------------------------
+
+For detailed info, follow this link:
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=17925&amp;group_id=9957">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=17925&amp;group_id=9957</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000417.html">[Crrcsim-devel] [Patch #3147] Support for PulseAudio input devices
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#418">[ date ]</a>
+              <a href="thread.html#418">[ thread ]</a>
+              <a href="subject.html#418">[ subject ]</a>
+              <a href="author.html#418">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

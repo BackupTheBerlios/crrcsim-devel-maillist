@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Release candidate 1 for 0.9.10
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-February/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Release%20candidate%201%20for%200.9.10&In-Reply-To=%3C20090225162428.GA9970%40knusper.jensens.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000139.html">
+   <LINK REL="Next"  HREF="000150.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Release candidate 1 for 0.9.10</H1>
+    <B>Jens Wilhelm Wulf</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Release%20candidate%201%20for%200.9.10&In-Reply-To=%3C20090225162428.GA9970%40knusper.jensens.local%3E"
+       TITLE="[Crrcsim-devel] Release candidate 1 for 0.9.10">jens_w2 at gmx.net
+       </A><BR>
+    <I>Wed Feb 25 17:24:28 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000139.html">[Crrcsim-devel] Release candidate 1 for 0.9.10
+</A></li>
+        <LI>Next message: <A HREF="000150.html">[Crrcsim-devel] Release candidate 1 for 0.9.10
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#140">[ date ]</a>
+              <a href="thread.html#140">[ thread ]</a>
+              <a href="subject.html#140">[ subject ]</a>
+              <a href="author.html#140">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+so I pushed my changesets, they partially clean up what I didn't like.
+
+Furthermore, they provide sensible launch defaults for every model (except
+mav, see below) and provide mostly backwards-compatible behaviour. So this
+is the first version which provides a working launch for every model after
+selecting it, without tweaking launch settings. No sports models/heli will
+fall from the sky and no glider will sit on the grass.
+
+I added the player-relative launch position to the launch default section in
+the model file and to launch presets in crrcsim.xml. The new values are
+handled by crrc_launch.cpp -- however, they are not editable using the GUI yet.
+
+'mav' can't be launched in any way, it must be started from the ground. I'll
+look into it -- it has been like this since some time, though...
+
+I recognized that one of the recent changesets changed the player position
+in such a way that when doing a ground start at Davis, the initial field of
+view has changed a lot -- the player has grown taller some feet.
+
+Jens
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000139.html">[Crrcsim-devel] Release candidate 1 for 0.9.10
+</A></li>
+	<LI>Next message: <A HREF="000150.html">[Crrcsim-devel] Release candidate 1 for 0.9.10
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#140">[ date ]</a>
+              <a href="thread.html#140">[ thread ]</a>
+              <a href="subject.html#140">[ subject ]</a>
+              <a href="author.html#140">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

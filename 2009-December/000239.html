@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] [Bug #16505] Spolier/Flaps non-functional
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BBug%20%2316505%5D%20Spolier/Flaps%20non-functional&In-Reply-To=%3C200912052125.nB5LPV10007282%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000238.html">
+   <LINK REL="Next"  HREF="000240.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] [Bug #16505] Spolier/Flaps non-functional</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BBug%20%2316505%5D%20Spolier/Flaps%20non-functional&In-Reply-To=%3C200912052125.nB5LPV10007282%40unicorn.berlios.de%3E"
+       TITLE="[Crrcsim-devel] [Bug #16505] Spolier/Flaps non-functional">admin at berlios.de
+       </A><BR>
+    <I>Sat Dec  5 22:25:31 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000238.html">[Crrcsim-devel] [Bug #16505] Spolier/Flaps non-functional
+</A></li>
+        <LI>Next message: <A HREF="000240.html">[Crrcsim-devel] [Bug #16505] Spolier/Flaps non-functional
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#239">[ date ]</a>
+              <a href="thread.html#239">[ thread ]</a>
+              <a href="subject.html#239">[ subject ]</a>
+              <a href="author.html#239">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bug #16505, was updated on 2009-Dec-01 04:57
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 9
+Submitted by: wheeldweller
+Assigned to : jreucker
+Summary: Spolier/Flaps non-functional
+
+Details: It's probably the only thing 'advertised' that doesn't work: spoilers and flaps.
+
+My joystick is being sensed properly- axis 3 can be used to operate the throttle, for instance. It's a lot of fun, too!
+
+And I've tried just about every high-dollar glider, especially the high-aspect ratio types, and changing the spoiler setting never shows up, and it never changes the flight characteristics, either. Inverted or normal, no change at all.
+
+In Huntsville, Alabama we had a gusty, windy day. I pointed it into the wind, facing me, and popped the spoilers of my Aquila to make it land at my feet.  People having trouble that day actually cheered. I'd know if they were working.  :)
+
+If they aren't coded, let's just get rid of the labels and such. Exactly as it stands it's a spectacular program and I enjoy it very, very much.  It'd just be nice if the spoilers/flaps worked, so I could land it more easily.
+
+Thanks
+
+Follow-Ups:
+
+Date: 2009-Dec-05 22:25
+By: jreucker
+
+Comment:
+Found the cause of the bug. Working on a fix.
+-------------------------------------------------------
+
+Date: 2009-Dec-02 21:05
+By: jreucker
+
+Comment:
+Hello,
+
+thanks for your bug report. However, I have to mark it as invalid. Spoilers and flaps are modelled in CRRCsim (since version 0.9.10). But right now there's AFAIK only one model that provides spoiler and flap settings: the Scorpion.
+
+If you are interested in adding working spoilers and/or flaps to one of the other gliders, please read documentation/file_format/index.html in the CRRCsim folder and take a look at models/Scorpion.xml to see how it is done. Feel free to submit a patch or at least the parameters if you created something that &quot;feels just right&quot;.
+
+Kind regards,
+Jan R.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=16505&amp;group_id=9957">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=16505&amp;group_id=9957</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000238.html">[Crrcsim-devel] [Bug #16505] Spolier/Flaps non-functional
+</A></li>
+	<LI>Next message: <A HREF="000240.html">[Crrcsim-devel] [Bug #16505] Spolier/Flaps non-functional
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#239">[ date ]</a>
+              <a href="thread.html#239">[ thread ]</a>
+              <a href="subject.html#239">[ subject ]</a>
+              <a href="author.html#239">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

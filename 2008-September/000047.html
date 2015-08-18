@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Hard point handling, was: CRRSCIM Wish List Revision 1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Hard%20point%20handling%2C%0A%20was%3A%20CRRSCIM%20Wish%20List%20Revision%201&In-Reply-To=%3C20080927113809.54fc2057.jan.reucker%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000046.html">
+   <LINK REL="Next"  HREF="000048.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Hard point handling, was: CRRSCIM Wish List Revision 1</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Hard%20point%20handling%2C%0A%20was%3A%20CRRSCIM%20Wish%20List%20Revision%201&In-Reply-To=%3C20080927113809.54fc2057.jan.reucker%40web.de%3E"
+       TITLE="[Crrcsim-devel] Hard point handling, was: CRRSCIM Wish List Revision 1">jan.reucker at web.de
+       </A><BR>
+    <I>Sat Sep 27 11:38:09 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000046.html">[Crrcsim-devel] Hard point handling,	was: CRRSCIM Wish List Revision 1
+</A></li>
+        <LI>Next message: <A HREF="000048.html">[Crrcsim-devel] Hard point handling
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#47">[ date ]</a>
+              <a href="thread.html#47">[ thread ]</a>
+              <a href="subject.html#47">[ subject ]</a>
+              <a href="author.html#47">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Am Sat, 27 Sep 2008 08:30:14 +0200 schrieb Jens Wilhelm Wulf &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">jens_w2 at gmx.net</A>&gt;:
+
+&gt;<i> Hi Jan,
+</I>
+Hi Jens,
+
+long time no see ;) Welcome back!
+
+&gt;<i> &gt; I'm currently revisiting the hardpoint handling code, so maybe I can include
+</I>&gt;<i> &gt; this as well.
+</I>&gt;<i> I thought about adding a parameter to every hard point which is the force
+</I>&gt;<i> (no matter in which direction, just the length of the resulting vector) at
+</I>&gt;<i> which the structure is damaged.
+</I>
+Ack. Thought about the same thing. But we have to think about the consequences:
+
+- Simply freeze the simulation and force the user to reset.
+- Stop calculating lift after damaging any hardpoint so that the plane will
+  bounce on the ground and crash, also forcing the user to reset.
+- Something else?
+
+I guess it's time to integrate the EventDispatcher I proposed recently:
+
+<A HREF="http://crrcsim.berlios.de/wiki/index.php?n=CRRCsim.EventDispatcher">http://crrcsim.berlios.de/wiki/index.php?n=CRRCsim.EventDispatcher</A>
+
+This is a typical use case for this mechanism. If a wheel detects a crash,
+it will throw an event. FDM and other interested objects (like, maybe, a
+flight time stopwatch or the main statemachine) catch this event. When the
+user resets the sim, a &quot;reset&quot; event is thrown, which in turn is caught by
+every wheel, setting back the &quot;crashed&quot; state. This provides very loose
+coupling between all participating objects.
+ 
+A &quot;normal&quot; touchdown, of course, will also throw some kind of event received
+by e.g. a flight time stopwatch.
+
+&gt;<i> Furthermore, one might need to adjust 'sliding_mu' (see code) for every
+</I>&gt;<i> non-gear hardpoint?
+</I>
+Yes, I guess that &quot;tyres on tarmac&quot; is not what you usually want for a glider.
+
+I guess you've already noticed that I pushed some changes regarding wheel
+handling. There are no functional changes yet, only structural changes. Maybe
+you have a better idea for a more general interface between FDM and WheelSystem?
+It worked fine for fdm_larcsim and fdm_heli, but not for fdm_002 (maybe the
+adaption is easy, but I don't know enough about the code and the math behind
+it).
+
+About retracting hardpoints: I think it should be enough to define a destination
+point and linearly interpolate between the original hardpoint location and the
+destination, based on the current RETRACT input value. This introduces a certain
+error for swinging gears, but even interpolating along a circle would lead to an
+error (because the real contact point moves along the outline of the wheel while
+retracting the gear). And it would be much harder to configure, if it is possible
+in a flexible way at all.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: <A HREF="http://www.reucker-online.de/pgpkey.asc">http://www.reucker-online.de/pgpkey.asc</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000046.html">[Crrcsim-devel] Hard point handling,	was: CRRSCIM Wish List Revision 1
+</A></li>
+	<LI>Next message: <A HREF="000048.html">[Crrcsim-devel] Hard point handling
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#47">[ date ]</a>
+              <a href="thread.html#47">[ thread ]</a>
+              <a href="subject.html#47">[ subject ]</a>
+              <a href="author.html#47">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

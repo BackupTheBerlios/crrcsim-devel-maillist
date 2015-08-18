@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] [Bug #18100] Geodetic latitude calculation has	numerical instability
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2011-May/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BBug%20%2318100%5D%20Geodetic%20latitude%20calculation%20has%0A%09numerical%20instability&In-Reply-To=%3C201105061712.p46HCwg4006997%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000420.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] [Bug #18100] Geodetic latitude calculation has	numerical instability</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BBug%20%2318100%5D%20Geodetic%20latitude%20calculation%20has%0A%09numerical%20instability&In-Reply-To=%3C201105061712.p46HCwg4006997%40unicorn.berlios.de%3E"
+       TITLE="[Crrcsim-devel] [Bug #18100] Geodetic latitude calculation has	numerical instability">admin at berlios.de
+       </A><BR>
+    <I>Fri May  6 19:12:58 CEST 2011</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000420.html">[Crrcsim-devel] [Patch #3153] Numerically stable geodetic latitude	function
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#419">[ date ]</a>
+              <a href="thread.html#419">[ thread ]</a>
+              <a href="subject.html#419">[ subject ]</a>
+              <a href="author.html#419">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bug #18100, was updated on 2011-May-06 13:12
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: aharmat
+Assigned to : none
+Summary: Geodetic latitude calculation has numerical instability
+
+Details: The conversion from geocentric to geodetic latitude in the function ls_geoc_to_geod(...) in ls_geodesy.cpp suffers from numerical instability around zero latitude, making the simulation jerky as the aircraft crosses the &quot;equator&quot; because the geodetic latitude output becomes coarse.
+
+I will be uploading a patch to fix this, it implements a fast version of Bowring's iterative formula for calculating geodetic location. This function does not suffer from instability around the equator and behaves just like the old function everywhere else.
+
+For detailed info, follow this link:
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=18100&amp;group_id=9957">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=18100&amp;group_id=9957</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000420.html">[Crrcsim-devel] [Patch #3153] Numerically stable geodetic latitude	function
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#419">[ date ]</a>
+              <a href="thread.html#419">[ thread ]</a>
+              <a href="subject.html#419">[ subject ]</a>
+              <a href="author.html#419">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

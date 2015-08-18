@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] CRRCSim helicopter model
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20CRRCSim%20helicopter%20model&In-Reply-To=%3C20080905092731.GA19494%40localhost%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000006.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] CRRCSim helicopter model</H1>
+    <B>Jens Wilhelm Wulf</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20CRRCSim%20helicopter%20model&In-Reply-To=%3C20080905092731.GA19494%40localhost%3E"
+       TITLE="[Crrcsim-devel] CRRCSim helicopter model">jens_w2 at gmx.net
+       </A><BR>
+    <I>Fri Sep  5 11:27:31 CEST 2008</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000006.html">[Crrcsim-devel] [crrcsim] CRRCSim helicopter model
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5">[ date ]</a>
+              <a href="thread.html#5">[ thread ]</a>
+              <a href="subject.html#5">[ subject ]</a>
+              <a href="author.html#5">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi folks,
+
+there is something new to play with in the development version of CRRCSim!
+
+If you are able to compile from source, you can use
+  <A HREF="http://hg.berlios.de/repos/crrcsim/archive/tip.zip">http://hg.berlios.de/repos/crrcsim/archive/tip.zip</A>
+
+If you are experienced with model helicopters, please provide feedback and 
+fiddle around with parameters in
+  models/heli.xml
+until it feels realistic.
+The model already contains different configurations; one for a fixed-pitch
+heli and two for a collective-pitch heli.
+
+The file format of heli.xml is mostly identical to that of the fixed wing
+models.
+If it climbs to fast/not fast enough, adjust its force F in the following
+context
+  +--------------------------------------------------------
+  |     &lt;power&gt;
+  |       &lt;automagic F=&quot;10&quot; V=&quot;1&quot;&gt;
+  +--------------------------------------------------------
+of the configuration you use.
+
+Other interesting parameters are 
+  +--------------------------------------------------------
+  |     &lt;aero version=&quot;1&quot; &gt;
+  |       &lt;yaw   ctrl=&quot;0.6&quot;  damp=&quot;0.05&quot; dist=&quot;0.03&quot; /&gt;
+  |       &lt;pitch ctrl=&quot;0.15&quot; damp=&quot;0.01&quot; dist=&quot;0.03&quot; /&gt;
+  |       &lt;roll  ctrl=&quot;0.15&quot; damp=&quot;0.01&quot; dist=&quot;0.03&quot; /&gt;
+  |       &lt;cp    ctrl=&quot;1.0&quot;  off=&quot;0.55&quot; /&gt;
+  |       &lt;speed damp=&quot;0.05&quot; /&gt;
+  |     &lt;/aero&gt;  
+  +--------------------------------------------------------
+'ctrl' means control throw, 'damp' is damping (higher numbers make it easier to
+fly). 'dist' introduces disturbances so you get something to do ;-)
+'cp' contains settings for the collective-pitch type only (control throw and
+offset).
+
+throttle controls climb
+rudder   controls yaw
+aileron  controls roll
+elevator controls pitch
+
+Taken from the changelog:
+  +--------------------------------------------------------
+  | First draft of a simple helicopter FDM and model
+  | 
+  | Note how simple this is (make a visual diff between fdm_larcsim
+  | and fdm_heli01!) and keep in mind that...
+  | - it is NOT backed by physics knowledge
+  | - it is done by a person who has never flown a helicopter (apart
+  |   from twenty minutes of simulation)
+  | - no special model for helicopter rotors has been created; the
+  |   fixed pitch models just use the existing propeller of the power
+  |   system
+  | - ...yes, the 3D model is done by myself, simple as usual...
+  | 
+  | However, comparing this to the helicopter simulation I tried out
+  | some years ago (for twenty minutes; I was told it was quite realistic)
+  | and to FMS (tried that out last night) this already seems better
+  | than FMS!
+  +--------------------------------------------------------
+  
+
+Have fun,
+Jens
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000006.html">[Crrcsim-devel] [crrcsim] CRRCSim helicopter model
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5">[ date ]</a>
+              <a href="thread.html#5">[ thread ]</a>
+              <a href="subject.html#5">[ subject ]</a>
+              <a href="author.html#5">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

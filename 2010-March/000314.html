@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] coherence convention for Z
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-March/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20coherence%20convention%20for%20Z&In-Reply-To=%3C20100321074008.1f91f583%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000313.html">
+   <LINK REL="Next"  HREF="000315.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] coherence convention for Z</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20coherence%20convention%20for%20Z&In-Reply-To=%3C20100321074008.1f91f583%40web.de%3E"
+       TITLE="[Crrcsim-devel] coherence convention for Z">jan.reucker at web.de
+       </A><BR>
+    <I>Sun Mar 21 07:40:08 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000313.html">[Crrcsim-devel] timings bugs are fixed now: record/demo/shadow is	ready for testing
+</A></li>
+        <LI>Next message: <A HREF="000315.html">[Crrcsim-devel] record/demo/shadow comments?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#314">[ date ]</a>
+              <a href="thread.html#314">[ thread ]</a>
+              <a href="subject.html#314">[ subject ]</a>
+              <a href="author.html#314">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Joel,
+
+here's a very late answer...
+
+On Sun, 21 Feb 2010 18:32:56 +0100
+Jo&#235;l Li&#233;nard &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">joel.lienard at free.fr</A>&gt; wrote:
+
+&gt;<i> &gt; It should avoid using any PLIB types and methods if possible, so that
+</I>&gt;<i> &gt; PLIB SG and SSG are only used in mod_landscape and mod_video.
+</I>&gt;<i> 
+</I>&gt;<i> Why?
+</I>&gt;<i> I had found convenient to use functions of SG Lib in my new file. Do you
+</I>&gt;<i> do recommend another lib?
+</I>
+PLIB is a nice library, and CRRCsim definitely benefits from it. PLIB is very
+mature and has few bugs, nice. But there's only a very small chance of ever
+seeing any really new features in it. So if we want things like a more
+sophisticated GUI or better 3D rendering with real shadows or vertex shaders,
+we have to switch to something else. Therefore I don't want to use PLIB
+features if I can avoid them, especially for modules that are not related to
+the GUI or 3D rendering.
+
+Regarding SG: It's a very complete library with lots of functions that are
+really useful for games. But I don't like the general design (treating
+vectors and matrices as plain arrays and handling them in unrelated functions).
+Therefore I prefer using CRRCMath if possible, extending the existing classes
+if needed. It has a much more object-oriented design which leads to &quot;nicer&quot;
+code.
+
+Kind regards,
+Jan R.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000313.html">[Crrcsim-devel] timings bugs are fixed now: record/demo/shadow is	ready for testing
+</A></li>
+	<LI>Next message: <A HREF="000315.html">[Crrcsim-devel] record/demo/shadow comments?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#314">[ date ]</a>
+              <a href="thread.html#314">[ thread ]</a>
+              <a href="subject.html#314">[ subject ]</a>
+              <a href="author.html#314">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

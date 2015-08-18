@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] ComboBox background colour
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2011-August/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20ComboBox%20background%20colour&In-Reply-To=%3C20110810174217.GA12161%40knusper%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000433.html">
+   <LINK REL="Next"  HREF="000435.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] ComboBox background colour</H1>
+    <B>Jens Wilhelm Wulf</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20ComboBox%20background%20colour&In-Reply-To=%3C20110810174217.GA12161%40knusper%3E"
+       TITLE="[Crrcsim-devel] ComboBox background colour">jens_w2 at gmx.net
+       </A><BR>
+    <I>Wed Aug 10 19:42:17 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000433.html">[Crrcsim-devel] ComboBox background colour
+</A></li>
+        <LI>Next message: <A HREF="000435.html">[Crrcsim-devel] ComboBox background colour
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#434">[ date ]</a>
+              <a href="thread.html#434">[ thread ]</a>
+              <a href="subject.html#434">[ subject ]</a>
+              <a href="author.html#434">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Jan,
+
+&gt;<i> digging into the PLIB source code, I found out what is also stated
+</I>&gt;<i> in the PLIB documentation:
+</I>Uh, and I just found out that despite not liking their API (sometimes it
+is lower left and upper right corner, sometimes lower left corner plus
+width and height to define a widget's position and size) and the fact
+that their documentation is not more than an introduction to what
+might be possible with plib, they don't even comment their code. So it
+is not enough to read .h files, you have to go through all their
+source...what a pita.
+
+&gt;<i> As a puaComboBox is-a-kind-of puGroup, you should try these functions.
+</I>Yes, and read their sourcecode including everything down to where the puBox
+is painted: puaComboBox, puPopupMenu, puOneShot, puButton, puObject,
+puBox. Maybe I missed something in between...
+
+It all boils down to calling
+
+  someComboBox-&gt;setChildColour(PUCLASS_BUTTON, PUCOL_FOREGROUND, 0.85, 0.85, 0.85, 1.0, TRUE);
+
+to change a combo boxes background color. PUCOL_FOREGROUND is pretty
+obvious, isn't it? I admit to be slightly pissed...
+
+And after all that I found:
+
+  +--------------------------------------------------------
+  | CGUIMain::CGUIMain(bool vis) : visible(vis)
+  | {
+  |   puInit();
+  |   puSetDefaultStyle(PUSTYLE_SMALL_BEVELLED);
+  | 
+  |   // Light grey, transparency
+  |   puSetDefaultColourScheme(0.85, 0.85, 0.85, 0.85);
+  |   // Light grey, no transparency
+  |   //puSetDefaultColourScheme(0.85, 0.85, 0.85, 1.0);
+  +--------------------------------------------------------
+
+Anyone opposed to changing back to the second color scheme? Jan, you
+added that one in aed58809d425 without activating it. That fixes all
+those dialogs at once. Transparency in dialogs is nothing more than
+making things more difficult to see, it only adds problems.
+
+Best regards,
+Jens
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000433.html">[Crrcsim-devel] ComboBox background colour
+</A></li>
+	<LI>Next message: <A HREF="000435.html">[Crrcsim-devel] ComboBox background colour
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#434">[ date ]</a>
+              <a href="thread.html#434">[ thread ]</a>
+              <a href="subject.html#434">[ subject ]</a>
+              <a href="author.html#434">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] license header progress
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20license%20header%20progress&In-Reply-To=%3C20090127221159.59b53d3b.jan.reucker%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000112.html">
+   <LINK REL="Next"  HREF="000114.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] license header progress</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20license%20header%20progress&In-Reply-To=%3C20090127221159.59b53d3b.jan.reucker%40web.de%3E"
+       TITLE="[Crrcsim-devel] license header progress">jan.reucker at web.de
+       </A><BR>
+    <I>Tue Jan 27 22:11:59 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000112.html">[Crrcsim-devel] license header progress
+</A></li>
+        <LI>Next message: <A HREF="000114.html">[Crrcsim-devel] license header progress
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#113">[ date ]</a>
+              <a href="thread.html#113">[ thread ]</a>
+              <a href="subject.html#113">[ subject ]</a>
+              <a href="author.html#113">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Am Tue, 27 Jan 2009 09:23:42 +0100 schrieb Jo&#235;l Li&#233;nard &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">joel.lienard at free.fr</A>&gt;:
+
+&gt;<i> &gt;&gt; Another issue that needs discussion: Should we clean up the list of
+</I>&gt;<i> airplanes delivered with the base package? I think we should maybe remove
+</I>&gt;<i> some of the lower quality models (e.g. the &quot;Delta&quot; things that show some
+</I>&gt;<i> very interesting flat-spinning when handled incorrectly, or models that are
+</I>&gt;<i> just duplicates of the Allegro FDM parameters) and maybe add one or two
+</I>&gt;<i> of the higher quality models from crrcsim-addon-models (like the Supra or
+</I>&gt;<i> the Fireworks III with Bob's fine-tuned FDM parameters).
+</I>&gt;<i> 
+</I>&gt;<i> Yes
+</I>
+So here's my proposal for the models:
+
+allegro.xml      keep
+apogee.xml       keep
+arkanj-mg11.xml  remove
+biplane2.xml     ? (based on sport.xml, but nice to have a biplane)
+delta1c.xml      remove
+delta1d.xml      remove
+delta1e.xml      remove
+FlexiflyXLM.xml  keep
+gap65.xml        keep
+heli.xml         keep
+k2-f3f2.xml      ?
+k2-f3f.xml       ?
+k2.xml           keep
+mav0.xml         ?
+mav.xml          ?
+melyan_01.xml    remove
+outrage.xml      keep
+quickie01.xml    keep
+Skimmer_MK_I.xml remove
+Skorpion.xml     keep
+sovereign.xml    keep
+spirit.xml       remove
+sport.xml        keep
+superzagi.xml    keep
+tug.xml          remove
+zagi.xml         ?
+zagi-xs.xml      keep
+zip60.xml        remove
+zipper.xml       keep
+
+And from addon-models:
+
+Crossfire.xml
+Erwin.xml
+fireworks3_C.xml (with Bob's parameter adjustment)
+supra.xml (with Bob's parameter adjustment)
+ 
+&gt;<i> &gt;&gt; And what about scenery files?
+</I>&gt;<i> 
+</I>&gt;<i> It would be logical to replace the old ones (&quot;built-in&quot;) by the new ones
+</I>&gt;<i> (&quot;model-based&quot;). It would be perhaps possible for Davis but not for Cape
+</I>&gt;<i> Code : it misses the waves animation and especially it misses the wind.
+</I>
+Therefore I'd like to stick with the &quot;built-in&quot; versions, at least for the
+next release.
+
+&gt;<i> &gt;&gt; What do you propose for the large files out of HG?
+</I>
+We can serve them from the BerliOS server without storing them in the repo.
+I can simply create a .zip file and upload them as a data package. For the
+Ubuntu packaging process I'd separate them from the main package. Maybe
+Chris can create something like a &quot;crrcsim-extra-data&quot; package. Many projects
+seem to do it this way. The base package just provides a basic set of
+data files while large addons are offered as a separate download for those
+with a broadband connection.
+
+Just when I thought I had fixed the last bug (the soundserver issue, fix not
+tested yet, but I guess I know the cause), two more have appeared in the
+bug tracker :-(
+
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=15138&amp;group_id=9957">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=15138&amp;group_id=9957</A>
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=15139&amp;group_id=9957">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=15139&amp;group_id=9957</A>
+
+Any help in reproducing and fixing these bugs is appreciated! Regarding
+#015139, I think something similar was reported before on one of the mailing lists,
+but I never managed to reproduce it.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: <A HREF="http://www.reucker-online.de/pgpkey.asc">http://www.reucker-online.de/pgpkey.asc</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000112.html">[Crrcsim-devel] license header progress
+</A></li>
+	<LI>Next message: <A HREF="000114.html">[Crrcsim-devel] license header progress
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#113">[ date ]</a>
+              <a href="thread.html#113">[ thread ]</a>
+              <a href="subject.html#113">[ subject ]</a>
+              <a href="author.html#113">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

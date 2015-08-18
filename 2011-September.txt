@@ -1,0 +1,22 @@
+From admin at berlios.de  Tue Sep  6 00:57:13 2011
+From: admin at berlios.de (admin at berlios.de)
+Date: Tue, 6 Sep 2011 02:57:13 +0400 (MSD)
+Subject: [Crrcsim-devel] [Patch #3206] Support for FreeBSD serial device
+	names
+Message-ID: <201109052257.p85MvDUt019116@unicorn.berlios.de>
+
+Patch #3206 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: amdmi3
+Assigned to : none
+Summary: Support for FreeBSD serial device names
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3206&group_id=9957
+
+

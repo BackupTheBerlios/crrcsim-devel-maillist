@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] panorama scenery
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2008-December/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20panorama%20scenery&In-Reply-To=%3C5C1724E24EFB43BC99EEB02F214A1AB5%40PCdeJol%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000070.html">
+   <LINK REL="Next"  HREF="000072.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] panorama scenery</H1>
+    <B>Jo&#235;l Li&#233;nard</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20panorama%20scenery&In-Reply-To=%3C5C1724E24EFB43BC99EEB02F214A1AB5%40PCdeJol%3E"
+       TITLE="[Crrcsim-devel] panorama scenery">joel.lienard at laposte.net
+       </A><BR>
+    <I>Sat Dec 20 09:39:37 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000070.html">[Crrcsim-devel] panorama scenery
+</A></li>
+        <LI>Next message: <A HREF="000072.html">[Crrcsim-devel] panorama scenery
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#71">[ date ]</a>
+              <a href="thread.html#71">[ thread ]</a>
+              <a href="subject.html#71">[ subject ]</a>
+              <a href="author.html#71">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello with all!
+
+I transferred on hg.berlios.de my modifications. It still remains me to work
+but you can start to play. 
+
+Merry Christmas!
+
+Jo&#235;l
+
+-----Message d'origine-----
+De&#160;: <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">jan.reucker at web.de</A> [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">jan.reucker at web.de</A>] 
+Envoy&#233;&#160;: samedi 13 d&#233;cembre 2008 17:30
+&#192;&#160;: <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">crrcsim-devel at lists.berlios.de</A>
+Cc&#160;: Jo&#235;l Li&#233;nard
+Objet&#160;: Re: panorama scenery
+
+
+Hello Joel,
+
+your email bounced (don't know why), so I'm reposting it below...
+
+Kind regards,
+Jan R.
+
+
+Am Sat, 13 Dec 2008 16:51:17 +0100 schrieb Jo&#235;l Li&#233;nard
+&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">joel.lienard at laposte.net</A>&gt;:
+
+&gt;<i> I have quite advanced on the development of new scenes by using a
+</I>&gt;<i> photographic panorama. Here a small report of my work.
+</I>&gt;<i> 
+</I>&gt;<i>  
+</I>&gt;<i> 
+</I>&gt;<i> The technique of realization of the panorama functions well. The example
+</I>of
+&gt;<i> the slope of Brie (close to Grenoble) is correct. The determination of the
+</I>&gt;<i> altitude of the ground starting from the photographs is satisfactory for
+</I>the
+&gt;<i> close objects. I will supplement then by the use of map or aerial photos.
+</I>&gt;<i> 
+</I>&gt;<i>  
+</I>&gt;<i> 
+</I>&gt;<i> I integrate this panorama in CRRCSIm like a &quot;Skybox&quot;. Each face is defined
+</I>&gt;<i> by 2048x2048px. One will be able to envisage a low resolution of 1024x1024
+</I>&gt;<i> for old graphics cards.
+</I>&gt;<i> 
+</I>&gt;<i> The difficulties start with the definition of altitudes to obtain
+</I>realistic
+&gt;<i> landings. I finally decided to define the altitude of the ground by
+</I>creating
+&gt;<i> a graphic surface. I generate a file of the type &#147;.ac&#148;. That enables me to
+</I>&gt;<i> use the functions already ready in CRRCSIM for the &#147;ModelBasedScenery&#148;.
+</I>The
+&gt;<i> only difference is that the contents of the file are not traced because it
+</I>&gt;<i> definite a transparent surface. 
+</I>&gt;<i> 
+</I>&gt;<i> To use this representation as definition of altitude, I programmed the
+</I>&gt;<i> functions &#147;getHeightAndPlane&#148; and &#147;getHeight&#148; in the class
+</I>&gt;<i> &#147;ModelBasedScenery&#148;. As suggested by Jan, I used the function ssgLOS. That
+</I>&gt;<i> functions but is very greedy in CPU because it is not accelerated by the
+</I>&gt;<i> graphics card. &#147;Simple Scenery&#148; does not function even on my very recent
+</I>&gt;<i> computer. I thus started to use a technique of tiling. My first incomplete
+</I>&gt;<i> version currently functions with &#147;Simple Scenery&#148; but does not accept
+</I>&gt;<i> hierarchical scenes like that of Davis. I temporarily envisaged a
+</I>&gt;<i> commutation by an attribute &lt;scene type=&quot;model-based&quot; mode=x &gt;.. Thus, all
+</I>&gt;<i> of the scenes function in mode &#147;ModelBasedScenery&#148;: Davis, CapeCod,
+</I>&gt;<i> SimpleScenery, and Brie.
+</I>&gt;<i> 
+</I>&gt;<i>  
+</I>&gt;<i> 
+</I>&gt;<i> Remain to parameterize the wind. I envisaged a function similar
+</I>&gt;<i> &#147;GetWindComponents&#148; of getHeight but I did not still decide anything to
+</I>load
+&gt;<i> it (It is necessary to be able to load a grid 3D!). Temporarily, that
+</I>&gt;<i> function returns a constant vertical component.
+</I>&gt;<i> 
+</I>&gt;<i>  
+</I>&gt;<i> 
+</I>&gt;<i> Later, it will be necessary to improve management of the contact
+</I>&gt;<i> sailplane/ground. It will be necessary, in particular, to define
+</I>parameters
+&gt;<i> &#147;stiffness&#148; and &#147;roughness&#148;.
+</I>&gt;<i> 
+</I>&gt;<i>  
+</I>&gt;<i> 
+</I>&gt;<i> I will file soon my modifications on Berlios. They relate to primarily
+</I>&gt;<i> crrc_scenry.cpp.
+</I>&gt;<i> 
+</I>&gt;<i> I, moreover, standardized conventions of coordinates of the files
+</I>&gt;<i> scenes.xml. ( I gave up a complete standardization in all CRRCSIM!)
+</I>&gt;<i> 
+</I>&gt;<i> Jo&#235;l
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000070.html">[Crrcsim-devel] panorama scenery
+</A></li>
+	<LI>Next message: <A HREF="000072.html">[Crrcsim-devel] panorama scenery
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#71">[ date ]</a>
+              <a href="thread.html#71">[ thread ]</a>
+              <a href="subject.html#71">[ subject ]</a>
+              <a href="author.html#71">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

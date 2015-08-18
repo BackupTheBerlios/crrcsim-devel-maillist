@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] [Patch #3044] Airplane specific controls	configuration
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-September/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BPatch%20%233044%5D%20Airplane%20specific%20controls%0A%09configuration&In-Reply-To=%3C201009132056.o8DKuj29007663%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000394.html">
+   <LINK REL="Next"  HREF="000400.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] [Patch #3044] Airplane specific controls	configuration</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BPatch%20%233044%5D%20Airplane%20specific%20controls%0A%09configuration&In-Reply-To=%3C201009132056.o8DKuj29007663%40unicorn.berlios.de%3E"
+       TITLE="[Crrcsim-devel] [Patch #3044] Airplane specific controls	configuration">admin at berlios.de
+       </A><BR>
+    <I>Mon Sep 13 22:56:45 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000394.html">[Crrcsim-devel] [Patch #3059] New airplane specific config and	verbosity level config
+</A></li>
+        <LI>Next message: <A HREF="000400.html">[Crrcsim-devel] [Patch #3063] Verbosity level configuration only
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#395">[ date ]</a>
+              <a href="thread.html#395">[ thread ]</a>
+              <a href="subject.html#395">[ subject ]</a>
+              <a href="author.html#395">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Patch #3044 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Out of date
+Submitted by: jreucker
+Assigned to : jreucker
+Summary: Airplane specific controls configuration
+
+Follow-Ups:
+
+Date: 2010-Sep-07 20:56
+By: dl6lr
+
+Comment:
+Please do not use any more, a new patch was submitted today that should be used.
+-------------------------------------------------------
+
+Date: 2010-Aug-08 15:49
+By: jreucker
+
+Comment:
+Submitted on behalf of Bernd Laengerich (see CRRCsim Yahoo group posting from 2010-08-04).
+
+Patch to enable model specific input configurations
+
+---------------------------------------------------
+
+
+
+Idea: 
+
+
+
+Model specific configuration options like mixer settings may help in handling of separate models.
+
+Make usage of existing classes and configuration by writing the config to a different position in the xml file.
+
+
+
+GUI:
+
+
+
+The input configuration dialog &quot;Controls&quot; was extended by two components.
+
+The first component is a check box indicating if the current configuration is model specific
+
+The second component is a button to enable migration of the current config to either a model 
+
+specific or a global section, depending on the state the configuration is in.
+
+This button is greyed out if the current configuration option matches the configuration file.
+
+
+
+The xml file:
+
+
+
+The global configuration resides as is in the section &lt;inputMethod /&gt; 
+
+The tag has a new attribute &quot;model_specific=0/1&quot; indicating if the new feature should be used. The old behaviour is model_specific=0.
+
+The model specific input configuration resides in a new tree named &lt;models /&gt;
+
+Every model has its own section inside &lt;models /&gt; with the name of the model (i.e. &lt;allegro&gt;)
+
+If the model specific section is not found, the configuration falls back to the global section.
+
+
+
+How does it work?
+
+
+
+1. Beginning with the xml file from 0.9.11, crrcsim should work as before.
+
+2. Using the controls dialog, the check box &quot;model specific&quot; is unset, the migration button is deactivated
+
+3. Checking the model specific check box will enable the migration button. 
+
+4. When saving configuration, the only change will be the attribute model_specific set to 1. 
+
+   As there is no specific configuration option for the current airplane, the input configuration will remain the same.
+
+5. Hitting the Migration button &quot;--&gt; Model&quot; will now migrate the global input config to a specific config for the current model.
+
+   Save settings and check the xml file. There should be a copy of the input configuration inside the models tag.
+
+6. Every change you do now will affect the model specific settings, not the global one.
+
+7. Selecting a different airplane will start over as before, beginning with the global config, as there is no specific config.
+
+   Migrate and save the setting
+
+8. Switching between airplanes will now load each specific configuration for each airplane.
+
+9. To write the current model specific configuration as a global config back to the file:
+
+   a) uncheck the model specific setting
+
+   b) hit the migration button &quot;--&gt; Global&quot;
+
+   c) Save settings
+
+   You can reenable the model specific configuration thereafter 
+
+
+
+Further changes:
+
+
+
+- Refactored the crrc_ctrlgen.cpp to have a simple layout scheme with easier calculation of the components
+
+
+
+Known issues:
+
+
+
+- Still in work
+
+- Before saving the settings, the migration button will reappear each time the controls dialog is opened
+
+- Some debugging printf to be removed
+
+- Ugly usage of global function reconfigureInputMethod in crrc_main from the dialog
+
+- Encapsulation of functionalities needs more work
+
+
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+<A HREF="http://developer.berlios.de/patch/?func=detailpatch&amp;patch_id=3044&amp;group_id=9957">http://developer.berlios.de/patch/?func=detailpatch&amp;patch_id=3044&amp;group_id=9957</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000394.html">[Crrcsim-devel] [Patch #3059] New airplane specific config and	verbosity level config
+</A></li>
+	<LI>Next message: <A HREF="000400.html">[Crrcsim-devel] [Patch #3063] Verbosity level configuration only
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#395">[ date ]</a>
+              <a href="thread.html#395">[ thread ]</a>
+              <a href="subject.html#395">[ subject ]</a>
+              <a href="author.html#395">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

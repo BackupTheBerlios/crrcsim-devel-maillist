@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] learing to fly (&amp; land) with CRRCsim.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-November/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20learing%20to%20fly%20%28%26%20land%29%20with%20CRRCsim.&In-Reply-To=%3C20091128110823.GD21962%40bitwizard.nl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000235.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] learing to fly (&amp; land) with CRRCsim.</H1>
+    <B>Rogier Wolff</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20learing%20to%20fly%20%28%26%20land%29%20with%20CRRCsim.&In-Reply-To=%3C20091128110823.GD21962%40bitwizard.nl%3E"
+       TITLE="[Crrcsim-devel] learing to fly (&amp; land) with CRRCsim.">R.E.Wolff at BitWizard.nl
+       </A><BR>
+    <I>Sat Nov 28 12:08:23 CET 2009</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000235.html">[Crrcsim-devel] learing to fly (&amp; land) with CRRCsim.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#234">[ date ]</a>
+              <a href="thread.html#234">[ thread ]</a>
+              <a href="subject.html#234">[ subject ]</a>
+              <a href="author.html#234">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hi,
+
+I built my first two models the last few weeks, but because of the
+weather here, didn't get to flying them. And maybe that's a good thing
+because I've gotten a lot better at rc flying on CRRCSIM... :-)
+
+For me, one of the hardest things is to get the plane back on the
+ground (in one piece) after flying a few rounds... In CRRCSIM the
+plane just bounces if you hit the ground. In a review I saw this is
+described as &quot;unrealistic&quot;. But technically probably the easiest
+solution.
+
+Now I was thinking: how about a &quot;damage meter&quot;. If the reaction forces
+from the ground are &quot;measured&quot;, and the highest value encountered
+displayed, then that would allow me to see an impartial measure of how
+good my landing skills are getting....
+
+So far I've found: 
+
+  src/mod_fdm/gear01/gear.cpp
+
+as one place where ground forces are calculated. But I have no idea
+yet where to store and where to display the results. 
+
+Moreover I think it's not always the gears that touch the ground, so
+maybe this is not the place to add this.
+
+Suggestions? Improvements?
+
+	Roger. 
+
+-- 
+** <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">R.E.Wolff at BitWizard.nl</A> ** <A HREF="http://www.BitWizard.nl/">http://www.BitWizard.nl/</A> ** +31-15-2600998 **
+**    Delftechpark 26 2628 XH  Delft, The Netherlands. KVK: 27239233    **
+*-- BitWizard writes Linux device drivers for any device you may have! --*
+Q: It doesn't work. A: Look buddy, doesn't work is an ambiguous statement. 
+Does it sit on the couch all day? Is it unemployed? Please be specific! 
+Define 'it' and what it isn't doing. --------- Adapted from lxrbot FAQ
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000235.html">[Crrcsim-devel] learing to fly (&amp; land) with CRRCsim.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#234">[ date ]</a>
+              <a href="thread.html#234">[ thread ]</a>
+              <a href="subject.html#234">[ subject ]</a>
+              <a href="author.html#234">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

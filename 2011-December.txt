@@ -1,0 +1,70 @@
+From jens_w2 at gmx.net  Wed Dec 28 09:36:29 2011
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Wed, 28 Dec 2011 09:36:29 +0100
+Subject: [Crrcsim-devel] error on hg push
+Message-ID: <20111228083629.GA1828@streusel>
+
+Hi there,
+
+I hope all of you had a merry christmas and have some nice days ... 
+
+Jan R. just mailed me about a problem when pushing to the sf.net repo
+(remember that berlios shuts down in a few days). It seems to be
+related to a hook implemented by sf and happen in some cases (I did
+not see it when pushing our whole repo to sf) with a non english
+locale. 
+
+Searching the web revealed this (workaround included):
+
+  http://sourceforge.net/apps/trac/sourceforge/ticket/14971
+
+Best regards,
+Jens
+
+
+From admin at berlios.de  Thu Dec 29 02:04:59 2011
+From: admin at berlios.de (admin at berlios.de)
+Date: Wed, 28 Dec 2011 20:04:59 -0500 (EST)
+Subject: [Crrcsim-devel] [Patch #3147] Support for PulseAudio input devices
+Message-ID: <201112290104.pBT14xvw015770@unicorn.berlios.de>
+
+Patch #3147 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: pdima
+Assigned to : jreucker
+Summary: Support for PulseAudio input devices
+
+Follow-Ups:
+
+Date: 2011-Dec-28 20:04
+By: arnav
+
+Comment:
+When I try the patch on Ubuntu 11.04 2.6.38-13 x64 I get the following error when trying to compile:
+
+crrcsim-crrc_graphics.o: In function `Video::oscillo()':
+/dan/src/crrcsim/crrcsim-0.9.11/src/mod_video/crrc_graphics.cpp:597: undefined reference to `get_pa_audio_signal(int)'
+crrcsim-crrc_main.o: In function `reconfigureInputMethod(bool)':
+/dan/src/crrcsim/crrcsim-0.9.11/src/crrc_main.cpp:374: undefined reference to `T_TX_InterfacePulseAudio::T_TX_InterfacePulseAudio()'
+collect2: ld returned 1 exit status
+make[2]: *** [crrcsim] Error 1
+
+Any ideas? 
+-------------------------------------------------------
+
+Date: 2011-May-07 03:43
+By: jreucker
+
+Comment:
+Thanks for your patch, I'll try it ASAP.
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/patch/?func=detailpatch&patch_id=3147&group_id=9957
+
+

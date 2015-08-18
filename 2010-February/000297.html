@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] coherence convention for Z
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-February/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20coherence%20convention%20for%20Z&In-Reply-To=%3C20100215225327.2fc3687b%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000296.html">
+   <LINK REL="Next"  HREF="000298.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] coherence convention for Z</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20coherence%20convention%20for%20Z&In-Reply-To=%3C20100215225327.2fc3687b%40web.de%3E"
+       TITLE="[Crrcsim-devel] coherence convention for Z">jan.reucker at web.de
+       </A><BR>
+    <I>Mon Feb 15 22:53:27 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000296.html">[Crrcsim-devel] coherence convention for Z
+</A></li>
+        <LI>Next message: <A HREF="000298.html">[Crrcsim-devel] coherence convention for Z
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#297">[ date ]</a>
+              <a href="thread.html#297">[ thread ]</a>
+              <a href="subject.html#297">[ subject ]</a>
+              <a href="author.html#297">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, 13 Feb 2010 19:14:05 +0100
+Jo&#235;l Li&#233;nard &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">joel.lienard at laposte.net</A>&gt; wrote:
+
+&gt;<i> I noticed an incoherence between the parameters of the functions
+</I>&gt;<i> &quot;getHeight&quot; and &quot;getWindComponents&quot;.
+</I>&gt;<i> GetHeight returns a positive value pour up
+</I>&gt;<i> getWindComponents uses Z  positive value for down
+</I>
+Hi Jo&#235;l,
+
+thanks for implementing the wind simulation, finally we have at least some
+kind of lift in model based sceneries. I guess that's a good starting point
+for more detailed implementations.
+
+But maybe we should take the time and think about the general design of the
+wind simulation in CRRCsim. Right now things are scattered across several
+modules:
+
+- thermal simulation in mod_windfield
+- initialization of mod_windfield in mod_main (Init_mod_windfield)
+- interface getWindComponents in mod_landscape
+- config file interface in config.cpp
+
+We should centralize all this stuff in mod_windfield. I know that I advocated
+the close coupling of wind and scenery stuff in the past, but maybe it's
+a better design if mod_windfield only uses the getHeight interface of mod_scenery
+and takes care of all the rest. mod_fdm already gets its wind information
+directly from mod_windfield.
+
+mod_windfield should offer an abstract base class defining the common interface
+for all future windfield implementations, along with methods to access the config
+file. It should avoid using any PLIB types and methods if possible, so that
+PLIB SG and SSG are only used in mod_landscape and mod_video.
+
+Then maybe all interfaces should stick to the &quot;Z is down&quot; convention. I think
+it's convenient to have &quot;Z is up&quot; externally (e.g. in the scenery files),
+but internally I don't really care if everything is well-documented.
+
+What do you think? Maybe I could start to rearrange some things during the
+next few days.
+
+Kind regards,
+Jan R.
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000296.html">[Crrcsim-devel] coherence convention for Z
+</A></li>
+	<LI>Next message: <A HREF="000298.html">[Crrcsim-devel] coherence convention for Z
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#297">[ date ]</a>
+              <a href="thread.html#297">[ thread ]</a>
+              <a href="subject.html#297">[ subject ]</a>
+              <a href="author.html#297">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

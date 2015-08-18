@@ -1,0 +1,368 @@
+From admin at berlios.de  Wed Aug  3 19:55:47 2011
+From: admin at berlios.de (admin at berlios.de)
+Date: Wed, 3 Aug 2011 19:55:47 +0200 (CEST)
+Subject: [Crrcsim-devel] [Bug #18100] Geodetic latitude calculation has
+	numerical instability
+Message-ID: <201108031755.p73Htldt021442@unicorn.berlios.de>
+
+Bug #18100, was updated on 2011-May-06 19:12
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: Fixed
+Bug Group: None
+Priority: 5
+Submitted by: aharmat
+Assigned to : jww
+Summary: Geodetic latitude calculation has numerical instability
+
+Details: The conversion from geocentric to geodetic latitude in the function ls_geoc_to_geod(...) in ls_geodesy.cpp suffers from numerical instability around zero latitude, making the simulation jerky as the aircraft crosses the "equator" because the geodetic latitude output becomes coarse.
+
+I will be uploading a patch to fix this, it implements a fast version of Bowring's iterative formula for calculating geodetic location. This function does not suffer from instability around the equator and behaves just like the old function everywhere else.
+
+Follow-Ups:
+
+Date: 2011-Aug-03 19:55
+By: jww
+
+Comment:
+Patch applied: 8e395bce06ca, Fri Jul 29 2011.
+
+Thanks a lot for your for your excellent patch!
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=18100&group_id=9957
+
+
+From admin at berlios.de  Wed Aug  3 19:55:56 2011
+From: admin at berlios.de (admin at berlios.de)
+Date: Wed, 3 Aug 2011 19:55:56 +0200 (CEST)
+Subject: [Crrcsim-devel] [Bug #18100] Geodetic latitude calculation has
+	numerical instability
+Message-ID: <201108031755.p73HtuVs021958@unicorn.berlios.de>
+
+Bug #18100, was updated on 2011-May-06 19:12
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: Fixed
+Bug Group: None
+Priority: 5
+Submitted by: aharmat
+Assigned to : jww
+Summary: Geodetic latitude calculation has numerical instability
+
+Details: The conversion from geocentric to geodetic latitude in the function ls_geoc_to_geod(...) in ls_geodesy.cpp suffers from numerical instability around zero latitude, making the simulation jerky as the aircraft crosses the "equator" because the geodetic latitude output becomes coarse.
+
+I will be uploading a patch to fix this, it implements a fast version of Bowring's iterative formula for calculating geodetic location. This function does not suffer from instability around the equator and behaves just like the old function everywhere else.
+
+Follow-Ups:
+
+Date: 2011-Aug-03 19:55
+By: jww
+
+Comment:
+Patch applied: 8e395bce06ca, Fri Jul 29 2011.
+
+Thanks a lot for your for your excellent patch!
+-------------------------------------------------------
+
+Date: 2011-Aug-03 19:55
+By: jww
+
+Comment:
+Patch applied: 8e395bce06ca, Fri Jul 29 2011.
+
+Thanks a lot for your for your excellent patch!
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=18100&group_id=9957
+
+
+From admin at berlios.de  Wed Aug  3 19:56:32 2011
+From: admin at berlios.de (admin at berlios.de)
+Date: Wed, 3 Aug 2011 19:56:32 +0200 (CEST)
+Subject: [Crrcsim-devel] [Bug #18100] Geodetic latitude calculation has
+	numerical instability
+Message-ID: <201108031756.p73HuWTU023452@unicorn.berlios.de>
+
+Bug #18100, was updated on 2011-May-06 19:12
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Closed
+Resolution: Fixed
+Bug Group: None
+Priority: 5
+Submitted by: aharmat
+Assigned to : jww
+Summary: Geodetic latitude calculation has numerical instability
+
+Details: The conversion from geocentric to geodetic latitude in the function ls_geoc_to_geod(...) in ls_geodesy.cpp suffers from numerical instability around zero latitude, making the simulation jerky as the aircraft crosses the "equator" because the geodetic latitude output becomes coarse.
+
+I will be uploading a patch to fix this, it implements a fast version of Bowring's iterative formula for calculating geodetic location. This function does not suffer from instability around the equator and behaves just like the old function everywhere else.
+
+Follow-Ups:
+
+Date: 2011-Aug-03 19:56
+By: jww
+
+Comment:
+forgot to close...
+-------------------------------------------------------
+
+Date: 2011-Aug-03 19:55
+By: jww
+
+Comment:
+Patch applied: 8e395bce06ca, Fri Jul 29 2011.
+
+Thanks a lot for your for your excellent patch!
+-------------------------------------------------------
+
+Date: 2011-Aug-03 19:55
+By: jww
+
+Comment:
+Patch applied: 8e395bce06ca, Fri Jul 29 2011.
+
+Thanks a lot for your for your excellent patch!
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=18100&group_id=9957
+
+
+From admin at berlios.de  Wed Aug  3 19:57:58 2011
+From: admin at berlios.de (admin at berlios.de)
+Date: Wed, 3 Aug 2011 19:57:58 +0200 (CEST)
+Subject: [Crrcsim-devel] [Bug #18218] dead zone with E-sky USB interface
+Message-ID: <201108031757.p73HvwZf027354@unicorn.berlios.de>
+
+Bug #18218, was updated on 2011-Jul-08 22:11
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: df2qy
+Assigned to : none
+Summary: dead zone with E-sky USB interface
+
+Details: As reported here: http://crrcsim.berlios.de/wiki/index.php?n=CRRCsim.IFJoyStick
+there is a dead zone with the E-sky USB interface in CRRCsim. I can confirm this behavior, but it is not there when I use the same hardware with FMS running in VirtualBox on the same machine with Windows XP. Therefore it has to be a bug in either CRRCsim or the linux driver for the interface cable. Also the dead zone is not at center position but only in one direction between 50% and about 75%. I assume that this is also the cause for the different scaling for positive and negative input.
+
+Tested with current source code from repository on ubuntu 11.04 64bit.
+
+Follow-Ups:
+
+Date: 2011-Aug-03 19:57
+By: jww
+
+Comment:
+Please take a look at
+
+  http://superuser.com/questions/17959/linux-joystick-seems-mis-calibrated-in-an-sdl-game-freespace-2-open
+  https://bugs.launchpad.net/ubuntu/+source/libsdl1.2/+bug/410187
+
+Maybe this
+
+  Set SDL_JOYSTICK_DEVICE=/dev/input/js0 (a user can put this in
+  /etc/environment and reboot to apply it everywhere).
+
+helps for your case, too? In case you are able to recompile SDL, the
+links above do mention other possible solutions.
+
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=18218&group_id=9957
+
+
+From jens_w2 at gmx.net  Wed Aug 10 15:05:21 2011
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Wed, 10 Aug 2011 15:05:21 +0200
+Subject: [Crrcsim-devel] ComboBox background colour
+Message-ID: <20110810130521.GA1652@knusper>
+
+Hi,
+
+I just tried setting the combo boxes background color to something less
+transparent, but had no success.
+For example the "category" box in the airplane selection dialog is
+hardly readable.
+
+I tried
+  void puaComboBox::setColourScheme ( float r, float g, float b, float a )
+and all of
+  
+#define PUCOL_FOREGROUND 0
+#define PUCOL_BACKGROUND 1
+#define PUCOL_HIGHLIGHT  2
+#define PUCOL_LABEL      3
+#define PUCOL_LEGEND     4
+#define PUCOL_MISC       5
+#define PUCOL_EDITFIELD  6
+#define PUCOL_MAX        7
+
+with 
+  void puaComboBox::setColour ( int which, float r, float g, float b, float a )
+
+Does anyone know how to achieve the desired effect?
+
+Best regards,
+Jens
+
+
+From jan.reucker at web.de  Wed Aug 10 15:48:46 2011
+From: jan.reucker at web.de (Jan Reucker)
+Date: Wed, 10 Aug 2011 15:48:46 +0200
+Subject: [Crrcsim-devel] ComboBox background colour
+In-Reply-To: <20110810130521.GA1652@knusper>
+References: <20110810130521.GA1652@knusper>
+Message-ID: <4E428C3E.7030000@web.de>
+
+On 10.08.2011 15:05, Jens Wilhelm Wulf wrote:
+> Hi,
+>
+> I just tried setting the combo boxes background color to something less
+> transparent, but had no success.
+
+Hi Jens,
+
+
+digging into the PLIB source code, I found out what is also stated in 
+the PLIB documentation:
+
+"Colours, styles, etc are *not* propagated from puGroup to its children, 
+although there are six functions which allow you to change the 
+appearances of the child widgets on a per-child-class basis:
+
+   void puGroup::setChildStyle ( int childs, int style, int recursive = FALSE ) ;
+   void puGroup::setChildBorderThickness ( int childs, int t, int recursive = FALSE ) ;
+
+   void puGroup::setChildColour ( int childs, int which,
+                                  float r, float g, float b, float a = 1.0f,
+                                  int recursive = FALSE ) ;
+   void puGroup::setChildColourScheme ( int childs,
+                                        float r, float g, float b, float a = 1.0f,
+                                        int recursive = FALSE ) ;
+
+   void puGroup::setChildLegendFont ( int childs, puFont f, int recursive = FALSE ) ;
+   void puGroup::setChildLabelFont ( int childs, puFont f, int recursive = FALSE ) ;
+"
+
+As a puaComboBox is-a-kind-of puGroup, you should try these functions.
+
+Kind regards,
+Jan R.
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/crrcsim-devel/attachments/20110810/8c41de8f/attachment.html>
+
+From jens_w2 at gmx.net  Wed Aug 10 19:42:17 2011
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Wed, 10 Aug 2011 19:42:17 +0200
+Subject: [Crrcsim-devel] ComboBox background colour
+In-Reply-To: <4E428C3E.7030000@web.de>
+References: <20110810130521.GA1652@knusper>
+ <4E428C3E.7030000@web.de>
+Message-ID: <20110810174217.GA12161@knusper>
+
+Hello Jan,
+
+> digging into the PLIB source code, I found out what is also stated
+> in the PLIB documentation:
+Uh, and I just found out that despite not liking their API (sometimes it
+is lower left and upper right corner, sometimes lower left corner plus
+width and height to define a widget's position and size) and the fact
+that their documentation is not more than an introduction to what
+might be possible with plib, they don't even comment their code. So it
+is not enough to read .h files, you have to go through all their
+source...what a pita.
+
+> As a puaComboBox is-a-kind-of puGroup, you should try these functions.
+Yes, and read their sourcecode including everything down to where the puBox
+is painted: puaComboBox, puPopupMenu, puOneShot, puButton, puObject,
+puBox. Maybe I missed something in between...
+
+It all boils down to calling
+
+  someComboBox->setChildColour(PUCLASS_BUTTON, PUCOL_FOREGROUND, 0.85, 0.85, 0.85, 1.0, TRUE);
+
+to change a combo boxes background color. PUCOL_FOREGROUND is pretty
+obvious, isn't it? I admit to be slightly pissed...
+
+And after all that I found:
+
+  +--------------------------------------------------------
+  | CGUIMain::CGUIMain(bool vis) : visible(vis)
+  | {
+  |   puInit();
+  |   puSetDefaultStyle(PUSTYLE_SMALL_BEVELLED);
+  | 
+  |   // Light grey, transparency
+  |   puSetDefaultColourScheme(0.85, 0.85, 0.85, 0.85);
+  |   // Light grey, no transparency
+  |   //puSetDefaultColourScheme(0.85, 0.85, 0.85, 1.0);
+  +--------------------------------------------------------
+
+Anyone opposed to changing back to the second color scheme? Jan, you
+added that one in aed58809d425 without activating it. That fixes all
+those dialogs at once. Transparency in dialogs is nothing more than
+making things more difficult to see, it only adds problems.
+
+Best regards,
+Jens
+
+
+From jan.reucker at web.de  Thu Aug 11 15:16:35 2011
+From: jan.reucker at web.de (Jan Reucker)
+Date: Thu, 11 Aug 2011 15:16:35 +0200
+Subject: [Crrcsim-devel] ComboBox background colour
+In-Reply-To: <20110810174217.GA12161@knusper>
+References: <20110810130521.GA1652@knusper> <4E428C3E.7030000@web.de>
+	<20110810174217.GA12161@knusper>
+Message-ID: <4E43D633.80201@web.de>
+
+On 10.08.2011 19:42, Jens Wilhelm Wulf wrote:
+>
+>    +--------------------------------------------------------
+>    | CGUIMain::CGUIMain(bool vis) : visible(vis)
+>    | {
+>    |   puInit();
+>    |   puSetDefaultStyle(PUSTYLE_SMALL_BEVELLED);
+>    |
+>    |   // Light grey, transparency
+>    |   puSetDefaultColourScheme(0.85, 0.85, 0.85, 0.85);
+>    |   // Light grey, no transparency
+>    |   //puSetDefaultColourScheme(0.85, 0.85, 0.85, 1.0);
+>    +--------------------------------------------------------
+>
+> Anyone opposed to changing back to the second color scheme? Jan, you
+> added that one in aed58809d425 without activating it. That fixes all
+> those dialogs at once. Transparency in dialogs is nothing more than
+> making things more difficult to see, it only adds problems.
+>
+
+Hi Jens,
+
+feel free to change this to the fully opaque setting.
+
+Kind regards,
+Jan R.
+
+
+

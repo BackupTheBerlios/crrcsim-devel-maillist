@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] learing to fly (&amp; land) with CRRCsim.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-November/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20learing%20to%20fly%20%28%26%20land%29%20with%20CRRCsim.&In-Reply-To=%3C20091128113219.GA4900%40knusper%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000234.html">
+   <LINK REL="Next"  HREF="000237.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] learing to fly (&amp; land) with CRRCsim.</H1>
+    <B>Jens Wilhelm Wulf</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20learing%20to%20fly%20%28%26%20land%29%20with%20CRRCsim.&In-Reply-To=%3C20091128113219.GA4900%40knusper%3E"
+       TITLE="[Crrcsim-devel] learing to fly (&amp; land) with CRRCsim.">jens_w2 at gmx.net
+       </A><BR>
+    <I>Sat Nov 28 12:32:19 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000234.html">[Crrcsim-devel] learing to fly (&amp; land) with CRRCsim.
+</A></li>
+        <LI>Next message: <A HREF="000237.html">[Crrcsim-devel] learing to fly (&amp; land) with CRRCsim.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#235">[ date ]</a>
+              <a href="thread.html#235">[ thread ]</a>
+              <a href="subject.html#235">[ subject ]</a>
+              <a href="author.html#235">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Roger,
+
+&gt;<i> For me, one of the hardest things is to get the plane back on the
+</I>&gt;<i> ground (in one piece) after flying a few rounds... In CRRCSIM the
+</I>&gt;<i> plane just bounces if you hit the ground. In a review I saw this is
+</I>&gt;<i> described as &quot;unrealistic&quot;. But technically probably the easiest
+</I>&gt;<i> solution.
+</I>This behaviour can be adjusted. You are right, the code is in 
+   src/mod_fdm/gear01/gear.cpp
+and is used for all kind of ground interaction (no matter whether wing or
+gear hits the ground). The points used are defined in the airplanes .xml
+file; see that file and the description in 
+   documentation/file_format/index.html
+
+By tweaking the parameters you might be able to produce much more realistic
+behaviour.
+
+If you are interested in how well you did the landing: it is resembled by
+how much the plane bounces. So there already is a real time feedback like
+you want to have.
+
+Best regards,
+Jens
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000234.html">[Crrcsim-devel] learing to fly (&amp; land) with CRRCsim.
+</A></li>
+	<LI>Next message: <A HREF="000237.html">[Crrcsim-devel] learing to fly (&amp; land) with CRRCsim.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#235">[ date ]</a>
+              <a href="thread.html#235">[ thread ]</a>
+              <a href="subject.html#235">[ subject ]</a>
+              <a href="author.html#235">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,193 @@
+From R.E.Wolff at BitWizard.nl  Sat Nov 28 12:08:23 2009
+From: R.E.Wolff at BitWizard.nl (Rogier Wolff)
+Date: Sat, 28 Nov 2009 12:08:23 +0100
+Subject: [Crrcsim-devel] learing to fly (& land) with CRRCsim.
+Message-ID: <20091128110823.GD21962@bitwizard.nl>
+
+
+Hi,
+
+I built my first two models the last few weeks, but because of the
+weather here, didn't get to flying them. And maybe that's a good thing
+because I've gotten a lot better at rc flying on CRRCSIM... :-)
+
+For me, one of the hardest things is to get the plane back on the
+ground (in one piece) after flying a few rounds... In CRRCSIM the
+plane just bounces if you hit the ground. In a review I saw this is
+described as "unrealistic". But technically probably the easiest
+solution.
+
+Now I was thinking: how about a "damage meter". If the reaction forces
+from the ground are "measured", and the highest value encountered
+displayed, then that would allow me to see an impartial measure of how
+good my landing skills are getting....
+
+So far I've found: 
+
+  src/mod_fdm/gear01/gear.cpp
+
+as one place where ground forces are calculated. But I have no idea
+yet where to store and where to display the results. 
+
+Moreover I think it's not always the gears that touch the ground, so
+maybe this is not the place to add this.
+
+Suggestions? Improvements?
+
+	Roger. 
+
+-- 
+** R.E.Wolff at BitWizard.nl ** http://www.BitWizard.nl/ ** +31-15-2600998 **
+**    Delftechpark 26 2628 XH  Delft, The Netherlands. KVK: 27239233    **
+*-- BitWizard writes Linux device drivers for any device you may have! --*
+Q: It doesn't work. A: Look buddy, doesn't work is an ambiguous statement. 
+Does it sit on the couch all day? Is it unemployed? Please be specific! 
+Define 'it' and what it isn't doing. --------- Adapted from lxrbot FAQ
+
+
+From jens_w2 at gmx.net  Sat Nov 28 12:32:19 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Sat, 28 Nov 2009 12:32:19 +0100
+Subject: [Crrcsim-devel] learing to fly (& land) with CRRCsim.
+In-Reply-To: <20091128110823.GD21962@bitwizard.nl>
+References: <20091128110823.GD21962@bitwizard.nl>
+Message-ID: <20091128113219.GA4900@knusper>
+
+Hi Roger,
+
+> For me, one of the hardest things is to get the plane back on the
+> ground (in one piece) after flying a few rounds... In CRRCSIM the
+> plane just bounces if you hit the ground. In a review I saw this is
+> described as "unrealistic". But technically probably the easiest
+> solution.
+This behaviour can be adjusted. You are right, the code is in 
+   src/mod_fdm/gear01/gear.cpp
+and is used for all kind of ground interaction (no matter whether wing or
+gear hits the ground). The points used are defined in the airplanes .xml
+file; see that file and the description in 
+   documentation/file_format/index.html
+
+By tweaking the parameters you might be able to produce much more realistic
+behaviour.
+
+If you are interested in how well you did the landing: it is resembled by
+how much the plane bounces. So there already is a real time feedback like
+you want to have.
+
+Best regards,
+Jens
+
+
+From jan.reucker at web.de  Sat Nov 28 12:39:18 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sat, 28 Nov 2009 12:39:18 +0100
+Subject: [Crrcsim-devel] learing to fly (& land) with CRRCsim.
+In-Reply-To: <20091128110823.GD21962@bitwizard.nl>
+References: <20091128110823.GD21962@bitwizard.nl>
+Message-ID: <20091128123918.48a53854@web.de>
+
+On Sat, 28 Nov 2009 12:08:23 +0100
+Rogier Wolff <R.E.Wolff at BitWizard.nl> wrote:
+
+> Now I was thinking: how about a "damage meter". If the reaction forces
+> from the ground are "measured", and the highest value encountered
+> displayed, then that would allow me to see an impartial measure of how
+> good my landing skills are getting....
+> 
+> So far I've found: 
+> 
+>   src/mod_fdm/gear01/gear.cpp
+> 
+> as one place where ground forces are calculated. But I have no idea
+> yet where to store and where to display the results. 
+> 
+> Moreover I think it's not always the gears that touch the ground, so
+> maybe this is not the place to add this.
+> 
+> Suggestions? Improvements?
+
+Hi Roger,
+
+for historical reasons, the whole ground contact model is located in the
+"gear" module. This module keeps a list of all "hardpoints" for a plane,
+no matter if they are located on the actual gear or at the wingtip or
+whereever. The hardpoint locations are defined in the model's XML file.
+For each hardpoint there are settings defining the friction, the spring
+constant and the spring damping:
+
+    <wheel percent_brake="0.25" caster_angle_rad="0">
+      <pos x="-2.44" y="-1.28" z="0" />
+      <spring constant="65" damping="0.25" />
+    </wheel>
+
+The name "wheel" is a bit misleading... It's just a hardpoint.
+
+For a simple "crash" model, it would be sufficient to define another
+parameter for each wheel that defines the maximum force that this
+hardpoint can bear without breaking. The actual force can be calculated
+in the "gear" module. Then one could use the EventManager to fire some
+kind of "crash event", which could be picked up by any other module
+(SimStateHandler, ...).
+
+If you want to work on this, I recommend that you clone the CRRCsim
+repository and prepare a patch. You can submit it via the CRRCsim
+patch tracker on Berlios.de.
+
+Regarding landing training: If you manage to land a plane without
+bouncing, I think you're ready for some real flying ;-)
+
+Kind regards,
+Jan R.
+
+
+From R.E.Wolff at BitWizard.nl  Sat Nov 28 14:17:18 2009
+From: R.E.Wolff at BitWizard.nl (Rogier Wolff)
+Date: Sat, 28 Nov 2009 14:17:18 +0100
+Subject: [Crrcsim-devel] learing to fly (& land) with CRRCsim.
+In-Reply-To: <20091128113219.GA4900@knusper>
+References: <20091128110823.GD21962@bitwizard.nl>
+	<20091128113219.GA4900@knusper>
+Message-ID: <20091128131718.GG21962@bitwizard.nl>
+
+On Sat, Nov 28, 2009 at 12:32:19PM +0100, Jens Wilhelm Wulf wrote:
+> Hi Roger,
+> 
+> > For me, one of the hardest things is to get the plane back on the
+> > ground (in one piece) after flying a few rounds... In CRRCSIM the
+> > plane just bounces if you hit the ground. In a review I saw this is
+> > described as "unrealistic". But technically probably the easiest
+> > solution.
+> This behaviour can be adjusted. You are right, the code is in 
+>    src/mod_fdm/gear01/gear.cpp
+> and is used for all kind of ground interaction (no matter whether wing or
+> gear hits the ground). The points used are defined in the airplanes .xml
+> file; see that file and the description in 
+>    documentation/file_format/index.html
+> 
+> By tweaking the parameters you might be able to produce much more realistic
+> behaviour.
+> 
+> If you are interested in how well you did the landing: it is resembled by
+> how much the plane bounces. So there already is a real time feedback like
+> you want to have.
+
+Sometimes it bounces up say 2m, but that's because it's still flying
+at a speed that's giving it lots of lift. So I don't agree that the
+bounce height is a good indication of how hard a landing was. (you're
+right: if I plow in prop-first and bounce back up 2m, then in real
+life the plane would've been broken.)
+
+Sometimes a bounce is just like a touch-and-go, and even in real life,
+you'd be able to continue to fly. (i.e. nothing broken). 
+
+	Roger. 
+
+-- 
+** R.E.Wolff at BitWizard.nl ** http://www.BitWizard.nl/ ** +31-15-2600998 **
+**    Delftechpark 26 2628 XH  Delft, The Netherlands. KVK: 27239233    **
+*-- BitWizard writes Linux device drivers for any device you may have! --*
+Q: It doesn't work. A: Look buddy, doesn't work is an ambiguous statement. 
+Does it sit on the couch all day? Is it unemployed? Please be specific! 
+Define 'it' and what it isn't doing. --------- Adapted from lxrbot FAQ
+
+

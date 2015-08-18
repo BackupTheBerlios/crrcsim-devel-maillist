@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Compiler warnings -- to be taken serious
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-March/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Compiler%20warnings%20--%20to%20be%20taken%20serious&In-Reply-To=%3C20090301054400.GA3789%40knusper.jensens.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000168.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Compiler warnings -- to be taken serious</H1>
+    <B>Jens Wilhelm Wulf</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Compiler%20warnings%20--%20to%20be%20taken%20serious&In-Reply-To=%3C20090301054400.GA3789%40knusper.jensens.local%3E"
+       TITLE="[Crrcsim-devel] Compiler warnings -- to be taken serious">jens_w2 at gmx.net
+       </A><BR>
+    <I>Sun Mar  1 06:44:00 CET 2009</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000168.html">[Crrcsim-devel] Compiler warnings -- to be taken serious
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#163">[ date ]</a>
+              <a href="thread.html#163">[ thread ]</a>
+              <a href="subject.html#163">[ subject ]</a>
+              <a href="author.html#163">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> so you're using the same gcc version. Strange. Does cmake use any
+</I>&gt;<i> additional compiler flags to enable stricter checking?
+</I>Don't know...in this case you should see those warnings with cmake, too.
+Maybe there's a difference in config flags (shown with 'g++ -v').
+
+This is what's used:
+
+/usr/bin/c++   
+-Dlinux 
+-DCRRC_DATA_PATH=\&quot;/usr/local/share/crrcsim\&quot; 
+-O3 
+-DNDEBUG 
+-I/usr/include/SDL -I/home/jens/cvs/crrcsim/crrcsim-jens/out_cmake -I/home/jens/cvs/crrcsim/crrcsim-jens/src/mod_chardevice/1   
+-Wall 
+-o CMakeFiles/mod_chardevice.dir/chardevicec.cpp.o 
+-c /home/jens/cvs/crrcsim/crrcsim-jens/src/mod_chardevice/chardevicec.cpp
+
+Jens
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000168.html">[Crrcsim-devel] Compiler warnings -- to be taken serious
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#163">[ date ]</a>
+              <a href="thread.html#163">[ thread ]</a>
+              <a href="subject.html#163">[ subject ]</a>
+              <a href="author.html#163">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] New release: CRRCsim 0.9.11
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-June/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20New%20release%3A%20CRRCsim%200.9.11&In-Reply-To=%3C20100602235011.d3d9b243.jan.reucker%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000360.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] New release: CRRCsim 0.9.11</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20New%20release%3A%20CRRCsim%200.9.11&In-Reply-To=%3C20100602235011.d3d9b243.jan.reucker%40web.de%3E"
+       TITLE="[Crrcsim-devel] New release: CRRCsim 0.9.11">jan.reucker at web.de
+       </A><BR>
+    <I>Wed Jun  2 23:50:11 CEST 2010</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000360.html">[Crrcsim-devel] [Bug #17218] CRRCsim crashes in location dialog on	Ubuntu 9.04
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#359">[ date ]</a>
+              <a href="thread.html#359">[ thread ]</a>
+              <a href="subject.html#359">[ subject ]</a>
+              <a href="author.html#359">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>The CRRCsim dev team released version 0.9.11 of the cross-platform R/C model aircraft simulator today. Besides lots of bug fixes, several interesting new features were implemented: Support for simulating multicopters, driver for CT6A transmitters, adjustable model volume, crash detection, a flight recorder that also works in the F3F mode and a stable scenery file format.
+
+Download link for source package and Win32 installer:
+
+<A HREF="http://crrcsim.berlios.de/wiki/index.php?n=CRRCsim.DownLoad">http://crrcsim.berlios.de/wiki/index.php?n=CRRCsim.DownLoad</A>
+
+Have fun!
+
+
+
+
+Release Notes for CRRCSim 0.9.11
+--------------------------------
+- Added command line option -V (print version info, configuration options and exit).
+- removed obsolete files from distribution
+- hitting any unused key causes CRRCSim to try reloading the FDMs parameters
+- Fixed bug #15694 Segfault when configuring audio interface (patch provided by Glenn Trigg)
+- Improved helicopter parameters
+- New FDM including an example model: multicopter
+- New CT6A transmitter interface (by Nikolay B. Eremeyev)
+- Implemented real engine downthrust, adjusted Flexifly accordingly
+- Repaired flap and spoiler parameters
+- Implemented feature request #4271: Model volume can now be configured through the GUI
+- Heli and Multicopter: reversed nick input to be like fixed wing
+- Fixed bug #16552 Collision detection with multiple objects fail
+- Fixed bug #16204 core dump on karmic. Fixed CMake build with libCGAL.
+- Simulate influence of retractable gears on aerodynamics
+- Implemented rudimentary crash handling with a new spring.max_force attribute
+- F3F on all scenery
+- Implemented scenery file specification v3 
+- Feature Request #4311 (Replay tool - a shadow plane): You can now save and replay
+  your flights and race against a shadow plane in F3F mode.
+- Fixed bug #017127 Selections are hardly visible in the GUI
+- Fixed bug #017076 Build error when CGAL installed on Ubuntu karmic
+- Implemented feature request #4470 Improve scenery selection dialog
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000360.html">[Crrcsim-devel] [Bug #17218] CRRCsim crashes in location dialog on	Ubuntu 9.04
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#359">[ date ]</a>
+              <a href="thread.html#359">[ thread ]</a>
+              <a href="subject.html#359">[ subject ]</a>
+              <a href="author.html#359">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Release planning for 0.9.10
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Release%20planning%20for%200.9.10&In-Reply-To=%3C20090130233855.0ddb860f.jan.reucker%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000117.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Release planning for 0.9.10</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Release%20planning%20for%200.9.10&In-Reply-To=%3C20090130233855.0ddb860f.jan.reucker%40web.de%3E"
+       TITLE="[Crrcsim-devel] Release planning for 0.9.10">jan.reucker at web.de
+       </A><BR>
+    <I>Fri Jan 30 23:38:55 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000117.html">[Crrcsim-devel] Joystick bugfixes
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#118">[ date ]</a>
+              <a href="thread.html#118">[ thread ]</a>
+              <a href="subject.html#118">[ subject ]</a>
+              <a href="author.html#118">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+I guess it's time to discuss the remaining few steps until we can release
+CRRCsim 0.9.10. I've just updated the TaskList in the Wiki
+(<A HREF="http://crrcsim.berlios.de/wiki/index.php?n=CRRCsim.TaskList">http://crrcsim.berlios.de/wiki/index.php?n=CRRCsim.TaskList</A>). Here's a
+summary of open points:
+
+#1 Verification of spoiler and flap parameters needed. Parameters for more models needed. (coordinated by JWW) 
+#2 Verify that configuration of new functions also works on the command line. (open)
+#3 Heli-FDM: Verification and/or improvement of FDM parameters needed. (coordinated by JWW) 
+#4 Bug #15161 (Axis assignment in Options-&gt;Controls-&gt;Buttons does not work). (open) 
+#5 Unix manpage may need some corrections due to new input functions. (open) 
+#6 New scenery selection dialog:should display more information (like airplane selection
+  dialog) (open) 
+#7 Experimental landscape files should not be part of the final distribution tarball/binary
+  packages to avoid confusing the user. Verify autotools scripts. (open) 
+
+And from my recent mail:
+#8 List of models needs a cleanup. Remove some, add some from addon-models.
+
+
+My comments:
+
+#1 no showstopper
+#2 I guess that the configuration of axis functions on the command line no
+   longer works (see bug #15161: it uses the same internal mechanism which
+   was removed 2005). Need to verify this and maybe remove the corresponding
+   CLI options.
+#3 no showstopper
+#4 can be solved within a few days
+#5 could be outdated, see #2. Nevertheless, the man page needs some corrections and
+   a thorough review.
+#6 should be postponed to a later release (quite a bit of work)
+#7 needs discussion. I'd say that we only ship cape_cod-orig.xml, davis-orig.xml
+   and maybe simple.xml (as an example for potential scenery builders) with the
+   tarball and remove the other files from the distribution (by adapting the
+   Makefile.am's, not by removing them from the repo).
+#8 can be solved within a few days
+
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: <A HREF="http://www.reucker-online.de/pgpkey.asc">http://www.reucker-online.de/pgpkey.asc</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000117.html">[Crrcsim-devel] Joystick bugfixes
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#118">[ date ]</a>
+              <a href="thread.html#118">[ thread ]</a>
+              <a href="subject.html#118">[ subject ]</a>
+              <a href="author.html#118">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

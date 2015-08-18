@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Scenery, windfield
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Scenery%2C%20windfield&In-Reply-To=%3C20091220214839.7ec0ff63%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000255.html">
+   <LINK REL="Next"  HREF="000271.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Scenery, windfield</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Scenery%2C%20windfield&In-Reply-To=%3C20091220214839.7ec0ff63%40web.de%3E"
+       TITLE="[Crrcsim-devel] Scenery, windfield">jan.reucker at web.de
+       </A><BR>
+    <I>Sun Dec 20 21:48:39 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000255.html">[Crrcsim-devel] Scenery, windfield
+</A></li>
+        <LI>Next message: <A HREF="000271.html">[Crrcsim-devel] Scenery, windfield
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#259">[ date ]</a>
+              <a href="thread.html#259">[ thread ]</a>
+              <a href="subject.html#259">[ subject ]</a>
+              <a href="author.html#259">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, 20 Dec 2009 13:59:02 +0100
+Jo&#235;l Li&#233;nard &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">joel.lienard at laposte.net</A>&gt; wrote:
+
+Hi Joel and others!
+
+&gt;<i> I have no more the password to edit the page &quot; download &quot; of the wiki
+</I>
+I'll send you the credentials in a private email.
+ 
+&gt;<i> For the wind, it is necessary to go much more far (is 1 kilometer
+</I>&gt;<i> sufficient?). I try to complete by map or aerial photos
+</I>
+Maybe Google Earth can help here? At least for a very coarse grid (which
+should be enough for the big distance calculations) you can directly
+enter the N/E coordinates and then read out the height value. I don't know
+if there's a free API to access these values without using GE as a
+frontend. I guess most parts of the GE API are only for premium users.
+ 
+&gt;<i> In the hypothesis of a calculation of the windfield  in CRRCSIM, I do
+</I>&gt;<i> not know if it is reasonable to use a regular grid:
+</I>&gt;<i> If we take the low hypotheses of Jan, 1 kilometre squared and a step of
+</I>&gt;<i> 2m but by adding the third dimension on 100m we obtain a grid of
+</I>&gt;<i> 500x500x50=12500.000 cells. In every cell, are needed at least 3
+</I>&gt;<i> components of winds and others values to make the calculation. Let us
+</I>&gt;<i> say 6 float. It gives 300 Mb of memory. Possible with a modern computer.
+</I>&gt;<i> If one to be more precise, we take a square of 2x2 kilometers and a step
+</I>&gt;<i> of 0,5m. One need that then 16 times more, that is almost 5 Go, what is
+</I>&gt;<i> not reasonable.
+</I>
+I agree. And I'd really like to continue to run CRRCsim on my netbook with
+only 512 MB of RAM in the future ;-) (without having to rip it apart to add
+another 512 MBs).
+
+Maybe we should lower our standards regarding wind component precision. Do
+we really need floating point precision? And which values do we need apart
+from x/y/z components of the wind vector at this point. Let's see: typical
+flying conditions are somewhere between 0 and 10 bft., which equals 0 to
+about 25 m/s. If we use one byte per component, we get a resolution of about
+0.1 m/s per bit. I guess that should be enough, considering the fact that
+we always use interpolated values with a much finer resolution. And I really
+think that 2m should be enough as long as we don't want to simulate every
+little bit of turbulence behind the outhouse. ;-)
+
+12.500.000 cells * 3 byte = 36.6 MByte
+
+And maybe we can make this configurable, using a wider grid on low-power
+machines.
+
+Kind regards,
+Jan R.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000255.html">[Crrcsim-devel] Scenery, windfield
+</A></li>
+	<LI>Next message: <A HREF="000271.html">[Crrcsim-devel] Scenery, windfield
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#259">[ date ]</a>
+              <a href="thread.html#259">[ thread ]</a>
+              <a href="subject.html#259">[ subject ]</a>
+              <a href="author.html#259">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] FW: [Bug #16204] core dump on karmic
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-September/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20FW%3A%20%5BBug%20%2316204%5D%20core%20dump%20on%20karmic&In-Reply-To=%3C1251875509.4a9e1ab50d48a%40imp.free.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000223.html">
+   <LINK REL="Next"  HREF="000222.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] FW: [Bug #16204] core dump on karmic</H1>
+    <B>joel.lienard at free.fr</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20FW%3A%20%5BBug%20%2316204%5D%20core%20dump%20on%20karmic&In-Reply-To=%3C1251875509.4a9e1ab50d48a%40imp.free.fr%3E"
+       TITLE="[Crrcsim-devel] FW: [Bug #16204] core dump on karmic">joel.lienard at free.fr
+       </A><BR>
+    <I>Wed Sep  2 09:11:49 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000223.html">[Crrcsim-devel] FW: [Bug #16204] core dump on karmic
+</A></li>
+        <LI>Next message: <A HREF="000222.html">[Crrcsim-devel] CRRCsim in german press
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#224">[ date ]</a>
+              <a href="thread.html#224">[ thread ]</a>
+              <a href="subject.html#224">[ subject ]</a>
+              <a href="author.html#224">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+I do not know how to answer this question today.
+My personel computer is out of order and I cannot make try. But I intend to
+reinstall it under Linux. Thus I shall see if I notice the problem.
+
+Jo&#235;l
+
+Selon Jan Reucker &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">jan.reucker at web.de</A>&gt;:
+
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> a new bug has been opened regarding a core dump with CGAL on Ubuntu Karmic.
+</I>&gt;<i> Joel, do you know this error message? Do I have to add this mentioned option
+</I>&gt;<i> to the Makefiles?
+</I>&gt;<i>
+</I>&gt;<i> Kind regards,
+</I>&gt;<i> Jan R.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; -----Urspr&#252;ngliche Nachricht-----
+</I>&gt;<i> &gt; Von: <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">admin at berlios.de</A>
+</I>&gt;<i> &gt; Gesendet: 01.09.09 14:10:37
+</I>&gt;<i> &gt; An: <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">andreabravetti at gmail.com</A>, <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">jreucker at bat.berlios.de</A>
+</I>&gt;<i> &gt; Betreff: [Bug #16204] core dump on karmic
+</I>&gt;<i>
+</I>&gt;<i> &gt; Bug #16204, was updated on 2009-Sep-01 14:09
+</I>&gt;<i> &gt; Here is a current snapshot of the bug.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Project: CRRCsim
+</I>&gt;<i> &gt; Category: None
+</I>&gt;<i> &gt; Status: Open
+</I>&gt;<i> &gt; Resolution: None
+</I>&gt;<i> &gt; Bug Group: None
+</I>&gt;<i> &gt; Priority: 5
+</I>&gt;<i> &gt; Submitted by: brand77
+</I>&gt;<i> &gt; Assigned to : none
+</I>&gt;<i> &gt; Summary: core dump on karmic
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Details: almost a fresh karmic alpha4 install, dist-upgrade at 31/08/2009,
+</I>&gt;<i> and with:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; apt-get -y install \
+</I>&gt;<i> &gt;   mercurial \
+</I>&gt;<i> &gt;   automake autoconf \
+</I>&gt;<i> &gt;   libsdl1.2debian-alsa libsdl1.2-dev \
+</I>&gt;<i> &gt;   libplib1 libplib-dev \
+</I>&gt;<i> &gt;   libportaudio0 libportaudio-dev \
+</I>&gt;<i> &gt;   libcgal3 libcgal-dev
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">andrea at sibilla</A>:~$ uname -a
+</I>&gt;<i> &gt; Linux sibilla 2.6.31-8-generic #28-Ubuntu SMP Thu Aug 27 14:42:57 UTC 2009
+</I>&gt;<i> x86_64 GNU/Linux
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">andrea at sibilla</A>:~$ gcc --version
+</I>&gt;<i> &gt; gcc (Ubuntu 4.4.1-3ubuntu3) 4.4.1
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">andrea at sibilla</A>:~$ lsb_release -crd
+</I>&gt;<i> &gt; Description:    Ubuntu karmic (development branch)
+</I>&gt;<i> &gt; Release:        9.10
+</I>&gt;<i> &gt; Codename:       karmic
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">andrea at sibilla</A>:~$ crrcsim
+</I>&gt;<i> &gt; terminate called after throwing an instance of 'CGAL::Assertion_exception'
+</I>&gt;<i> &gt;   what():  CGAL ERROR: assertion violation!
+</I>&gt;<i> &gt; Expr: -CGAL_IA_MUL(-1.1, 10.1) != CGAL_IA_MUL(1.1, 10.1)
+</I>&gt;<i> &gt; File: /usr/include/CGAL/Interval_nt.h
+</I>&gt;<i> &gt; Line: 154
+</I>&gt;<i> &gt; Explanation: Wrong rounding: did you forget the -frounding-math option if
+</I>&gt;<i> you use GCC?
+</I>&gt;<i> &gt; Aborted (core dumped)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; don't know if the problem is in cgal or crrcsim...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; For detailed info, follow this link:
+</I>&gt;<i> &gt; <A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=16204&amp;group_id=9957">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=16204&amp;group_id=9957</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ________________________________________________________________
+</I>&gt;<i> Neu: WEB.DE Doppel-FLAT mit Internet-Flatrate + Telefon-Flatrate
+</I>&gt;<i> f&#252;r nur 19,99 Euro/mtl.!* <A HREF="http://produkte.web.de/go/02/">http://produkte.web.de/go/02/</A>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Crrcsim-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">Crrcsim-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">https://lists.berlios.de/mailman/listinfo/crrcsim-devel</A>
+</I>&gt;<i>
+</I>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000223.html">[Crrcsim-devel] FW: [Bug #16204] core dump on karmic
+</A></li>
+	<LI>Next message: <A HREF="000222.html">[Crrcsim-devel] CRRCsim in german press
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#224">[ date ]</a>
+              <a href="thread.html#224">[ thread ]</a>
+              <a href="subject.html#224">[ subject ]</a>
+              <a href="author.html#224">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

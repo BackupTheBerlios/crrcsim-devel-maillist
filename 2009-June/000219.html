@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Patch for Walkera PCM via audio interface
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Patch%20for%20Walkera%20PCM%20via%20audio%20interface&In-Reply-To=%3C1246048064.9062.36.camel%40localhost%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000218.html">
+   <LINK REL="Next"  HREF="000220.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Patch for Walkera PCM via audio interface</H1>
+    <B>Martin Herrmann</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Patch%20for%20Walkera%20PCM%20via%20audio%20interface&In-Reply-To=%3C1246048064.9062.36.camel%40localhost%3E"
+       TITLE="[Crrcsim-devel] Patch for Walkera PCM via audio interface">martin at famherrmann.de
+       </A><BR>
+    <I>Fri Jun 26 22:27:44 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000218.html">[Crrcsim-devel] Patch for Walkera PCM via audio interface
+</A></li>
+        <LI>Next message: <A HREF="000220.html">[Crrcsim-devel] Patch for Walkera PCM via audio interface
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#219">[ date ]</a>
+              <a href="thread.html#219">[ thread ]</a>
+              <a href="subject.html#219">[ subject ]</a>
+              <a href="author.html#219">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, 2009-06-24 at 22:11 +0200, Jan Reucker wrote:
+&gt;<i> The solution for the integration somehow differs from other interfaces
+</I>&gt;<i> (like the &quot;serial&quot; family). FMSPIC and Zhenhua share most of the code,
+</I>&gt;<i> but use different configuration branches. This is achieved by using a
+</I>&gt;<i> common superclass for device handling and doing the interface-specific
+</I>&gt;<i> stuff in subclasses. Peter, in contrast, proposes to extend the existing
+</I>&gt;<i> audio interface with an additional &quot;type&quot; attribute that selects
+</I>&gt;<i> between two different data decoding methods inside the same class.
+</I>
+Using a common superclass is generally considered better programming
+style that using switches/ifs in a class. This keeps the individual
+classes small and modular.
+
+Suppose we would add support for 42 different audio transmitters in the
+future, then it would certainly be better to have 42 classes with maybe
+100 lines each than one single class with 4200 lines. Not only does this
+make it much easier to understand by keeping the individual modules
+(classes) concise, it also makes it easier for multiple developers to
+work on different parts at the same time.
+
+Usually, it is also more maintainable with multiple classes. A single
+file with a type attribute tends to have code that belongs together
+distributed all over the file, like this:
+
+void init () {
+  if (type 1) {
+    // Code for initializing type 1
+  }
+  else if (type 2) {
+    // Code for initializing type 2
+  }
+  ...
+  else if (type 42) {
+    // Code for initializing type 42
+  }
+}
+
+void process_data (...) {
+  if (type 1) {
+    // Code for processing type 1
+  }
+  else if (type 2) {
+    // Code for processing type 2
+  }
+  ...
+  else if (type 42) {
+    // Code for processing type 42
+  }
+}
+
+void cleanup (...) {
+  if (type 1) {
+    ...
+  }
+
+  ...
+}
+
+Separate classes keep together what belongs together. They also separate
+the hardware specific code from the protocol decoding logic.
+
+So I am in favor of the separate classes approach. On the other hand, if
+the code is already written and tested and you are unwilling to change
+it, it can still be rewritten later (as I did for the serial code) - and
+it may be easier to figure out the interface between the classes if
+there are more than just one or two protocols.
+
+
+Martin
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000218.html">[Crrcsim-devel] Patch for Walkera PCM via audio interface
+</A></li>
+	<LI>Next message: <A HREF="000220.html">[Crrcsim-devel] Patch for Walkera PCM via audio interface
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#219">[ date ]</a>
+              <a href="thread.html#219">[ thread ]</a>
+              <a href="subject.html#219">[ subject ]</a>
+              <a href="author.html#219">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

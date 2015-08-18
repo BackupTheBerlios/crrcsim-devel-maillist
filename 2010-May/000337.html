@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] [Bug #17127] Selections are hardly visible in the GUI
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BBug%20%2317127%5D%20Selections%20are%20hardly%20visible%20in%0A%20the%20GUI&In-Reply-To=%3C1273138296.4367.936.camel%40joel-portable%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000335.html">
+   <LINK REL="Next"  HREF="000340.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] [Bug #17127] Selections are hardly visible in the GUI</H1>
+    <B>Jo&#235;l Li&#233;nard</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BBug%20%2317127%5D%20Selections%20are%20hardly%20visible%20in%0A%20the%20GUI&In-Reply-To=%3C1273138296.4367.936.camel%40joel-portable%3E"
+       TITLE="[Crrcsim-devel] [Bug #17127] Selections are hardly visible in the GUI">joel.lienard at free.fr
+       </A><BR>
+    <I>Thu May  6 11:31:36 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000335.html">[Crrcsim-devel] [Bug #17127] Selections are hardly visible in the	GUI
+</A></li>
+        <LI>Next message: <A HREF="000340.html">[Crrcsim-devel] [Bug #17127] Selections are hardly visible in the GUI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#337">[ date ]</a>
+              <a href="thread.html#337">[ thread ]</a>
+              <a href="subject.html#337">[ subject ]</a>
+              <a href="author.html#337">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+&gt;<i>  The color difference of selected items in the GUI dialogs compared to unselected items is very small,
+</I>&gt;<i>  which makes it hard to use some parts of the GUI (e.g. the scenery selection dialog).
+</I>
+There are several versions of puListBox.cxx with different behavior !
+
+Under Linux / Ubuntu I have plib-1.8.4. The selected item is drawn in
+white, the others in black. The contrast between selected player and not
+selected player is thus very good, but the selected text is little
+readable with the light gray bottom used at present. It is thus
+necessary to make it darker.
+
+Under Window, I have plib-1.8.5. The selected item has an average color
+between two colors which one can choose (PUCOL_LABEL and
+PUCOL_BACKGROUND). The only way of improving the contrast between
+selected player and not selected player is to modify PUCOL_BACKGROUND.
+For example red. But it makes an outline not desirable. To eliminate
+this outline, it is necessary to modify the style to eliminate the 3D
+outline. 
+
+I made modifications which seem to me acceptable in 2 cases. To make
+better and have an appearance independent from the version of Plib, it
+is necessary to import and to modify the code source of puListBox in
+source. I verified that it compiles  with no problem but is it
+acceptable? 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000335.html">[Crrcsim-devel] [Bug #17127] Selections are hardly visible in the	GUI
+</A></li>
+	<LI>Next message: <A HREF="000340.html">[Crrcsim-devel] [Bug #17127] Selections are hardly visible in the GUI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#337">[ date ]</a>
+              <a href="thread.html#337">[ thread ]</a>
+              <a href="subject.html#337">[ subject ]</a>
+              <a href="author.html#337">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

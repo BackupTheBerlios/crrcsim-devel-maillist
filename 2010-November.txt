@@ -1,0 +1,34 @@
+From admin at berlios.de  Thu Nov 11 19:10:13 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Thu, 11 Nov 2010 20:10:13 +0200 (EET)
+Subject: [Crrcsim-devel] [Feature #5164] Screen resolutions for flat panels
+Message-ID: <201011111810.oABIAD6w014450@unicorn.berlios.de>
+
+Feature Request #5164, was updated on 2010-Nov-11 20:10
+You can respond by visiting: 
+http://developer.berlios.de/feature/?func=detailfeature&feature_id=5164&group_id=9957
+
+Category: None
+Status: Open
+Priority: 5
+Summary: Screen resolutions for  flat panels
+
+By: mhirvonen
+Date: 2010-Nov-11 20:10
+
+Message:
+Logged In: YES 
+user_id=58105
+Browser: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.12) Gecko/20101026 Firefox/3.6.12 ( .NET CLR 3.5.30729)
+
+Today flat panel PC displays and TV devices have screen
+resolutions 1360x768, 1920x1080, 1920x1200. 
+
+Does this addition require more than adding
+initializing items in "crrc_video.cpp" stdResZZZ variables?
+
+----------------------------------------------------------------------
+You can respond by visiting: 
+http://developer.berlios.de/feature/?func=detailfeature&feature_id=5164&group_id=9957
+
+

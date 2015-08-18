@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] CRRCSim helicopter model
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20CRRCSim%20helicopter%20model&In-Reply-To=%3C20080907103719.31a72a6c.jan.reucker%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000012.html">
+   <LINK REL="Next"  HREF="000009.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] CRRCSim helicopter model</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20CRRCSim%20helicopter%20model&In-Reply-To=%3C20080907103719.31a72a6c.jan.reucker%40web.de%3E"
+       TITLE="[Crrcsim-devel] CRRCSim helicopter model">jan.reucker at web.de
+       </A><BR>
+    <I>Sun Sep  7 10:37:19 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000012.html">[Crrcsim-devel] CRRCSim helicopter model
+</A></li>
+        <LI>Next message: <A HREF="000009.html">[Crrcsim-devel] [crrcsim] CRRCSim helicopter model
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#14">[ date ]</a>
+              <a href="thread.html#14">[ thread ]</a>
+              <a href="subject.html#14">[ subject ]</a>
+              <a href="author.html#14">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Am Sun, 7 Sep 2008 08:37:36 +0200 schrieb Jens Wilhelm Wulf &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">jens_w2 at gmx.net</A>&gt;:
+
+&gt;<i> By the way, there is something wrong with transmitter interface setup. I
+</I>&gt;<i> used a clean crrcsim.xml (I removed it), chose 'FMSPIC', and '/dev/ttyUSB0'
+</I>&gt;<i> for the device, but then it crashed and still wanted to use '/dev/ttyS0'. So
+</I>&gt;<i> I had to write FMSPIC.port.name into crrcsim.xml using an editor.
+</I>
+Yes, I'm currently working on this. The &quot;ctrlgen&quot; dialog showed some very
+weird behaviour, so I &quot;fixed&quot; something, which unfortunately caused some
+more weird behaviour... I decided to rewrite large parts of the dialog (and
+actually split it into two dialogs), but this is not ready for the public,
+yet. FMSPIC and ZhenHua device selection seems to be working now, but
+joystick and AUDIO still need some work. I will push my changesets ASAP,
+but it may still take about a week or so.
+ 
+&gt;<i> I noticed something else when fixing the yaw thing: throttle is inverse
+</I>&gt;<i> (related to fixed wing model). The behaviour of the variable seems right,
+</I>&gt;<i> but I feel 
+</I>&gt;<i>  - throttle is positive for stick forward with fixed wing model
+</I>&gt;<i>  - throttle is positive for stick backward with fixed pitch heli model
+</I>&gt;<i>  - throttle (controls climb in this case) is positive for stick backward
+</I>&gt;<i>    with collective pitch heli model
+</I>
+I guess there's no &quot;right&quot; way to implement throttle behaviour. Some pilots
+like the &quot;fixed-wing&quot; behaviour (forward == more power), others like
+the &quot;real-thing&quot; behaviour (pull the stick for more power, like in a
+real copter).
+
+&gt;<i> So the meaning of throttle has to be inverted when switching between fixed
+</I>&gt;<i> wing/heli. For me this is ok, as I have to remap anyway. But maybe I should
+</I>&gt;<i> invert throttle in the heli code to save user one click?
+</I>
+I'd prefer the &quot;fixed-wing&quot; behaviour: same stick direction gives more power
+on both fixed-wing and heli models.
+
+&gt;<i> I prefer the following setup (please comment if this is totally strange and
+</I>&gt;<i> what is strange about it):
+</I>&gt;<i> 
+</I>&gt;<i> fixed wing:
+</I>&gt;<i>   left stick is elevator, rudder
+</I>&gt;<i>   right stick is throttle, aileron
+</I>&gt;<i> 
+</I>&gt;<i> heli:
+</I>&gt;<i>   Roll and pitch have to be on one stick, and I want them on the right stick.
+</I>&gt;<i>   So there is throttle (collective pitch) and yaw on the left stick.
+</I>
+I prefer the same heli setup, and I guess that's what most people are using,
+maybe with left and right stick swapped. My fixed-wing setup is swapped,
+so that the throttle stick is always on the left for both fixed-wing and heli.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: <A HREF="http://www.reucker-online.de/pgpkey.asc">http://www.reucker-online.de/pgpkey.asc</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000012.html">[Crrcsim-devel] CRRCSim helicopter model
+</A></li>
+	<LI>Next message: <A HREF="000009.html">[Crrcsim-devel] [crrcsim] CRRCSim helicopter model
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#14">[ date ]</a>
+              <a href="thread.html#14">[ thread ]</a>
+              <a href="subject.html#14">[ subject ]</a>
+              <a href="author.html#14">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Compiler warning
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-February/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Compiler%20warning&In-Reply-To=%3C20090226211133.a2edf5e4.jan.reucker%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000149.html">
+   <LINK REL="Next"  HREF="000155.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Compiler warning</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Compiler%20warning&In-Reply-To=%3C20090226211133.a2edf5e4.jan.reucker%40web.de%3E"
+       TITLE="[Crrcsim-devel] Compiler warning">jan.reucker at web.de
+       </A><BR>
+    <I>Thu Feb 26 21:11:33 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000149.html">[Crrcsim-devel] Compiler warning
+</A></li>
+        <LI>Next message: <A HREF="000155.html">[Crrcsim-devel] Compiler warning
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#154">[ date ]</a>
+              <a href="thread.html#154">[ thread ]</a>
+              <a href="subject.html#154">[ subject ]</a>
+              <a href="author.html#154">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Am Thu, 26 Feb 2009 13:54:01 +0100 schrieb Jo&#235;l Li&#233;nard &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">joel.lienard at free.fr</A>&gt;:
+
+&gt;<i> I do not understand the warning message: the test is on &quot;xform0&quot;,
+</I>&gt;<i> not on &quot; xform &quot;.
+</I>
+No, the offending line 2896 read:
+
+if( xform) sgPreMultMat4  ( xform, xform1 ) ;//Pre or Post ???
+
+And because &quot;sgMat4&quot; is just an array, &quot;xform&quot; will evaluate to the address of
+the first element, therefore always being != 0.
+
+&gt;<i> To avoid any problem, I modified the code (pushed on hg)
+</I>
+Thanks. But I think you didn't really fix the issue, you just told the
+compiler that xform might be pointing to NULL now (by passing it in as
+a parameter, the compiler loses the ability to track its value). The real
+problem is that the &quot;if&quot; clause (now in line 2893) doesn't do anything
+useful:
+
+- it doesn't check if &quot;xform&quot; is all zeros
+- it doesn't check if &quot;xform&quot; is an identity matrix
+- it is always true, because you always pass a pointer to an automatic
+  variable to the function (which is always != NULL)
+
+So I suggest that you just remove the &quot;if (xform)&quot; or tell us what you
+wanted to achieve with it so that we can think of a working solution.
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: <A HREF="http://www.reucker-online.de/pgpkey.asc">http://www.reucker-online.de/pgpkey.asc</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000149.html">[Crrcsim-devel] Compiler warning
+</A></li>
+	<LI>Next message: <A HREF="000155.html">[Crrcsim-devel] Compiler warning
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#154">[ date ]</a>
+              <a href="thread.html#154">[ thread ]</a>
+              <a href="subject.html#154">[ subject ]</a>
+              <a href="author.html#154">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

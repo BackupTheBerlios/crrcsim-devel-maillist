@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] panorama scenery
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2008-December/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20panorama%20scenery&In-Reply-To=%3C20081226165847.5a14baff.jan.reucker%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000071.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] panorama scenery</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20panorama%20scenery&In-Reply-To=%3C20081226165847.5a14baff.jan.reucker%40web.de%3E"
+       TITLE="[Crrcsim-devel] panorama scenery">jan.reucker at web.de
+       </A><BR>
+    <I>Fri Dec 26 16:58:47 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000071.html">[Crrcsim-devel] panorama scenery
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#72">[ date ]</a>
+              <a href="thread.html#72">[ thread ]</a>
+              <a href="subject.html#72">[ subject ]</a>
+              <a href="author.html#72">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Am Sat, 20 Dec 2008 09:39:37 +0100 schrieb Jo&#235;l Li&#233;nard &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">joel.lienard at laposte.net</A>&gt;:
+
+&gt;<i> I transferred on hg.berlios.de my modifications. It still remains me to work
+</I>&gt;<i> but you can start to play. 
+</I>
+Hello Joel,
+
+nice work! Here are some unsorted comments:
+
+- The panorama scenery looks good, especially with the more detailed texture set.
+
+- The size of the textures in .rgb format is unbearable. The hg repository grew
+  from 10 MB to about 90 MB (only counting the .hg directory itself), which means
+  that a working copy now uses about 200 MB instead of 30 MB. So I think now is the
+  time to write a jpg loader (based on libjpeg). I don't know if we can integrate it
+  into PLIB-SSG without touching SSG itself, but we could at least use it to generate
+  ssgStates for the sky box rendering.
+
+- Even with a jpg loader, we should discuss how we store data files in the future.
+  Maybe we should only keep a small set of data files in the main hg repository
+  (the original sceneries plus about 5 good quality models) and move everything else
+  to a different location. Data files don't change that much, and a VCS is not the
+  ideal place to store binary files.
+
+- Although my system isn't too bad (Athlon(tm) 64 X2 Dual Core 4200+, NVidia GeForce
+  7300 GS, 1 GB RAM), I get stuttering with the panorama scenery. I don't know if
+  this is a result of improper culling of the sky box (all faces are drawn, even
+  the invisible faces, although SSG usually performs culling before rendering;
+  I'll have to investigate why SSG fails here).
+  I get up to 140 FPS, but the stuttering remains visible, so maybe it's a problem
+  of a non-constant frame rate rather than low frame rate.
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: <A HREF="http://www.reucker-online.de/pgpkey.asc">http://www.reucker-online.de/pgpkey.asc</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000071.html">[Crrcsim-devel] panorama scenery
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#72">[ date ]</a>
+              <a href="thread.html#72">[ thread ]</a>
+              <a href="subject.html#72">[ subject ]</a>
+              <a href="author.html#72">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

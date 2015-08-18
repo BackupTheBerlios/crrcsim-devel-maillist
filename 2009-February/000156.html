@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Compiler warnings -- to be taken serious
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-February/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Compiler%20warnings%20--%20to%20be%20taken%20serious&In-Reply-To=%3C20090227103037.GA4205%40knusper.jensens.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000155.html">
+   <LINK REL="Next"  HREF="000158.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Compiler warnings -- to be taken serious</H1>
+    <B>Jens Wilhelm Wulf</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Compiler%20warnings%20--%20to%20be%20taken%20serious&In-Reply-To=%3C20090227103037.GA4205%40knusper.jensens.local%3E"
+       TITLE="[Crrcsim-devel] Compiler warnings -- to be taken serious">jens_w2 at gmx.net
+       </A><BR>
+    <I>Fri Feb 27 11:30:38 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000155.html">[Crrcsim-devel] Compiler warning
+</A></li>
+        <LI>Next message: <A HREF="000158.html">[Crrcsim-devel] Compiler warnings -- to be taken serious
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#156">[ date ]</a>
+              <a href="thread.html#156">[ thread ]</a>
+              <a href="subject.html#156">[ subject ]</a>
+              <a href="author.html#156">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi there,
+
+as I've definitely switched to cmake now, warnings become visible. There is
+one related to physics in fdm_002 about which I'll care about later, as this
+code is not in use.
+
+
+
+There is one I related to 'shadow_matrix', which I'm not familiar with. Jan,
+can you care about it, please? The compiler says:
+  +--------------------------------------------------------
+  | [ 87%] Building CXX object CMakeFiles/crrcsim.dir/src/crrc_graphics.cpp.o
+  | /usr/include/plib/sg.h: In function &#8216;void makeShadowMatrix(float (*)[4], float, float)&#8217;:
+  | /usr/include/plib/sg.h:291: warning: array subscript is above array bounds
+  | /usr/include/plib/sg.h: In function &#8216;void display()&#8217;:
+  | /usr/include/plib/sg.h:291: warning: array subscript is above array bounds
+  +--------------------------------------------------------
+The surrounding lines in my /usr/include/plib/sg.h are:
+  +--------------------------------------------------------
+  | inline void sgCopyVec3 ( sgVec3 dst, const sgVec3 src )
+  | {
+  |   dst [ 0 ] = src [ 0 ] ;
+  |   dst [ 1 ] = src [ 1 ] ;
+  |   dst [ 2 ] = src [ 2 ] ;
+  | }
+  | 
+  | inline void sgCopyVec4 ( sgVec4 dst, const sgVec4 src )
+  | {
+  |   dst [ 0 ] = src [ 0 ] ;
+  |   dst [ 1 ] = src [ 1 ] ;
+  |   dst [ 2 ] = src [ 2 ] ;
+  |   dst [ 3 ] = src [ 3 ] ;      // this is line 291
+  | }
+  | 
+  | 
+  | inline void sgAddVec2 ( sgVec2 dst, const sgVec2 src )
+  | {
+  |   dst [ 0 ] += src [ 0 ] ;
+  |   dst [ 1 ] += src [ 1 ] ;
+  | }
+  +--------------------------------------------------------
+
+
+  
+There was another bug like that in handlerF3F.cpp, I fixed it.
+
+
+
+Some more warnings (I will not care about those):
+
+
+
+[ 51%] Building CXX object src/mod_landscape/CMakeFiles/mod_landscape.dir/ssgLoadJPG.cpp.o
+src/mod_landscape/ssgLoadJPG.cpp: In function &#8216;bool ssgLoadJPG(const char*, ssgTextureInfo*)&#8217;:
+src/mod_landscape/ssgLoadJPG.cpp:62: warning: comparison between signed and unsigned integer expressions
+
+
+
+
+
+
+Joel, this related to what I already asked you to do: indent your code,
+remove code you have commented out and unused variables due to that:
+
+[ 48%] Building CXX object src/mod_windfield/CMakeFiles/mod_windfield.dir/windfield.cpp.o
+src/mod_windfield/windfield.cpp: In function &#8216;int calculate_wind(double, double, double, double&amp;, double&amp;, double&amp;)&#8217;:
+src/mod_windfield/windfield.cpp:579: warning: unused variable &#8216;flWindVel&#8217;
+
+
+
+[  3%] Building CXX object src/mod_chardevice/CMakeFiles/mod_chardevice.dir/chardevicewrapper.cpp.o
+src/mod_chardevice/chardevicewrapper.cpp: In member function &#8216;ssize_t CharDeviceWrapper::LogReader::read_log(uint64_t, const void*, size_t)&#8217;:
+src/mod_chardevice/chardevicewrapper.cpp:150: warning: comparison between signed and unsigned integer expressions
+src/mod_chardevice/chardevicewrapper.cpp: In member function &#8216;int CharDeviceWrapper::run_script(const char*)&#8217;:
+src/mod_chardevice/chardevicewrapper.cpp:316: warning: comparison between signed and unsigned integer expressions
+
+
+
+
+Best regards,
+Jens
+
+  
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000155.html">[Crrcsim-devel] Compiler warning
+</A></li>
+	<LI>Next message: <A HREF="000158.html">[Crrcsim-devel] Compiler warnings -- to be taken serious
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#156">[ date ]</a>
+              <a href="thread.html#156">[ thread ]</a>
+              <a href="subject.html#156">[ subject ]</a>
+              <a href="author.html#156">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

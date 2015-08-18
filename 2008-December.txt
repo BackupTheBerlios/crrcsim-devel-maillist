@@ -1,0 +1,331 @@
+From jan.reucker at web.de  Sat Dec 13 17:29:55 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Sat, 13 Dec 2008 17:29:55 +0100
+Subject: [Crrcsim-devel] panorama scenery
+In-Reply-To: <E97D2BB5B31E40988E9625DC708AE05F@PCdeJol>
+References: <E97D2BB5B31E40988E9625DC708AE05F@PCdeJol>
+Message-ID: <20081213172955.b2789eb9.jan.reucker@web.de>
+
+Hello Joel,
+
+your email bounced (don't know why), so I'm reposting it below...
+
+Kind regards,
+Jan R.
+
+
+Am Sat, 13 Dec 2008 16:51:17 +0100 schrieb Jo?l Li?nard <joel.lienard at laposte.net>:
+
+> I have quite advanced on the development of new scenes by using a
+> photographic panorama. Here a small report of my work.
+> 
+>  
+> 
+> The technique of realization of the panorama functions well. The example of
+> the slope of Brie (close to Grenoble) is correct. The determination of the
+> altitude of the ground starting from the photographs is satisfactory for the
+> close objects. I will supplement then by the use of map or aerial photos.
+> 
+>  
+> 
+> I integrate this panorama in CRRCSIm like a "Skybox". Each face is defined
+> by 2048x2048px. One will be able to envisage a low resolution of 1024x1024
+> for old graphics cards.
+> 
+> The difficulties start with the definition of altitudes to obtain realistic
+> landings. I finally decided to define the altitude of the ground by creating
+> a graphic surface. I generate a file of the type ?.ac?. That enables me to
+> use the functions already ready in CRRCSIM for the ?ModelBasedScenery?. The
+> only difference is that the contents of the file are not traced because it
+> definite a transparent surface. 
+> 
+> To use this representation as definition of altitude, I programmed the
+> functions ?getHeightAndPlane? and ?getHeight? in the class
+> ?ModelBasedScenery?. As suggested by Jan, I used the function ssgLOS. That
+> functions but is very greedy in CPU because it is not accelerated by the
+> graphics card. ?Simple Scenery? does not function even on my very recent
+> computer. I thus started to use a technique of tiling. My first incomplete
+> version currently functions with ?Simple Scenery? but does not accept
+> hierarchical scenes like that of Davis. I temporarily envisaged a
+> commutation by an attribute <scene type="model-based" mode=x >.. Thus, all
+> of the scenes function in mode ?ModelBasedScenery?: Davis, CapeCod,
+> SimpleScenery, and Brie.
+> 
+>  
+> 
+> Remain to parameterize the wind. I envisaged a function similar
+> ?GetWindComponents? of getHeight but I did not still decide anything to load
+> it (It is necessary to be able to load a grid 3D!). Temporarily, that
+> function returns a constant vertical component.
+> 
+>  
+> 
+> Later, it will be necessary to improve management of the contact
+> sailplane/ground. It will be necessary, in particular, to define parameters
+> ?stiffness? and ?roughness?.
+> 
+>  
+> 
+> I will file soon my modifications on Berlios. They relate to primarily
+> crrc_scenry.cpp.
+> 
+> I, moreover, standardized conventions of coordinates of the files
+> scenes.xml. ( I gave up a complete standardization in all CRRCSIM!)
+> 
+> Jo?l
+
+
+From jan.reucker at web.de  Mon Dec 15 23:42:23 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Mon, 15 Dec 2008 23:42:23 +0100
+Subject: [Crrcsim-devel] panorama scenery
+In-Reply-To: <20081213172955.b2789eb9.jan.reucker@web.de>
+References: <E97D2BB5B31E40988E9625DC708AE05F@PCdeJol>
+	<20081213172955.b2789eb9.jan.reucker@web.de>
+Message-ID: <20081215234223.3990bda3.jan.reucker@web.de>
+
+Am Sat, 13 Dec 2008 17:29:55 +0100 schrieb Jan Reucker <jan.reucker at web.de>:
+
+> > The technique of realization of the panorama functions well. The example of
+> > the slope of Brie (close to Grenoble) is correct. The determination of the
+> > altitude of the ground starting from the photographs is satisfactory for the
+> > close objects. I will supplement then by the use of map or aerial photos.
+
+Hello Joel,
+
+that's good news! I can't wait to try it out.
+
+> > I integrate this panorama in CRRCSIm like a "Skybox". Each face is defined
+> > by 2048x2048px. One will be able to envisage a low resolution of 1024x1024
+> > for old graphics cards.
+
+Are you using the existing skybox code or did you write a new class for this
+purpose?
+
+> > The difficulties start with the definition of altitudes to obtain realistic
+> > landings. I finally decided to define the altitude of the ground by creating
+> > a graphic surface. I generate a file of the type ?.ac?. That enables me to
+> > use the functions already ready in CRRCSIM for the ?ModelBasedScenery?. The
+> > only difference is that the contents of the file are not traced because it
+> > definite a transparent surface. 
+
+I think this is a good solution, and other simulators handle it in the same way.
+This also makes it possible to place transparent primitives like cubes or
+cylinders in the landscape to get a simple collision detection (if we want
+to implement it some day).
+
+> > To use this representation as definition of altitude, I programmed the
+> > functions ?getHeightAndPlane? and ?getHeight? in the class
+> > ?ModelBasedScenery?. As suggested by Jan, I used the function ssgLOS. That
+> > functions but is very greedy in CPU because it is not accelerated by the
+> > graphics card. ?Simple Scenery? does not function even on my very recent
+> > computer. I thus started to use a technique of tiling. My first incomplete
+> > version currently functions with ?Simple Scenery? but does not accept
+> > hierarchical scenes like that of Davis. I temporarily envisaged a
+> > commutation by an attribute <scene type="model-based" mode=x >.. Thus, all
+> > of the scenes function in mode ?ModelBasedScenery?: Davis, CapeCod,
+> > SimpleScenery, and Brie.
+
+Yes, ssgLOS hogs the CPU because it walks through every rendered triangle to
+determine if it intersects with the given line of sight. You have to tile
+the environment to profit from frustrum culling to reduce the number of
+rendered triangles.
+
+My solution for this problem (purely theoretical, didn't find the time to
+try it out yet): Define an evenly spaced grid and call getLOS for each
+grid point while loading the scenery. This generates a height map for the
+given terrain. Then you can lookup the height by interpolating values from
+this height map which should be precise enough and extremely fast compared
+with ssgLOS.
+
+Another possibility would be to reduce the number of hardpoints that actually
+call ssgLOS. If we only call it for four "corner hardpoints" and interpolate
+for all others, CPU usage should be reduced by about 60-90% depending on the
+plane model.
+
+> > Remain to parameterize the wind. I envisaged a function similar
+> > ?GetWindComponents? of getHeight but I did not still decide anything to load
+> > it (It is necessary to be able to load a grid 3D!). Temporarily, that
+> > function returns a constant vertical component.
+
+Yes, let's work on this later. However, when generating a height map as
+described above, I can provide some formulas from a simulation that I did
+about a year ago and that seemed to calculate quite realistic vertical
+winds. The interface should be something like
+
+CRRCMath::Vector3 getWind(CRRCMath::Vector3& location)
+
+> > Later, it will be necessary to improve management of the contact
+> > sailplane/ground. It will be necessary, in particular, to define parameters
+> > ?stiffness? and ?roughness?.
+
+Let's focus on flying, not crashing ;-)
+
+There are already some parameters for the airplane in the "wheels" section
+of the XML file that define bouncing (spring constant) and friction.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+
+From joel.lienard at laposte.net  Sat Dec 20 09:39:37 2008
+From: joel.lienard at laposte.net (=?iso-8859-1?Q?Jo=EBl_Li=E9nard?=)
+Date: Sat, 20 Dec 2008 09:39:37 +0100
+Subject: [Crrcsim-devel] panorama scenery
+In-Reply-To: <20081213172955.b2789eb9.jan.reucker@web.de>
+References: <E97D2BB5B31E40988E9625DC708AE05F@PCdeJol>
+	<20081213172955.b2789eb9.jan.reucker@web.de>
+Message-ID: <5C1724E24EFB43BC99EEB02F214A1AB5@PCdeJol>
+
+Hello with all!
+
+I transferred on hg.berlios.de my modifications. It still remains me to work
+but you can start to play. 
+
+Merry Christmas!
+
+Jo?l
+
+-----Message d'origine-----
+De?: jan.reucker at web.de [mailto:jan.reucker at web.de] 
+Envoy??: samedi 13 d?cembre 2008 17:30
+??: crrcsim-devel at lists.berlios.de
+Cc?: Jo?l Li?nard
+Objet?: Re: panorama scenery
+
+
+Hello Joel,
+
+your email bounced (don't know why), so I'm reposting it below...
+
+Kind regards,
+Jan R.
+
+
+Am Sat, 13 Dec 2008 16:51:17 +0100 schrieb Jo?l Li?nard
+<joel.lienard at laposte.net>:
+
+> I have quite advanced on the development of new scenes by using a
+> photographic panorama. Here a small report of my work.
+> 
+>  
+> 
+> The technique of realization of the panorama functions well. The example
+of
+> the slope of Brie (close to Grenoble) is correct. The determination of the
+> altitude of the ground starting from the photographs is satisfactory for
+the
+> close objects. I will supplement then by the use of map or aerial photos.
+> 
+>  
+> 
+> I integrate this panorama in CRRCSIm like a "Skybox". Each face is defined
+> by 2048x2048px. One will be able to envisage a low resolution of 1024x1024
+> for old graphics cards.
+> 
+> The difficulties start with the definition of altitudes to obtain
+realistic
+> landings. I finally decided to define the altitude of the ground by
+creating
+> a graphic surface. I generate a file of the type ?.ac?. That enables me to
+> use the functions already ready in CRRCSIM for the ?ModelBasedScenery?.
+The
+> only difference is that the contents of the file are not traced because it
+> definite a transparent surface. 
+> 
+> To use this representation as definition of altitude, I programmed the
+> functions ?getHeightAndPlane? and ?getHeight? in the class
+> ?ModelBasedScenery?. As suggested by Jan, I used the function ssgLOS. That
+> functions but is very greedy in CPU because it is not accelerated by the
+> graphics card. ?Simple Scenery? does not function even on my very recent
+> computer. I thus started to use a technique of tiling. My first incomplete
+> version currently functions with ?Simple Scenery? but does not accept
+> hierarchical scenes like that of Davis. I temporarily envisaged a
+> commutation by an attribute <scene type="model-based" mode=x >.. Thus, all
+> of the scenes function in mode ?ModelBasedScenery?: Davis, CapeCod,
+> SimpleScenery, and Brie.
+> 
+>  
+> 
+> Remain to parameterize the wind. I envisaged a function similar
+> ?GetWindComponents? of getHeight but I did not still decide anything to
+load
+> it (It is necessary to be able to load a grid 3D!). Temporarily, that
+> function returns a constant vertical component.
+> 
+>  
+> 
+> Later, it will be necessary to improve management of the contact
+> sailplane/ground. It will be necessary, in particular, to define
+parameters
+> ?stiffness? and ?roughness?.
+> 
+>  
+> 
+> I will file soon my modifications on Berlios. They relate to primarily
+> crrc_scenry.cpp.
+> 
+> I, moreover, standardized conventions of coordinates of the files
+> scenes.xml. ( I gave up a complete standardization in all CRRCSIM!)
+> 
+> Jo?l
+
+
+
+From jan.reucker at web.de  Fri Dec 26 16:58:47 2008
+From: jan.reucker at web.de (Jan Reucker)
+Date: Fri, 26 Dec 2008 16:58:47 +0100
+Subject: [Crrcsim-devel] panorama scenery
+In-Reply-To: <5C1724E24EFB43BC99EEB02F214A1AB5@PCdeJol>
+References: <E97D2BB5B31E40988E9625DC708AE05F@PCdeJol>
+	<20081213172955.b2789eb9.jan.reucker@web.de>
+	<5C1724E24EFB43BC99EEB02F214A1AB5@PCdeJol>
+Message-ID: <20081226165847.5a14baff.jan.reucker@web.de>
+
+Am Sat, 20 Dec 2008 09:39:37 +0100 schrieb Jo?l Li?nard <joel.lienard at laposte.net>:
+
+> I transferred on hg.berlios.de my modifications. It still remains me to work
+> but you can start to play. 
+
+Hello Joel,
+
+nice work! Here are some unsorted comments:
+
+- The panorama scenery looks good, especially with the more detailed texture set.
+
+- The size of the textures in .rgb format is unbearable. The hg repository grew
+  from 10 MB to about 90 MB (only counting the .hg directory itself), which means
+  that a working copy now uses about 200 MB instead of 30 MB. So I think now is the
+  time to write a jpg loader (based on libjpeg). I don't know if we can integrate it
+  into PLIB-SSG without touching SSG itself, but we could at least use it to generate
+  ssgStates for the sky box rendering.
+
+- Even with a jpg loader, we should discuss how we store data files in the future.
+  Maybe we should only keep a small set of data files in the main hg repository
+  (the original sceneries plus about 5 good quality models) and move everything else
+  to a different location. Data files don't change that much, and a VCS is not the
+  ideal place to store binary files.
+
+- Although my system isn't too bad (Athlon(tm) 64 X2 Dual Core 4200+, NVidia GeForce
+  7300 GS, 1 GB RAM), I get stuttering with the panorama scenery. I don't know if
+  this is a result of improper culling of the sky box (all faces are drawn, even
+  the invisible faces, although SSG usually performs culling before rendering;
+  I'll have to investigate why SSG fails here).
+  I get up to 140 FPS, but the stuttering remains visible, so maybe it's a problem
+  of a non-constant frame rate rather than low frame rate.
+
+Kind regards,
+Jan R.
+
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: http://www.reucker-online.de/pgpkey.asc
+
+

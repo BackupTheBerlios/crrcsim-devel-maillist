@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] learing to fly (&amp; land) with CRRCsim.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-November/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20learing%20to%20fly%20%28%26%20land%29%20with%20CRRCsim.&In-Reply-To=%3C20091128123918.48a53854%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000237.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] learing to fly (&amp; land) with CRRCsim.</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20learing%20to%20fly%20%28%26%20land%29%20with%20CRRCsim.&In-Reply-To=%3C20091128123918.48a53854%40web.de%3E"
+       TITLE="[Crrcsim-devel] learing to fly (&amp; land) with CRRCsim.">jan.reucker at web.de
+       </A><BR>
+    <I>Sat Nov 28 12:39:18 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000237.html">[Crrcsim-devel] learing to fly (&amp; land) with CRRCsim.
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#236">[ date ]</a>
+              <a href="thread.html#236">[ thread ]</a>
+              <a href="subject.html#236">[ subject ]</a>
+              <a href="author.html#236">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, 28 Nov 2009 12:08:23 +0100
+Rogier Wolff &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">R.E.Wolff at BitWizard.nl</A>&gt; wrote:
+
+&gt;<i> Now I was thinking: how about a &quot;damage meter&quot;. If the reaction forces
+</I>&gt;<i> from the ground are &quot;measured&quot;, and the highest value encountered
+</I>&gt;<i> displayed, then that would allow me to see an impartial measure of how
+</I>&gt;<i> good my landing skills are getting....
+</I>&gt;<i> 
+</I>&gt;<i> So far I've found: 
+</I>&gt;<i> 
+</I>&gt;<i>   src/mod_fdm/gear01/gear.cpp
+</I>&gt;<i> 
+</I>&gt;<i> as one place where ground forces are calculated. But I have no idea
+</I>&gt;<i> yet where to store and where to display the results. 
+</I>&gt;<i> 
+</I>&gt;<i> Moreover I think it's not always the gears that touch the ground, so
+</I>&gt;<i> maybe this is not the place to add this.
+</I>&gt;<i> 
+</I>&gt;<i> Suggestions? Improvements?
+</I>
+Hi Roger,
+
+for historical reasons, the whole ground contact model is located in the
+&quot;gear&quot; module. This module keeps a list of all &quot;hardpoints&quot; for a plane,
+no matter if they are located on the actual gear or at the wingtip or
+whereever. The hardpoint locations are defined in the model's XML file.
+For each hardpoint there are settings defining the friction, the spring
+constant and the spring damping:
+
+    &lt;wheel percent_brake=&quot;0.25&quot; caster_angle_rad=&quot;0&quot;&gt;
+      &lt;pos x=&quot;-2.44&quot; y=&quot;-1.28&quot; z=&quot;0&quot; /&gt;
+      &lt;spring constant=&quot;65&quot; damping=&quot;0.25&quot; /&gt;
+    &lt;/wheel&gt;
+
+The name &quot;wheel&quot; is a bit misleading... It's just a hardpoint.
+
+For a simple &quot;crash&quot; model, it would be sufficient to define another
+parameter for each wheel that defines the maximum force that this
+hardpoint can bear without breaking. The actual force can be calculated
+in the &quot;gear&quot; module. Then one could use the EventManager to fire some
+kind of &quot;crash event&quot;, which could be picked up by any other module
+(SimStateHandler, ...).
+
+If you want to work on this, I recommend that you clone the CRRCsim
+repository and prepare a patch. You can submit it via the CRRCsim
+patch tracker on Berlios.de.
+
+Regarding landing training: If you manage to land a plane without
+bouncing, I think you're ready for some real flying ;-)
+
+Kind regards,
+Jan R.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000237.html">[Crrcsim-devel] learing to fly (&amp; land) with CRRCsim.
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#236">[ date ]</a>
+              <a href="thread.html#236">[ thread ]</a>
+              <a href="subject.html#236">[ subject ]</a>
+              <a href="author.html#236">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] [Bug #17118] Segfault on selecting audio input
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-April/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BBug%20%2317118%5D%20Segfault%20on%20selecting%20audio%20input&In-Reply-To=%3C201004281504.o3SF4sT9001418%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000329.html">
+   <LINK REL="Next"  HREF="000331.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] [Bug #17118] Segfault on selecting audio input</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BBug%20%2317118%5D%20Segfault%20on%20selecting%20audio%20input&In-Reply-To=%3C201004281504.o3SF4sT9001418%40unicorn.berlios.de%3E"
+       TITLE="[Crrcsim-devel] [Bug #17118] Segfault on selecting audio input">admin at berlios.de
+       </A><BR>
+    <I>Wed Apr 28 17:04:54 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000329.html">[Crrcsim-devel] open heads, was: Windows beta package
+</A></li>
+        <LI>Next message: <A HREF="000331.html">[Crrcsim-devel] [Bug #17118] Segfault on selecting audio input
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#330">[ date ]</a>
+              <a href="thread.html#330">[ thread ]</a>
+              <a href="subject.html#330">[ subject ]</a>
+              <a href="author.html#330">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bug #17118, was updated on 2010-Apr-28 16:04
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: pbarnett
+Assigned to : none
+Summary: Segfault on selecting audio input
+
+Details: This happens on Ubuntu 9.10 with crrcsim 0.9.10 and portaudio V18 or V19.
+
+Here's the backtrace (with portaudio 18) -
+
+Program received signal SIGSEGV, Segmentation fault.
+0x00853f6b in strlen () from /lib/tls/i686/cmov/libc.so.6
+(gdb) bt
+#0  0x00853f6b in strlen () from /lib/tls/i686/cmov/libc.so.6
+#1  0x0072950b in std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;::basic_string(char const*, std::allocator&lt;char&gt; const&amp;) ()
+   from /usr/lib/libstdc++.so.6
+#2  0x0805b975 in CGUICtrlDeviceDialog::activateSelectedInterface (
+    this=0x8808a00) at src/GUI/crrc_ctrldev.cpp:270
+#3  0x0805bb42 in CGUICtrlDeviceCallback (obj=0x8808a00)
+    at src/GUI/crrc_ctrldev.cpp:301
+#4  0x080578fa in puObject::invokeCallback (this=0x8808a00)
+    at /usr/include/plib/pu.h:681
+#5  0x0805ec47 in CRRCDialogOKCallback (obj=0x8808ee8)
+    at src/GUI/crrc_dialog.cpp:274
+#6  0x00596a37 in puButton::doHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#7  0x0059e03e in puOneShot::doHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#8  0x0059cc08 in puObject::checkHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#9  0x00599d89 in puGroup::checkHit(int, int, int, int) ()
+   from /usr/lib/libplibpu.so.1
+#10 0x005958b4 in puMouse(int, int, int, int) () from /usr/lib/libplibpu.so.1
+#11 0x080638c4 in CGUIMain::mouseButtonUpHandler (this=0x8672588, btn=1, 
+    x=657, y=555) at src/GUI/crrc_gui_main.cpp:334
+---Type &lt;return&gt; to continue, or q &lt;return&gt; to quit---
+#12 0x081264cb in EventHandler::handle_events (this=0xbffff278)
+    at src/mod_main/eventhandler.cpp:145
+#13 0x081262bf in EventHandler::Run (this=0xbffff278)
+    at src/mod_main/eventhandler.cpp:56
+#14 0x080ebb5f in Scheduler::Run (this=0xbffff280)
+    at src/mod_misc/scheduler.cpp:50
+#15 0x0811b4ae in main (argc=1, argv=0xbffff484) at src/crrc_main.cpp:749
+(gdb) 
+
+Other than this problem, the code works perfectly...
+
+Pete. 
+
+For detailed info, follow this link:
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=17118&amp;group_id=9957">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=17118&amp;group_id=9957</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000329.html">[Crrcsim-devel] open heads, was: Windows beta package
+</A></li>
+	<LI>Next message: <A HREF="000331.html">[Crrcsim-devel] [Bug #17118] Segfault on selecting audio input
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#330">[ date ]</a>
+              <a href="thread.html#330">[ thread ]</a>
+              <a href="subject.html#330">[ subject ]</a>
+              <a href="author.html#330">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

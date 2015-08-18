@@ -1,0 +1,365 @@
+From jan.reucker at web.de  Tue Oct 20 22:15:35 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Tue, 20 Oct 2009 22:15:35 +0200
+Subject: [Crrcsim-devel] New transmitter interface
+Message-ID: <20091020221535.c4a388f6.jan.reucker@web.de>
+
+Hello,
+
+I've just pushed a patch from Nikolay Borisovich Eremeyev to the repository.
+It adds a new interface variant to CRRCsim, the CT6A interface. It's a
+serial interface based on interface_serial. The patch includes documentation
+on the serial protocol in the documentation/input_method/CT6A folder.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker <jan.reucker at web.de>
+
+
+From jens_w2 at gmx.net  Wed Oct 21 20:06:59 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Wed, 21 Oct 2009 20:06:59 +0200
+Subject: [Crrcsim-devel] Downthrust working now, behaviour of flexifly
+Message-ID: <20091021180659.GA6250@knusper>
+
+Hi Jan and others,
+
+after recognizing that the downthrust implementation we have had was simply
+wrong, I (hopefully) did it right now and adjusted the Flexifly accordingly.
+It was the only model in main which used (and needs) siginficant downthrust.
+
+Jan, it would be nice if you could try it out and comment on it and/or
+adjust it.
+
+I completely removed previous downthrust behaviour, as it did not have any
+effect (no pitch up or down) anyway.
+
+Best regards,
+Jens
+
+
+From jan.reucker at web.de  Wed Oct 21 22:17:35 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Wed, 21 Oct 2009 22:17:35 +0200
+Subject: [Crrcsim-devel] Downthrust working now, behaviour of flexifly
+In-Reply-To: <20091021180659.GA6250@knusper>
+References: <20091021180659.GA6250@knusper>
+Message-ID: <20091021221735.affe9c5d.jan.reucker@web.de>
+
+On Wed, 21 Oct 2009 20:06:59 +0200
+Jens Wilhelm Wulf <jens_w2 at gmx.net> wrote:
+
+> Jan, it would be nice if you could try it out and comment on it and/or
+> adjust it.
+
+Hi Jens,
+
+nice bugfix, the behaviour of the Flexifly feels even more realistic now.
+Although I didn't fly the real one for quite some time now (especially
+with the original motor, which was later changed to a CDROM brushless),
+I think it comes very close to the original now.
+
+I also tried to modify the P-51 by adding some downthrust. To overcome
+the tendency to nose-up at WOT, I needed about 20 degrees of downthrust,
+so I think you should definitely try to move the CoG a bit more to the
+back. The downthrust simulation seems to work perfectly: when flying
+low and slow at about 25% with 20 deg of downthrust, suddenly opening
+the throttle to 100% will pull the nose right into the ground... so the
+thrust vector seems to be simulated correctly now :-)
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker <jan.reucker at web.de>
+
+
+From jens_w2 at gmx.net  Thu Oct 22 06:31:02 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Thu, 22 Oct 2009 06:31:02 +0200
+Subject: [Crrcsim-devel] Downthrust working now, behaviour of flexifly
+In-Reply-To: <20091021221735.affe9c5d.jan.reucker@web.de>
+References: <20091021180659.GA6250@knusper>
+	<20091021221735.affe9c5d.jan.reucker@web.de>
+Message-ID: <20091022043102.GA3240@streusel>
+
+> nice bugfix, the behaviour of the Flexifly feels even more realistic now.
+> Although I didn't fly the real one for quite some time now (especially
+> with the original motor, which was later changed to a CDROM brushless),
+> I think it comes very close to the original now.
+I just noticed that the prop position I entered is wrong. It is more like 0.16m in
+front of CG than 0.9m (which is what I entered). So the quite big downthrust
+angle can be reduced, too.
+
+
+> I also tried to modify the P-51 by adding some downthrust. To overcome
+This is why I fixed the downthrust thing, but I experienced the same. I need
+to understand it a bit more to ease the process.
+
+Jens
+
+
+From jan.reucker at web.de  Mon Oct 26 21:38:06 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Mon, 26 Oct 2009 21:38:06 +0100
+Subject: [Crrcsim-devel] Downthrust working now, behaviour of flexifly
+In-Reply-To: <20091022043102.GA3240@streusel>
+References: <20091021180659.GA6250@knusper>
+	<20091021221735.affe9c5d.jan.reucker@web.de>
+	<20091022043102.GA3240@streusel>
+Message-ID: <20091026213806.b80be18d.jan.reucker@web.de>
+
+On Thu, 22 Oct 2009 06:31:02 +0200
+Jens Wilhelm Wulf <jens_w2 at gmx.net> wrote:
+
+> > nice bugfix, the behaviour of the Flexifly feels even more realistic now.
+> > Although I didn't fly the real one for quite some time now (especially
+> > with the original motor, which was later changed to a CDROM brushless),
+> > I think it comes very close to the original now.
+> I just noticed that the prop position I entered is wrong. It is more like 0.16m in
+> front of CG than 0.9m (which is what I entered). So the quite big downthrust
+> angle can be reduced, too.
+
+Hi,
+
+now that we have a near-perfect model for the Flexifly (do you have an
+adjusted XML file that contains the new prop position and downthrust values?),
+maybe we could close the circle back to the "few models" thread. I still
+have that "finish the Flexifly tutorial in the Wiki" task on my list of open
+points. So maybe we can put everything together now to finish the last
+page. I guess my input files weren't that bad, maybe I can compare them to
+your automagically created files to spot any severe differences. Then
+you could maybe describe how you (or your tool) runs AVL to get the desired
+output. Which commands to execute, which constraints to set, and so on.
+And then the final step, which value from AVL goes where in the XML file.
+
+All the plans for user-friendly tools are nice and I'd really appreciate
+if something like this would be available in the near future, but until then
+it would be quite helpful for all of us if there was at least one example
+describing the workflow for creating a model. From measuring stuff on your
+own airplane to test-flying it in CRRCsim. No matter how many tools are
+involved in between, as long as anybody willing to do it actually can do it.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker <jan.reucker at web.de>
+
+
+From jens_w2 at gmx.net  Tue Oct 27 16:05:50 2009
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Tue, 27 Oct 2009 16:05:50 +0100
+Subject: [Crrcsim-devel] Downthrust working now, behaviour of flexifly
+In-Reply-To: <20091026213806.b80be18d.jan.reucker@web.de>
+References: <20091021180659.GA6250@knusper>
+	<20091021221735.affe9c5d.jan.reucker@web.de>
+	<20091022043102.GA3240@streusel>
+	<20091026213806.b80be18d.jan.reucker@web.de>
+Message-ID: <20091027150550.GB3805@knusper>
+
+> now that we have a near-perfect model for the Flexifly (do you have an
+> adjusted XML file that contains the new prop position and downthrust values?),
+I did not and I question whether this makes sense -- because I think the
+flexifly has its problem somewhere else.
+
+> Then
+> you could maybe describe how you (or your tool) runs AVL to get the desired
+> output. Which commands to execute, which constraints to set, and so on.
+> And then the final step, which value from AVL goes where in the XML file.
+Here's what was used for the P51:
+  +--------------------------------------------------------
+  | oper
+  | d3 pm 0
+  | a a 0
+  | x
+  | st
+  | pz-p51-bl-crrcsim-input.st
+  | c1
+  | 
+  | q
+  +--------------------------------------------------------
+
+d3 is a "second elevator" only used to trim (pm, pitching moment=0) the
+model (I described that method in some other post long time ago). 
+
+The key to not needing downthrust is to force alpha=0, "a a 0". This is what
+I found out some days ago. Lift is adjusted via center of gravity and angle
+of attack.
+
+Related threads on yahoo group:
+   01.06.2006: AVL usage to create CRRCSim models
+   11.01.2007: Again: CRRCSim and AVL
+
+
+AVL output (taken from P51 again):
+  +--------------------------------------------------------
+  |  Vortex Lattice Output -- Total Forces
+  | 
+  |  Configuration: Name of wing                                                
+  |      # Surfaces =   5
+  |      # Strips   =  52
+  |      # Vortices = 364
+  | 
+  |   Sref =  267.89       Cref =  7.2679       Bref =  38.979    
+  |   Xref = -1.2990       Yref =  0.0000       Zref =-0.40310    
+  | 
+  |  Standard axis orientation,  X fwd, Z down         
+  | 
+  |  Run case:  -unnamed-                              
+  | 
+  |   Alpha =   0.00000     pb/2V =  -0.00000     p'b/2V =  -0.00000
+  |   Beta  =   0.00000     qc/2V =   0.00000
+  |   Mach  =     0.000     rb/2V =  -0.00000     r'b/2V =  -0.00000
+  | 
+  |   CXtot =  -0.04296     Cltot =   0.00000     Cl'tot =   0.00000
+  |   CYtot =   0.00000     Cmtot =  -0.00000
+  |   CZtot =  -0.21010     Cntot =  -0.00000     Cn'tot =  -0.00000
+  | 
+  |   CLtot =   0.21010
+  |   CDtot =   0.04296
+  |   CDvis =   0.04000     CDind =   0.00296
+  |   CLff  =   0.20984     CDff  =   0.00285    | Trefftz
+  |   CYff  =  -0.00000         e =    0.8667    | Plane  
+  | 
+  |    aileron         =   0.00000
+  |    elevator        =   0.00000
+  |    eletrim         =  -0.07247
+  |    rudder          =   0.00000
+  | 
+  |  ---------------------------------------------------------------
+  | 
+  |  Stability-axis derivatives...
+  | 
+  |                              alpha                beta
+  |                   ----------------    ----------------
+  |  z' force CL |    CLa =   4.653863    CLb =   0.000000
+  |  y  force CY |    CYa =  -0.000003    CYb =  -0.287618
+  |  x' mom.  Cl'|    Cla =  -0.000000    Clb =  -0.072167
+  |  y  mom.  Cm |    Cma =  -1.211189    Cmb =  -0.000000
+  |  z' mom.  Cn'|    Cna =   0.000002    Cnb =   0.116366
+  | 
+  |                      roll rate  p'      pitch rate  q'        yaw rate  r'
+  |                   ----------------    ----------------    ----------------
+  |  z' force CL |    CLp =   0.000000    CLq =   8.700470    CLr =   0.000000
+  |  y  force CY |    CYp =  -0.055052    CYq =  -0.000024    CYr =   0.288532
+  |  x' mom.  Cl'|    Clp =  -0.395561    Clq =  -0.000001    Clr =   0.075697
+  |  y  mom.  Cm |    Cmp =   0.000001    Cmq =  -9.166656    Cmr =   0.000000
+  |  z' mom.  Cn'|    Cnp =  -0.019716    Cnq =   0.000016    Cnr =  -0.140169
+  | 
+  |                   aileron      d1     elevator     d2     eletrim      d3     rudder       d4 
+  |                   ----------------    ----------------    ----------------    ----------------
+  |  z' force CL |   CLd1 =  -0.000000   CLd2 =   0.171995   CLd3 =   0.171995   CLd4 =   0.000000
+  |  y  force CY |   CYd1 =  -0.013673   CYd2 =  -0.000000   CYd3 =  -0.000000   CYd4 =  -0.067872
+  |  x' mom.  Cl'|   Cld1 =  -0.082938   Cld2 =  -0.000000   Cld3 =  -0.000000   Cld4 =  -0.003713
+  |  y  mom.  Cm |   Cmd1 =   0.000000   Cmd2 =  -0.422563   Cmd3 =  -0.422563   Cmd4 =  -0.000000
+  |  z' mom.  Cn'|   Cnd1 =   0.000376   Cnd2 =   0.000000   Cnd3 =   0.000000   Cnd4 =   0.036552
+  |  Trefftz drag| CDffd1 =   0.000000 CDffd2 =   0.000030 CDffd3 =   0.000030 CDffd4 =   0.000000
+  |  span eff.   |    ed1 =  -0.000000    ed2 =   1.409826    ed3 =   1.409826    ed4 =  -0.000000
+  | 
+  | 
+  | 
+  |  Neutral point  Xnp =   0.592449
+  | 
+  |  Clb Cnr / Clr Cnb  =   1.148382    (  > 1 if spirally stable )
+  | 
+  +--------------------------------------------------------
+
+  
+CRRCSim XML    AVL output
+-----------    ----------
+  ref.chord    Cref
+  ref.span     Bref
+  ref.area     Sref
+
+  l.Cl_b       Clb
+  l.Cl_p       Clp
+  l.Cl_r       Clr
+
+  m.Cm_a       Cma
+  m.Cm_q       Cmq
+
+  n.Cn_b       Cnb
+  n.Cn_p       Cnp
+  n.Cn_r       Cnr
+
+  Y.CY_b       CYb
+  Y.CY_p       CYp
+  Y.CY_r       CYr
+
+  lift.CL_a    CLa
+  lift.CL_q    CLq
+
+  misc.Alpha_0 Alpha * pi/180.0   
+  lift.CL_0    CLtot
+  m.Cm_0       Cmtot
+  
+elevator:  
+  m.Cm_de      Cmd2
+  lift.CL_de   CLd2
+
+if the plane has rudder control:
+  Y.CY_dr   CYd4
+  l.Cl_dr   Cld4
+  n.Cn_dr   Cnd4
+  
+if the plane has aileron control:  
+  Y.CY_da   CYd1
+  l.Cl_da   Cld1
+  n.Cn_da   Cnd1
+
+Remember that for CRRCSim, if the plane has rudder, but no aileron, rudder
+derivatives are written onto *_da-values.
+
+Also, in the case shown above:
+  d1 aileron
+  d2 elevator
+  d3 eletrim
+  d4 rudder
+The actual d-number depends on your AVL input file, so take care when
+reading rudder/elevator/aileron derivatives.
+  
+Best regards,
+Jens
+
+
+From jan.reucker at web.de  Tue Oct 27 21:37:49 2009
+From: jan.reucker at web.de (Jan Reucker)
+Date: Tue, 27 Oct 2009 21:37:49 +0100
+Subject: [Crrcsim-devel] Downthrust working now, behaviour of flexifly
+In-Reply-To: <20091027150550.GB3805@knusper>
+References: <20091021180659.GA6250@knusper>
+	<20091021221735.affe9c5d.jan.reucker@web.de>
+	<20091022043102.GA3240@streusel>
+	<20091026213806.b80be18d.jan.reucker@web.de>
+	<20091027150550.GB3805@knusper>
+Message-ID: <20091027213749.a6d92b4c.jan.reucker@web.de>
+
+On Tue, 27 Oct 2009 16:05:50 +0100
+Jens Wilhelm Wulf <jens_w2 at gmx.net> wrote:
+
+> > now that we have a near-perfect model for the Flexifly (do you have an
+> > adjusted XML file that contains the new prop position and downthrust values?),
+> I did not and I question whether this makes sense -- because I think the
+> flexifly has its problem somewhere else.
+
+Do you think there still is a problem? I think its behaviour is quite
+realistic now with the additional downthrust. The original also has a
+slight tendency to pitch up when gaining speed, but I think that's o.k.
+considering the fact that it's not designed as a "neutral" aerobatics
+plane.
+
+> Here's what was used for the P51:
+
+Many thanks for putting all this stuff together. I'll see if I can reproduce
+the results and then put it in the Wiki to finish the tutorial.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker <jan.reucker at web.de>
+
+

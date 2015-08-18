@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] [Bug #17248] CRRCsim crashes when trying to load	invalid model file
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-October/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BBug%20%2317248%5D%20CRRCsim%20crashes%20when%20trying%20to%20load%0A%09invalid%20model%20file&In-Reply-To=%3C201010230543.o9N5hR8N002903%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000406.html">
+   <LINK REL="Next"  HREF="000407.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] [Bug #17248] CRRCsim crashes when trying to load	invalid model file</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BBug%20%2317248%5D%20CRRCsim%20crashes%20when%20trying%20to%20load%0A%09invalid%20model%20file&In-Reply-To=%3C201010230543.o9N5hR8N002903%40unicorn.berlios.de%3E"
+       TITLE="[Crrcsim-devel] [Bug #17248] CRRCsim crashes when trying to load	invalid model file">admin at berlios.de
+       </A><BR>
+    <I>Sat Oct 23 07:43:27 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000406.html">[Crrcsim-devel] [Feature #4309] Replay tool (partially done)
+</A></li>
+        <LI>Next message: <A HREF="000407.html">[Crrcsim-devel] [Patch #3062] Patch model specific config only
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#405">[ date ]</a>
+              <a href="thread.html#405">[ thread ]</a>
+              <a href="subject.html#405">[ subject ]</a>
+              <a href="author.html#405">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bug #17248, was updated on 2010-Jun-13 08:06
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Closed
+Resolution: Fixed
+Bug Group: None
+Priority: 3
+Submitted by: jreucker
+Assigned to : none
+Summary: CRRCsim crashes when trying to load invalid model file
+
+Details: When specifying an invalid model file on the command line (e.g. specify a scenery file instead of a model file), CRRCsim will segfault:
+
+crrcsim scenery/cape_cod-orig.xml
+
+Output:
+
+[...]
+The file could not be loaded by any FDM.
+The following FDMs are enabled:
+  displaymode: 1
+  heli01:      1
+  larcsim:     1
+  002:         1
+They said:
+  Not CRRC_AirplaneSim_Heli01: No Attribute named type in crrcsimSceneryFile
+  Not CRRC_AirplaneSim_MCopter01: No Attribute named type in crrcsimSceneryFile
+  Not CRRC_AirplaneSim_Larcsim: No child named aero in crrcsimSceneryFile
+  Not CRRC_AirplaneSim_002: No child named aero in crrcsimSceneryFile
+CRRCAirplaneV2(xml)
+Speicherzugriffsfehler  (&lt;-- Segmentation fault)
+
+
+This should be more robust: Either fall back to the default airplane, or at least exit cleanly without segfaulting.
+
+Follow-Ups:
+
+Date: 2010-Oct-23 07:43
+By: jww
+
+Comment:
+Fixed in (90a2bb68426e) which should be part of any release after 0.9.11.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=17248&amp;group_id=9957">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=17248&amp;group_id=9957</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000406.html">[Crrcsim-devel] [Feature #4309] Replay tool (partially done)
+</A></li>
+	<LI>Next message: <A HREF="000407.html">[Crrcsim-devel] [Patch #3062] Patch model specific config only
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#405">[ date ]</a>
+              <a href="thread.html#405">[ thread ]</a>
+              <a href="subject.html#405">[ subject ]</a>
+              <a href="author.html#405">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

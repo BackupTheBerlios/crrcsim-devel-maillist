@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] record/demo/shadow is ready for testing
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-March/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20record/demo/shadow%20is%20ready%20for%20testing&In-Reply-To=%3C20100319212106.5265e367%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000309.html">
+   <LINK REL="Next"  HREF="000311.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] record/demo/shadow is ready for testing</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20record/demo/shadow%20is%20ready%20for%20testing&In-Reply-To=%3C20100319212106.5265e367%40web.de%3E"
+       TITLE="[Crrcsim-devel] record/demo/shadow is ready for testing">jan.reucker at web.de
+       </A><BR>
+    <I>Fri Mar 19 21:21:06 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000309.html">[Crrcsim-devel] record/demo/shadow is ready for testing
+</A></li>
+        <LI>Next message: <A HREF="000311.html">[Crrcsim-devel] record/demo/shadow is ready for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#310">[ date ]</a>
+              <a href="thread.html#310">[ thread ]</a>
+              <a href="subject.html#310">[ subject ]</a>
+              <a href="author.html#310">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, 19 Mar 2010 17:10:05 +0100
+Jens Wilhelm Wulf &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">jens_w2 at gmx.net</A>&gt; wrote:
+
+&gt;<i> &gt; There is also the format of floating numbers representation but the
+</I>&gt;<i> &gt; normalized format IEEE 754 is used everywhere.
+</I>&gt;<i> That means the only issue with floats/doubles is byte order, too? Good news.
+</I>&gt;<i> I searched the net but only found the usual integer examples and a paper
+</I>&gt;<i> dealing with ancient unix systems.
+</I>
+Speaking for modern x86(_64) platforms you should be right, but I'm currently
+developing software for a platform with a non-IEEE754 float format. The bit
+arrangement differs from the usual sign/exponent/fraction layout. But I
+guess that shouldn't bother you regarding CRRCsim.
+
+&gt;<i> I will not go that way. The files will use native x86 byte order (little
+</I>&gt;<i> endian), other systems will have to byteswap.
+</I>
+I would do it the same way. There's no need to bother with a flexible file
+format as long as you are in control of the format definition.
+ 
+&gt;<i> Anyway, I'll prepare the code for endianess issues...
+</I>
+Good idea.
+
+Kind regards,
+Jan R.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000309.html">[Crrcsim-devel] record/demo/shadow is ready for testing
+</A></li>
+	<LI>Next message: <A HREF="000311.html">[Crrcsim-devel] record/demo/shadow is ready for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#310">[ date ]</a>
+              <a href="thread.html#310">[ thread ]</a>
+              <a href="subject.html#310">[ subject ]</a>
+              <a href="author.html#310">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

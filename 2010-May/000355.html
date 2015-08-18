@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] [crrcsim] New photopanoramic scenery
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5Bcrrcsim%5D%20New%20photopanoramic%20scenery&In-Reply-To=%3C20100516145349.3be0e377%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000354.html">
+   <LINK REL="Next"  HREF="000356.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] [crrcsim] New photopanoramic scenery</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5Bcrrcsim%5D%20New%20photopanoramic%20scenery&In-Reply-To=%3C20100516145349.3be0e377%40web.de%3E"
+       TITLE="[Crrcsim-devel] [crrcsim] New photopanoramic scenery">jan.reucker at web.de
+       </A><BR>
+    <I>Sun May 16 14:53:49 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000354.html">[Crrcsim-devel] [crrcsim] New photopanoramic scenery
+</A></li>
+        <LI>Next message: <A HREF="000356.html">[Crrcsim-devel] addition to the scenery file format
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#355">[ date ]</a>
+              <a href="thread.html#355">[ thread ]</a>
+              <a href="subject.html#355">[ subject ]</a>
+              <a href="author.html#355">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, 16 May 2010 09:41:01 +0200
+Jo&#235;l Li&#233;nard &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">joel.lienard at laposte.net</A>&gt; wrote:
+
+&gt;<i> I find that it is more convenient, for me and for the users, of it step
+</I>&gt;<i> to scatter the components of the scenery. The interest of the use of the
+</I>&gt;<i> file &quot;objects&quot; and &quot;texture&quot; is to be able to reuse elements. It is not
+</I>&gt;<i> possible in my case.
+</I>&gt;<i> To avoid the use of &quot;../&quot;, we could add the &quot;scenery&quot; directory in the
+</I>&gt;<i> search path for objects and textures.
+</I>
+If we add something to the search path, we should take a more general
+approach and add a &quot;search local&quot; feature that also covers models.
+I also find it convenient to keep everything in one folder, especially
+when trying out new stuff from other users. And I think there hasn't
+been too much component reuse during the past years :-/
+
+So maybe we should implement something like &quot;search relative to a
+given base file (same directory), or use the search path if the
+file wasn't found&quot;.
+
+&gt;<i> My idea was to add a parameter of size of texture in the video options. 
+</I>&gt;<i> But your suggestion seems to me simpler and more general. It gives one
+</I>&gt;<i> argument furthermore to write a new dialogue for scenery choice!
+</I>
+:<i>-)
+</I>
+I'll give it a try... At least I will define the needed addition to the
+scenery file format v3, so that we can safely release 0.9.11 soon. The scenery
+dialog can be extended step-by-step.
+
+Kind regards,
+Jan R.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000354.html">[Crrcsim-devel] [crrcsim] New photopanoramic scenery
+</A></li>
+	<LI>Next message: <A HREF="000356.html">[Crrcsim-devel] addition to the scenery file format
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#355">[ date ]</a>
+              <a href="thread.html#355">[ thread ]</a>
+              <a href="subject.html#355">[ subject ]</a>
+              <a href="author.html#355">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

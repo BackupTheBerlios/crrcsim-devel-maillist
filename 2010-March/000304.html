@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Record and playback
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-March/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Record%20and%20playback&In-Reply-To=%3C4B9D6A65.9080804%40obordes.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000303.html">
+   <LINK REL="Next"  HREF="000305.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Record and playback</H1>
+    <B>Olivier Bordes</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Record%20and%20playback&In-Reply-To=%3C4B9D6A65.9080804%40obordes.com%3E"
+       TITLE="[Crrcsim-devel] Record and playback">olivier at obordes.com
+       </A><BR>
+    <I>Sun Mar 14 23:59:49 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000303.html">[Crrcsim-devel] Record and playback
+</A></li>
+        <LI>Next message: <A HREF="000305.html">[Crrcsim-devel] Record and playback
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#304">[ date ]</a>
+              <a href="thread.html#304">[ thread ]</a>
+              <a href="subject.html#304">[ subject ]</a>
+              <a href="author.html#304">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Jens,
+You got a nice idea to reintroduce  again this &quot;shadow&quot; mode. It is very 
+useful for training F3F to &quot;fight&quot; against your shadow, which may have 
+been  recorded as your best run.
+As far as i remember, it took little cpu processing to record, so as you 
+suggest, doing a &quot;continuous recording&quot; might be possible.
+When I used it for training, usually I just recorded my best run, and 
+then shadow it and flight against it to improve and see where I could 
+save some time.
+One way to see it;
+     - save the run manually (or the last X seconds) in a file,
+     - at any time recall a file as shadow
+
+In original F3F version, the shadow started simultaneously when the 
+model enter the course. This allow a direct comparison between your 
+current flight and the shadow, against time.
+Olivier
+
+
+On 14/03/2010 19:42, Jens Wilhelm Wulf wrote:
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> I want to use CRRCSim to display movements I recorded on a real plane, so I
+</I>&gt;<i> needed a way to make it read time/position/attitude from a file and use
+</I>&gt;<i> those data.
+</I>&gt;<i>
+</I>&gt;<i> However, I thought about more general use and implemented a FlightRecorder
+</I>&gt;<i> with extended capability.
+</I>&gt;<i>
+</I>&gt;<i> There is a new feature branch in the official repository --
+</I>&gt;<i> changes/additions are small and easy to understand. There is no GUI yet,
+</I>&gt;<i> because I think important features are missing:
+</I>&gt;<i>
+</I>&gt;<i>   - shadow mode, especially useful for F3F and training like this; as I know
+</I>&gt;<i>     from posts and a screenshot, the early F3F branch had something like this
+</I>&gt;<i>   - storing additional data like airplane, scenery, settings, ...
+</I>&gt;<i>   - retrieving this data (only displaying it? Enforcing settings?)
+</I>&gt;<i>   - showing F3F results from the recorded file (they are already stored)
+</I>&gt;<i>
+</I>&gt;<i> I am not sure about how to implement this second (&quot;shadow&quot;) plane yet --
+</I>&gt;<i> comments are welcome regarding this task (and of course regarding the whole
+</I>&gt;<i> thing...).
+</I>&gt;<i>
+</I>&gt;<i> In case you want to try it out: recording are done automatically. If you
+</I>&gt;<i> want to play one back, add some playback line to the simulation section
+</I>&gt;<i> in your crrcsim.xml. It might look like this afterwards:
+</I>&gt;<i>
+</I>&gt;<i>    &lt;simulation&gt;
+</I>&gt;<i>      &lt;flightModel dt=&quot;0.002777&quot; /&gt;
+</I>&gt;<i>      &lt;display_mode fUse=&quot;0&quot; /&gt;
+</I>&gt;<i>      &lt;playback mode=&quot;demo&quot; file=&quot;record.log&quot; /&gt;
+</I>&gt;<i>    &lt;/simulation&gt;
+</I>&gt;<i>
+</I>&gt;<i> Have fun,
+</I>&gt;<i> Jens
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Crrcsim-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">Crrcsim-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">https://lists.berlios.de/mailman/listinfo/crrcsim-devel</A>
+</I>&gt;<i>
+</I>&gt;<i>    
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000303.html">[Crrcsim-devel] Record and playback
+</A></li>
+	<LI>Next message: <A HREF="000305.html">[Crrcsim-devel] Record and playback
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#304">[ date ]</a>
+              <a href="thread.html#304">[ thread ]</a>
+              <a href="subject.html#304">[ subject ]</a>
+              <a href="author.html#304">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

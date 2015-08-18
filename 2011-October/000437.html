@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Moving away from berlios...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Moving%20away%20from%20berlios...&In-Reply-To=%3C20111002181658.GA3607%40knusper%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000438.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Moving away from berlios...</H1>
+    <B>Jens Wilhelm Wulf</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Moving%20away%20from%20berlios...&In-Reply-To=%3C20111002181658.GA3607%40knusper%3E"
+       TITLE="[Crrcsim-devel] Moving away from berlios...">jens_w2 at gmx.net
+       </A><BR>
+    <I>Sun Oct  2 20:16:58 CEST 2011</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000438.html">[Crrcsim-devel] Moving away from berlios...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#437">[ date ]</a>
+              <a href="thread.html#437">[ thread ]</a>
+              <a href="subject.html#437">[ subject ]</a>
+              <a href="author.html#437">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi there,
+
+berlios will be closed at the end of this year.
+
+Some time ago we moved from sourceforge to berlios because sf didn't
+allow/provide mercurial hosting; however, we didn't delete crrcsim at
+sf and the mailing lists and everything are still alive.
+
+
+=== source code repository
+
+As of today its mercurial support is better than what we have at
+berlios now; it provides everything else we need, so we just move back.
+
+crrcsim's source code has already been cloned to sf; please edit your
+.hg/hgrc, insert
+
+  default = <A HREF="http://crrcsim.hg.sourceforge.net:8000/hgroot/crrcsim/crrcsim">http://crrcsim.hg.sourceforge.net:8000/hgroot/crrcsim/crrcsim</A>
+  default-push = <A HREF="ssh://USERNAME@crrcsim.hg.sourceforge.net/hgroot/crrcsim/crrcsim">ssh://USERNAME@crrcsim.hg.sourceforge.net/hgroot/crrcsim/crrcsim</A>
+
+(replace USERNAME) and remove or rename the entries pointing to berlios.
+
+Due to mercurial's distributed nature it is not a problem if you
+accidentially push to berlios -- you can always push to sf later on or
+someone else can pull from berlios and push to sf, so no changeset
+will be lost.
+
+
+=== wiki 
+
+Jan R. will care about that.
+
+
+=== mailing list
+
+Please use <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">crrcsim-devel at lists.sourceforge.net</A> instead of
+<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">crrcsim-devel at lists.berlios.de</A> from now on.
+
+Is it neccessary to download mails from berlios and archive them
+somewhele? It is possible: 
+
+  rsync -av lists.berlios.de::&lt;listname&gt;-archive &lt;listname&gt;-archive
+
+  
+=== tracker: bugs, patches
+
+It is possible to export tracker items:
+  
+  <A HREF="http://developer.berlios.de/docman/display_doc.php?docid=2055&amp;group_id=2#tracker">http://developer.berlios.de/docman/display_doc.php?docid=2055&amp;group_id=2#tracker</A>
+
+But can we easily import them to the sf tracker?
+
+
+=== something else?
+
+There is a package crrcsim-legacy-models on berlios.
+
+Well, maybe there is something more that needs to be migrated? I don't
+know.
+
+
+
+Best regards,
+Jens
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000438.html">[Crrcsim-devel] Moving away from berlios...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#437">[ date ]</a>
+              <a href="thread.html#437">[ thread ]</a>
+              <a href="subject.html#437">[ subject ]</a>
+              <a href="author.html#437">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

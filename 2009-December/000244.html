@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] [Bug #16552] Collision detection with multiple	objects fail
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BBug%20%2316552%5D%20Collision%20detection%20with%20multiple%0A%09objects%20fail&In-Reply-To=%3C200912151123.nBFBNaIB026584%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000243.html">
+   <LINK REL="Next"  HREF="000245.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] [Bug #16552] Collision detection with multiple	objects fail</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BBug%20%2316552%5D%20Collision%20detection%20with%20multiple%0A%09objects%20fail&In-Reply-To=%3C200912151123.nBFBNaIB026584%40unicorn.berlios.de%3E"
+       TITLE="[Crrcsim-devel] [Bug #16552] Collision detection with multiple	objects fail">admin at berlios.de
+       </A><BR>
+    <I>Tue Dec 15 12:23:36 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000243.html">[Crrcsim-devel] [Bug #16552] Collision detection with multiple	objects fail
+</A></li>
+        <LI>Next message: <A HREF="000245.html">[Crrcsim-devel] [Bug #16204] core dump on karmic
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#244">[ date ]</a>
+              <a href="thread.html#244">[ thread ]</a>
+              <a href="subject.html#244">[ subject ]</a>
+              <a href="author.html#244">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bug #16552, was updated on 2009-Dec-14 14:15
+Here is a current snapshot of the bug.
+
+Project: CRRCsim
+Category: None
+Status: Closed
+Resolution: Fixed
+Bug Group: None
+Priority: 5
+Submitted by: dl6lr
+Assigned to : jreucker
+Summary: Collision detection with multiple objects fail
+
+Details: When using multiple instances of objects in a scenary, only the first object will be handled for collision detection.
+Example: Simple Scenary: You can hit the first outhouse (leftmost), but not the other two.
+
+Follow-Ups:
+
+Date: 2009-Dec-15 12:23
+By: jreucker
+
+Comment:
+Fixed in changeset ae09ffcceb52.
+-------------------------------------------------------
+
+Date: 2009-Dec-14 20:54
+By: dl6lr
+
+Comment:
+It seems that only one (the first) instance of an object is used for collision detection. 
+
+  &lt;scene type=&quot;model-based&quot;&gt;
+    &lt;object filename=&quot;small.ac&quot; terrain=&quot;1&quot;&gt;
+      &lt;instance x=&quot;0&quot; y=&quot;0&quot; z=&quot;0&quot; /&gt;
+    &lt;/object&gt;
+    &lt;object filename=&quot;outhouse.ac&quot;&gt;
+      &lt;instance x=&quot;-160&quot; y=&quot;34.0&quot; z=&quot;0&quot; /&gt;
+      &lt;instance x=&quot;-160&quot; y=&quot;27.0&quot; z=&quot;0&quot; /&gt;
+      &lt;instance x=&quot;-160&quot; y=&quot;20.0&quot; z=&quot;0&quot; /&gt;
+    &lt;/object&gt;
+	&lt;object filename=&quot;freqboard.ac&quot;&gt;
+      &lt;instance x=&quot;-160&quot; y=&quot;0.0&quot; z=&quot;0&quot; h=&quot;90&quot; p=&quot;0&quot; r=&quot;0&quot; /&gt;
+    &lt;/object&gt;
+  &lt;/scene&gt;
+
+You can hit the leftmost outhouse.
+
+  &lt;scene type=&quot;model-based&quot;&gt;
+    &lt;object filename=&quot;small.ac&quot; terrain=&quot;1&quot;&gt;
+      &lt;instance x=&quot;0&quot; y=&quot;0&quot; z=&quot;0&quot; /&gt;
+    &lt;/object&gt;
+    &lt;object filename=&quot;trashcan.ac&quot;&gt;
+      &lt;instance x=&quot;-160&quot; y=&quot;0.0&quot; z=&quot;0&quot; h=&quot;90&quot; p=&quot;0&quot; r=&quot;0&quot; /&gt;
+    &lt;/object&gt;
+    &lt;object filename=&quot;outhouse.ac&quot;&gt;
+      &lt;instance x=&quot;-160&quot; y=&quot;34.0&quot; z=&quot;0&quot; /&gt;
+      &lt;instance x=&quot;-160&quot; y=&quot;27.0&quot; z=&quot;0&quot; /&gt;
+      &lt;instance x=&quot;-160&quot; y=&quot;20.0&quot; z=&quot;0&quot; /&gt;
+    &lt;/object&gt;
+  &lt;/scene&gt;
+
+You can hit the trashcan only.
+
+So it is not dependent on multiple instances of one object, but only the first very instance seems to be used for collision detection.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=16552&amp;group_id=9957">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=16552&amp;group_id=9957</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000243.html">[Crrcsim-devel] [Bug #16552] Collision detection with multiple	objects fail
+</A></li>
+	<LI>Next message: <A HREF="000245.html">[Crrcsim-devel] [Bug #16204] core dump on karmic
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#244">[ date ]</a>
+              <a href="thread.html#244">[ thread ]</a>
+              <a href="subject.html#244">[ subject ]</a>
+              <a href="author.html#244">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

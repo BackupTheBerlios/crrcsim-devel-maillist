@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] [Patch #3063] Verbosity level configuration only
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-September/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BPatch%20%233063%5D%20Verbosity%20level%20configuration%20only&In-Reply-To=%3C201009132054.o8DKs6Dc004853%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000399.html">
+   <LINK REL="Next"  HREF="000394.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] [Patch #3063] Verbosity level configuration only</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BPatch%20%233063%5D%20Verbosity%20level%20configuration%20only&In-Reply-To=%3C201009132054.o8DKs6Dc004853%40unicorn.berlios.de%3E"
+       TITLE="[Crrcsim-devel] [Patch #3063] Verbosity level configuration only">admin at berlios.de
+       </A><BR>
+    <I>Mon Sep 13 22:54:06 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000399.html">[Crrcsim-devel] Dereferencing a type-punned pointer
+</A></li>
+        <LI>Next message: <A HREF="000394.html">[Crrcsim-devel] [Patch #3059] New airplane specific config and	verbosity level config
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#393">[ date ]</a>
+              <a href="thread.html#393">[ thread ]</a>
+              <a href="subject.html#393">[ subject ]</a>
+              <a href="author.html#393">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Patch #3063 has been updated. 
+
+Project: crrcsim
+Category: None
+Status: Open
+Submitted by: dl6lr
+Assigned to : jreucker
+Summary: Verbosity level configuration only
+
+Follow-Ups:
+
+Date: 2010-Sep-13 22:54
+By: jreucker
+
+Comment:
+I'll accept this patch, but I think the new feature deserves a better name. &quot;Verbosity level&quot; was adopted from one of the early CRRCsim versions, but I guess something like &quot;Info Panel&quot; sounds better.
+
+I already did some minor changes to your code (e.g. ran it through AStyle to adjust the formatting to our coding standard) and updated the patch. I think I can handle the renaming myself, but if you insist on doing it yourself, just send me an email.
+
+Kind regards,
+Jan R. 
+-------------------------------------------------------
+
+Date: 2010-Sep-12 21:57
+By: dl6lr
+
+Comment:
+Patch to configure verbosity levels
+-----------------------------------
+
+
+Idea:
+
+The current setting of verbosity levels are hard coded and not configurable.
+Personal preferences can only be set by compiling the source code.
+
+GUI:
+
+A new dialog box was created that contains a &quot;New&quot; button to create a new level, 
+a combo box to select one of the current levels, a text field to (re)name the current level
+and one check box for every feature that can be selected/deselcted.
+The &quot;OK&quot; button closes the dialog.
+
+The xml file:
+
+A new tree &lt;display&gt; was inserted. 
+A sub tree &lt;verbose&gt; holds every level, stating the number of levels and the currently selected level in its attributes.
+For every level, a node &lt;&gt; is inside the &lt;verbose&gt; tree.
+
+Example xml:
+
+  &lt;display&gt;
+    &lt;verbose levels=&quot;5&quot; current=&quot;2&quot;&gt;
+      &lt;level0 name=&quot;nothing&quot; controls=&quot;0&quot; fov=&quot;0&quot; fps=&quot;0&quot; altitude=&quot;0&quot; position=&quot;0&quot; /&gt;
+      &lt;level1 name=&quot;test1&quot; controls=&quot;0&quot; fov=&quot;1&quot; fps=&quot;1&quot; altitude=&quot;1&quot; position=&quot;0&quot; /&gt;
+      &lt;level2 name=&quot;test2&quot; controls=&quot;0&quot; fov=&quot;1&quot; fps=&quot;0&quot; altitude=&quot;1&quot; position=&quot;0&quot; /&gt;
+      &lt;level3 name=&quot;noname3&quot; controls=&quot;0&quot; fov=&quot;0&quot; fps=&quot;0&quot; altitude=&quot;0&quot; position=&quot;1&quot; /&gt;
+      &lt;level4 name=&quot;all&quot; controls=&quot;1&quot; fov=&quot;1&quot; fps=&quot;1&quot; altitude=&quot;1&quot; position=&quot;1&quot; /&gt;
+    &lt;/verbose&gt;
+  &lt;/display&gt;
+
+How does it work?
+
+1. Starting with the xml from 0.9.11, a new empty level called &quot;unnamed&quot; is automatically created.
+2. Open the configuration Options/Verbosity. You will see the one and only level &quot;unnamed&quot;
+   You can rename it (with the text field) and/or select options.
+3. By closing the dialog with OK, the new settings will be effective.
+4. You can create new levels with the &quot;New&quot; button
+   Whenever you create a new level, select a different one from the combo box or close the dialog with OK,
+   the current settings are saved to memory.
+5. You can now toggle the verbose levels inside crrcsim with the &quot;v&quot; key
+
+For the developers:
+
+Expanding the configurable verbosity options is easy:
+- verboselevel.h: extend the enum by inserting a new value JUST BEFORE __UNUSED__MAX_NUM
+- verboselevel.cpp: expand the array optionNames with the new string
+- info.cpp: expand the method InfoPanel::show()
+
+To do:
+
+- rework the verbosity info to an overlay
+- configure the position and size of the overlay
+
+-------------------------------------------------------
+
+-------------------------------------------------------
+For more info, visit:
+
+<A HREF="http://developer.berlios.de/patch/?func=detailpatch&amp;patch_id=3063&amp;group_id=9957">http://developer.berlios.de/patch/?func=detailpatch&amp;patch_id=3063&amp;group_id=9957</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000399.html">[Crrcsim-devel] Dereferencing a type-punned pointer
+</A></li>
+	<LI>Next message: <A HREF="000394.html">[Crrcsim-devel] [Patch #3059] New airplane specific config and	verbosity level config
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#393">[ date ]</a>
+              <a href="thread.html#393">[ thread ]</a>
+              <a href="subject.html#393">[ subject ]</a>
+              <a href="author.html#393">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,125 @@
+From jens_w2 at gmx.net  Sun Oct  2 20:16:58 2011
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Sun, 2 Oct 2011 20:16:58 +0200
+Subject: [Crrcsim-devel] Moving away from berlios...
+Message-ID: <20111002181658.GA3607@knusper>
+
+Hi there,
+
+berlios will be closed at the end of this year.
+
+Some time ago we moved from sourceforge to berlios because sf didn't
+allow/provide mercurial hosting; however, we didn't delete crrcsim at
+sf and the mailing lists and everything are still alive.
+
+
+=== source code repository
+
+As of today its mercurial support is better than what we have at
+berlios now; it provides everything else we need, so we just move back.
+
+crrcsim's source code has already been cloned to sf; please edit your
+.hg/hgrc, insert
+
+  default = http://crrcsim.hg.sourceforge.net:8000/hgroot/crrcsim/crrcsim
+  default-push = ssh://USERNAME at crrcsim.hg.sourceforge.net/hgroot/crrcsim/crrcsim
+
+(replace USERNAME) and remove or rename the entries pointing to berlios.
+
+Due to mercurial's distributed nature it is not a problem if you
+accidentially push to berlios -- you can always push to sf later on or
+someone else can pull from berlios and push to sf, so no changeset
+will be lost.
+
+
+=== wiki 
+
+Jan R. will care about that.
+
+
+=== mailing list
+
+Please use crrcsim-devel at lists.sourceforge.net instead of
+crrcsim-devel at lists.berlios.de from now on.
+
+Is it neccessary to download mails from berlios and archive them
+somewhele? It is possible: 
+
+  rsync -av lists.berlios.de::<listname>-archive <listname>-archive
+
+  
+=== tracker: bugs, patches
+
+It is possible to export tracker items:
+  
+  http://developer.berlios.de/docman/display_doc.php?docid=2055&group_id=2#tracker
+
+But can we easily import them to the sf tracker?
+
+
+=== something else?
+
+There is a package crrcsim-legacy-models on berlios.
+
+Well, maybe there is something more that needs to be migrated? I don't
+know.
+
+
+
+Best regards,
+Jens
+
+
+From jan.reucker at web.de  Mon Oct  3 17:46:20 2011
+From: jan.reucker at web.de (Jan Reucker)
+Date: Mon, 03 Oct 2011 17:46:20 +0200
+Subject: [Crrcsim-devel] Moving away from berlios...
+In-Reply-To: <20111002181658.GA3607@knusper>
+References: <20111002181658.GA3607@knusper>
+Message-ID: <4E89D8CC.2060701@web.de>
+
+On 02.10.2011 20:16, Jens Wilhelm Wulf wrote:
+> === source code repository
+>
+> As of today its mercurial support is better than what we have at
+> berlios now; it provides everything else we need, so we just move back.
+
+I've already tested pulling, seems to work flawlessly.
+
+> === wiki
+>
+> Jan R. will care about that.
+
+I've found pm2media, a converter from pmwiki to mediawiki. But it 
+doesn't work out-of-the box because the MediaWiki accounts at SF.net 
+seem to be tightly coupled to the SF.net accounts, so the login process 
+is non-standard. Maybe I have to write my own script for this task.
+
+
+>
+> === tracker: bugs, patches
+>
+> It is possible to export tracker items:
+>
+>    http://developer.berlios.de/docman/display_doc.php?docid=2055&group_id=2#tracker
+>
+> But can we easily import them to the sf tracker?
+>
+
+Don't know. A quick google search turned up nothing useful.
+
+> === something else?
+>
+> There is a package crrcsim-legacy-models on berlios.
+>
+> Well, maybe there is something more that needs to be migrated? I don't
+> know.
+
+We should update the latest binary releases (or simply make a new 
+release soon).
+
+Kind regards,
+Jan R.
+
+
+

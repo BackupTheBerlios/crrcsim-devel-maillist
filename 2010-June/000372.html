@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] [Bug #17237] Wrong starting position when loading scenery from cmdline
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-June/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BBug%20%2317237%5D%20Wrong%20starting%20position%20when%0A%20loading%20scenery%20from%20cmdline&In-Reply-To=%3C1276365174.4077.33.camel%40joel-portable%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000371.html">
+   <LINK REL="Next"  HREF="000373.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] [Bug #17237] Wrong starting position when loading scenery from cmdline</H1>
+    <B>Jo&#235;l Li&#233;nard</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20%5BBug%20%2317237%5D%20Wrong%20starting%20position%20when%0A%20loading%20scenery%20from%20cmdline&In-Reply-To=%3C1276365174.4077.33.camel%40joel-portable%3E"
+       TITLE="[Crrcsim-devel] [Bug #17237] Wrong starting position when loading scenery from cmdline">joel.lienard at free.fr
+       </A><BR>
+    <I>Sat Jun 12 19:52:54 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000371.html">[Crrcsim-devel] [Bug #17237] Wrong starting position when loading scenery from cmdline
+</A></li>
+        <LI>Next message: <A HREF="000373.html">[Crrcsim-devel] [Bug #17237] Wrong starting position when loading scenery from cmdline
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#372">[ date ]</a>
+              <a href="thread.html#372">[ thread ]</a>
+              <a href="subject.html#372">[ subject ]</a>
+              <a href="author.html#372">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Le samedi 12 juin 2010 &#224; 12:36 +0200, Jan Reucker a &#233;crit :
+&gt;<i> On Fri, 11 Jun 2010 09:39:51 +0200
+</I>&gt;<i> Jo&#235;l Li&#233;nard &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">joel.lienard at free.fr</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; I am not certain that the problem comes from the load from cmdline.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I did not reproduce the case &quot;start FAR below ground&quot;. I only noticed
+</I>&gt;<i> &gt; the problem of the sloping position (see bug 17239) : A part of the
+</I>&gt;<i> &gt; plane is slightly under the ground.
+</I>&gt;<i> 
+</I>&gt;<i> Jo&#235;l,
+</I>&gt;<i> 
+</I>&gt;<i> I've added some more information to the tracker, maybe you can reproduce it
+</I>&gt;<i> this way.
+</I>
+Jan,
+
+I conclusions is identical: only a part of the plane is slightly under
+the ground. We can see that only some points give the message &quot;max_force
+exceeded&quot;.
+If we modify the start position, for example in the test.xml
+file,[rel_front=&quot;0&quot; rel_right=&quot;20&quot;],(or only altitude=&quot;4&quot;)everything is
+OK.
+It seems to me that if the plane breaks itself everything at the
+beginning of the simulation, view(sight) clocks at the point (0,0,0)
+what persuades that the plane is far under the ground me if it is not
+true. You can see with [altitude=&quot;-1&quot; rel_front=&quot;0&quot; rel_right=&quot;20&quot;].
+
+Kind regards,
+Jo&#235;l
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000371.html">[Crrcsim-devel] [Bug #17237] Wrong starting position when loading scenery from cmdline
+</A></li>
+	<LI>Next message: <A HREF="000373.html">[Crrcsim-devel] [Bug #17237] Wrong starting position when loading scenery from cmdline
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#372">[ date ]</a>
+              <a href="thread.html#372">[ thread ]</a>
+              <a href="subject.html#372">[ subject ]</a>
+              <a href="author.html#372">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

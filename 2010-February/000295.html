@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Simple wind calculation
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-February/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Simple%20wind%20calculation&In-Reply-To=%3C1266083502.3228.89.camel%40joel-portable%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000296.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Simple wind calculation</H1>
+    <B>Jo&#235;l Li&#233;nard</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Simple%20wind%20calculation&In-Reply-To=%3C1266083502.3228.89.camel%40joel-portable%3E"
+       TITLE="[Crrcsim-devel] Simple wind calculation">joel.lienard at laposte.net
+       </A><BR>
+    <I>Sat Feb 13 18:51:42 CET 2010</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000296.html">[Crrcsim-devel] coherence convention for Z
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#295">[ date ]</a>
+              <a href="thread.html#295">[ thread ]</a>
+              <a href="subject.html#295">[ subject ]</a>
+              <a href="author.html#295">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+I began with a very simple solution for the calculation of wind from
+profile of the ground.
+
+Here is the principle: we make locally a modeling of the ground by a
+simple shape. At present a plan, then a horizontal cylinder, a  cylinder
+inclined...). That modeling is made from some points of terrain (2...5).
+The distance from these measurement points  of the terrain is all the
+bigger as the height is big. It makes a kind of smoothing when we rise.
+
+Physically, it is an estimate (still very unrefined) of a flow of a
+perfect fluid : the flux of air stick on the ground. No turbulence,
+obviously. Simulation (for dynamic soaring) of the back-side of a slope
+as that of Brie will be very far from the reality.
+But it is better that nothing. And at least so just as the current model
+of Cape Cod.
+It makes possible the flight on Cape &quot;model based&quot; and on Bri&#233; without
+using of wind datafile. And it is possible to make vary the direction of
+wind.
+A suggestion to Jan: in simple scenery, move closer to the hill of the
+runway. It would allow to make it slope-soaring!
+
+Note : For my tests, I added a utility for drawing the profiles of
+ground and wind. To validate it, add &quot;-Dviewwind&quot; to the compilation.
+Cela ajoute un &#233;lement dans le menu
+
+Jo&#235;l
+
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000296.html">[Crrcsim-devel] coherence convention for Z
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#295">[ date ]</a>
+              <a href="thread.html#295">[ thread ]</a>
+              <a href="subject.html#295">[ subject ]</a>
+              <a href="author.html#295">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

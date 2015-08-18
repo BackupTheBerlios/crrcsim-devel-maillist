@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] important repository maintenance request
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20important%20repository%20maintenance%20request&In-Reply-To=%3C20090112192851.GB5207%40localhost%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000083.html">
+   <LINK REL="Next"  HREF="000080.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] important repository maintenance request</H1>
+    <B>Jens Wilhelm Wulf</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20important%20repository%20maintenance%20request&In-Reply-To=%3C20090112192851.GB5207%40localhost%3E"
+       TITLE="[Crrcsim-devel] important repository maintenance request">jens_w2 at gmx.net
+       </A><BR>
+    <I>Mon Jan 12 20:28:51 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000083.html">[Crrcsim-devel] panorama scenery
+</A></li>
+        <LI>Next message: <A HREF="000080.html">[Crrcsim-devel] important repository maintenance request
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#79">[ date ]</a>
+              <a href="thread.html#79">[ thread ]</a>
+              <a href="subject.html#79">[ subject ]</a>
+              <a href="author.html#79">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+this is an important request which everyone who pulled from the official
+repository since 19.12.2008 (and who plans to push back to it) must follow
+in order to keep our (or his) repository small and clean:
+
+
+1. Hopefully you have not based any changeset on the changesets 33569991f606
+   or later. If this is the case, you must rebase them on b5d92059e2b0.
+
+2. Enable the mq extension for your installation of mercurial. In your
+   ~/.hgrc (or equivalent file on windows) there must be a line
+  +--------------------------------------------------------
+  | hgext.mq =
+  +--------------------------------------------------------
+   in the section '[extensions]'.
+
+3. Issue 'hg strip 33569991f606' on every single one of your CRRCSim
+   repositories, which will delete changeset 33569991f606 and what's derived
+   from it.
+
+Thanks,
+Jens
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000083.html">[Crrcsim-devel] panorama scenery
+</A></li>
+	<LI>Next message: <A HREF="000080.html">[Crrcsim-devel] important repository maintenance request
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#79">[ date ]</a>
+              <a href="thread.html#79">[ thread ]</a>
+              <a href="subject.html#79">[ subject ]</a>
+              <a href="author.html#79">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

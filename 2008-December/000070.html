@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] panorama scenery
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2008-December/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20panorama%20scenery&In-Reply-To=%3C20081215234223.3990bda3.jan.reucker%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000069.html">
+   <LINK REL="Next"  HREF="000071.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] panorama scenery</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20panorama%20scenery&In-Reply-To=%3C20081215234223.3990bda3.jan.reucker%40web.de%3E"
+       TITLE="[Crrcsim-devel] panorama scenery">jan.reucker at web.de
+       </A><BR>
+    <I>Mon Dec 15 23:42:23 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000069.html">[Crrcsim-devel] panorama scenery
+</A></li>
+        <LI>Next message: <A HREF="000071.html">[Crrcsim-devel] panorama scenery
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#70">[ date ]</a>
+              <a href="thread.html#70">[ thread ]</a>
+              <a href="subject.html#70">[ subject ]</a>
+              <a href="author.html#70">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Am Sat, 13 Dec 2008 17:29:55 +0100 schrieb Jan Reucker &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">jan.reucker at web.de</A>&gt;:
+
+&gt;<i> &gt; The technique of realization of the panorama functions well. The example of
+</I>&gt;<i> &gt; the slope of Brie (close to Grenoble) is correct. The determination of the
+</I>&gt;<i> &gt; altitude of the ground starting from the photographs is satisfactory for the
+</I>&gt;<i> &gt; close objects. I will supplement then by the use of map or aerial photos.
+</I>
+Hello Joel,
+
+that's good news! I can't wait to try it out.
+
+&gt;<i> &gt; I integrate this panorama in CRRCSIm like a &quot;Skybox&quot;. Each face is defined
+</I>&gt;<i> &gt; by 2048x2048px. One will be able to envisage a low resolution of 1024x1024
+</I>&gt;<i> &gt; for old graphics cards.
+</I>
+Are you using the existing skybox code or did you write a new class for this
+purpose?
+
+&gt;<i> &gt; The difficulties start with the definition of altitudes to obtain realistic
+</I>&gt;<i> &gt; landings. I finally decided to define the altitude of the ground by creating
+</I>&gt;<i> &gt; a graphic surface. I generate a file of the type &#147;.ac&#148;. That enables me to
+</I>&gt;<i> &gt; use the functions already ready in CRRCSIM for the &#147;ModelBasedScenery&#148;. The
+</I>&gt;<i> &gt; only difference is that the contents of the file are not traced because it
+</I>&gt;<i> &gt; definite a transparent surface. 
+</I>
+I think this is a good solution, and other simulators handle it in the same way.
+This also makes it possible to place transparent primitives like cubes or
+cylinders in the landscape to get a simple collision detection (if we want
+to implement it some day).
+
+&gt;<i> &gt; To use this representation as definition of altitude, I programmed the
+</I>&gt;<i> &gt; functions &#147;getHeightAndPlane&#148; and &#147;getHeight&#148; in the class
+</I>&gt;<i> &gt; &#147;ModelBasedScenery&#148;. As suggested by Jan, I used the function ssgLOS. That
+</I>&gt;<i> &gt; functions but is very greedy in CPU because it is not accelerated by the
+</I>&gt;<i> &gt; graphics card. &#147;Simple Scenery&#148; does not function even on my very recent
+</I>&gt;<i> &gt; computer. I thus started to use a technique of tiling. My first incomplete
+</I>&gt;<i> &gt; version currently functions with &#147;Simple Scenery&#148; but does not accept
+</I>&gt;<i> &gt; hierarchical scenes like that of Davis. I temporarily envisaged a
+</I>&gt;<i> &gt; commutation by an attribute &lt;scene type=&quot;model-based&quot; mode=x &gt;.. Thus, all
+</I>&gt;<i> &gt; of the scenes function in mode &#147;ModelBasedScenery&#148;: Davis, CapeCod,
+</I>&gt;<i> &gt; SimpleScenery, and Brie.
+</I>
+Yes, ssgLOS hogs the CPU because it walks through every rendered triangle to
+determine if it intersects with the given line of sight. You have to tile
+the environment to profit from frustrum culling to reduce the number of
+rendered triangles.
+
+My solution for this problem (purely theoretical, didn't find the time to
+try it out yet): Define an evenly spaced grid and call getLOS for each
+grid point while loading the scenery. This generates a height map for the
+given terrain. Then you can lookup the height by interpolating values from
+this height map which should be precise enough and extremely fast compared
+with ssgLOS.
+
+Another possibility would be to reduce the number of hardpoints that actually
+call ssgLOS. If we only call it for four &quot;corner hardpoints&quot; and interpolate
+for all others, CPU usage should be reduced by about 60-90% depending on the
+plane model.
+
+&gt;<i> &gt; Remain to parameterize the wind. I envisaged a function similar
+</I>&gt;<i> &gt; &#147;GetWindComponents&#148; of getHeight but I did not still decide anything to load
+</I>&gt;<i> &gt; it (It is necessary to be able to load a grid 3D!). Temporarily, that
+</I>&gt;<i> &gt; function returns a constant vertical component.
+</I>
+Yes, let's work on this later. However, when generating a height map as
+described above, I can provide some formulas from a simulation that I did
+about a year ago and that seemed to calculate quite realistic vertical
+winds. The interface should be something like
+
+CRRCMath::Vector3 getWind(CRRCMath::Vector3&amp; location)
+
+&gt;<i> &gt; Later, it will be necessary to improve management of the contact
+</I>&gt;<i> &gt; sailplane/ground. It will be necessary, in particular, to define parameters
+</I>&gt;<i> &gt; &#147;stiffness&#148; and &#147;roughness&#148;.
+</I>
+Let's focus on flying, not crashing ;-)
+
+There are already some parameters for the airplane in the &quot;wheels&quot; section
+of the XML file that define bouncing (spring constant) and friction.
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: <A HREF="http://www.reucker-online.de/pgpkey.asc">http://www.reucker-online.de/pgpkey.asc</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000069.html">[Crrcsim-devel] panorama scenery
+</A></li>
+	<LI>Next message: <A HREF="000071.html">[Crrcsim-devel] panorama scenery
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#70">[ date ]</a>
+              <a href="thread.html#70">[ thread ]</a>
+              <a href="subject.html#70">[ subject ]</a>
+              <a href="author.html#70">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

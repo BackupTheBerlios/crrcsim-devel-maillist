@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] max_force attribute
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20max_force%20attribute&In-Reply-To=%3C20100515185456.6ca3b12d%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000352.html">
+   <LINK REL="Next"  HREF="000354.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] max_force attribute</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20max_force%20attribute&In-Reply-To=%3C20100515185456.6ca3b12d%40web.de%3E"
+       TITLE="[Crrcsim-devel] max_force attribute">jan.reucker at web.de
+       </A><BR>
+    <I>Sat May 15 18:54:56 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000352.html">[Crrcsim-devel] [Bug #17076] Build error when CGAL installed on	Ubuntu karmic
+</A></li>
+        <LI>Next message: <A HREF="000354.html">[Crrcsim-devel] [crrcsim] New photopanoramic scenery
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#353">[ date ]</a>
+              <a href="thread.html#353">[ thread ]</a>
+              <a href="subject.html#353">[ subject ]</a>
+              <a href="author.html#353">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+I've added the max_force attribute to all hardpoints in all model files. This
+effectively enables crash detection for all models (until now it was only
+enabled for the Sport). Please test your favourite models; if you think that
+they are too crash-sensitive now or should be less sensitive, feel free to
+adjust this attribute.
+
+I didn't put too much effort into this, so for most models, all hardpoints
+have the same max_force. For geared models, the gear will be more forgiving than
+the rest of the plane. I tried to take the plane material into consideration,
+so the EPP planes will take quite a beating before they crash.
+
+Kind regards,
+Jan R.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000352.html">[Crrcsim-devel] [Bug #17076] Build error when CGAL installed on	Ubuntu karmic
+</A></li>
+	<LI>Next message: <A HREF="000354.html">[Crrcsim-devel] [crrcsim] New photopanoramic scenery
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#353">[ date ]</a>
+              <a href="thread.html#353">[ thread ]</a>
+              <a href="subject.html#353">[ subject ]</a>
+              <a href="author.html#353">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] New scenery and shadow
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2011-November/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20New%20scenery%20and%20shadow&In-Reply-To=%3C1321031245.2197.344.camel%40joel-portable%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000440.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] New scenery and shadow</H1>
+    <B>Jo&#235;l Li&#233;nard</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20New%20scenery%20and%20shadow&In-Reply-To=%3C1321031245.2197.344.camel%40joel-portable%3E"
+       TITLE="[Crrcsim-devel] New scenery and shadow">joel.lienard at laposte.net
+       </A><BR>
+    <I>Fri Nov 11 18:07:25 CET 2011</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000440.html">[Crrcsim-devel] [Bug #18416] linking fails against cgal with gmp	support.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#439">[ date ]</a>
+              <a href="thread.html#439">[ thread ]</a>
+              <a href="subject.html#439">[ subject ]</a>
+              <a href="author.html#439">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+As I wrote it on the list Yahoo/crrcsim, I put on-line a new panoramic
+scenery :
+<A HREF="http://joel.lienard.free.fr/crrcsim/index-en.html">http://joel.lienard.free.fr/crrcsim/index-en.html</A>
+
+This scenery brings to light particularly the limitations of the
+generation of the shadows of CRRCSIM:
+
+The height of the ground is upright measured at the glider position : it
+is thus correct only if the sun is upright (at noon, on the equator).
+And, more important, the ground is supposed plan. As soon as the ground
+presents an important relief, the defects are very visible : shadow are
+partially &quot;in the air&quot;. We can see also this defect by putting a glider
+on the edge of the table in &quot;simple scenery&quot;.
+
+I thus intend to work on this subject. Has anybody already a project?
+
+Both general techniques seem to be &quot;Shadow
+Mapping&quot; (<A HREF="http://www.paulsprojects.net/tutorials/smt/smt">http://www.paulsprojects.net/tutorials/smt/smt</A> .html) and
+&quot;Stenciled Shadow Volumes&quot; (<A HREF="http://arxiv.org/abs/cs/0301002">http://arxiv.org/abs/cs/0301002</A>). I tried a
+demonstration program of &quot;Shadow Mapping&quot;. OK on my development computer
+with card Nvidia. Not well on another computer with card ATI.
+
+If somebody has an experience on this subject, thank you for sharing it.
+
+Jo&#235;l
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000440.html">[Crrcsim-devel] [Bug #18416] linking fails against cgal with gmp	support.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#439">[ date ]</a>
+              <a href="thread.html#439">[ thread ]</a>
+              <a href="subject.html#439">[ subject ]</a>
+              <a href="author.html#439">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

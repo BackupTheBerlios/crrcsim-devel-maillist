@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] panorama scenery
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20panorama%20scenery&In-Reply-To=%3C2B80DAF6564C428299D85DE99B046A93%40PCdeJol%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000080.html">
+   <LINK REL="Next"  HREF="000087.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] panorama scenery</H1>
+    <B>Jo&#235;l Li&#233;nard</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20panorama%20scenery&In-Reply-To=%3C2B80DAF6564C428299D85DE99B046A93%40PCdeJol%3E"
+       TITLE="[Crrcsim-devel] panorama scenery">joel.lienard at free.fr
+       </A><BR>
+    <I>Thu Jan 15 17:09:50 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000080.html">[Crrcsim-devel] important repository maintenance request
+</A></li>
+        <LI>Next message: <A HREF="000087.html">[Crrcsim-devel] panorama scenery
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#84">[ date ]</a>
+              <a href="thread.html#84">[ thread ]</a>
+              <a href="subject.html#84">[ subject ]</a>
+              <a href="author.html#84">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Firstly, I present to you my excuse for my awkwardness. I had not understood
+that the transfer of large data files increased in an irreversible way the
+size of the history of Mercurial. Thank you in Jens to have proposed a
+solution.
+
+I transferred my modifications again. Without any large data file. I put
+them on a personal site while waiting for a better solution. (See
+scenery/Brie/ReadMe.txt)
+
+Some comments on the solution chosen for the wind, in answer to the
+questions of Jan and Jens:
+
+- The quality of CRRCSIM is the realism of the fly. That is obtained by the
+use of external software of simulation (AVL). I aim to preserve this realism
+for the sites of slope soaring by the use of software of aerodynamic
+simulation of the slope. (<A HREF="http://jugiraud1.free.fr/brie.htm">http://jugiraud1.free.fr/brie.htm</A>).
+
+- The problem is that the result of this simulation cannot be summarized by
+only some coefficients. It is necessary to cover the space of flight by data
+in 3 dimensions. To reduce the volume of these data, they are taken on a no
+uniform grid. But that complicates the retrieval the data close to a point
+of space. I noted that the interpolation is essential. To make this
+interpolation of no regular data, a good technique is to carry out a
+triangulation. The interpolation in a specified point then consists to seek
+the triangle containing this point and to interpolate the values of the tops
+linearly. (In 3D, the triangles become tetrahedrons.)
+
+- I thought of calculating the triangulation at the outside of CRRCSIM but
+that increases much the volume of the data file. I then found this library
+CGAL which makes very well the triangulation and the search for tetrahedron.
+The interface of the functions used is very simple (windata3D.cpp). It thus
+seems preferable to me to use this library rather than to &quot;reinvent the
+wheel&quot;.
+I did not have any difficulty to install it under Windows and Msys (.
+/config; make).
+
+- To recopy only the useful parts? I can test but I fear that is not easy
+for CGAL. That is probably easier for libJPEG.
+
+- Note, I envisaged to be able to compile CRRCSIM without importation of the
+data of wind and thus without CGAL (see windata3D.h).
+
+
+Cordially,
+
+Jo&#235;l
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000080.html">[Crrcsim-devel] important repository maintenance request
+</A></li>
+	<LI>Next message: <A HREF="000087.html">[Crrcsim-devel] panorama scenery
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#84">[ date ]</a>
+              <a href="thread.html#84">[ thread ]</a>
+              <a href="subject.html#84">[ subject ]</a>
+              <a href="author.html#84">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

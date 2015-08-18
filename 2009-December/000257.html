@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] F3F on all scenery
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20F3F%20on%20all%20scenery&In-Reply-To=%3C1261330341.5650.439.camel%40joel-portable%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000256.html">
+   <LINK REL="Next"  HREF="000258.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] F3F on all scenery</H1>
+    <B>Jo&#235;l Li&#233;nard</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20F3F%20on%20all%20scenery&In-Reply-To=%3C1261330341.5650.439.camel%40joel-portable%3E"
+       TITLE="[Crrcsim-devel] F3F on all scenery">joel.lienard at laposte.net
+       </A><BR>
+    <I>Sun Dec 20 18:32:21 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000256.html">[Crrcsim-devel] F3F on all scenery
+</A></li>
+        <LI>Next message: <A HREF="000258.html">[Crrcsim-devel] F3F on all scenery
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#257">[ date ]</a>
+              <a href="thread.html#257">[ thread ]</a>
+              <a href="subject.html#257">[ subject ]</a>
+              <a href="author.html#257">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE> Hello Olivier,
+
+ I prepared the modifications to parametrize the direction and the
+positions. No difficulty to obtain then the height, the method already
+exist.
+A question is to know where to store these parameters. They can be in
+the general configuration file but it seems to me useful to put values
+by default in scenery files.
+To add a method F3F in the object scene to read these parameters does
+not seem to me good as regards the modularity of the code, I thus
+suggest making it in the object F3F.
+
+Jo&#235;l
+
+Le dimanche 20 d&#233;cembre 2009 &#224; 15:45 +0100, Olivier Bordes a &#233;crit :
+&gt;<i> Hello Joel,
+</I>&gt;<i> Thanks for the question.
+</I>&gt;<i> 
+</I>&gt;<i> Game mode brings rules, physical and times constraints to the 
+</I>&gt;<i> simulation. They should be valid on every location, even if it does not 
+</I>&gt;<i> really make sense to do F3F on all scenery.
+</I>&gt;<i> Game mode should need a central point to initialize  (the center of the 
+</I>&gt;<i> course) , and a direction (toward which the race will happen).
+</I>&gt;<i> Once this is defined,  pylons can  be located relatively to this point. 
+</I>&gt;<i> But their real location will be subject to  relief  contraints (as in 
+</I>&gt;<i> the real life :).
+</I>&gt;<i> 
+</I>&gt;<i> So, this suggest *no* dependances between the scenery and the game mode: 
+</I>&gt;<i> it  means, that a scenery shoud be able to tell the altitude of the 
+</I>&gt;<i> ground at a certain point, and then  the F3F game mode should ask to the 
+</I>&gt;<i> scenery: what is the ground altitude of this point ? and then start 
+</I>&gt;<i> drawing the pylons from that location.
+</I>&gt;<i> 
+</I>&gt;<i> In term of code, each Scenery object should implement an additional 
+</I>&gt;<i> method (Virtual function  mandatory) that they have to implement.
+</I>&gt;<i> The &quot;F3F game mode&quot; to be changed when drawing the pylons, to first 
+</I>&gt;<i> require the &quot;altitude&quot; of the starting point.
+</I>&gt;<i> 
+</I>&gt;<i> Olivier
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Jo&#235;l Li&#233;nard wrote:
+</I>&gt;<i> &gt; I prepared minor modifications for the code F3F so that he can work on
+</I>&gt;<i> &gt; all scenery.
+</I>&gt;<i> &gt; But it is necessary to define the position of bases according to the
+</I>&gt;<i> &gt; scenery. It is then logical to put these parameters in files scenery. If
+</I>&gt;<i> &gt; these parameters are read by loadScenery and stored in the scenery
+</I>&gt;<i> &gt; object, it create a dependence  scenery/f3f code.
+</I>&gt;<i> &gt; To avoid it, we can, in the scenery object, make public the name of the
+</I>&gt;<i> &gt; file or the object &quot; SimpleXMLTransfer xml &quot;.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Do you see a better solution?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Jo&#235;l
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; Crrcsim-devel mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">Crrcsim-devel at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">https://lists.berlios.de/mailman/listinfo/crrcsim-devel</A>
+</I>&gt;<i> &gt;   
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000256.html">[Crrcsim-devel] F3F on all scenery
+</A></li>
+	<LI>Next message: <A HREF="000258.html">[Crrcsim-devel] F3F on all scenery
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#257">[ date ]</a>
+              <a href="thread.html#257">[ thread ]</a>
+              <a href="subject.html#257">[ subject ]</a>
+              <a href="author.html#257">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

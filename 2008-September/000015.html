@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Interface configuration dialog
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Interface%20configuration%20dialog&In-Reply-To=%3C20080907171309.2cbd7b13.jan.reucker%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000010.html">
+   <LINK REL="Next"  HREF="000016.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Interface configuration dialog</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Interface%20configuration%20dialog&In-Reply-To=%3C20080907171309.2cbd7b13.jan.reucker%40web.de%3E"
+       TITLE="[Crrcsim-devel] Interface configuration dialog">jan.reucker at web.de
+       </A><BR>
+    <I>Sun Sep  7 17:13:09 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000010.html">[Crrcsim-devel] [crrcsim] CRRCSim helicopter model
+</A></li>
+        <LI>Next message: <A HREF="000016.html">[Crrcsim-devel] Interface configuration dialog
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#15">[ date ]</a>
+              <a href="thread.html#15">[ thread ]</a>
+              <a href="subject.html#15">[ subject ]</a>
+              <a href="author.html#15">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+I just pushed my changes regarding the ctrlgen dialog to the BerliOS repo. Large
+parts of the dialog code were rewritten, and I also changed some of the inputdev
+modules to work with the new dialog. I hope that I didn't break too much stuff :-/
+
+Please report any unusual behaviour. This includes:
+
+- interface configurations not properly saved to config file
+- dialog does not reflect the settings from the config when opened
+- interface cannot be configured properly
+- missing devices in the device selection combo box
+- wrong set of buttons highlighted in the main dialog after selecting
+  a new interface in the &quot;Device&quot; subdialog
+
+Especially the joystick configuration procedure is a bit messy, because it is
+split into two independent modules (mouse_kbd.* and inputdev_software). I
+tested it with the &quot;fake joystick&quot; mode, but can't test it with real joysticks
+(they are still buried somewhere in a box since my move last year).
+
+Kind regards,
+Jan R.
+
+-- 
+Jan Reucker
+Ober-Ramstadt, Germany   
+PGP-Key: <A HREF="http://www.reucker-online.de/pgpkey.asc">http://www.reucker-online.de/pgpkey.asc</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000010.html">[Crrcsim-devel] [crrcsim] CRRCSim helicopter model
+</A></li>
+	<LI>Next message: <A HREF="000016.html">[Crrcsim-devel] Interface configuration dialog
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#15">[ date ]</a>
+              <a href="thread.html#15">[ thread ]</a>
+              <a href="subject.html#15">[ subject ]</a>
+              <a href="author.html#15">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

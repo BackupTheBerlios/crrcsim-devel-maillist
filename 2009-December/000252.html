@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] collision management
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20collision%20management&In-Reply-To=%3C20091220084600.437e8b26%40web.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000251.html">
+   <LINK REL="Next"  HREF="000253.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] collision management</H1>
+    <B>Jan Reucker</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20collision%20management&In-Reply-To=%3C20091220084600.437e8b26%40web.de%3E"
+       TITLE="[Crrcsim-devel] collision management">jan.reucker at web.de
+       </A><BR>
+    <I>Sun Dec 20 08:46:00 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000251.html">[Crrcsim-devel] collision management
+</A></li>
+        <LI>Next message: <A HREF="000253.html">[Crrcsim-devel] collision management
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#252">[ date ]</a>
+              <a href="thread.html#252">[ thread ]</a>
+              <a href="subject.html#252">[ subject ]</a>
+              <a href="author.html#252">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, 19 Dec 2009 22:54:26 +0100
+Jo&#235;l Li&#233;nard &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">joel.lienard at laposte.net</A>&gt; wrote:
+
+&gt;<i> detection with objects &quot;. And it is a good idea to have split the file
+</I>&gt;<i> crrc_scenery.c.
+</I>
+Maybe I'll even create more files for the various sub-classes. It makes things
+much easier to browse and find. But I've started to do some clean-ups in
+the landscape module anyway, so I'll see later what goes where.
+
+Tasks that I plan to accomplish in the near future:
+- Write up some documentation on the existing scenery file format (similar to
+  the existing documentation in the file_format folder).
+- Maybe do some harmonisation between the existing file formats (e.g. use the
+  same coordinate system for scenery and FDM, support metric units in scenery
+  files using the &quot;units&quot; attribute). This may lead to a version &quot;4&quot; of the
+  scenery description format.
+- Refactor the existing height calculation mechanism into its own hierarchy
+  of classes to build a generic interface for the FDM and windfield algorithms.
+  This should make it easier to select between different height calculation
+  mechanisms (like what you started with the getHeight_mode attribute) and,
+  later on, different windfield implementations.
+ 
+&gt;<i> But It would be necessary to manage better the collisions. A complete
+</I>&gt;<i> management is a big work. In the meantime, I propose you the addition of
+</I>&gt;<i> some line in the file &quot;mod_fdm/gear01/gear.cpp&quot;. It is very imperfect.
+</I>&gt;<i> There are some values empirical. But it seems to me better than
+</I>&gt;<i> anything.
+</I>
+What about the following approach:
+
+- The existing code already calculates the force that acts on each hardpoint.
+- We could extend the hardpoint description with a new attribute &quot;max_force&quot;.
+- After calculating the force for a hardpoint, we compare it to the max_force
+  and emit a CRASH_EVENT or something like this if the maximum is exceeded.
+- The SimStateHandler is extended to catch this event and go to a CRASHED state
+  that can only be left by a simulation reset command.
+- If max_force is not defined for a hardpoint, we do nothing.
+
+All this should be easy to implement. The hardest part is finding appropriate
+empirical values for the max_force. But the biggest advantage is that we get
+different behaviour for different hardpoints: you can set the max_force for a
+propeller to a very low value, while the gear itself can take much more load
+without breaking. 
+
+Of course, your code is &quot;better than nothing&quot; compared to the current state with
+the unrealistic &quot;frisbee&quot; collisions, but I think it's easy to &quot;make it right&quot;
+here.
+
+Kind regards,
+Jan R.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000251.html">[Crrcsim-devel] collision management
+</A></li>
+	<LI>Next message: <A HREF="000253.html">[Crrcsim-devel] collision management
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#252">[ date ]</a>
+              <a href="thread.html#252">[ thread ]</a>
+              <a href="subject.html#252">[ subject ]</a>
+              <a href="author.html#252">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

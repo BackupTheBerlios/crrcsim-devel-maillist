@@ -1,0 +1,160 @@
+From jens_w2 at gmx.net  Wed Dec  8 18:24:33 2010
+From: jens_w2 at gmx.net (Jens Wilhelm Wulf)
+Date: Wed, 8 Dec 2010 18:24:33 +0100
+Subject: [Crrcsim-devel] Joystick interface debugging
+In-Reply-To: <20101026222027.597800d1@web.de>
+References: <20101026175938.GB6068@knusper> <20101026222027.597800d1@web.de>
+Message-ID: <20101208172433.GC4351@knusper>
+
+Hi,
+
+so this process did take a while due to large round trip times.
+
+Result: the input device (esky-transmitter and included
+usb-joystick-converter) needs a different scaling for
+positive/negative inputs -- this was easily fixed and I'll push the
+corresponding changeset (a different calibration method was
+implemented, but it is backwards-compatible regarding the config file,
+so there is no need to recalibrate). 
+
+However, a problem remained: a "dead zone" is inserted around neutral
+position :-(
+
+I added information to http://crrcsim.berlios.de/wiki/index.php?n=CRRCsim.IFJoyStick
+
+Regards, 
+Jens
+
+
+From admin at berlios.de  Thu Dec  9 22:55:32 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Fri, 10 Dec 2010 08:25:32 +1030 (CST)
+Subject: [Crrcsim-devel] [Feature #5194] Add F3B distance and speed to F3F
+	Game
+Message-ID: <201012092155.oB9LtWKS009017@unicorn.berlios.de>
+
+Feature Request #5194, was updated on 2010-Dec-10 08:25
+You can respond by visiting: 
+http://developer.berlios.de/feature/?func=detailfeature&feature_id=5194&group_id=9957
+
+Category: None
+Status: Open
+Priority: 5
+Summary: Add F3B distance and speed to F3F Game
+
+By: gdwhite
+Date: 2010-Dec-10 08:25
+
+Message:
+Logged In: YES 
+user_id=58355
+Browser: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; GTB6.5; InfoPath.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET4.0C; .NET4.0E)
+
+A feature to be able to time and log a 4 lap F3B 
+speed run (150m between gates not 100m 
+between gates - working time is 4 minutes).
+
+Also add an F3B lap distance task to the F3F game 
+panel. This would record and log the number of 
+laps completed with in the 150m course in 4 
+minutes.
+
+Great job on the F3F feature - it works well and I 
+have been able to use it to practice F3B speed runs 
+by adjusting the distance between the gates and 
+changing the launch.
+
+Greg
+
+----------------------------------------------------------------------
+You can respond by visiting: 
+http://developer.berlios.de/feature/?func=detailfeature&feature_id=5194&group_id=9957
+
+
+From admin at berlios.de  Thu Dec  9 23:11:03 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Fri, 10 Dec 2010 08:41:03 +1030 (CST)
+Subject: [Crrcsim-devel] [Feature #5195] Add high speed winch launch from
+	ground
+Message-ID: <201012092211.oB9MB3k1026971@unicorn.berlios.de>
+
+Feature Request #5195, was updated on 2010-Dec-10 08:41
+You can respond by visiting: 
+http://developer.berlios.de/feature/?func=detailfeature&feature_id=5195&group_id=9957
+
+Category: None
+Status: Open
+Priority: 5
+Summary: Add high speed winch launch from ground
+
+By: gdwhite
+Date: 2010-Dec-10 08:41
+
+Message:
+Logged In: YES 
+user_id=58355
+Browser: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; GTB6.5; InfoPath.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET4.0C; .NET4.0E)
+
+Add a winch launch feature. Can launch a model 
+from the ground - be able to practice when to zoom 
+and release (when in the arc of launch) - also 
+practice steering on the winch - keeping it straight . 
+Have adjustable power winch motor and 
+adjustable length of winch line . Also be able to 
+practice winch launch with a heavy F3B model 
+(must be able to set the winch to standard F3B 
+power levels).
+
+----------------------------------------------------------------------
+You can respond by visiting: 
+http://developer.berlios.de/feature/?func=detailfeature&feature_id=5195&group_id=9957
+
+
+From admin at berlios.de  Sat Dec 25 22:56:26 2010
+From: admin at berlios.de (admin at berlios.de)
+Date: Sat, 25 Dec 2010 22:56:26 +0100 (CET)
+Subject: [Crrcsim-devel] [Feature #5164] Screen resolutions for flat panels
+Message-ID: <201012252156.oBPLuQWd028309@unicorn.berlios.de>
+
+Feature Request #5164, was updated on 2010-Nov-11 19:10
+You can respond by visiting: 
+http://developer.berlios.de/feature/?func=detailfeature&feature_id=5164&group_id=9957
+
+Category: None
+Status: Closed
+Priority: 5
+Summary: Screen resolutions for  flat panels
+
+By: jreucker
+Date: 2010-Dec-25 22:56
+
+Message:
+Logged In: YES 
+user_id=47235
+Browser: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.13) Gecko/20101211 Firefox/3.6.13
+
+Merry Xmas ;)
+
+Implemented in 1d7ccb8e3e64.
+
+----------------------------------------------------------------------
+
+By: mhirvonen
+Date: 2010-Nov-11 19:10
+
+Message:
+Logged In: YES 
+user_id=58105
+Browser: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.12) Gecko/20101026 Firefox/3.6.12 ( .NET CLR 3.5.30729)
+
+Today flat panel PC displays and TV devices have screen
+resolutions 1360x768, 1920x1080, 1920x1200. 
+
+Does this addition require more than adding
+initializing items in "crrc_video.cpp" stdResZZZ variables?
+
+----------------------------------------------------------------------
+You can respond by visiting: 
+http://developer.berlios.de/feature/?func=detailfeature&feature_id=5164&group_id=9957
+
+

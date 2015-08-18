@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] coherence convention for Z
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-February/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20coherence%20convention%20for%20Z&In-Reply-To=%3C1266773576.4680.50.camel%40joel-portable%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000297.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] coherence convention for Z</H1>
+    <B>Jo&#235;l Li&#233;nard</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20coherence%20convention%20for%20Z&In-Reply-To=%3C1266773576.4680.50.camel%40joel-portable%3E"
+       TITLE="[Crrcsim-devel] coherence convention for Z">joel.lienard at free.fr
+       </A><BR>
+    <I>Sun Feb 21 18:32:56 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000297.html">[Crrcsim-devel] coherence convention for Z
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#298">[ date ]</a>
+              <a href="thread.html#298">[ thread ]</a>
+              <a href="subject.html#298">[ subject ]</a>
+              <a href="author.html#298">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+&gt;<i> 
+</I>&gt;<i> But maybe we should take the time and think about the general design of the
+</I>&gt;<i> wind simulation in CRRCsim. Right now things are scattered across several
+</I>&gt;<i> modules:
+</I>&gt;<i> 
+</I>&gt;<i> - thermal simulation in mod_windfield
+</I>&gt;<i> - initialization of mod_windfield in mod_main (Init_mod_windfield)
+</I>&gt;<i> - interface getWindComponents in mod_landscape
+</I>&gt;<i> - config file interface in config.cpp
+</I>&gt;<i> 
+</I>&gt;<i> We should centralize all this stuff in mod_windfield. I know that I advocated
+</I>&gt;<i> the close coupling of wind and scenery stuff in the past, but maybe it's
+</I>&gt;<i> a better design if mod_windfield only uses the getHeight interface of mod_scenery
+</I>&gt;<i> and takes care of all the rest. mod_fdm already gets its wind information
+</I>&gt;<i> directly from mod_windfield.
+</I>&gt;<i> 
+</I>&gt;<i> mod_windfield should offer an abstract base class defining the common interface
+</I>&gt;<i> for all future windfield implementations, along with methods to access the config
+</I>&gt;<i> file. 
+</I>
+No objection for model based scenery. But it is going to be difficult
+for Cape-Cod if we want to leave the code of origin.
+
+&gt;<i> It should avoid using any PLIB types and methods if possible, so that
+</I>&gt;<i> PLIB SG and SSG are only used in mod_landscape and mod_video.
+</I>
+Why?
+I had found convenient to use functions of SG Lib in my new file. Do you
+do recommend another lib?
+
+&gt;<i> 
+</I>&gt;<i> Then maybe all interfaces should stick to the &quot;Z is down&quot; convention. I think
+</I>&gt;<i> it's convenient to have &quot;Z is up&quot; externally (e.g. in the scenery files),
+</I>&gt;<i> but internally I don't really care if everything is well-documented.
+</I>&gt;<i> 
+</I>I agree
+
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000297.html">[Crrcsim-devel] coherence convention for Z
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#298">[ date ]</a>
+              <a href="thread.html#298">[ thread ]</a>
+              <a href="subject.html#298">[ subject ]</a>
+              <a href="author.html#298">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>

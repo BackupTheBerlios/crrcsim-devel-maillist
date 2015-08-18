@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Crrcsim-devel] Problems with the shadow of the aeroplane.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/crrcsim-devel/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Problems%20with%20the%20shadow%20of%20the%20aeroplane.&In-Reply-To=%3C1273139967.4367.987.camel%40joel-portable%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000336.html">
+   <LINK REL="Next"  HREF="000339.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Crrcsim-devel] Problems with the shadow of the aeroplane.</H1>
+    <B>Jo&#235;l Li&#233;nard</B> 
+    <A HREF="mailto:crrcsim-devel%40lists.berlios.de?Subject=Re%3A%20%5BCrrcsim-devel%5D%20Problems%20with%20the%20shadow%20of%20the%20aeroplane.&In-Reply-To=%3C1273139967.4367.987.camel%40joel-portable%3E"
+       TITLE="[Crrcsim-devel] Problems with the shadow of the aeroplane.">joel.lienard at laposte.net
+       </A><BR>
+    <I>Thu May  6 11:59:27 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000336.html">[Crrcsim-devel] [Bug #17118] Segfault on selecting audio input
+</A></li>
+        <LI>Next message: <A HREF="000339.html">[Crrcsim-devel] Problems with the shadow of the aeroplane.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#338">[ date ]</a>
+              <a href="thread.html#338">[ thread ]</a>
+              <a href="subject.html#338">[ subject ]</a>
+              <a href="author.html#338">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Three points:
+
+1. The shadow flashes in certain cases. It seems that the cause is that
+it is exactly drawn at the height of the ground and that, as a result of
+calculation errors, she can be above or below. A solution is to put a
+very light vertical offset to be certain to be above. There is, in
+&quot;airplane_vis.cpp&quot; a commented line &quot;//jwtodoshadow  m[3][1] += 0.1;&quot;
+which makes it. Is there a reason not to validate it (with a smaller
+offset)?
+
+2. For a new photo-panoramic scene in mountain, I tried to put the true
+height (1700m # 5000ft) so that the simulator takes into account the
+variation of density of the air.
+I noticed that if we increase the height of the ground, the shadow is
+not visible. It is easy to reproduce in &quot; simple.xml &quot;:
+&lt;object filename=&quot;small.ac&quot; terrain=&quot;1&quot; &gt;
+      &lt;instance north=&quot;0&quot; east=&quot;0&quot; height=&quot;1000&quot; h=&quot;180&quot;  /&gt;
+Is it of in one insufficient precision? What is surprising, it is that
+all the rest works well and that the error arrives brutally. If we put
+ourselves in it limit, we never see a false situation : either it is
+good, or the shadow is not visible any more.
+Have you a suggestion?
+
+3. The shadow of &quot;Allegro&quot; is different from the others. It is textured
+and animated. I did not find the reason.
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000336.html">[Crrcsim-devel] [Bug #17118] Segfault on selecting audio input
+</A></li>
+	<LI>Next message: <A HREF="000339.html">[Crrcsim-devel] Problems with the shadow of the aeroplane.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#338">[ date ]</a>
+              <a href="thread.html#338">[ thread ]</a>
+              <a href="subject.html#338">[ subject ]</a>
+              <a href="author.html#338">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/crrcsim-devel">More information about the Crrcsim-devel
+mailing list</a><br>
+</body></html>
